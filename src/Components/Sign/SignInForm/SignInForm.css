@@ -1,0 +1,76 @@
+.signInTitle{
+    color: var(--TextColor);
+    font-size: 56px;
+    padding-bottom: 36px;
+}
+
+.name_pswd input{
+    margin-bottom: 24px;
+}
+
+.remember_fogot{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .remberDiv{
+        display: flex;
+        gap: 10px;
+    }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+    border: 1px solid var(--BorderColor);
+    padding: 10px;
+    border-radius: 4px; /* Optional: For slightly rounded corners */
+    width: 100%; /* Ensures the input field takes up full width */
+    padding: 10px 50px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    font-size: 14px;
+    color: var(--PlaceholderColor);
+    line-height: 1.5;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border: 2px solid var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    outline: none; /* Removes the default focus outline */
+    color: var(--TextColorActive);
+}
+
+input[type="submit"]{
+    font-size: 22px;
+    line-height: 1.5;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Optional: For slightly rounded corners */
+    width: 100%; /* Ensures the input field takes up full width */
+    padding: 10px 50px;
+    background-color: var(--SecondaryColor);
+    margin-bottom: 24px;
+}
+
+input[type="submit"]:active{
+    background-color: var(--PrimaryColor);
+}
+
+.signUpQ{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

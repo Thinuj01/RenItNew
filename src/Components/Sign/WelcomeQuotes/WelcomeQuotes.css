@@ -1,0 +1,17 @@
+.welocmeLogo{
+    img{
+        width: 375px;
+    }
+}
+
+.welcomeTitle{
+    font-size: 72px;
+    font-weight: bold;
+    color: var(--TextColor);
+}
+
+.welcomeText{
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--TextColor);
+}

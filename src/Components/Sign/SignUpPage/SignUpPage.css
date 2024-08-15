@@ -1,0 +1,21 @@
+#signUpPageContainer{
+    height: 100vh;
+    padding: 0 10%;
+    display: flex;
+}
+
+.leftDiv{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightDiv{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
