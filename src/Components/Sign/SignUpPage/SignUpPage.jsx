@@ -2,7 +2,7 @@ import React from 'react'
 import './SignUpPage.css'
 import WelcomeQuotes from '../WelcomeQuotes/WelcomeQuotes'
 import SignUpForm from '../SignUpForm/SignUpForm'
-import { Link } from 'react-router-dom'
+import ProofSubmissionForm from '../ProofSubmissionForm/ProofSubmissionForm'
 
 function SignUpPage() {
   return (
@@ -14,6 +14,7 @@ function SignUpPage() {
 
             <div className="rightDiv">
                 <SignUpForm/>
+                <ProofSubmissionForm/>
             </div>
         </div>
     </>

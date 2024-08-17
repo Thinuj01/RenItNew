@@ -1,0 +1,100 @@
+.ProofSubmissionContainer {
+    padding: 0 10%;
+}
+
+.proofSubmissionTitle {
+    color: var(--TextColor);
+    font-size: 56px;
+    padding-bottom: 5px;
+}
+
+.remindText {
+    color: var(--PlaceholderColor);
+    font-size: 16px;
+    padding-bottom: 36px;
+}
+
+.ProofSubmissionForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+label{
+    color: var(--PlaceholderColor);
+}
+
+.submissionButton{
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+    border: 1px solid var(--BorderColor);
+    border-radius: 4px; /* Optional: For slightly rounded corners */
+    width: 100%; /* Ensures the input field takes up full width */
+    padding: 10px 20px ;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.submissionButton::placeholder{
+    font-size: 14px;
+    color: var(--PlaceholderColor);
+    line-height: 1.5;
+}
+
+.submissionButton:focus{
+    border: 1px solid var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    outline: none;
+    color: var(--TextColorActive);
+}
+
+.submissionButton::-webkit-file-upload-button{
+    position: absolute;
+    right: -4px;
+    top: 0;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 14px 20px;
+    width: 35%;
+    background-color: var(--SecondaryColor);
+}
+
+.submissionButton::-webkit-file-upload-button:active{
+    background-color: var(--PrimaryColor);
+}
+
+input[type="submit"] {
+    font-size: 22px;
+    line-height: 1.5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px 50px;
+    background-color: var(--SecondaryColor);
+    margin-bottom: 24px;
+}
+
+input[type="submit"]:active {
+    background-color: var(--PrimaryColor);
+}
+
+.signInQ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.signInQ p Link {
+    color: var(--PrimaryColor);
+    text-decoration: none;
+}
+
+span{
+    color: var(--PrimaryColorDark);
+}
