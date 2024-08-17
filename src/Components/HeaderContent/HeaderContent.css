@@ -19,7 +19,7 @@
 }
 
 #signInButton{
-    outline: 1px solid white;
+    outline: 1px solid var(--White);
     padding: 10px 20px;
     border-radius: 50px;
     color: white;
