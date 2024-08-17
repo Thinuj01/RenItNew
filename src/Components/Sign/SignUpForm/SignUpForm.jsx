@@ -203,7 +203,7 @@ function SignUpForm() {
             <input type="submit" name="submit" value="Sign in" />
 
             <div className="signInQ">
-              <p>Already a member? <Link to="/signin">Sign in</Link></p>
+              <p>Already a member? <Link to="/signin">Sign UP</Link></p>
             </div>
           </form>
         </div>
