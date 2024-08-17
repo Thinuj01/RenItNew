@@ -3,7 +3,7 @@ import './SignUpForm.css';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function SignUpForm() {
+function SignUpForm({isRegistered,setIsRegistered}) {
   const [years, setYears] = useState([]);
   const [months, setMonths] = useState([]);
   const [days, setDays] = useState([]);
@@ -294,7 +294,7 @@ function SignUpForm() {
       console.log('Registration successful:', response.data);
       if (response.data == "Registration Successfull") {
         alert('Registration successful!');
-        navigate("/signin");
+        setIsRegistered(true);
       }else{
         alert('Registration unsuccessful!');
       }
