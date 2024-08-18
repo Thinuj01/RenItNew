@@ -163,16 +163,19 @@ function SignUpForm({isRegistered,setIsRegistered}) {
 
   const handleChangeEmail = async (e) => {
     setemail(e.target.value);
-    setstatus('1');
+    // setstatus('1');
     console.log("3");
     setIsSubmitting(false);
 
   };
 
   const sendMail = async (e) => {
+    const newStatus = '1';
+    setstatus(newStatus);
+    console.log(newStatus);
     setIsSendingEmail(true);
     try {
-      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { email, status }, { withCredentials: true });
+      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { email, newStatus }, { withCredentials: true });
       console.log('Email sent successfully:', response.data);
       setIsSubmitting(true);
     } catch (error) {
@@ -186,12 +189,15 @@ function SignUpForm({isRegistered,setIsRegistered}) {
 
   const handleChangeOTP = (e) => {
     setotp(e.target.value);
-    setstatus('2');
+    
   }
 
   const confirmOTP = async (e) => {
+    const newStatus = '2';
+    setstatus(newStatus);
+    console.log(newStatus);
     try {
-      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { otp, status }, { withCredentials: true });
+      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { otp, newStatus }, { withCredentials: true });
       console.log('Email Verification:', response.data);
       if (response.data == "Matched") {
         setIsOtpVerified(true);
@@ -251,7 +257,7 @@ function SignUpForm({isRegistered,setIsRegistered}) {
     setcPassword(newConfirmPassword);
     const check = validatetwopasswords(newConfirmPassword, password);
     setmError(check);
-    setstatus('3');
+    
   };
 
   const validatetwopasswords = (cPassword, password) => {
@@ -266,7 +272,9 @@ function SignUpForm({isRegistered,setIsRegistered}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const newStatus = '3';
+    setstatus(newStatus);
+    console.log(newStatus);
     if (!isOtpVerified) {
       alert("Please verify the OTP before proceeding.");
       return;
@@ -285,7 +293,7 @@ function SignUpForm({isRegistered,setIsRegistered}) {
       email,
       phoneN,
       password,
-      status,
+      newStatus,
       otp
     };
 
