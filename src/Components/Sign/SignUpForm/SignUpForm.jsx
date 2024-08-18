@@ -476,7 +476,7 @@ function SignUpForm({isRegistered,setIsRegistered}) {
             <input type="submit" name="submit" value="Sign Up" />
 
             <div className="signInQ">
-              <p>Already a member? <Link to="/signin">Sign UP</Link></p>
+              <p>Already a member? <Link to="/signin">Sign In</Link></p>
             </div>
           </form>
         </div>

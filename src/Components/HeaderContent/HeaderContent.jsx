@@ -28,6 +28,7 @@ function HeaderContent() {
         <MenuLinks linkName="Category" url="/category" />
         <MenuLinks linkName="Package" url="/package" />
         <MenuLinks linkName="About" url="/about" />
+        
         {details ? (
           <>
             <MenuLinks linkName={details['fname']} url="#" />

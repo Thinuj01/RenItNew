@@ -181,7 +181,6 @@ input[type="submit"]:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .signInQ p Link {

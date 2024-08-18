@@ -64,7 +64,7 @@ function SignInForm() {
               <label htmlFor="remberMe">Remember me</label>
             </div>
             <div className="forgotDiv">
-              <Link to=''>Forgot password</Link>
+              <Link to='/forgotpswd'>Forgot password</Link>
             </div>
           </div>
 
