@@ -20,8 +20,9 @@
   --PrimaryColor: #55e971;
   --PrimaryColorLight: #e9fcef; /* Light variation for background */
   --PrimaryColorDark: #1e4732; /* Darker variation for footer or dark sections */
-  
+  --PrimaryColorDark-rgb: 30, 71, 50;
   --SecondaryColor: #0bbf64;
+  --SecondaryColor-rgb: 11, 191, 100;
   --TextColor: #333; /* Neutral dark color for text */
   --White: #fff; /* White color for contrast */
   --BackgroundColor: #f8f9fa; /* Light neutral background color */

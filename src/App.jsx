@@ -1,5 +1,10 @@
 import HeaderContent from "./Components/HeaderContent/HeaderContent"
+
+import ImageSlider from "./Components/ImageSlider/ImageSlider"
+
+
 import { useNavigate } from 'react-router-dom'
+
 function App() {
   const navigate = useNavigate();
   const setCookie = (name, value, days) => {
@@ -16,7 +21,11 @@ function App() {
   return (
     <>
       <HeaderContent/>
+
+      <ImageSlider/>
+
       <button onClick={logout}>logout</button>
+
     </>
   )
 }

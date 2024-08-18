@@ -87,6 +87,11 @@
     display: flex;
 }
 
+.eMailDivWithMessage{
+    display: flex;
+    flex-direction: column;
+}
+
 .emailVerifyBtn {
     font-size: 16px;
     color: white;

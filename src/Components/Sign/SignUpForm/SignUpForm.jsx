@@ -443,22 +443,34 @@ function SignUpForm({isRegistered,setIsRegistered}) {
               </button>
             </div>
 
-            <div className="eMailDiv">
-              <input type="text" name="emailOtp" placeholder="OTP code" id="eOtp" value={otp} onChange={handleChangeOTP} />
-              <button className="emailVerifyBtn" onClick={(e) => { e.preventDefault(); confirmOTP(); }}>Submit</button>
-              {isOtpVerified ? <span className="confirmMark">&#10004;</span> : <span className="confirmMark">&#10007;</span>}
+            <div className="eMailDivWithMessage">
+              <div className="eMailDiv">
+                <input type="text" name="emailOtp" placeholder="OTP code" id="eOtp" value={otp} onChange={handleChangeOTP} />
+                <button className="emailVerifyBtn" onClick={(e) => { e.preventDefault(); confirmOTP(); }}>Submit</button>
+              </div>
+
+              <div className="onChangeMessageContainer">
+               {isOtpVerified ? <span className="confirmMark">&#10004;</span> : <span className="confirmMark">&#10007;</span>}
+              </div>
+              
             </div>
+            
 
             <div className="mobile_number">
               <input type="text" name="userMobile" placeholder="Mobile number" id="uMobile" value={phoneN} onChange={handleChangephoneN} />
             </div>
 
             <div className="verifyPswd">
-              <input type="password" name="userPswd" placeholder="Password" className="uPSWD" value={password} onChange={handleChangePassword} />
-              {error && <p style={{ color: 'red' }}>{error}</p>}
-
-              <input type="password" name="confirmPswd" placeholder="Confirm password" className="uPSWD" vlaue={cPassword} onChange={handleChangecPassword} />
-              {mError && <p style={{ color: 'red' }}>{mError}</p>}
+                <div className="onChangeMessageContainer uPSWD">
+                  <input type="password" name="userPswd" placeholder="Password" className="uPSWD" value={password} onChange={handleChangePassword} />
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </div>
+              
+                  <div className="onChangeMessageContainer uPSWD">
+                    <input type="password" name="confirmPswd" placeholder="Confirm password" className="uPSWD" vlaue={cPassword} onChange={handleChangecPassword} />
+                    {mError && <p style={{ color: 'red' }}>{mError}</p>}
+                  </div>
+              
             </div>
 
             <input type="submit" name="submit" value="Sign Up" />
