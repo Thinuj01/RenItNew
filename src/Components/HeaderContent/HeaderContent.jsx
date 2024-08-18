@@ -7,7 +7,7 @@ import axios from 'axios'
 
 function HeaderContent() {
   const [details, setDetails] = useState([]);
- 
+
 
   useEffect(() => {
     axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
@@ -15,7 +15,7 @@ function HeaderContent() {
     })
       .then(response => {
         const data = response.data;
-          setDetails(data);
+        setDetails(data);
       });
   }, []);
 
@@ -28,8 +28,8 @@ function HeaderContent() {
         <MenuLinks linkName="Category" url="/category" />
         <MenuLinks linkName="Package" url="/package" />
         <MenuLinks linkName="About" url="/about" />
-        
-        {details ? (
+
+        {details && details['fname'] ? (
           <>
             <MenuLinks linkName={details['fname']} url="#" />
           </>
@@ -38,6 +38,7 @@ function HeaderContent() {
             <Link to='/signin' id='signInButton'>Sign in</Link>
           </>
         )}
+
       </div>
     </div>
   )
