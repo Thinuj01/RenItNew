@@ -1,9 +1,8 @@
-import HeaderContent from "./Components/HeaderContent/HeaderContent"
-
-import ImageSlider from "./Components/ImageSlider/ImageSlider"
-
-
 import { useNavigate } from 'react-router-dom'
+
+import HeaderContent from "./Components/HeaderContent/HeaderContent"
+import ImageSlider from "./Components/ImageSlider/ImageSlider"
+import SubHeader from "./Components/SubHeader/SubHeader"
 
 function App() {
   const navigate = useNavigate();
@@ -21,6 +20,7 @@ function App() {
   return (
     <>
       <HeaderContent/>
+      <SubHeader/>
 
       <ImageSlider/>
 

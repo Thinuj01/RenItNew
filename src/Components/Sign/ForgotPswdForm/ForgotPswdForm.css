@@ -1,0 +1,129 @@
+.forgotPswdFormContainer{
+    padding: 0 10%;
+}
+
+.forgotPswdTitle{
+    color: var(--TextColor);
+    font-size: 56px;
+    padding-bottom: 5px;
+}
+
+.remindText {
+    color: var(--PlaceholderColor);
+    font-size: 16px;
+    padding-bottom: 36px;
+}
+
+.forgotPswdForm{
+    height: fit-content;
+}
+
+.forgotPswdForm form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.eMailDiv {
+    display: flex;
+}
+
+.eMailDivWithMessage{
+    display: flex;
+    flex-direction: column;
+}
+
+.emailVerifyBtn {
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0; /* Optional: For slightly rounded corners */
+    width: 35%; /* Ensures the input field takes up full width */
+    background-color: var(--SecondaryColor);
+}
+
+.emailVerifyBtn:active {
+    background-color: var(--PrimaryColor);
+}
+
+#uEmail {
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+#eOtp {
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+.verifyPswd {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.uPSWD{
+    width: 50%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+    border: 1px solid var(--BorderColor);
+    border-radius: 4px; /* Optional: For slightly rounded corners */
+    width: 100%; /* Ensures the input field takes up full width */
+    padding: 10px 20px;
+    -webkit-appearance: none; /* Removes the default dropdown arrow on Webkit browsers */
+    -moz-appearance: none; /* Removes the default dropdown arrow on Firefox */
+    appearance: none; /* Removes the default dropdown arrow on all browsers */
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    font-size: 14px;
+    color: var(--PlaceholderColor);
+    line-height: 1.5;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus, select:focus {
+    border: 1px solid var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    outline: none;
+    color: var(--TextColorActive);
+}
+
+input[type="submit"] {
+    font-size: 22px;
+    line-height: 1.5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px 50px;
+    background-color: var(--SecondaryColor);
+}
+
+input[type="submit"]:active {
+    background-color: var(--PrimaryColor);
+}
+
+.signInQ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signInQ p Link {
+    color: var(--PrimaryColor);
+    text-decoration: none;
+}
