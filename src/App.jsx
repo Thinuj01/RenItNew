@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import HeaderContent from "./Components/HeaderContent/HeaderContent"
 import ImageSlider from "./Components/ImageSlider/ImageSlider"
 import SubHeader from "./Components/SubHeader/SubHeader"
+import SearchBar from './Components/SearchBar/SearchBar';
 
 function App() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ function App() {
       <SubHeader/>
 
       <ImageSlider/>
+
+      <SearchBar/>
 
       <button onClick={logout}>logout</button>
 
