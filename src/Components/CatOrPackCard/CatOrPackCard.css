@@ -1,0 +1,28 @@
+.CatOrPackCardContainer{
+    width: 200px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.CatOrPackCardImage{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.CatOrPackCardImage img{
+    max-width: 100px;
+    min-height: 100px;
+}
+
+.CatOrPackCardTitle h4{
+    color: var(--TextColor);
+    text-align: center;
+}

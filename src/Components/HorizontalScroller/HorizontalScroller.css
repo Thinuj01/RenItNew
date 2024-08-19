@@ -1,0 +1,64 @@
+.horizontalScrollerContainer {
+    padding: 10px 10%;
+}
+
+.containerHead h2 {
+    color: var(--PrimaryColorDark);
+}
+
+.containerHead p {
+    color: var(--PlaceholderColor);
+}
+
+.scrollerWrapperHorizontal {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scrollerContainerHorizontal {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    gap: 40px;
+    scroll-behavior: smooth;
+    cursor: grab; /* Change cursor to indicate draggable area */
+}
+
+.scrollerContainerHorizontal:active {
+    cursor: grabbing; /* Change cursor to grabbing when dragging */
+}
+
+.scrollerContainerHorizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollerContainerHorizontal .itemBox {
+    height: 200px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.leftArrow {
+    left: -20px;
+}
+
+.rightArrow {
+    right: -20px;
+}

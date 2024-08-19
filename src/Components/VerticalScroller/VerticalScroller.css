@@ -1,0 +1,65 @@
+.verticalScrollerContainer {
+  padding: 10px 10%;
+}
+
+.containerHead h2 {
+  color: var(--PrimaryColorDark);
+}
+
+.containerHead p {
+  color: var(--PlaceholderColor);
+}
+
+.scrollerWrapperVertical {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollerContainerVertical {
+  margin-top: 20px;
+  height: 400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.scrollerContainerVertical:active {
+  cursor: grabbing;
+}
+
+.scrollerContainerVertical::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollerContainerVertical .itemBox {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.arrow {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.topArrow {
+  top: 0;
+}
+
+.bottomArrow {
+  top: 440px;
+}
