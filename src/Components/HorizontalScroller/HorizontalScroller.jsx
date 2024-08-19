@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './HorizontalScroller.css';
+import ItemCard from '../ItemCard/ItemCard';
+
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 function HorizontalScroller(props) {
     const scrollerRef = useRef(null);
@@ -8,6 +12,16 @@ function HorizontalScroller(props) {
     const [scrollLeft, setScrollLeft] = useState(0);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
+
+
+    const item = {
+        imageUrl: 'https://via.placeholder.com/250',
+        name: 'Sample Item name in 2 lines visible' ,
+        category: 'Electronics',
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        price: 99.99
+      };
+      
 
     const startDragging = (e) => {
         setIsDragging(true);
@@ -61,7 +75,7 @@ function HorizontalScroller(props) {
                 <div className="scrollerWrapperHorizontal">
                     {showLeftArrow && (
                         <button className="arrow leftArrow" onClick={scrollLeftArrow}>
-                            &#9664;
+                            <RiArrowLeftSLine />
                         </button>
                     )}
                     <div
@@ -73,71 +87,23 @@ function HorizontalScroller(props) {
                         onMouseUp={stopDragging}
                         onMouseLeave={stopDragging}
                     >
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
-                        <div className="itemBox">
-                            <p>Sample Card</p>
-                        </div>
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        <ItemCard item={item} />
+                        
 
                     </div>
                     {showRightArrow && (
                         <button className="arrow rightArrow" onClick={scrollRightArrow}>
-                            &#9654;
+                            <RiArrowRightSLine />
                         </button>
                     )}
                 </div>

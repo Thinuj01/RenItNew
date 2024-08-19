@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './VerticalScroller.css';
 
+import { RiArrowUpSLine } from "react-icons/ri";
+import { RiArrowDownSLine } from "react-icons/ri";
+
 function VerticalScroller(props) {
     const scrollerRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -60,7 +63,7 @@ function VerticalScroller(props) {
             <div className="scrollerWrapperVertical">
                 {showTopArrow && (
                     <button className="arrow topArrow" onClick={scrollTopArrow}>
-                        &#9650;
+                        <RiArrowUpSLine />
                     </button>
                 )}
                 <div
@@ -135,7 +138,7 @@ function VerticalScroller(props) {
                 </div>
                 {showBottomArrow && (
                     <button className="arrow bottomArrow" onClick={scrollBottomArrow}>
-                        &#9660;
+                        <RiArrowDownSLine />
                     </button>
                 )}
             </div>

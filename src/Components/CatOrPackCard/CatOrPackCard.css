@@ -6,6 +6,12 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.CatOrPackCardContainer:hover{
+    transform: scale(1.05);    
 }
 
 .CatOrPackCardImage{
