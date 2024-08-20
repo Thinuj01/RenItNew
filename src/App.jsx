@@ -7,6 +7,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroller";
 import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";
+import AddItemForm from "./Components/AddItemForm/AddItemForm";
 
 function App() {
   const navigate = useNavigate();

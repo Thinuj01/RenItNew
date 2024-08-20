@@ -36,10 +36,13 @@ function SearchBar() {
                         style={getSelectStyle(selectedCategory)}
                     >
                         <option value="">Category</option>
+                        <option value="Real_Estate">Real Estate</option>
                         <option value="Electronics">Electronics</option>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Vehicles">Vehicles</option>
-                        {/* Add more categories as needed */}
+                        <option value="Tools_&_Equipment">Tools & Equipment</option>
+                        <option value="Fashion_&_Accessories">Fashion & Accessories</option>
+                        <option value="Sports_&_Outdoors">Sports & Outdoors</option>
+                        <option value="Event_Supplies">Event Supplies</option>
+                        <option value="Books_&_Educational_Material">Books & Educational Material</option>
                     </select>
                 </div>
 

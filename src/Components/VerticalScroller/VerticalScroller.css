@@ -82,7 +82,7 @@ button{
 }
 
 .bottomArrow {
-  top: 440px;
+  bottom: -20px;
 } 
 
 .arrow:hover {

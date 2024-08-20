@@ -1,0 +1,46 @@
+.RentalPriceFormContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.RentalPriceFormContainer .rental-pricing-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pricing-modifiers-section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modifier-item{
+    display: flex;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
