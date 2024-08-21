@@ -1,0 +1,70 @@
+.mageUploadMainContainer{
+    margin-top: 20px;
+}
+
+.mageUploadMainContainer h3{
+    color: var(--PrimaryColorDark);
+    padding-bottom: 20px;
+}
+
+.image-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-preview-grid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-square {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed var(--BorderColor);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--BackgroundColor);
+    cursor: pointer;
+}
+
+.upload-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.plus-icon {
+    font-size: 24px;
+    color: var(--PlaceholderColor);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(var(--PrimaryColorDark-rgb), 0.6);
+    border: none;
+    border-radius: 50%;
+    color: var(--White);
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+.image-container:hover .remove-image-btn {
+    display: block;
+}

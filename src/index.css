@@ -30,12 +30,12 @@
   --BorderColor: #ddd; /* Light border color */
 
   --TiataryColor: hsl(22.63, 67.61%, 51.57%);
-  --InputBackgroundColor: #E8F5E9; /* Default input field background */
+  --InputBackgroundColor: #ffffff; /* Default input field background */
   --PlaceholderColor: #A5A5A5; /* Placeholder text color */
   --InputBorderColor: #C8E6C9; /* Default border color */
   --ActiveBorderColor: #388E3C; /* Border color when input is active */
   --TextColorActive: #2E7D32; /* Text color when input is active */
-  --ActiveInputBackgroundColor: #C8E6C9; /* Background color when input is active */
+  --ActiveInputBackgroundColor: #e8f5e9; /* Background color when input is active */
 
   /* Font Sizes */
   --FontSizeSmall: 0.875rem; /* 14px */

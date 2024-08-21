@@ -1,0 +1,96 @@
+.addItemFormContainer {
+    border-radius: 10px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    position: relative;
+    overflow: hidden;
+}
+
+.addItemHeader h1 {
+    color: var(--PrimaryColorDark);
+}
+
+h3 {
+    color: var(--PrimaryColorDark);
+}
+
+.addItemHeader p {
+    color: var(--TextColor);
+    margin-bottom: 10px;
+}
+
+.addItemForm {
+    min-width: 80%;
+}
+
+.addItemForm form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.addItemForm form .navigation-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.addItemForm form .navigation-buttons button{
+    width: 25%;
+}
+
+.itemTitle input,
+.itemDescription textarea,
+.rentalPrice input,
+.categorySelect select,
+.conditionSelect select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--InputBorderColor);
+    border-radius: 5px;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--InputBorderColor);
+    border-radius: 5px;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+}
+
+input[type="number"]:focus {
+    border-color: var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    color: var(--TextColorActive);
+}
+
+.itemTitle input:focus,
+.itemDescription textarea:focus,
+.rentalPrice input:focus,
+.categorySelect select:focus,
+.conditionSelect select:focus {
+    border-color: var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    color: var(--TextColorActive);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: var(--SecondaryColor);
+    color: var(--White);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--PrimaryColorDark);
+}
+

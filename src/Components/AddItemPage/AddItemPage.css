@@ -1,0 +1,29 @@
+.addItemPageContainer{
+    height: 100vh;
+    padding: 0 10%;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.leftDivAddItemPage{
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    position: relative;
+    padding-top: 50px;
+}
+
+.rightDivAddItemPage{
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightDivAddItemPage .itemPreview{
+    width: 100%;
+}

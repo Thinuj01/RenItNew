@@ -42,7 +42,7 @@
   
   .subHeaderCard h3 {
     font-size: 1.2em;
-    color: #0bbf64;
+    color: var(--TextColorActive);
   }
   
   .subHeaderCard p {

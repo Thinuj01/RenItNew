@@ -1,8 +1,13 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-import HeaderContent from "./Components/HeaderContent/HeaderContent"
-import ImageSlider from "./Components/ImageSlider/ImageSlider"
-import SubHeader from "./Components/SubHeader/SubHeader"
+import HeaderContent from "./Components/HeaderContent/HeaderContent";
+import ImageSlider from "./Components/ImageSlider/ImageSlider";
+import SubHeader from "./Components/SubHeader/SubHeader";
+import SearchBar from "./Components/SearchBar/SearchBar";
+import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroller";
+import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
+import CategoryBar from "./Components/CategoryBar/CategoryBar";
+import AddItemForm from "./Components/AddItemForm/AddItemForm";
 
 function App() {
   const navigate = useNavigate();
@@ -13,21 +18,36 @@ function App() {
   };
 
   function logout() {
-    setCookie('PHPSESSID', 0, -1);
-    navigate('/');
+    setCookie("PHPSESSID", 0, -1);
+    navigate("/");
     location.reload();
   }
   return (
     <>
-      <HeaderContent/>
-      <SubHeader/>
+      <HeaderContent />
+      <SubHeader />
+      <ImageSlider />
+      <SearchBar />
 
-      <ImageSlider/>
+      <HorizontalScroller
+        title="Promotion Items"
+        description="Also you can promote your items this section"
+      />
+
+      <CategoryBar />
+
+      <HorizontalScroller
+        title="Promotion Packages"
+        description="Also you can promote your items package in this section"
+      />
+
+      <CategoryBar />
+
+      <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" />
 
       <button onClick={logout}>logout</button>
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;

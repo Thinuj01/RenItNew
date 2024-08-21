@@ -1,0 +1,51 @@
+[
+    {
+        "icon": "/CategoryImage/Real Estate.png",
+        "imgAlt": "Real Estates",
+        "title": "Real Estates",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Vehicles.png",
+        "imgAlt": "Vehicles",
+        "title": "Vehicles",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Electronics.png",
+        "imgAlt": "Electronics",
+        "title": "Electronics",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Tools & Equipment.png",
+        "imgAlt": "Tools & Equipment",
+        "title": "Tools & Equipment",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Fashion & Accessories.png",
+        "imgAlt": "Fashion & Accessories",
+        "title": "Fashion & Accessories",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Sports & Outdoors.png",
+        "imgAlt": "Sports & Outdoors",
+        "title": "Sports & Outdoors",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Event Supplies.png",
+        "imgAlt": "Event Supplies",
+        "title": "Event Supplies",
+        "url": ""
+    },
+    {
+        "icon": "/CategoryImage/Books & Educational Material.png",
+        "imgAlt": "Books & Educational Material",
+        "title": "Books & Educational Material",
+        "url": ""
+    }
+
+]

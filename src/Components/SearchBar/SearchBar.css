@@ -1,0 +1,93 @@
+.searchBarContainer {
+    margin: 25px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+}
+
+.textSearch, .categorySearch, .locationSearch, .searchButton {
+    width: 25%;
+}
+
+#searchText {
+    border-radius: 4px 0 0 4px;
+    padding: 15px 50px;
+}
+
+/* Remove the border-radius from the top-right and bottom-right corners */
+.textSearch input {
+    border-radius: 4px 0 0 4px;
+    padding: 15px 50px;
+}
+
+/* This ensures the input retains the left border-radius only */
+.textSearch input:focus {
+    border-radius: 4px 0 0 4px;
+}
+
+.categorySearch select {
+    border-radius: 0;
+    padding: 15px 50px;
+}
+
+.locationSearch select {
+    border-radius: 0;
+    padding: 15px 50px;
+}
+
+.searchButton {
+    border-radius: 0 4px 4px 0;
+
+}
+
+input[type="text"],
+select {
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--BackgroundColor);
+    color: var(--TextColorA);
+    border: 1px solid var(--BorderColor);
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="text"]::placeholder,
+select::placeholder {
+    font-size: 14px;
+    color: var(--PlaceholderColor);
+    line-height: 1.5;
+    border-radius: 0;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border: 1px solid var(--ActiveBorderColor);
+    background-color: var(--InputBackgroundColor);
+    outline: none;
+    color: var(--TextColorActive);
+}
+
+.searchButton button {
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+    border: 1px solid var(--SecondaryColor);
+    border-radius: 0 4px 4px 0;
+    width: 100%;
+    padding: 15px 50px;
+    background-color: var(--SecondaryColor);
+}
+
+.searchButton button:hover {
+    background-color: var(--PrimaryColorDark);
+    border: 1px solid var(--PrimaryColorDark);
+    cursor: pointer;
+}
+
+.searchButton button:active {
+    background-color: var(--PrimaryColor);
+}
