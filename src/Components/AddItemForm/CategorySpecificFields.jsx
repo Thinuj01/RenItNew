@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CategorySpecificFields.css';
 
-function CategorySpecificFields({ category, handleInputChange }) {
+function CategorySpecificFields({ category, handleInputChange,formData,setFormData }) {
     const [selectedOptions, setSelectedOptions] = useState({
         amenities: [],
         furnishingStatus: [],
@@ -18,10 +18,13 @@ function CategorySpecificFields({ category, handleInputChange }) {
 
     const [additionalColors, setAdditionalColors] = useState([]);
     const [additionalSubjects, setAdditionalSubjects] = useState([]);
+    const [predefinedColors, setPredefinedColors] = useState(['Red', 'Green']);
+    const [predefinedsubjectTopics, setPredefinedsubjectTopics] = useState(['Science', 'Literature']);
 
     const handleAddField = (field) => {
         if (field === 'color') {
             setAdditionalColors([...additionalColors, '']);
+
         } else if (field === 'subjectTopic') {
             setAdditionalSubjects([...additionalSubjects, '']);
         }
@@ -46,22 +49,63 @@ function CategorySpecificFields({ category, handleInputChange }) {
             const updatedColors = [...additionalColors];
             updatedColors[index] = value;
             setAdditionalColors(updatedColors);
+            const allColors = [
+                ...(formData.color ? formData.color.filter(color => predefinedColors.includes(color)) : []), // Predefined selected colors
+                ...updatedColors, // Additional colors
+            ];
+    
+            setFormData((prevData) => ({
+                ...prevData,
+                color: allColors, // Update formData with combined colors
+            }));
         } else if (field === 'subjectTopic') {
             const updatedSubjects = [...additionalSubjects];
             updatedSubjects[index] = value;
             setAdditionalSubjects(updatedSubjects);
+
+            const allSubjects = [
+                ...(formData.subjectTopic ? formData.subjectTopic.filter(subjectTopic => predefinedsubjectTopics.includes(subjectTopic)) : []), // Predefined selected colors
+                ...updatedSubjects, // Additional colors
+            ];
+    
+            setFormData((prevData) => ({
+                ...prevData,
+                subjectTopic: allSubjects, // Update formData with combined colors
+            }));
         }
     };
 
 
+    // const toggleOption = (field, option) => {
+    //     setSelectedOptions(prevState => ({
+    //         ...prevState,
+    //         [field]: prevState[field].includes(option)
+    //             ? prevState[field].filter(item => item !== option)
+    //             : [...prevState[field], option]
+    //     }));
+    //     setFormData({
+    //         ...formData,
+    //         [field]: selectedOptions[field],
+    //     });
+    // };
+
     const toggleOption = (field, option) => {
+        const updatedOptions = selectedOptions[field].includes(option)
+            ? selectedOptions[field].filter(item => item !== option)
+            : [...selectedOptions[field], option];
+    
         setSelectedOptions(prevState => ({
             ...prevState,
-            [field]: prevState[field].includes(option)
-                ? prevState[field].filter(item => item !== option)
-                : [...prevState[field], option]
+            [field]: updatedOptions
         }));
+    
+        // Set the form data
+        setFormData({
+            ...formData,
+            [field]: updatedOptions.length > 0 ? updatedOptions : [option],
+        });
     };
+    
 
     const renderOptions = (options, field) => (
         options.map((option, index) => (
@@ -320,7 +364,13 @@ function CategorySpecificFields({ category, handleInputChange }) {
                             <div className="subcategoryContainer">
                                 {renderOptions(['Red', 'Green'], 'color')}
                                 {renderAdditionalFields('color', additionalColors)}
-                                <button onClick={() => handleAddField('color')}>Add More Colors</button>
+                                <input 
+                                    type="button" 
+                                    value="Add More Colors" 
+                                    onClick={() => handleAddField('color')} 
+                                    className="add-more-button" // Optional: Add classes for styling
+                                />
+
                             </div>
                         </div>
                         <div>
@@ -504,7 +554,13 @@ function CategorySpecificFields({ category, handleInputChange }) {
                             <div className="subcategoryContainer">
                                 {renderOptions(['Science', 'Literature'], 'subjectTopic')}
                                 {renderAdditionalFields('subjectTopic', additionalSubjects)}
-                                <button onClick={() => handleAddField('subjectTopic')}>Add More Subjects</button>
+                                {/* <button onClick={() => handleAddField('subjectTopic')}>Add More Subjects</button> */}
+                                <input 
+                                    type="button" 
+                                    value="Add More Subjects" 
+                                    onClick={() => handleAddField('subjectTopic')} 
+                                    className="add-more-button" // Optional: Add classes for styling
+                                />
                             </div>
                         </div>
                         <div>

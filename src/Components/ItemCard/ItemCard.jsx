@@ -21,7 +21,7 @@ function ItemCard({ item }) {
               ))}
             </ul>
           )}
-          <p className="item-price">${item.price.toFixed(2)}</p>
+          <p className="item-price">Rs.{item.price}</p>
         </div>
         <div className="wishlist-button">
           <button onClick={() => addToWishlist(item)}>
