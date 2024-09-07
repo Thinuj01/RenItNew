@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState , useEffect} from 'react';
+import axios from 'axios';
 import CommonFields from './CommonFields';
 import ImageUpload from './ImageUpload';
 import RentalPriceForm from './RentalPriceForm';
@@ -8,7 +8,7 @@ import CategoryFields from './CategoryFields';
 import CategorySpecificFields from './CategorySpecificFields';
 import './AddItemForm.css';
 
-function AddItemForm() {
+function AddItemForm({ item, setItem }) {
     const [step, setStep] = useState(1);
     const [category, setCategory] = useState('');
     const [formData, setFormData] = useState({});
@@ -19,29 +19,68 @@ function AddItemForm() {
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [pcode, setPcode] = useState('');
     const [paddress, setPaddress] = useState('');
+    const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+
+    useEffect(() => {
+        if(selectedSubcategories != null){
+            setItem({
+                ...item,
+                subcategories:selectedSubcategories,
+            });
+        }
+    }, [selectedSubcategories]);
 
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
+        if(e.target.name=="title"){
+            setItem({
+                ...item,
+                name:e.target.value,
+            }); 
+        }
+        if(e.target.name=="basePricePerDay"){
+            setItem({
+                ...item,
+                price:e.target.value,
+            }); 
+        }
     };
 
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
+        setItem({
+            ...item,
+            category:e.target.value,
+        }); 
     };
 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
-        setImages((prevImages) => [...prevImages, ...files].slice(0, 5)); // Limiting to 5 images
+        setImages((prevImages) => {
+            const newImages = [...prevImages, ...files].slice(0, 5); // Limiting to 5 images
+            if (newImages.length > 0 && item.imageUrl === 'https://via.placeholder.com/250') {
+                // Update the item imageUrl with the first image's URL
+                setItem({
+                    ...item,
+                    imageUrl: URL.createObjectURL(newImages[0]),
+                });
+            }
+            return newImages;
+        });
     };
-
     const handleRemoveImage = (index) => {
         setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     };
 
     const handleBasePriceChange = (e) => {
         setBasePricePerDay(e.target.value);
+        setItem({
+            ...item,
+            price:e.target.value,
+        }); 
     };
 
     const handleLateFeeChange = (e) => {
@@ -82,19 +121,40 @@ function AddItemForm() {
             }
         }
 
-        return basePricePerDay * days * multiplier;
+        return formData.basePricePerDay * days * multiplier;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formDataToSubmit = {
             ...formData,
             images,
-            basePricePerDay,
             pricingModifiers,
-            lateReturnFeePerDay,
+            category,
+            selectedSubcategories,
+
         };
+        console.log(step);
         console.log('Form Data:', formDataToSubmit);
+        try {
+            const response = await axios.post('http://localhost:4433/RentIT/Controllers/addItemController.php', formDataToSubmit,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    withCredentials: true
+                });
+            console.log('Item adding successful:', response.data);
+            // if (response.data == "Registration Successfull") {
+            //   alert('Registration successful!');
+            //   setIsRegistered(true);
+            // } else {
+            //   alert('Registration unsuccessful!');
+            // }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('Registration failed. Please try again.');
+        }
     };
 
     const renderStepContent = () => {
@@ -108,6 +168,7 @@ function AddItemForm() {
                             setSelectedDistrict={setSelectedDistrict}
                             setPcode={setPcode}
                             setPaddress={setPaddress}
+                            setFormData={handleInputChange}
                         />
                         <ImageUpload
                             images={images}
@@ -127,24 +188,31 @@ function AddItemForm() {
                     addPricingModifier={addPricingModifier}
                     removePricingModifier={removePricingModifier}
                     calculatePrice={calculatePrice}
+                    formData={formData}
+                    setFormData={handleInputChange}
                 />;
             case 3:
                 return (
                     <div>
                         <ConditionField
-                            onInputChange={handleInputChange}
+                            formData={formData}
+                            setFormData={handleInputChange}
                         />
                         <CategoryFields
                             category={category}
                             handleCategoryChange={handleCategoryChange}
                             onInputChange={handleInputChange}
+                            setSelectedSubcategories={setSelectedSubcategories}
+                            selectedSubcategories={selectedSubcategories}
                         />
                     </div>
                 );
             case 4:
                 return <CategorySpecificFields
                     category={category}
-                    onInputChange={handleInputChange}
+                    handleInputChange={handleInputChange}
+                    formData={formData}
+                    setFormData={setFormData}
                 />;
             default:
                 return null;
@@ -172,7 +240,8 @@ function AddItemForm() {
                                 Next
                             </button>
                         ) : (
-                            <button type="submit" className="submit-btn">Submit</button>
+                            // <button type="submit" className="submit-btn">Submit</button>
+                            <input type="submit" value="Submit" className="submit-btn"/>
                         )}
                     </div>
                 </form>

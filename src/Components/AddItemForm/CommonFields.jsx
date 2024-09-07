@@ -10,8 +10,9 @@ function CommonFields({ formData, selectedDistrict, pcode, paddress, setFormData
                     <input
                         type="text"
                         name="title"
-                        placeholder="Title"
                         onChange={setFormData}
+                        placeholder="Title"
+                        value={formData.title||''}
                         required
                     />
                 </div>
@@ -20,15 +21,16 @@ function CommonFields({ formData, selectedDistrict, pcode, paddress, setFormData
                         name="description"
                         placeholder="Description"
                         onChange={setFormData}
+                        value={formData.description||''}
                         required
                     ></textarea>
                 </div>
                 <div className="district_postal">
                     <select
-                        name="itemDistrict"
+                        name="selectedDistrict"
                         id="iDistrict"
-                        value={selectedDistrict}
-                        onChange={(e) => setSelectedDistrict(e.target.value)}
+                        value={formData.selectedDistrict||''}
+                        onChange={setFormData}
                     >
                         <option value="">District</option>
                         <option value="Colombo">Colombo</option>
@@ -63,21 +65,21 @@ function CommonFields({ formData, selectedDistrict, pcode, paddress, setFormData
                     </select>
                     <input
                         type="text"
-                        name="itemPostal"
+                        name="pcode"
                         placeholder="Postal code"
                         id="iPostal"
-                        value={pcode}
-                        onChange={(e) => setPcode(e.target.value)}
+                        value={formData.pcode||''}
+                        onChange={setFormData}
                     />
                 </div>
                 <div className="permanentAddress">
                     <input
                         type="text"
-                        name="itemAddress"
+                        name="paddress"
                         placeholder="Item Address"
                         id="iAddress"
-                        value={paddress}
-                        onChange={(e) => setPaddress(e.target.value)}
+                        value={formData.paddress||''}
+                        onChange={setFormData}
                     />
                 </div>
             </div>

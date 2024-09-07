@@ -10,7 +10,9 @@ function RentalPriceForm({
     handleModifierChange,
     addPricingModifier,
     removePricingModifier,
-    calculatePrice
+    calculatePrice,
+    formData,
+    setFormData
 }) {
     return (
         <>
@@ -24,8 +26,9 @@ function RentalPriceForm({
                         <input
                             type="number"
                             id="basePricePerDay"
-                            value={basePricePerDay}
-                            onChange={handleBasePriceChange}
+                            name="basePricePerDay"
+                            value={formData.basePricePerDay||''}
+                            onChange={setFormData}
                             required
                         />
                     </div>
@@ -34,8 +37,9 @@ function RentalPriceForm({
                         <input
                             type="number"
                             id="lateReturnFeePerDay"
-                            value={lateReturnFeePerDay}
-                            onChange={handleLateFeeChange}
+                            name="lateReturnFeePerDay"
+                            value={formData.lateReturnFeePerDay||''}
+                            onChange={setFormData}
                             required
                         />
                     </div>

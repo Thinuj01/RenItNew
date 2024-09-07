@@ -12,9 +12,9 @@ const categorySubcategories = {
     'books-educational': ['Textbooks', 'Novels', 'Educational Toys', 'Stationery'],
 };
 
-function CategoryFields({ category, handleCategoryChange }) {
+function CategoryFields({ category, handleCategoryChange ,selectedSubcategories,setSelectedSubcategories}) {
     const [subcategories, setSubcategories] = useState([]);
-    const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+
 
     const handleCategorySelect = (e) => {
         const selectedCategory = e.target.value;
