@@ -7,7 +7,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroller";
 import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";
-import AddItemForm from "./Components/AddItemForm/AddItemForm";
+import './index.css'
 
 function App() {
   const navigate = useNavigate();
@@ -29,7 +29,9 @@ function App() {
       <ImageSlider />
       <SearchBar />
 
-      <HorizontalScroller
+      
+    <div className="containerHomePage">
+    <HorizontalScroller
         title="Promotion Items"
         description="Also you can promote your items this section"
       />
@@ -44,6 +46,9 @@ function App() {
       <CategoryBar />
 
       <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" />
+
+    </div>
+
 
       <button onClick={logout}>logout</button>
     </>

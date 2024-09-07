@@ -11,7 +11,7 @@
 }
 
 #searchText {
-    border-radius: 4px 0 0 4px;
+    border-radius: 16px 0 0 16px;
     padding: 15px 50px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .searchButton {
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 16px 16px 0;
 
 }
 
@@ -76,7 +76,7 @@ select:focus {
     line-height: 1.5;
     color: white;
     border: 1px solid var(--SecondaryColor);
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 16px 16px 0;
     width: 100%;
     padding: 15px 50px;
     background-color: var(--SecondaryColor);
