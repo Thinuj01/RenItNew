@@ -1,0 +1,15 @@
+.ItemPreviewPageContainer{
+    display: flex;
+    position: relative;
+    padding: 10px 10%;
+    width: 100%;
+    min-height: fit-content;
+}
+
+.leftDiv{
+    width: 50%;
+}
+
+.rightDiv{
+    width: 50%;
+}

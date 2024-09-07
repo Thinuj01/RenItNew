@@ -7,8 +7,11 @@ import SignInPage from './Components/Sign/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/Sign/SignUpPage/SignUpPage.jsx'
 import ForgotPswdPage from './Components/Sign/ForgotPswdPage/ForgotPswdPage.jsx'
 import AddItemPage from './Components/AddItemPage/AddItemPage.jsx'
+import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
 
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
+import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx'
+import FilterPage from './Components/FilterPage/FilterPage.jsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/>, },
@@ -16,6 +19,9 @@ const router = createBrowserRouter([
   { path: "/signup", element: <SignUpPage/>, },
   { path: "/forgotpswd", element: <ForgotPswdPage/>, },
   { path: "/additempage", element: <AddItemPage/>, },
+  { path: "/ItemPreviewPage", element: <ItemPreviewPage/>, },
+  { path: "/CategoryViewPage", element: <CategoryViewPage/>, },
+  { path: "/FilterPage", element: <FilterPage/>, },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
