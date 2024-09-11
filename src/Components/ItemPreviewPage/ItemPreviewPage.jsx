@@ -7,6 +7,8 @@ import HorizontalScroller from '../HorizontalScroller/HorizontalScroller'
 import HeaderContent from '../HeaderContent/HeaderContent'
 import IitemPreviewPageItemDetails from '../IitemPreviewPageItemDetails/IitemPreviewPageItemDetails'
 import ItemPreviewPageDateSelectCalendar from '../ItemPreviewPageDateSelectCalendar/ItemPreviewPageDateSelectCalendar'
+import NoneScroller from '../NoneScroller/NoneScroller'
+import ItemCard from '../ItemCard/ItemCard'
 
 function ItemPreviewPage() {
     const item = {
@@ -23,7 +25,6 @@ function ItemPreviewPage() {
             <div className="ItemPreviewPageContainer">
 
 
-
                 <div className="ItemPreviewPageContainerleftDiv">
                     <div className="itemImageSlider">
                         <ItemImageSlider />
@@ -31,7 +32,7 @@ function ItemPreviewPage() {
                     <div className="FeedbackShowingBox">
                         <FeedBackShowingBox />
                     </div>
-                    {/* <div className="promotionSimilarItemsDiv">
+                    <div className="promotionSimilarItemsDiv">
                         <NoneScroller
                             title='Promotion Similar Items'
                             description='Also you can promote your items this section'
@@ -46,7 +47,7 @@ function ItemPreviewPage() {
                         <ItemCard item={item} />
                         <ItemCard item={item} />
                         </NoneScroller>
-                    </div> */}
+                    </div>
 
                     <HorizontalScroller
                         title='Promotion Similar Items'
