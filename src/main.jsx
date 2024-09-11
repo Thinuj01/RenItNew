@@ -11,7 +11,8 @@ import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
 
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx'
-import FilterPage from './Components/FilterPage/FilterPage.jsx'
+import ItemImageSlider from './Components/ItemImageSlider/ItemImageSlider.jsx'
+import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingBox.jsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/>, },
@@ -21,8 +22,10 @@ const router = createBrowserRouter([
   { path: "/additempage", element: <AddItemPage/>, },
   { path: "/ItemPreviewPage", element: <ItemPreviewPage/>, },
   { path: "/CategoryViewPage", element: <CategoryViewPage/>, },
-  { path: "/FilterPage", element: <FilterPage/>, },
+  { path: "/ItemImageSlider", element: <ItemImageSlider/>, },
+  { path: "/FeedBackShowingBox", element: <FeedBackShowingBox/>, },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
