@@ -11,7 +11,7 @@ import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
 
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx'
-import FilterPage from './Components/FilterPage/FilterPage.jsx'
+import SearchResults from './Components/SearchBar/SearchResults.jsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/>, },
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   { path: "/additempage", element: <AddItemPage/>, },
   { path: "/ItemPreviewPage", element: <ItemPreviewPage/>, },
   { path: "/CategoryViewPage", element: <CategoryViewPage/>, },
-  { path: "/FilterPage", element: <FilterPage/>, },
+  { path: "/results", element: <SearchResults/>, },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

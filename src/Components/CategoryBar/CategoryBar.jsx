@@ -19,6 +19,7 @@ function CategoryBar() {
                                 imageAlt={item.imgAlt}
                                 title={item.title}
                                 url={item.url}
+                                category={item.category}
                             />
                         </div>
                     ))

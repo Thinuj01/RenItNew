@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
+import { useLocation } from 'react-router-dom'
+import axios from 'axios';
 
 function CategoryViewPage() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const cate = decodeURIComponent(queryParams.get('category') || '');
+    const { category, district, text } = location.state || {};
+    //console.log(category,district,text);
+    
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
         'Kurunegala', 'Anuradhapura', 'Polonnaruwa', 'Gampaha',
@@ -20,6 +28,7 @@ function CategoryViewPage() {
         'Sports & Outdoors': ['Bicycle', 'Tennis Racket', 'Backpack'],
         'Event Supplies': ['Chairs', 'Tents', 'Tables'],
         'Books & Educational Material': ['Book', 'Notebook', 'Stationery'],
+        'Vehicles': ['Car', 'Van', 'Motor Bike', 'Truck', 'Bus'],
     };
 
     const deliveryMethods = ['Shipping', 'Free-Shipping', 'Pickup'];
@@ -30,7 +39,8 @@ function CategoryViewPage() {
     const [selectedDeliveryMethods, setSelectedDeliveryMethods] = useState([]);
     const [selectedConditions, setSelectedConditions] = useState([]);
     const [selectedDistrict, setSelectedDistrict] = useState('');
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState(text || '');
+    const [paths, setPaths] = useState([]);
 
     const handleDistrictChange = (e) => {
         setSelectedDistrict(e.target.value);
@@ -84,6 +94,50 @@ function CategoryViewPage() {
         }
     };
 
+    useEffect(() => {
+        // Only set selectedCategory if it's not already set or if "cate" is valid
+        if (cate && selectedCategory !== cate) {
+            setSelectedCategory(cate);
+            console.log("Category set to:", cate);
+        } else if ((category || district || text) && !selectedCategory) {
+            // Only update selectedCategory and other states if they aren't already set
+            if (category) {
+                setSelectedCategory(category);
+            }
+            if (district) {
+                setSelectedDistrict(district);
+            }
+            if (text) {
+                setSearchText(text);
+            }
+        }
+    }, [cate, category, district, text]); // Add dependencies to trigger when these values change
+    
+
+    useEffect(() => {
+        if (!selectedCategory) return;  // Don't fetch if no category is selected
+    
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+                    params: { param: selectedCategory }
+                });
+                setPaths(response.data);
+                console.log(response.data);
+                console.log("Current state:", selectedCategory, category, district, text, cate);
+            } catch (error) {
+                console.error('There was an error fetching the data!', error);
+            }
+        };
+    
+        fetchData(); // Call the async function
+    }, [selectedCategory]); // Only fetch when selectedCategory changes
+    
+    
+
+    
+
+    
     return (
         <>
             <HeaderContent />
@@ -189,7 +243,7 @@ function CategoryViewPage() {
                     </div>
 
                     <div className="CategoryViewPageRightDiv">
-                        {/* Selected Items (Subcategories, Delivery Methods, Conditions) */}
+                        
                         {(selectedSubcategories.length > 0 || selectedDeliveryMethods.length > 0 || selectedConditions.length > 0) && (
                             <div className="selectedItemsViewContainer">
                                 <div className="selected-items">
@@ -215,68 +269,28 @@ function CategoryViewPage() {
                             </div>
                         )}
 
+                        <div>
+                            <h1>Category: {selectedCategory}</h1>
+                            {/* Render category-specific content */}
+
+                        </div>
+
                         <div className="itemViewContainer">
                             <NoneScroller className='nonScrollerWrapper'>
-                                <div className="itemBox">
-                                    Sample Card
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
-                                <div className="itemBox">
-                                    <p>Sample Card</p>
-                                </div>
+                                
+                                {
+                                paths.map((image, index) => (
+                                    (selectedCategory == image[2] || selectedSubcategories.includes(image[1])) ? (
+                                        <div className="itemBox">
+                                            <img key={index} src={'http://localhost:80/RentIT'+image.item_Picture_01} width='100px'/>
+                                            {/* <p>{console.log((image[1]))}</p> */}
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )
+                                ))
+                                }
+                                
                             </NoneScroller>
                         </div>
                     </div>
