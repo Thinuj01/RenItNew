@@ -37,6 +37,8 @@
   --TextColorActive: #2E7D32; /* Text color when input is active */
   --ActiveInputBackgroundColor: #ffffff; /* Background color when input is active */
 
+  --BoxShadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+
   /* Font Sizes */
   --FontSizeSmall: 0.875rem; /* 14px */
   --FontSizeNormal: 1rem; /* 16px */
