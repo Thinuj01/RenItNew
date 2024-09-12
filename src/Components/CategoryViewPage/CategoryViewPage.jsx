@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
-import { useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 function CategoryViewPage() {
@@ -10,6 +10,7 @@ function CategoryViewPage() {
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
+    const navigate = useNavigate();
     //console.log(category,district,text);
     
     const districts = [
@@ -119,7 +120,7 @@ function CategoryViewPage() {
     
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory }
                 });
                 setPaths(response.data);
@@ -281,8 +282,10 @@ function CategoryViewPage() {
                                 {
                                 paths.map((image, index) => (
                                     (selectedCategory == image[2] || selectedSubcategories.includes(image[1])) ? (
-                                        <div className="itemBox">
-                                            <img key={index} src={'http://localhost:80/RentIT'+image.item_Picture_01} width='100px'/>
+                                        <div className="itemBox" onClick={()=>{
+                                            navigate("/ItemPreviewPage", { state: { id: image[4] } });
+                                        }}>
+                                            <img key={index} src={'http://localhost:4433/RentIT'+image.item_Picture_01} width='100px'/>
                                             {/* <p>{console.log((image[1]))}</p> */}
                                         </div>
                                     ) : (

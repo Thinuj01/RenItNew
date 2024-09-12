@@ -27,7 +27,7 @@ function ForgotPswdForm() {
         console.log(status);
         setIsSendingEmail(true);
         try {
-            const response = await axios.post('http://localhost:80/RentIT/Controllers/userLoginController.php', { email, status }, { withCredentials: true });
+            const response = await axios.post('http://localhost:4433/RentIT/Controllers/userLoginController.php', { email, status }, { withCredentials: true });
             console.log('Email sent successfully:', response.data);
             setIsSubmitting(true);
         } catch (error) {
@@ -48,7 +48,7 @@ function ForgotPswdForm() {
         const status = '3';
         console.log(status);
         try {
-            const response = await axios.post('http://localhost:80/RentIT/Controllers/userLoginController.php', { otp, status }, { withCredentials: true });
+            const response = await axios.post('http://localhost:4433/RentIT/Controllers/userLoginController.php', { otp, status }, { withCredentials: true });
             console.log('Email Verification:', response.data);
             if (response.data == "Matched") {
                 setIsOtpVerified(true);
@@ -131,7 +131,7 @@ function ForgotPswdForm() {
         };
     
         try {
-          const response = await axios.post('http://localhost:80/RentIT/Controllers/userLoginController.php', formData,{withCredentials:true});
+          const response = await axios.post('http://localhost:4433/RentIT/Controllers/userLoginController.php', formData,{withCredentials:true});
           console.log('Password Changed:', response.data);
           if (response.data == "Password Changed") {
             alert('Password Changed');

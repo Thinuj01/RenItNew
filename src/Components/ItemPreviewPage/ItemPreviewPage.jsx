@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ItemPreviewPage.css'
 import ToggleableSection from '../ToggleableSection/ToggleableSection'
 import ItemImageSlider from '../ItemImageSlider/ItemImageSlider'
@@ -9,15 +9,35 @@ import IitemPreviewPageItemDetails from '../IitemPreviewPageItemDetails/IitemPre
 import ItemPreviewPageDateSelectCalendar from '../ItemPreviewPageDateSelectCalendar/ItemPreviewPageDateSelectCalendar'
 import NoneScroller from '../NoneScroller/NoneScroller'
 import ItemCard from '../ItemCard/ItemCard'
+import { useLocation } from 'react-router-dom';
 
 function ItemPreviewPage() {
+    const location = useLocation();
+    const { id } = location.state || {};
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
         category: 'Electronics',
-        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], 
         price: 99.99
     };
+
+    useEffect(() => {
+        if (id) {
+          axios.get(`http://localhost:4433/RentIT/getOneItem.php?category=&id=${id}`)
+            .then(response => {
+              console.log('Response data:', response.data);
+              setItem(response.data);
+            //   if (response.data[0].pics && response.data[0].pics.length > 0) {
+            //     setMainImage(response.data[0].pics[0]);
+            //   }
+            })
+            .catch(error => {
+              console.error('There was an error!', error);
+              setItem([]);
+            });
+        }
+      }, [id]);
 
     return (
         <>
