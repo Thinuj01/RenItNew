@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [searchText, setSearchText] = useState('');
+    const navigate = useNavigate();
 
     const handleSelectChange = (setter) => (event) => {
         setter(event.target.value);
@@ -13,6 +15,16 @@ function SearchBar() {
 
     const getSelectStyle = (selectedValue) => {
         return selectedValue === '' ? { color: '#A5A5A5' } : { color: '#333' };
+    };
+
+    const handleSearchClick = () => {
+        navigate('/CategoryViewPage', {
+            state: {
+                category: selectedCategory,
+                district: selectedDistrict,
+                text: searchText
+            }
+        });
     };
 
     return (
@@ -36,13 +48,14 @@ function SearchBar() {
                         style={getSelectStyle(selectedCategory)}
                     >
                         <option value="">Category</option>
-                        <option value="Real_Estate">Real Estate</option>
+                        <option value="Real Estate">Real Estate</option>
                         <option value="Electronics">Electronics</option>
-                        <option value="Tools_&_Equipment">Tools & Equipment</option>
-                        <option value="Fashion_&_Accessories">Fashion & Accessories</option>
-                        <option value="Sports_&_Outdoors">Sports & Outdoors</option>
-                        <option value="Event_Supplies">Event Supplies</option>
-                        <option value="Books_&_Educational_Material">Books & Educational Material</option>
+                        <option value="Tools & Equipment">Tools & Equipment</option>
+                        <option value="Fashion & Accessories">Fashion & Accessories</option>
+                        <option value="Sports & Outdoors">Sports & Outdoors</option>
+                        <option value="Event Supplies">Event Supplies</option>
+                        <option value="Books & Educational Material">Books & Educational Material</option>
+                        <option value="Vehicles">Vehicles</option>
                     </select>
                 </div>
 
@@ -87,7 +100,7 @@ function SearchBar() {
                 </div>
 
                 <div className="searchButton">
-                    <button type="button">Search</button>
+                <button type="button" onClick={handleSearchClick}>Search</button>
                 </div>
             </div>
         </>

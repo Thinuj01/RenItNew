@@ -12,9 +12,9 @@ import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx'
 
+
 import ItemImageSlider from './Components/ItemImageSlider/ItemImageSlider.jsx'
 import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingBox.jsx'
-
 
 const router = createBrowserRouter([
   { path: "/", element: <App/>, },
@@ -26,7 +26,6 @@ const router = createBrowserRouter([
   { path: "/CategoryViewPage", element: <CategoryViewPage/>, },
   { path: "/ItemImageSlider", element: <ItemImageSlider/>, },
   { path: "/FeedBackShowingBox", element: <FeedBackShowingBox/>, },
-
 ]);
 
 
