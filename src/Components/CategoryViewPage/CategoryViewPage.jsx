@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
-import { useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 function CategoryViewPage() {
@@ -10,6 +10,8 @@ function CategoryViewPage() {
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
+
+    const navigate = useNavigate();
     
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
@@ -122,7 +124,7 @@ function CategoryViewPage() {
     
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory }
                 });
                 setPaths(response.data);
@@ -285,50 +287,48 @@ function CategoryViewPage() {
                             <NoneScroller className='nonScrollerWrapper'>
                                 
                             {Array.isArray(paths) && paths.length > 0 ? (
-    paths.filter((image) => {
-        // Check if search term matches (empty search term should show all items)
-        const matchesSearch = searchText === '' || 
-            image.title.toLowerCase().includes(searchText) || 
-            image.description.toLowerCase().includes(searchText);
+                              paths.filter((image) => {
+                                  // Check if search term matches (empty search term should show all items)
+                                  const matchesSearch = searchText === '' || 
+                                      image.title.toLowerCase().includes(searchText) || 
+                                      image.description.toLowerCase().includes(searchText);
 
-        // Check if subcategories match (show all if none are selected)
-        const matchesSubcategory = selectedSubcategories.length === 0 || 
-            image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                  // Check if subcategories match (show all if none are selected)
+                                  const matchesSubcategory = selectedSubcategories.length === 0 || 
+                                      image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
-        // Check if conditions match (show all if none are selected)
-        const matchesCondition = selectedConditions.length === 0 ||
-            selectedConditions.includes(image.item_condition);
+                                  // Check if conditions match (show all if none are selected)
+                                  const matchesCondition = selectedConditions.length === 0 ||
+                                      selectedConditions.includes(image.item_condition);
 
-        // Return items that match all filters (search, subcategory, and condition)
-        return matchesSearch && matchesSubcategory && matchesCondition;
-    }).length === 0 ? (
-        <div>No items found</div> // Display message if no items match the filter
-    ) : (
-        paths.filter((image, index) => {
-            // Apply the same filtering logic again
-            const matchesSearch = searchText === '' || 
-                image.title.toLowerCase().includes(searchText) || 
-                image.description.toLowerCase().includes(searchText);
+                                  // Return items that match all filters (search, subcategory, and condition)
+                                  return matchesSearch && matchesSubcategory && matchesCondition;
+                              }).length === 0 ? (
+                                  <div>No items found</div> // Display message if no items match the filter
+                              ) : (
+                                  paths.filter((image, index) => {
+                                      // Apply the same filtering logic again
+                                      const matchesSearch = searchText === '' || 
+                                          image.title.toLowerCase().includes(searchText) || 
+                                          image.description.toLowerCase().includes(searchText);
 
-            const matchesSubcategory = selectedSubcategories.length === 0 || 
-                image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                      const matchesSubcategory = selectedSubcategories.length === 0 || 
+                                          image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
-            const matchesCondition = selectedConditions.length === 0 ||
-                selectedConditions.includes(image.item_condition);
+                                      const matchesCondition = selectedConditions.length === 0 ||
+                                          selectedConditions.includes(image.item_condition);
 
-            return matchesSearch && matchesSubcategory && matchesCondition;
-        }).map((image, index) => (
-            <div key={index} className="itemBox">
-                <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
-            </div>
-        ))
-    )
-) : (
-    <div>No items found</div> // Display this message if paths is not an array or is empty
-)}
+                                      return matchesSearch && matchesSubcategory && matchesCondition;
+                                  }).map((image, index) => (
+                                      <div key={index} className="itemBox">
+                                          <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
+                                      </div>
+                                  ))
+                              )
+                          ) : (
+                              <div>No items found</div> // Display this message if paths is not an array or is empty
+                          )}
 
-
-       
                             </NoneScroller>
                         </div>
                     </div>
