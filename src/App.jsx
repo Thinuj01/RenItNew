@@ -5,7 +5,6 @@ import HeaderContent from "./Components/HeaderContent/HeaderContent";
 import ImageSlider from "./Components/ImageSlider/ImageSlider";
 import SubHeader from "./Components/SubHeader/SubHeader";
 import SearchBar from "./Components/SearchBar/SearchBar";
-import SearchResults from "./Components/SearchBar/SearchResults";
 import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroller";
 import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";

@@ -10,7 +10,6 @@ function CategoryViewPage() {
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
-    //console.log(category,district,text);
     
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
@@ -31,8 +30,8 @@ function CategoryViewPage() {
         'Vehicles': ['Car', 'Van', 'Motor Bike', 'Truck', 'Bus'],
     };
 
-    const deliveryMethods = ['Shipping', 'Free-Shipping', 'Pickup'];
-    const conditions = ['Like-New', 'Used'];
+    const deliveryMethods = ['Shipping', 'Pickup'];
+    const conditions = ['New', 'LikedNew', 'Used'];
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
@@ -41,6 +40,10 @@ function CategoryViewPage() {
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [searchText, setSearchText] = useState(text || '');
     const [paths, setPaths] = useState([]);
+
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value.toLowerCase());  // Convert to lowercase for case-insensitive search
+    };
 
     const handleDistrictChange = (e) => {
         setSelectedDistrict(e.target.value);
@@ -151,7 +154,7 @@ function CategoryViewPage() {
                                 type="text"
                                 placeholder="Search for anything"
                                 value={searchText}
-                                onChange={(e) => setSearchText(e.target.value)}
+                                onChange={handleSearchChange}
                             />
                         </div>
                         <div className="CategoryViewPageSearchButton">
@@ -208,7 +211,8 @@ function CategoryViewPage() {
                         )}
 
                         {/* Delivery Method Checkboxes */}
-                        <div className="deliveryMethodViewContainer">
+                        {selectedCategory !== 'Real Estate' ? (
+                            <div className="deliveryMethodViewContainer">
                             <h3>Rent by Delivery-Method</h3>
                             {deliveryMethods.map((method) => (
                                 <div key={method} className='checkBoxDiv'>
@@ -220,9 +224,13 @@ function CategoryViewPage() {
                                         onChange={handleDeliveryMethodChange}
                                     />
                                     <label htmlFor={method}>{method}</label>
-                                </div>
-                            ))}
-                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ):(
+                            null
+                        )}
+                        
 
                         {/* Conditions Checkboxes */}
                         <div className="conditionsViewContainer">
@@ -271,26 +279,56 @@ function CategoryViewPage() {
 
                         <div>
                             <h1>Category: {selectedCategory}</h1>
-                            {/* Render category-specific content */}
-
                         </div>
 
                         <div className="itemViewContainer">
                             <NoneScroller className='nonScrollerWrapper'>
                                 
-                                {
-                                paths.map((image, index) => (
-                                    (selectedCategory == image[2] || selectedSubcategories.includes(image[1])) ? (
-                                        <div className="itemBox">
-                                            <img key={index} src={'http://localhost:80/RentIT'+image.item_Picture_01} width='100px'/>
-                                            {/* <p>{console.log((image[1]))}</p> */}
-                                        </div>
-                                    ) : (
-                                        <></>
-                                    )
-                                ))
-                                }
-                                
+                            {Array.isArray(paths) && paths.length > 0 ? (
+    paths.filter((image) => {
+        // Check if search term matches (empty search term should show all items)
+        const matchesSearch = searchText === '' || 
+            image.title.toLowerCase().includes(searchText) || 
+            image.description.toLowerCase().includes(searchText);
+
+        // Check if subcategories match (show all if none are selected)
+        const matchesSubcategory = selectedSubcategories.length === 0 || 
+            image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+
+        // Check if conditions match (show all if none are selected)
+        const matchesCondition = selectedConditions.length === 0 ||
+            selectedConditions.includes(image.item_condition);
+
+        // Return items that match all filters (search, subcategory, and condition)
+        return matchesSearch && matchesSubcategory && matchesCondition;
+    }).length === 0 ? (
+        <div>No items found</div> // Display message if no items match the filter
+    ) : (
+        paths.filter((image, index) => {
+            // Apply the same filtering logic again
+            const matchesSearch = searchText === '' || 
+                image.title.toLowerCase().includes(searchText) || 
+                image.description.toLowerCase().includes(searchText);
+
+            const matchesSubcategory = selectedSubcategories.length === 0 || 
+                image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+
+            const matchesCondition = selectedConditions.length === 0 ||
+                selectedConditions.includes(image.item_condition);
+
+            return matchesSearch && matchesSubcategory && matchesCondition;
+        }).map((image, index) => (
+            <div key={index} className="itemBox">
+                <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
+            </div>
+        ))
+    )
+) : (
+    <div>No items found</div> // Display this message if paths is not an array or is empty
+)}
+
+
+       
                             </NoneScroller>
                         </div>
                     </div>
