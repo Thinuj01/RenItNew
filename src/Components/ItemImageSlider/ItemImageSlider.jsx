@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './ItemImageSlider.css';
 
-const ItemImageSlider = () => {
-    const images = [
-        "https://www.gstatic.com/webp/gallery/1.jpg",
-        "https://via.placeholder.com/600x400?text=Image+2",
-        "https://via.placeholder.com/600x400?text=Image+3",
-        "https://via.placeholder.com/600x400?text=Image+4",
-        "https://via.placeholder.com/600x400?text=Image+5",
-    ];
-
-    const [currentImage, setCurrentImage] = useState(images[0]);
+const ItemImageSlider = ({ pics = [] }) => {
+    const [images, setImages] = useState([]);
+    const [currentImage, setCurrentImage] = useState(null);
     const [magnifierStyle, setMagnifierStyle] = useState({
         backgroundImage: '',
         backgroundPosition: '0% 0%',
         display: 'none',
     });
+
+    
+    useEffect(() => {
+        if (pics.length > 0) {
+            console.log("pics", pics);
+            setImages(pics);
+        }
+    }, [pics]);
+
+   
+    useEffect(() => {
+        if (images.length > 0) {
+            setCurrentImage(images[0]); 
+        }
+    }, [images]);
 
     const handleMouseMove = (e) => {
         const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -27,7 +35,7 @@ const ItemImageSlider = () => {
 
         setMagnifierStyle({
             backgroundImage: `url(${currentImage})`,
-            backgroundSize: `${width * 2}px ${height * 2}px`,  // Adjust zoom level by changing multiplier
+            backgroundSize: `${width * 2}px ${height * 2}px`, // Adjust zoom level by changing multiplier
             backgroundPosition: `${xPercent}% ${yPercent}%`,
             display: 'block',
             top: `${y - 75}px`,  // Move the magnifier
@@ -53,10 +61,12 @@ const ItemImageSlider = () => {
                 ))}
             </div>
 
-            <div className="large-image" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-                <img src={currentImage} alt="large-view" />
-                <div className="magnifier" style={magnifierStyle}></div>
-            </div>
+            {currentImage && (
+                <div className="large-image" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+                    <img src={currentImage} alt="large-view" />
+                    <div className="magnifier" style={magnifierStyle}></div>
+                </div>
+            )}
         </div>
     );
 };

@@ -125,7 +125,7 @@ function CategoryViewPage() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
-                    params: { param: selectedCategory }
+                    params: { param: selectedCategory,status:"1" }
                 });
                 setPaths(response.data);
                 console.log(response.data);
@@ -320,8 +320,10 @@ function CategoryViewPage() {
 
                                       return matchesSearch && matchesSubcategory && matchesCondition;
                                   }).map((image, index) => (
-                                      <div key={index} className="itemBox">
-                                          <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
+                                      <div key={index} className="itemBox" onClick={()=>{
+                                        navigate("/ItemPreviewPage",{state:{ id: image[4] }});
+                                      }}>
+                                          <img src={'http://localhost:4433/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
                                       </div>
                                   ))
                               )
