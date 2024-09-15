@@ -1,0 +1,140 @@
+.CategoryViewPageSearchBarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.CategoryViewPageSearchBar {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CategoryViewPageSearchText {
+    width: 75%;
+    border-radius: 16px 0 0 16px;
+}
+
+.CategoryViewPageSearchButton {
+    width: 25%;
+    border-radius: 0 16px 16px 0;
+}
+
+.CategoryViewPageSearchButton button {
+    width: 20%;
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+    border: 1px solid var(--SecondaryColor);
+    border-radius: 0 16px 16px 0;
+    width: 100%;
+    padding: 15px 50px;
+    background-color: var(--SecondaryColor);
+}
+
+.CategoryViewPageSearchButton button:hover {
+    background-color: var(--PrimaryColorDark);
+    border: 1px solid var(--PrimaryColorDark);
+    cursor: pointer;
+}
+
+.CategoryViewPageSearchButton button:active {
+    background-color: var(--PrimaryColor);
+}
+
+.categoryViewPageBodyContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.CategoryViewPageLeftDiv {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border-right: 1px solid var(--PlaceholderColor);
+}
+
+h3 {
+    color: var(--PrimaryColorDark);
+}
+
+.checkBoxDiv {
+    margin: 10px 50px;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.checkBoxDiv input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: var(--PrimaryColor);
+}
+
+.checkBoxDiv label {
+    font-size: 16px;
+}
+
+.itemBox {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+}
+
+.CategoryViewPageRightDiv {
+    width: 4433%;
+    padding: 10px 24px;
+}
+
+.selectedItemsViewContainer{
+    width: 100%;
+    position: sticky;
+    display: flex;
+    align-items: center;
+}
+
+.selectedItemsViewContainer .selected-items{  
+    display: flex;
+    gap: 20px;
+}
+
+.selectedItemsViewContainer .selected-items .selected-item{
+    padding: 15px 25px;
+    border: 0.5px solid var(--PrimaryColorDark);
+    border-radius: 50px;
+    transition: background-color 0.05s, color 0.05s, border 0.05s;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--PrimaryColorDark);
+}
+
+.selectedItemsViewContainer .selected-items .selected-item button{
+    color: var(--PrimaryColorDark);
+    font-weight: 900;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.selectedItemsViewContainer .selected-items .selected-item button:hover {
+    color: var(--PrimaryColor);
+}
+
+.itemViewContainer{
+    width: 100%;
+}

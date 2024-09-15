@@ -1,0 +1,137 @@
+/* ImageSlider.css */
+.sliderPaddingContaion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10%;
+}
+
+.slider-container {
+    position: relative;
+    border-radius: 15px;
+    max-width: 100%;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Smooth slide transition */
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+    /* Add transition to slide */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateX(0);
+    /* Start with slide positioned normally */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* Fade in and out */
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.slide-content {
+    width: 50%;
+    height: 50vh;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.onOurSite {
+    color: rgb(228, 228, 60);
+}
+
+.sliderColor {
+    background-color: rgba(var(--PrimaryColorDark-rgb), 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000;
+}
+
+.slide-content-description {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 2000;
+}
+
+.btn {
+    margin-top: 10px;
+    outline: 1px solid var(--White);
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.slider-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.slider-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background-color: rgba(255, 255, 255, 1);
+}

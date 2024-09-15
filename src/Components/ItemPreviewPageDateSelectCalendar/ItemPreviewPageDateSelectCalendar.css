@@ -1,0 +1,172 @@
+.itemPreviewPageDateSelectCalendar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.titleAndDesc {
+    width: 100%;
+}
+
+.calendarTitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.calendarDesc {
+    color: var(--PlaceholderColor);
+}
+
+.availabilityOrNonAvailability {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.availabilityOrNonAvailabilityLabel {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.availableColorLabelDiv {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--PrimaryColor);
+    border-radius: 4px;
+}
+
+.nonAvailableColorLabelDiv {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgba(255, 0, 0, 0.521);
+    border-radius: 4px;
+}
+
+.calendarDiv{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* General styles for calendar tiles */
+
+.react-calendar__tile {
+    color: #333 !important; /* Default text color for the calendar dates */
+    font-weight: 500;
+    background: none; /* Clear background for better contrast */
+}
+
+/* Selected date styling */
+.selected-date {
+    background-color: rgba(0, 128, 0, 0.4) !important; /* Green background for selected dates */
+    color: white !important; /* Ensure text is visible */
+}
+
+/* Non-available date styling */
+.non-available-date {
+    background-color: rgba(255, 0, 0, 0.4) !important; /* Red background for non-available dates */
+    color: white !important; /* Ensure text is visible */
+    border-radius: 4px;
+}
+
+/* Add hover effect for better visibility */
+.react-calendar__tile:enabled:hover {
+    background-color: #ddd !important; /* Light grey background on hover */
+    color: black !important;
+}
+
+/* Disabled (unavailable) dates */
+.react-calendar__tile--disabled {
+    color: #ccc !important; /* Light grey text for disabled dates */
+    background: #f9f9f9 !important;
+}
+
+/* Additional customization for the selected date list */
+.selectedDates {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.dateList {
+    list-style-type: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.dateItem {
+    position: relative;
+    padding-left: 20px; /* Space for custom bullet */
+    margin-bottom: 8px; /* Space between list items */
+    font-size: 16px; /* Adjust text size */
+    color: #555; /* Adjust text color */
+}
+
+.dateItem::before {
+    content: '•'; /* Custom bullet character */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #55e971; /* Custom bullet color */
+    font-size: 20px; /* Size of the bullet */
+}
+
+.dateItem:hover {
+    color: #388e3c; /* Color on hover */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.react-calendar__navigation button {
+    background-color: transparent; /* Ensure background doesn't hide buttons */
+    color: #333; /* Visible color for buttons */
+    border: none; /* Remove default borders */
+    font-size: 16px; /* Ensure font is large enough */
+    padding: 5px; /* Add padding to make buttons clickable */
+    cursor: pointer; /* Show pointer on hover */
+}
+
+.react-calendar__navigation button:disabled {
+    opacity: 0.5; /* Fade disabled buttons */
+}
+
+.react-calendar__navigation button:hover {
+    background-color: #e0f7fa; /* Add background color on hover */
+    border-radius: 50%; /* Make buttons rounded */
+}
+
+.react-calendar__navigation {
+    position: relative;
+    z-index: 1; /* Ensure the navigation is on top */
+}
+
+.react-calendar {
+    padding: 10px; /* Add some padding if necessary */
+    overflow: visible; /* Ensure nothing overflows the container */
+}
+
+
+/* Buttons styling */
+.purchaseButton, .wishlistButton {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    transition: font-size 0.3s ease-in, line-height 0.3s ease-in;
+    height: 50px;
+}
+
+.purchaseButton:hover, .wishlistButton:hover {
+    font-size: 1.7rem;
+    line-height: 50px;
+}

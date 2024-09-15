@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SignUpPage.css'
 import WelcomeQuotes from '../WelcomeQuotes/WelcomeQuotes'
 import SignUpForm from '../SignUpForm/SignUpForm'
-import { Link } from 'react-router-dom'
+import ProofSubmissionForm from '../ProofSubmissionForm/ProofSubmissionForm'
 
 function SignUpPage() {
+  const[isRegistered,setIsRegistered] = useState(false);
   return (
     <>
         <div id='signUpPageContainer'>
@@ -13,7 +14,7 @@ function SignUpPage() {
             </div>
 
             <div className="rightDiv">
-                <SignUpForm/>
+              {isRegistered?<ProofSubmissionForm/>:<SignUpForm isRegistered={isRegistered} setIsRegistered={setIsRegistered}/>}
             </div>
         </div>
     </>

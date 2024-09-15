@@ -1,0 +1,34 @@
+.categoryFieldContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.selectCategoryDiv, .selectSubCategories {
+    margin-bottom: 1em;
+}
+
+.subcategoryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.subcategoryItem {
+    padding: 10px 25px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.05s, color 0.05s, border 0.05s;
+}
+
+.subcategoryItem.selected {
+    border: 2px solid var(--SecondaryColor);
+    color: #fff;
+    color: var(---SecondaryColor);
+}
+
+.subcategoryItem:hover {
+    background-color: var(--PrimaryColorLight);
+}

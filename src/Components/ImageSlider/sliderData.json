@@ -1,0 +1,37 @@
+[
+    {
+        "image": "/SliderImage/image1.jpg",
+        "title": "Planning a camping trip? Easily rent all your gear,",
+        "description": "On our site!",
+        "buttonText": "Visit Now",
+        "buttonLink": "#"
+    },
+    {
+        "image": "/SliderImage/image2.jpg",
+        "title": "Need screws? Let us know what you need, and find it,",
+        "description": "On our site!",
+        "buttonText": "Explore",
+        "buttonLink": "#"
+    },
+    {
+        "image": "/SliderImage/image3.jpg",
+        "title": "Are you going somewhere? Rent a vehicle,",
+        "description": "On our site!",
+        "buttonText": "Shop Now",
+        "buttonLink": "#"
+    },
+    {
+        "image": "/SliderImage/image4.jpg",
+        "title": "Are you looking for a place? Find your rental home,",
+        "description": "On our site!",
+        "buttonText": "Discover",
+        "buttonLink": "#"
+    },
+    {
+        "image": "/SliderImage/image5.jpg",
+        "title": "Need sound systems?  Rent them easily,",
+        "description": "On our site!",
+        "buttonText": "Learn More",
+        "buttonLink": "#"
+    }
+]

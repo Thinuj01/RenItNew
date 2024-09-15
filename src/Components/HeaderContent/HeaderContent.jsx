@@ -1,23 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './HeaderContent.css'
 import MenuLinks from '../MenuLinks/MenuLinks'
 import Logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 function HeaderContent() {
-  return (
-      <div id="navContent">
-        <Link to='/'><img src={Logo} alt="Rentit Home" /></Link>
+  const [details, setDetails] = useState([]);
 
-        <div id='menuLinks'>
-            <MenuLinks linkName = "Home" url="/"/>
-            <MenuLinks linkName = "Category" url="/category"/>
-            <MenuLinks linkName = "Package" url="/package"/>
-            <MenuLinks linkName = "About" url="/about"/>
-            
+
+  useEffect(() => {
+    axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+      withCredentials: true
+    })
+      .then(response => {
+        const data = response.data;
+        setDetails(data);
+      });
+  }, []);
+
+  return (
+    <div id="navContent">
+      <Link to='/'><img src={Logo} alt="Rentit Home" /></Link>
+
+      <div id='menuLinks'>
+        <MenuLinks linkName="Home" url="/" />
+        <MenuLinks linkName="Category" url="/category" />
+        <MenuLinks linkName="Package" url="/package" />
+        <MenuLinks linkName="About" url="/about" />
+
+        {details && details['fname'] ? (
+          <>
+            Hi, <MenuLinks linkName={details['fname']} url="#" />
+          </>
+        ) : (
+          <>
             <Link to='/signin' id='signInButton'>Sign in</Link>
-        </div>
+          </>
+        )}
+
       </div>
+    </div>
   )
 }
 

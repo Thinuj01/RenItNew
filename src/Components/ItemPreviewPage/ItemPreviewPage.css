@@ -1,0 +1,32 @@
+.ItemPreviewPageContainer{
+    display: flex;
+    position: relative;
+    padding: 10px 10%;
+    width: 100%;
+    min-height: fit-content;
+}
+
+.ItemPreviewPageContainerleftDiv{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px;
+    gap: 50px;
+}
+
+.ItemPreviewPageContainerrightDiv{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px;
+    gap: 50px;
+}
+
+
+/* .itemPreviewPageDateSelectCalendarDiv{
+    background-color: var(--BackgroundColor);
+    top: 0;
+    position: sticky;
+} */

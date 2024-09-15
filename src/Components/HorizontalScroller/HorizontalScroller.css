@@ -1,0 +1,87 @@
+.containerHead h2 {
+    color: var(--PrimaryColorDark);
+}
+
+.containerHead p {
+    color: var(--PlaceholderColor);
+}
+
+.scrollerWrapperHorizontal {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scrollerContainerHorizontal {
+    margin-top: 20px;
+    padding: 20px 10px;
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    gap: 40px;
+    scroll-behavior: smooth;
+    cursor: grab;
+    /* Change cursor to indicate draggable area */
+}
+
+.scrollerContainerHorizontal:active {
+    cursor: grabbing;
+    /* Change cursor to grabbing when dragging */
+}
+
+.scrollerContainerHorizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollerContainerHorizontal .itemBox {
+    height: 200px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+}
+
+/* .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+} */
+
+
+.arrow {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.leftArrow {
+    left: -20px;
+}
+
+.rightArrow {
+    right: -20px;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.arrow:active {
+    transform: scale(0.9);
+}
+
+.arrow svg {
+    color: white;
+    font-size: 24px;
+}

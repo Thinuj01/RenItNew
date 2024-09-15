@@ -1,0 +1,79 @@
+.itemPreviewPageItemDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+}
+
+.itemPreviewPageItemName{
+    color: var(--PrimaryColorDark);
+    font-size: 1.6rem;
+    margin: 0;
+    line-height: 1.2;
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.itemPreviewPageItemPrice{
+    font-size: 2rem;
+    color: var(--PrimaryColorDark);
+}
+
+.availabilityAndCondition {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.labelItemDetails {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    transition: font-size 0.3s ease-in, line-height 0.3s ease-in;
+    height: 60px;
+}
+
+.labelItemDetails:hover {
+    font-size: 1.7rem;
+    line-height: 50px;
+}
+
+.availabilitiDiv {
+    background-color: var(--PrimaryColor);
+    border: 2px solid var(--PrimaryColor);
+    color: var(--White);
+}
+
+.conditionDiv {
+    border: 2px solid var(--PrimaryColor);
+}
+
+.shippingOrPickup {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.shippingiDiv {
+    background-color: var(--PrimaryColorDark);
+    border: 2px solid var(--PrimaryColorDark);
+    color: var(--White);
+}
+
+.pickupDiv {
+    border: 2px solid var(--PrimaryColorDark);
+    background-color: var(--PrimaryColorDark);
+    color: var(--White);
+}
+

@@ -28,9 +28,8 @@ textarea {
     background-color: var(--InputBackgroundColor);
     color: var(--TextColor);
     border: 1px solid var(--BorderColor);
-    padding: 10px;
-    border-radius: 4px; /* Optional: For slightly rounded corners */
-    width: 100%; /* Ensures the input field takes up full width */
+    border-radius: 4px;
+    width: 100%;
     padding: 10px 50px;
 }
 
@@ -49,7 +48,7 @@ input[type="password"]:focus,
 textarea:focus {
     border: 2px solid var(--ActiveBorderColor);
     background-color: var(--ActiveInputBackgroundColor);
-    outline: none; /* Removes the default focus outline */
+    outline: none;
     color: var(--TextColorActive);
 }
 
@@ -58,11 +57,10 @@ input[type="submit"]{
     line-height: 1.5;
     color: white;
     border: none;
-    border-radius: 4px; /* Optional: For slightly rounded corners */
-    width: 100%; /* Ensures the input field takes up full width */
+    border-radius: 4px; 
+    width: 100%;
     padding: 10px 50px;
     background-color: var(--SecondaryColor);
-    margin-bottom: 24px;
 }
 
 input[type="submit"]:active{

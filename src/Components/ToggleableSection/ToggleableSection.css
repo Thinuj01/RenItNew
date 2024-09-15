@@ -1,0 +1,56 @@
+/* ToggleableSection.css */
+
+.toggleable-section {
+    border: 1px solid var(--BorderColor);
+    border-radius: 5px;
+    background-color: var(--White);
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.toggleable-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+    background-color: var(--White);
+    border-radius: 5px;
+}
+
+.toggleable-header h3 {
+    color: var(--PrimaryColorDark);
+    transition: scale 0.5s ease;
+}
+
+
+.toggleable-header h3:hover {
+    scale: 0.95;
+}
+
+.toggleable-content {
+    border-radius: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid var(--PlaceholderColor);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    padding-left: 20px;
+}
+
+
+.toggleable-content.open {
+    max-height: 500px;
+    border-radius: 0;
+    opacity: 1;
+    padding: 20px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}

@@ -1,0 +1,12 @@
+.commonFieldsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.district_postal{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}

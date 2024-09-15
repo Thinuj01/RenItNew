@@ -1,0 +1,27 @@
+[
+    {
+        "icon": "/SubHeaderImage/Image01.svg",
+        "title": "Value for money",
+        "description": "We offer competitive prices on thousand of items"
+    },
+    {
+        "icon": "/SubHeaderImage/Image02.svg",
+        "title": "Fast delivery",
+        "description": "Fast delivery on selected items thanks to our improved logistics"
+    },
+    {
+        "icon": "/SubHeaderImage/Image03.svg",
+        "title": "Pickup",
+        "description": "You can pickup item go to the shop after payment"
+    },
+    {
+        "icon": "/SubHeaderImage/Image04.svg",
+        "title": "Safe payments",
+        "description": "Safe payment methods preferred by international shoppers"
+    },
+    {
+        "icon": "/SubHeaderImage/Image05.svg",
+        "title": "Buyer protection",
+        "description": "Get a refund if items arrive late or not as described"
+    }
+]
