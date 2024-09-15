@@ -1,0 +1,125 @@
+.buyerRateContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--InputBackgroundColor);
+    padding: 20px;
+    width: 100%;
+    margin: auto;
+    border-radius: var(--BorderRadiusLarge);
+    border: 1px solid var(--BorderColor);
+    height: 300px;
+  }
+  
+  /* Rating Section */
+  .buyer-rating-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--BorderColor);
+    
+  }
+
+  .buyer-stars {       
+    display: flex;
+  }  
+  
+  .star.green{    
+    color: var(--SecondaryColor);    
+  }
+ 
+  .star {
+    font-size: 80px;
+    color: var(--PlaceholderColor);
+    margin-right: 5px;
+  }
+  
+  .rating{
+    text-align: right;
+  }
+
+  .rating-score {
+    font-size: 50px;
+    color: var(--SecondaryColor);
+  }
+
+  .rating-text {
+    font-size: var(--FontSizeNormal);
+    color: var(--SecondaryColor);
+  }
+    
+  .feedback {
+    color: var(--PlaceholderColor);
+    font-size: var(--FontSizeNormal);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .feedback:hover {
+    text-decoration: underline;
+  }  
+   
+  /* Purchased and Upcoming Items Section */
+  .items-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .total-items{
+    border-right: 2px solid var(--BorderColor);
+    padding-right: 10px;
+  }
+  
+  .total-items h3,
+  .upcoming-items h3 {
+    /* font-size: var(--FontSizeNormal); */
+    color: var(--SecondaryColor);
+    margin-bottom: 10px;
+  }
+
+  
+  .item-count {
+    font-size: 70px;
+    color: var(--SecondaryColor);
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .upcoming-items {
+    width: 60%;
+  }
+
+  .sub-topics{
+    color: var(--PlaceholderColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--PrimaryColorDark);
+    font-size: var(--FontSizeSmall);
+  }
+  
+  
+  .remaining-time {
+    color: var(--PrimaryColorDark);
+  }
+  
+  .exceed-link {
+    color: var(--SecondaryColor);
+    text-decoration: none;
+    font-size: var(--FontSizeSmall);
+
+  }
+  
+  .exceed-link:hover {
+    text-decoration: underline;
+  }
+  

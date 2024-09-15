@@ -1,0 +1,28 @@
+.buyerLinkContainer{
+    display: flex;
+    flex-direction: column;    
+    border-right: 2px solid var(--BorderColor);
+    padding: 20px;
+    align-items: end;
+}
+
+.link-item{
+    border-bottom: 2px solid var(--BorderColor);
+    padding-bottom: 10px;
+}
+
+.link-wishlist{
+    padding-top: 10px;
+}
+
+.buyerLinkContainer a{
+    font-size: var(--FontSizeXLarge);
+    color: var(--PlaceholderColor);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buyerLinkContainer a:hover{
+    text-decoration: underline;
+    color: var(--SecondaryColor);
+}

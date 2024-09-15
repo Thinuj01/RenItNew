@@ -5,6 +5,8 @@ import './index.css'
 
 import SignInPage from './Components/Sign/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/Sign/SignUpPage/SignUpPage.jsx'
+import BuyerPage from './Components/Buyer/BuyerPage/BuyerPage.jsx'
+
 
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 
@@ -12,6 +14,7 @@ const router = createBrowserRouter([
   { path: "/", element: <App/>, },
   { path: "/signin", element: <SignInPage/>, },
   { path: "/signup", element: <SignUpPage/>, },
+  { path: "/buyer", element: <BuyerPage/>},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

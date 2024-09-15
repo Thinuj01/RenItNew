@@ -1,3 +1,4 @@
+import BuyerPage from "./Components/Buyer/BuyerPage/BuyerPage"
 import HeaderContent from "./Components/HeaderContent/HeaderContent"
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   return (
     <>
       <HeaderContent/>
+      <BuyerPage/>
     </>
   )
 }
