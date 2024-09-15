@@ -1,0 +1,197 @@
+.purchase-page {
+    padding: 20px 10%;
+    display: flex;
+    width: 100%;
+    position: relative;
+    gap: 50px;
+}
+
+.purchasePageContainerLeft {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.purchasePageContainerRight {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.delivery-method {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+span {
+    color: var(--Black);
+    font-size: 24px;
+}
+
+.delivery-method-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.delivery-method button {
+    width: 50%;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid var(--PrimaryColorDark);
+    color: var(--PrimaryColorDark);
+    font-size: 24px;
+}
+
+.delivery-method button.active {
+    background-color: var(--PrimaryColorDark);
+    color: var(--White);
+}
+
+.delivery-method p {
+    color: var(--PlaceholderColor);
+}
+
+.address-section,
+.card-section, .item-address-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.address-card,
+.card-card, .item-address-card {
+    border: 1px solid var(--PlaceholderColor);
+    padding: 16px 32px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+}
+
+
+.item-address-card{
+    border: 2px solid var(--PrimaryColorDark);
+}
+.address-card.selected,
+.card-card.selected {
+    border: 2px solid var(--PrimaryColorDark);
+    border-radius: 8px;
+}
+
+.add-new-button {
+    width: 50%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--PrimaryColorDark);
+    border: 2px solid var(--PrimaryColorDark);
+    color: var(--White);
+    font-size: 20px;
+    transition: all ease-in 0.1s;
+}
+
+.add-new-button:hover {
+    background-color: transparent;
+    color: var(--PrimaryColorDark);
+}
+
+.summary-section {
+    border: 1px solid var(--PlaceholderColor);
+    padding: 16px 32px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+
+}
+
+.summary-section-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.summary-section-button {
+    width: 50%;
+    font-size: 20px;
+    transition: all ease-in 0.1s;
+}
+
+.place-order-button {
+    background-color: var(--SecondaryColor);
+    color: var(--White);
+    padding: 10px;
+}
+
+.cancel-order-button {
+    background-color: transparent;
+    color: var(--SecondaryColor);
+    border: 2px solid var(--SecondaryColor);
+    padding: 10px;
+}
+
+.cancel-order-button:hover {
+    background-color: var(--SecondaryColor);
+    border: 2px solid var(--SecondaryColor);
+    color: var(--White);
+}
+
+.PurchasePageTrustLabel {
+    border: 1px solid var(--PlaceholderColor);
+    padding: 16px 32px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+}
+
+.PurchasePageTrustLabel>img{
+    width: 20%;
+}
+
+.PurchasePageTrustLabel > .secureText{
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    align-items: center;
+}
+
+.PurchasePageTrustLabel > .secureText p{
+    color: var(--PlaceholderColor);
+}
+
+
+.PurchasePageTrustLabel > .secureText img{
+    width: auto;
+    height: 32px;
+    filter: invert(27%) sepia(16%) saturate(662%) hue-rotate(89deg) brightness(89%) contrast(98%);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--White);
+    padding: 20px;
+    width: 400px;
+    border-radius: 5px;
+}

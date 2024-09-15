@@ -1,5 +1,5 @@
 /* ImageSlider.css */
-.sliderPaddingContaion{
+.sliderPaddingContaion {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,12 +11,13 @@
     border-radius: 15px;
     max-width: 100%;
     height: 50vh;
-    overflow: hidden;  
+    overflow: hidden;
 }
 
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    /* Smooth slide transition */
     align-items: center;
     height: 50vh;
     width: 100%;
@@ -24,10 +25,21 @@
 
 .slide {
     min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+    /* Add transition to slide */
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transform: translateX(0);
+    /* Start with slide positioned normally */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* Fade in and out */
+}
+
+.slide.active {
+    opacity: 1;
 }
 
 .slide img {
@@ -50,11 +62,11 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.onOurSite{
+.onOurSite {
     color: rgb(228, 228, 60);
 }
 
-.sliderColor{
+.sliderColor {
     background-color: rgba(var(--PrimaryColorDark-rgb), 0.5);
     width: 100%;
     height: 100%;
@@ -62,7 +74,7 @@
     z-index: 1000;
 }
 
-.slide-content-description{
+.slide-content-description {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -79,7 +91,7 @@
     padding: 10px 20px;
     border-radius: 50px;
     color: white;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 .slider-controls {
