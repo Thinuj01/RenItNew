@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 import HeaderContent from "./Components/HeaderContent/HeaderContent";
 import ImageSlider from "./Components/ImageSlider/ImageSlider";
@@ -11,6 +12,17 @@ import './index.css'
 
 function App() {
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useState({
+    category: '',
+    district: '',
+    text: ''
+  });
+
+  const handleSearch = (category, district, text) => {
+    setSearchParams({ category, district, text });
+  };
+
   const setCookie = (name, value, days) => {
     const expires = new Date();
     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
@@ -27,8 +39,7 @@ function App() {
       <HeaderContent />
       <SubHeader />
       <ImageSlider />
-      <SearchBar />
-
+      <SearchBar onSearch={handleSearch} />
       
     <div className="containerHomePage">
     <HorizontalScroller

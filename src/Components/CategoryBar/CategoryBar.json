@@ -3,49 +3,57 @@
         "icon": "/CategoryImage/Real Estate.png",
         "imgAlt": "Real Estates",
         "title": "Real Estates",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Real Estate"
     },
     {
         "icon": "/CategoryImage/Vehicles.png",
         "imgAlt": "Vehicles",
         "title": "Vehicles",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Vehicles"
     },
     {
         "icon": "/CategoryImage/Electronics.png",
         "imgAlt": "Electronics",
         "title": "Electronics",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Electronics"
     },
     {
         "icon": "/CategoryImage/Tools & Equipment.png",
         "imgAlt": "Tools & Equipment",
         "title": "Tools & Equipment",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Tools & Equipment"
     },
     {
         "icon": "/CategoryImage/Fashion & Accessories.png",
         "imgAlt": "Fashion & Accessories",
         "title": "Fashion & Accessories",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Fashion & Accessories"
     },
     {
         "icon": "/CategoryImage/Sports & Outdoors.png",
         "imgAlt": "Sports & Outdoors",
         "title": "Sports & Outdoors",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Sports & Outdoors"
     },
     {
         "icon": "/CategoryImage/Event Supplies.png",
         "imgAlt": "Event Supplies",
         "title": "Event Supplies",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Event Supplies"
     },
     {
         "icon": "/CategoryImage/Books & Educational Material.png",
         "imgAlt": "Books & Educational Material",
         "title": "Books & Educational Material",
-        "url": ""
+        "url": "./CategoryViewPage",
+        "category": "Books & Educational Material"
     }
 
 ]

@@ -7,7 +7,7 @@ function SubHeader() {
         <>
             <div className="subHeaderContainer">
                 <div className="subHederTopic">
-                    <h2>A Smar Way</h2>
+                    <h2>A Smart Way</h2>
                     <h2>to Rent</h2>
                 </div>
 

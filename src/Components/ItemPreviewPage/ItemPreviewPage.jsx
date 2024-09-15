@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ItemPreviewPage.css'
 import ToggleableSection from '../ToggleableSection/ToggleableSection'
 import ItemImageSlider from '../ItemImageSlider/ItemImageSlider'
@@ -9,16 +9,56 @@ import IitemPreviewPageItemDetails from '../IitemPreviewPageItemDetails/IitemPre
 import ItemPreviewPageDateSelectCalendar from '../ItemPreviewPageDateSelectCalendar/ItemPreviewPageDateSelectCalendar'
 import NoneScroller from '../NoneScroller/NoneScroller'
 import ItemCard from '../ItemCard/ItemCard'
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function ItemPreviewPage() {
+    const location = useLocation();
+    const { id } = location.state || {};
+    const [fetch,setFetch]= useState([]);
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
         category: 'Electronics',
-        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], 
         price: 99.99
     };
 
+    useEffect(() => {
+        if (id) {
+          axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
+            params: {status:"2",id:id}
+          })
+            .then(response => {
+              console.log('Response data:', response.data);
+              setFetch(response.data);
+              console.log(fetch);
+
+            })
+            .catch(error => {
+              console.error('There was an error!', error);
+              setFetch([]);
+            });
+        }
+      }, [id]);
+
+      
+
+      useEffect(() => {
+        const item = fetch.length > 0 ? fetch[0] : {};
+        const cate = item.category_id;
+        axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
+            params: {status:"3",cate_id:cate}
+          }).then(response => {
+            console.log("Cate Data",response.data);
+          })
+      }, [fetch]);
+
+      const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
+
+    //   useEffect(() => {
+    //     console.log('Updated fetch state:', pics);
+    //   }, [pics]);
     return (
         <>
             <HeaderContent />
@@ -27,7 +67,8 @@ function ItemPreviewPage() {
 
                 <div className="ItemPreviewPageContainerleftDiv">
                     <div className="itemImageSlider">
-                        <ItemImageSlider />
+                        <ItemImageSlider 
+                            pics={pics} />
                     </div>
                     <div className="FeedbackShowingBox">
                         <FeedBackShowingBox />
@@ -65,7 +106,7 @@ function ItemPreviewPage() {
 
                 <div className="ItemPreviewPageContainerrightDiv">
                     <div className="itemPreviewPageItemDetailsDiv">
-                        <IitemPreviewPageItemDetails />
+                        <IitemPreviewPageItemDetails fetch={fetch}/>
                     </div>
 
                     <div className="itemPreviewPageDateSelectCalendarDiv">
