@@ -11,7 +11,7 @@ function ImageSlider() {
     const startSlideInterval = () => {
         slideInterval.current = setInterval(() => {
             setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderData.length);
-        }, 3000); // 5 seconds
+        }, 5000); // 5 seconds
     };
 
     // Function to reset the slide interval when manually changing the slide
@@ -50,51 +50,49 @@ function ImageSlider() {
     return (
         <div className="sliderPaddingContaion">
             <div className="slider-container">
-            <div className="slider">
-                {sliderData.map((slide, index) => (
-                    <div
-                        className={`slide ${index === currentSlide ? 'active' : ''}`}
-                        key={index}
-                        style={{ display: index === currentSlide ? 'block' : 'none' }}
-                    >
-                        <div className="slide-content">
-                            <div className="sliderColor">
-
-                            </div>
-                            <div className="slide-content-description slide-text-overlay">
-                                <div>
-                                <h1>{slide.title}</h1>
-                                <h1 className='onOurSite'>{slide.description}</h1>
+                <div className="slider" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                    {sliderData.map((slide, index) => (
+                        <div
+                            className={`slide ${index === currentSlide ? 'active' : ''}`}
+                            key={index}
+                        >
+                            <div className="slide-content">
+                                <div className="sliderColor"></div>
+                                <div className="slide-content-description slide-text-overlay">
+                                    <div>
+                                        <h1>{slide.title}</h1>
+                                        <h1 className="onOurSite">{slide.description}</h1>
+                                    </div>
+                                    <div className="slide-content-link">
+                                        <Link to={slide.buttonLink} className="btn">
+                                            {slide.buttonText}
+                                        </Link>
+                                    </div>
                                 </div>
-
-                                <div className="slide-content-link">
-                                <Link to={slide.buttonLink} className="btn">{slide.buttonText}</Link>
-                                </div>
                             </div>
-                            
+                            <img src={slide.image} alt={`Slide ${index + 1}`} />
                         </div>
-                        <img src={slide.image} alt={`Slide ${index + 1}`} />
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                <div className="slider-controls">
+                    <button className="prev" onClick={prevSlide}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={nextSlide}>
+                        &#10095;
+                    </button>
+                </div>
+                <div className="slider-indicators">
+                    {sliderData.map((_, index) => (
+                        <span
+                            className={`indicator ${index === currentSlide ? 'active' : ''}`}
+                            key={index}
+                            onClick={() => selectSlide(index)}
+                        ></span>
+                    ))}
+                </div>
             </div>
-            <div className="slider-controls">
-                <button className="prev" onClick={prevSlide}>
-                    &#10094;
-                </button>
-                <button className="next" onClick={nextSlide}>
-                    &#10095;
-                </button>
-            </div>
-            <div className="slider-indicators">
-                {sliderData.map((_, index) => (
-                    <span
-                        className={`indicator ${index === currentSlide ? 'active' : ''}`}
-                        key={index}
-                        onClick={() => selectSlide(index)}
-                    ></span>
-                ))}
-            </div>
-        </div>
         </div>
     );
 }
