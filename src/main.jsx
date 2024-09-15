@@ -6,6 +6,7 @@ import './index.css'
 
 import SignInPage from './Components/Sign/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/Sign/SignUpPage/SignUpPage.jsx'
+import BuyerPage from './Components/Buyer/BuyerPage/BuyerPage.jsx'
 import ForgotPswdPage from './Components/Sign/ForgotPswdPage/ForgotPswdPage.jsx'
 import AddItemPage from './Components/AddItemPage/AddItemPage.jsx'
 import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
   { path: "/ItemImageSlider", element: <ItemImageSlider />, },
   { path: "/FeedBackShowingBox", element: <FeedBackShowingBox />, },
   { path: "/PurchasePage", element: <PurchasePage />, },
+  { path: "/buyer", element: <BuyerPage/>},
 
 ]);
 
