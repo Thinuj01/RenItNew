@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PurchasePage.css'; // Include your CSS file for styling
 import HeaderContent from './../HeaderContent/HeaderContent'
 import SecureImg from '/SubHeaderImage/Image05.svg'
 import logoB from '/logob.png'
+import { useLocation,useNavigate } from 'react-router-dom'
+
 
 const PurchasePage = () => {
     // State for delivery method
     const [deliveryMethod, setDeliveryMethod] = useState('shipping');
+    const location = useLocation();
+    const {fetch,selectedDates,cateData} = location.state || [];
+
+    useEffect(()=>{
+        console.log("fetch",fetch);
+        console.log("Dates",selectedDates);
+        console.log("CateData",cateData);
+    },[fetch,selectedDates]);
 
     // State for address modal
     const [showNewAddressModal, setShowNewAddressModal] = useState(false);

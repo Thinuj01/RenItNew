@@ -16,6 +16,7 @@ function ItemPreviewPage() {
     const location = useLocation();
     const { id } = location.state || {};
     const [fetch,setFetch]= useState([]);
+    const [cateData,setCateData]= useState([]);
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
@@ -51,6 +52,7 @@ function ItemPreviewPage() {
             params: {status:"3",cate_id:cate}
           }).then(response => {
             console.log("Cate Data",response.data);
+            setCateData(response.data);
           })
       }, [fetch]);
 
@@ -110,7 +112,7 @@ function ItemPreviewPage() {
                     </div>
 
                     <div className="itemPreviewPageDateSelectCalendarDiv">
-                        <ItemPreviewPageDateSelectCalendar />
+                        <ItemPreviewPageDateSelectCalendar fetch={fetch} cateData={cateData}/>
                     </div>
 
                     <div className="moreDetailsOfItem">
