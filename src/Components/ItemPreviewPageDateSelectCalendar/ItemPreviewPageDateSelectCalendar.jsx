@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar'; // Import the calendar component
 import 'react-calendar/dist/Calendar.css'; // Import default calendar styling
 import './ItemPreviewPageDateSelectCalendar.css';
+import { useLocation,useNavigate } from 'react-router-dom'
 
-function ItemPreviewPageDateSelectCalendar() {
+
+function ItemPreviewPageDateSelectCalendar({fetch=[],cateData=[]}) {
     const [selectedDates, setSelectedDates] = useState([]);
+    const navigate = useNavigate();
+    const item = fetch.length > 0 ? fetch[0] : {};
+    const newCateData =cateData.length>0 ? cateData[0]:{};
+
+
+    // useEffect(()=>{
+    //     console.log("Item",item);
+    // });
+
 
     // Example of non-available dates (these could be fetched from the database)
     const nonAvailableDates = [
@@ -100,7 +111,13 @@ function ItemPreviewPageDateSelectCalendar() {
             </div>
 
             {/* Action buttons */}
-            <button className="purchaseButton">Purchase Now</button>
+            <button className="purchaseButton" onClick={()=>{
+                if(selectedDates.length){
+                    navigate("/PurchasePage",{state:{fetch:item,selectedDates:selectedDates,cateData:newCateData}});
+                }else{
+                    alert("Select Prefred Dates");
+                }
+            }}>Purchase Now</button>
             <button className="wishlistButton">Add to wishlist</button>
         </div>
     );

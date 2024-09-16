@@ -1,0 +1,242 @@
+/* Container for the entire form */
+.buyerFormContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 6% 5%;   
+    width: 100%; 
+    max-width: 1200px;    
+    border: 1px solid var(--BorderColor);
+    border-radius: var(--BorderRadiusLarge);
+    background-color: var(--InputBackgroundColor);
+    margin-top: opx; 
+    height: 300px;
+}
+
+/* Photo, Toggle button, and Edit button */
+.photo-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 25%; 
+}
+
+.profile-photo {
+    width: 120px; 
+    height: 120px;
+    background-color: var(--PlaceholderColor);
+    border-radius: var(--BorderRadiusLarge);
+}
+/* Toggle Button Container */
+.toggle-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--SpacingNormal); 
+}
+
+.toggle-button h2 {
+    color: var(--PrimaryColorDark);
+}
+
+#buyerSellerToggle {
+    display: none;
+}
+
+#buyerSellerToggle + label {
+    position: relative;
+    display: inline-block;
+    width: 50px;  
+    height: 25px; 
+    background-color: var(--PlaceholderColor);  
+    border-radius: 50px; 
+    cursor: pointer;
+    transition: background-color var(--TransitionNormal) ease;
+}
+
+#buyerSellerToggle + label::before {
+    content: '';
+    position: absolute;
+    width: 23px;  
+    height: 23px;
+    border-radius: 50%; 
+    background-color: var(--BackgroundColor);  
+    top: 1px;  
+    left: 1px;
+}
+
+#buyerSellerToggle:checked + label {
+    background-color: var(--PrimaryColor);  
+}
+
+#buyerSellerToggle:checked + label::before {
+    transform: translateX(25px);  
+}
+
+
+#bButton {
+    padding: 8px 16px;
+    font-size: var(--FontSizeSmall);
+    color: var(--White);
+    background-color: var(--SecondaryColor);
+    border: none;
+    border-radius: var(--BorderRadiusNormal);
+    cursor: pointer;
+    height: 35px ;
+}
+
+/* Buyer Form */
+.buyerForm {
+    width: 70%; 
+    padding-left: 30px; 
+}
+
+.buyerForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+/* Name Section */
+.buyer_fullname_nic {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.buyerName {
+    width: 30%;
+}
+
+/* NIC Number */
+.buyerNicNumber {
+    width: 70%;
+    
+}
+
+/* Date of Birth and Gender sections */
+.buyer_dob_gender {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.buyer_dob {
+    display: flex;
+    flex-direction: column;
+    width: 50%; 
+    
+}
+
+.buyer_gender {
+    display: flex;
+    flex-direction: column;
+    width: 50%; 
+}
+
+.label-and-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input{
+    height: 25px;     
+}
+
+.buyer_dobInput{
+    padding-left: 10px;
+}
+#buyer_dobYear, #buyer_dobMonth, #buyer_dobDay, #buyer_uGender, #buyer_uDistrict {
+    width: 100%;
+    padding: 0px; 
+    border: 1px solid var(--BorderColor);
+    border-radius: 4px;
+    background-color: var(--InputBackgroundColor);
+    
+}
+
+.buyer_districtPostal {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.buyer_district, .buyer_postal {
+    width: 50%;    
+}
+
+#buyer_uDistrict{
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+input[type="text"],
+select {
+    font-size: 16px;
+    padding: 10px;
+    background-color: var(--InputBackgroundColor);
+    color: var(--TextColor);
+    border: 1px solid var(--BorderColor);
+    border-radius: 4px;
+    width: 100%;
+}
+
+
+.permanentAddress {
+    width: 100%;
+}
+
+input[type="submit"]:active {
+    background-color: var(--PrimaryColor);
+}
+
+/* General Form Inputs */
+#buyerFormContainer input[type="text"]::placeholder,
+select option:first-child {
+    color: var(--PlaceholderColor);
+}
+
+#buyerFormContainer input[type="text"]:focus,
+#buyerFormContainer select:focus {
+    border-color: var(--ActiveBorderColor);
+    background-color: var(--ActiveInputBackgroundColor);
+    outline: none;
+}
+
+#buyerFormContainer input[type="text"]:not(:placeholder-shown),
+select:valid {
+    color: var(--TextColorActive);
+}
+
+#buyerFormContainer select {
+    color: var(--PlaceholderColor);
+}
+
+#buyerFormContainer select:focus option:checked,
+#buyerFormContainer select:valid {
+    color: var(--TextColorActive);
+}
+
+
+#buyerFormContainer select option {
+    color: var(--TextColor);
+}
+
+#buyerFormContainer select option[value=""]:first-child {
+    color: var(--PlaceholderColor);
+}
+
+/* After a value is selected, apply the active text color */
+#buyerFormContainer select:focus option {
+    color: var(--TextColorActive);
+}
+
+#buyerFormContainer input[type="text"]:focus {
+    color: var(--TextColorActive);
+}
+
+
