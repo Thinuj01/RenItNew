@@ -13,6 +13,7 @@ import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
 import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx'
 import ItemImageSlider from './Components/ItemImageSlider/ItemImageSlider.jsx'
 import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingBox.jsx'
+import SellerPage from './Components/Seller/SellerPage/SellerPage.jsx'
 import PurchasePage from './Components/PurchasePage/PurchasePage.jsx'
 
 const router = createBrowserRouter([
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
   { path: "/FeedBackShowingBox", element: <FeedBackShowingBox />, },
   { path: "/PurchasePage", element: <PurchasePage />, },
   { path: "/buyer", element: <BuyerPage/>},
-
+  { path: "/SellerPage", element: <SellerPage/>, },
 ]);
 
 
