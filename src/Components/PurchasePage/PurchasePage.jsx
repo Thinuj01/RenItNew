@@ -81,18 +81,24 @@ const PurchasePage = () => {
                     <div className="delivery-method">
                         <span>Choose your delivery method</span>
                         <div className="delivery-method-buttons">
-                            <button
-                                className={deliveryMethod === 'shipping' ? 'active' : ''}
-                                onClick={() => setDeliveryMethod('shipping')}
-                            >
-                                Shipping
-                            </button>
-                            <button
-                                className={deliveryMethod === 'pickup' ? 'active' : ''}
-                                onClick={() => setDeliveryMethod('pickup')}
-                            >
-                                Pickup Option
-                            </button>
+                            {cateData.renting_Method?(
+                            <div>
+                                <button
+                                    className={deliveryMethod === 'shipping' ? 'active' : ''}
+                                    onClick={() => setDeliveryMethod('shipping')}
+                                >
+                                    Shipping
+                                </button>
+                                <button
+                                    className={deliveryMethod === 'pickup' ? 'active' : ''}
+                                    onClick={() => setDeliveryMethod('pickup')}
+                                >
+                                    Pickup Option
+                                </button>
+                            </div>
+                            ):(
+                            <div className="active">Pickup</div>
+                            )}
                         </div>
                         <p>{deliveryMethod === 'shipping' ?
                             'In the Galle District free shipping, but others can be added with an additional fee.' :
