@@ -1,3 +1,5 @@
+
+import BuyerPage from "./Components/Buyer/BuyerPage/BuyerPage"
 import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 

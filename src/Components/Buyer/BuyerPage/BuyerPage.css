@@ -1,0 +1,38 @@
+.buyerPageContainer{
+    background-color: var(--InputBackgroundColor);
+}
+
+.upperContainer{
+    height: 70vh;
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+
+}
+
+.buyer_leftDiv{
+    width: 50%;
+    height: 60vh;    
+}
+
+.buyer_rightDiv{
+    width: 50%;
+    height: 60vh;  
+    
+}
+
+.lowerContainer{
+    height:100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+
+}
+
+.lowerLeft{
+    width: 20%;
+    height: 100vh;
+}

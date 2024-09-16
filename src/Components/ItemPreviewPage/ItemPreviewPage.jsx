@@ -16,7 +16,8 @@ import axios from 'axios';
 function ItemPreviewPage() {
     const location = useLocation();
     const { id } = location.state || {};
-    const [fetch, setFetch] = useState([]);
+    const [fetch,setFetch]= useState([]);
+    const [cateData,setCateData]= useState([]);
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
@@ -48,12 +49,13 @@ function ItemPreviewPage() {
     useEffect(() => {
         const item = fetch.length > 0 ? fetch[0] : {};
         const cate = item.category_id;
-        axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`, {
-            params: { status: "3", cate_id: cate }
-        }).then(response => {
-            console.log("Cate Data", response.data);
-        })
-    }, [fetch]);
+        axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
+            params: {status:"3",cate_id:cate}
+          }).then(response => {
+            console.log("Cate Data",response.data);
+            setCateData(response.data);
+          })
+      }, [fetch]);
 
     const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
 
@@ -179,6 +181,7 @@ function ItemPreviewPage() {
                         <ItemCard item={item} />
                         <ItemCard item={item} />
                     </HorizontalScroller>
+
 
                     <VerticalScroller title='Promotion Similar Items' description='Also you can promote your items this section'>
                         <ItemCard item={item} />
