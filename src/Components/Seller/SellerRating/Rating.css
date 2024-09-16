@@ -1,4 +1,4 @@
-.dashboard-summary {
+  .seller-dashboard-summary {
     display: flex;
     flex-direction: column;
     background-color: var(--BackgroundColor);
@@ -11,7 +11,7 @@
     height: 50vh;
   }
   
-  .rating-section {
+  .seller-rating-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,30 +19,30 @@
     border-bottom: 3px solid var(--BorderColor);
   }
   
-  .stars {
+  .seller-stars {
     display: flex;
   }
   
-  .star {
+  .seller-star {
     font-size: 80px;
     color: var(--PlaceholderColor);
     margin-right: 5px;
   }
   
-  .star.filled {
+  .seller-star.filled {
     color: var(--PrimaryColor);
   }
   
-  .rating-info {
+  .seller-rating-info {
     text-align: right;
   }
   
-  .rating-value {
+  .seller-rating-value {
     font-size: var(--FontSizeTitle);
     color: var(--PrimaryColor);
   }
   
-  .rating-users {
+  .seller-rating-users {
     font-size: var(--FontSizeNormal);
     color: var(--TextColor);
   }
@@ -54,7 +54,7 @@
     cursor: pointer;
   }
   
-  .summary-section {
+  .seller-summary-section {
     display: flex;
     justify-content: space-between;
   }
@@ -63,7 +63,7 @@
     border-right: 3px solid var(--BorderColor);
   }
 
-  .summary-item {
+  .seller-summary-item {
     text-align: center;
     flex: 1;
   }
