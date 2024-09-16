@@ -10,12 +10,14 @@ const PurchasePage = () => {
     // State for delivery method
     const [deliveryMethod, setDeliveryMethod] = useState('shipping');
     const location = useLocation();
-    const {fetch,selectedDates,cateData} = location.state || [];
+    const {fetch,selectedDates,cateData,details,userDetails} = location.state || [];
 
     useEffect(()=>{
         console.log("fetch",fetch);
         console.log("Dates",selectedDates);
         console.log("CateData",cateData);
+        console.log("details",details);
+        console.log("userDetails",userDetails[0]);
     },[fetch,selectedDates]);
 
     // State for address modal

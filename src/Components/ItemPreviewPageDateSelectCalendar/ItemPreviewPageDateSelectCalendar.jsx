@@ -5,16 +5,16 @@ import './ItemPreviewPageDateSelectCalendar.css';
 import { useLocation,useNavigate } from 'react-router-dom'
 
 
-function ItemPreviewPageDateSelectCalendar({fetch=[],cateData=[]}) {
+function ItemPreviewPageDateSelectCalendar({fetch=[],cateData=[],details=[],userDetails=[]}) {
     const [selectedDates, setSelectedDates] = useState([]);
     const navigate = useNavigate();
     const item = fetch.length > 0 ? fetch[0] : {};
     const newCateData =cateData.length>0 ? cateData[0]:{};
 
 
-    // useEffect(()=>{
-    //     console.log("Item",item);
-    // });
+    useEffect(()=>{
+        console.log("Item",userDetails);
+    });
 
 
     // Example of non-available dates (these could be fetched from the database)
@@ -113,7 +113,7 @@ function ItemPreviewPageDateSelectCalendar({fetch=[],cateData=[]}) {
             {/* Action buttons */}
             <button className="purchaseButton" onClick={()=>{
                 if(selectedDates.length){
-                    navigate("/PurchasePage",{state:{fetch:item,selectedDates:selectedDates,cateData:newCateData}});
+                    navigate("/PurchasePage",{state:{fetch:item,selectedDates:selectedDates,cateData:newCateData,details:details,userDetails:userDetails}});
                 }else{
                     alert("Select Prefred Dates");
                 }
