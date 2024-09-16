@@ -15,6 +15,7 @@ import CategoryViewPage from './Components/CategoryViewPage/CategoryViewPage.jsx
 
 import ItemImageSlider from './Components/ItemImageSlider/ItemImageSlider.jsx'
 import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingBox.jsx'
+import SellerPage from './Components/Seller/SellerPage/SellerPage.jsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/>, },
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   { path: "/CategoryViewPage", element: <CategoryViewPage/>, },
   { path: "/ItemImageSlider", element: <ItemImageSlider/>, },
   { path: "/FeedBackShowingBox", element: <FeedBackShowingBox/>, },
+  { path: "/SellerPage", element: <SellerPage/>, },
 ]);
 
 
