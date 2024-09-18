@@ -4,13 +4,16 @@ import HeaderContent from './../HeaderContent/HeaderContent'
 import SecureImg from '/SubHeaderImage/Image05.svg'
 import logoB from '/logob.png'
 import { useLocation,useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 
 const PurchasePage = () => {
     // State for delivery method
-    const [deliveryMethod, setDeliveryMethod] = useState('shipping');
+    const [deliveryMethod, setDeliveryMethod] = useState('pickup');
     const location = useLocation();
     const {fetch,selectedDates,cateData,details,userDetails} = location.state || [];
+    const [itemUserDetails,setItemUserDetails] = useState([]);
+    const [itemAddress, setItemAddress] = useState({});
 
     useEffect(()=>{
         console.log("fetch",fetch);
@@ -18,33 +21,68 @@ const PurchasePage = () => {
         console.log("CateData",cateData);
         console.log("details",details);
         console.log("userDetails",userDetails[0]);
+        
     },[fetch,selectedDates]);
+
+    useEffect(()=>{
+        console.log(details);
+        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
+            params:{status:"1",nic:fetch.NIC_number}
+        })
+        .then(response=>{
+            setItemUserDetails(response.data);
+        })
+        .catch(error=>{
+            console.error(error);
+        })
+      },[fetch]);
+
+      
+      useEffect(()=>{
+        console.log("Item User Details",itemUserDetails);
+        setItemAddress({
+            shopName: fetch.title,
+            fullName: itemUserDetails.length>0?itemUserDetails[0].first_name+" "+itemUserDetails[0].last_name:"",
+            address: itemUserDetails.length>0?itemUserDetails[0].permanent_address:"",
+            district:  itemUserDetails.length>0?itemUserDetails[0].district:"",
+            postalCode: itemUserDetails.length>0?itemUserDetails[0].postal_code:"",
+            phone1: itemUserDetails.length>0?itemUserDetails[0].phone_number:"",
+            phone2: '-',
+        });
+      },[itemUserDetails]);
 
     // State for address modal
     const [showNewAddressModal, setShowNewAddressModal] = useState(false);
     const [addresses, setAddresses] = useState([
         {
-            fullName: 'Ravindu Dilshan Karunathilaka',
-            address: '83/A, Lewduwa, Meetiyagoda.',
-            district: 'Galle District',
-            postalCode: '80320',
-            phone1: '0764052661',
-            phone2: '0721353148',
+            fullName: userDetails[0].first_name+" "+userDetails[0].last_name,
+            address: userDetails[0].permanent_address,
+            district: details.district,
+            postalCode: userDetails[0].postal_code,
+            phone1: userDetails[0].phone_number,
+            phone2: '-',
         }
     ]);
     const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
-
     // State for item address (for pickup option)
-    const [itemAddress, setItemAddress] = useState({
-        shopName: 'Bakers',
-        fullName: 'Thiunuja Hettiarachchi',
-        address: 'Thelijjavilla, Weligama.',
-        district: 'Mathara District',
-        postalCode: '80320',
-        phone1: '0764052661',
-        phone2: '0721353148',
-    });
+    // const [itemAddress, setItemAddress] = useState({
+    //     shopName: fetch.title,
+    //     fullName: itemUserDetails.length>0?itemUserDetails[0].first_name:""+" "+itemUserDetails.length>0?itemUserDetails[0].last_name:"",
+    //     address: itemUserDetails.length>0?itemUserDetails[0].permanent_address:"",
+    //     district:  itemUserDetails.length>0?itemUserDetails[0].district:"",
+    //     postalCode: itemUserDetails.length>0?itemUserDetails[0].postal_code:"",
+    //     phone1: itemUserDetails.length>0?itemUserDetails[0].phone_number:"",
+    //     phone2: '0721353148',
 
+    //     // shopName: 'Backers',
+    //     // fullName: 'itemUserDetails[0].first_name+" "+itemUserDetails[0].last_name',
+    //     // address: 'itemUserDetails[0].permanent_address',
+    //     // district:  'itemUserDetails[0].district',
+    //     // postalCode: 'itemUserDetails[0].postal_code',
+    //     // phone1: 'itemUserDetails[0].phone_number',
+    //     // phone2: '0721353148',
+    // });
+    
     // State for card modal
     const [showNewCardModal, setShowNewCardModal] = useState(false);
     const [cards, setCards] = useState([
@@ -71,6 +109,111 @@ const PurchasePage = () => {
         setShowNewCardModal(false); // Close the modal
     };
 
+    useEffect(() => {
+        // Load the PayHere script when the component mounts
+        const script = document.createElement('script');
+        script.src = "https://www.payhere.lk/lib/payhere.js";
+        script.async = true;
+        script.onload = () => {
+            window.payhere.onCompleted = function (orderId) {
+                console.log("Payment completed. OrderID:" + orderId);
+                axios.get('http://localhost:4433/RentIT/Controllers/paymentStatusController.php?',{
+                    params:{
+                        item_id:fetch.item_id,
+                        title:fetch.title,
+                        user_nic:details.NIC,
+                        user_fname:details.fname,
+                        user_lname:userDetails[0].last_name,
+                        pickup_Date:selectedDates[0],
+                        return_Date:selectedDates[selectedDates.length-1],
+                        item_fname:itemUserDetails.length>0?itemUserDetails[0].first_name:"",
+                        item_lname:itemUserDetails.length>0?itemUserDetails[0].last_name:"",
+                        item_mail:itemUserDetails.length>0?itemUserDetails[0].email_address:"",
+                        status:"1",
+                        user_mail:userDetails[0].email_address,
+                    }
+                }).then(response=>{
+                    console.log(response.data);
+                }).catch(error=>{
+                    console.error(error);
+                })
+            };
+
+            window.payhere.onDismissed = function () {
+                console.log("Payment dismissed");
+                axios.get('http://localhost:4433/RentIT/Controllers/paymentStatusController.php?',{
+                    params:{
+                        item_id:fetch.item_id,
+                        title:fetch.title,
+                        user_nic:details.NIC,
+                        user_fname:details.fname,
+                        user_lname:userDetails[0].last_name,
+                        pickup_Date:selectedDates[0],
+                        return_Date:selectedDates[selectedDates.length-1],
+                        item_fname:itemUserDetails.length>0?itemUserDetails[0].first_name:"",
+                        item_lname:itemUserDetails.length>0?itemUserDetails[0].last_name:"",
+                        status:"2",
+                        user_mail:userDetails[0].email_address,
+                    }
+                }).then(response=>{
+                    console.log(response.data);
+                }).catch(error=>{
+                    console.error(error);
+                })
+            };
+
+            window.payhere.onError = function (error) {
+                console.log("Error:"  + error);
+                // Handle payment error
+            };
+        };
+        document.body.appendChild(script);
+
+        // Clean up script when component unmounts
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, [itemUserDetails]);
+
+    const handlePayment = () => {
+        // Fetch hash from backend using axios
+        axios.get('http://localhost:4433/RentIT/Controllers/paymentController.php',{params:{
+            order_id:fetch.item_id,
+            amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length)
+            
+        },withCredentials:true})
+            .then(response => {
+                const data = response.data;
+                const payment = {
+                    sandbox: true,
+                    merchant_id: '1227928',    // Replace with your Merchant ID
+                    return_url: 'http://localhost:4433/RentIT/Controllers/paymentReturnController.php', // URL to redirect users when success
+                    cancel_url: 'http://yourdomain.com/cancel.php', // URL to redirect users when canceled
+                    notify_url: 'http://localhost:4433/RentIT/Controllers/paymentNotifyController.php', // URL to callback the status of the payment
+                    order_id: fetch.item_id,
+                    items: fetch.title,
+                    amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length),
+                    currency: 'LKR',
+                    hash: data.hash, // Replace with generated hash retrieved from backend
+                    first_name: userDetails[0].first_name,
+                    last_name: userDetails[0].last_name,
+                    email: userDetails[0].email_address,
+                    phone: userDetails[0].phone_number,
+                    address: userDetails[0].permanent_address,
+                    city: userDetails[0].district,
+                    country: 'Sri Lanka',
+                    delivery_address: userDetails[0].permanent_address,
+                    delivery_city: userDetails[0].district,
+                    delivery_country: 'Sri Lanka'
+                };
+
+                if (window.payhere) {
+                    window.payhere.startPayment(payment);
+                }
+            })
+            .catch(error => console.error('Error fetching hash:', error));
+    };
+
     return (
         <div className="purchasePageContainer">
             <HeaderContent />
@@ -81,7 +224,7 @@ const PurchasePage = () => {
                     <div className="delivery-method">
                         <span>Choose your delivery method</span>
                         <div className="delivery-method-buttons">
-                            {cateData.renting_Method?(
+                            {cateData.renting_method?(
                             <div>
                                 <button
                                     className={deliveryMethod === 'shipping' ? 'active' : ''}
@@ -159,11 +302,11 @@ const PurchasePage = () => {
                     {/* Summary Section */}
                     <div className="summary-section">
                         <h3>Summary</h3>
-                        <p>Sub total: 2000.00</p>
+                        <p>Sub total: {fetch.rental_price*selectedDates.length}.00</p>
                         <p>Shipping fee: {deliveryMethod === 'shipping' ? '300.00' : '0.00'}</p>
-                        <p><strong>Total: {deliveryMethod === 'shipping' ? '2300.00' : '2000.00'}</strong></p>
+                        <p><strong>Total: {deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length)}.00</strong></p>
                         <div className="summary-section-buttons">
-                            <button className="summary-section-button place-order-button">Place Order</button>
+                            <button className="summary-section-button place-order-button" onClick={handlePayment}>Place Order</button>
                             <button className="summary-section-button cancel-order-button">Cancel Order</button>
                         </div>
                     </div>
