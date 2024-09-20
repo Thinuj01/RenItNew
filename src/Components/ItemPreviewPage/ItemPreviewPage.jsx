@@ -24,7 +24,7 @@ function ItemPreviewPage() {
 
     useEffect(() => {
         if (id) {
-          axios.get(`http://localhost:4433/RentIT/getOneItem.php?category=&id=${id}`)
+          axios.get(`http://localhost:80/RentIT/getOneItem.php?category=&id=${id}`)
             .then(response => {
               console.log('Response data:', response.data);
               setItem(response.data);
