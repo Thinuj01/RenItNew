@@ -9,6 +9,7 @@ import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroll
 import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";
 import './index.css'
+import ItemCard from "./Components/ItemCard/ItemCard";
 
 function App() {
   const navigate = useNavigate();
@@ -34,6 +35,14 @@ function App() {
     navigate("/");
     location.reload();
   }
+
+  const item = {
+    imageUrl: 'https://via.placeholder.com/250',
+    name: 'Sample Item name in 2 lines visible',
+    category: 'Electronics',
+    subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+    price: 99.99
+  };
   return (
     <>
       <HeaderContent />

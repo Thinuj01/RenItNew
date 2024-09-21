@@ -21,6 +21,7 @@
 }
 
 .delivery-method {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -32,14 +33,15 @@ span {
 }
 
 .delivery-method-buttons {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     gap: 20px;
 }
 
 .delivery-method button {
     width: 50%;
     padding: 10px;
-    margin-right: 10px;
     cursor: pointer;
     background-color: transparent;
     border: 2px solid var(--PrimaryColorDark);

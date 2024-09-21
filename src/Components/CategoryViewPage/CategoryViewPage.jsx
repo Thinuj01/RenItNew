@@ -321,7 +321,7 @@ function CategoryViewPage() {
                                       return matchesSearch && matchesSubcategory && matchesCondition;
                                   }).map((image, index) => (
                                       <div key={index} className="itemBox" onClick={()=>{
-                                        navigate("/ItemPreviewPage",{state:{ id: image[4] }});
+                                        navigate("/ItemPreviewPage",{state:{ id: image.item_id }});
                                       }}>
                                           <img src={'http://localhost:4433/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
                                       </div>
