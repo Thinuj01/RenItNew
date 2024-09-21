@@ -1,0 +1,157 @@
+.userFormContainer {
+    width: 100%;
+    height: 370px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--InputBackgroundColor);
+    padding: 20px;
+    border-radius: var(--BorderRadiusLarge);
+    border: 1px solid var(--BorderColor);
+    position: relative;
+}
+
+.userFormContainerLeft {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.userProfilePic {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.userProfilePicAddButton{
+    width: 100%;
+}
+
+.userProfilePicAddButton .addImageButton {
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.userSwappingToggleButton{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sliderUser {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.sliderUser:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.sliderUser {
+    background-color: #2E7D32;
+}
+
+input:checked+.sliderUser:before {
+    transform: translateX(26px);
+}
+
+.toggleLabel {
+    font-weight: bold;
+    color: #2E7D32;
+}
+
+.userFormContainerRight {
+    flex-grow: 1;
+}
+
+.userForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    color: #333;
+}
+
+.formGroup input,
+.formGroup textarea {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+    color: #333;
+}
+
+.formGroup input[disabled],
+.formGroup textarea[disabled] {
+    color: #A5A5A5;
+}
+
+.dobGroup {
+    display: flex;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.flexRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
