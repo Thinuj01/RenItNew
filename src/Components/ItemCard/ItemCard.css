@@ -1,94 +1,139 @@
 .item-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 8px;
-    overflow: hidden;
-    min-width: 250px;
-    transition: transform 0.2s ease-in-out;
-    min-height: fit-content;
-    position: relative;
-  }
-  
-  .item-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .item-image img {
-    width: 100%;
-    max-height: 250px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .item-details {
-    width: 250px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    padding: 10px 0;
-  }
-  
-  .item-name {
-    font-size: 1.2rem;
-    color: #333;
-    margin: 0;
-    line-height: 1.2;
-    max-height: 2.8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-  }
-  
-  .item-category {
-    font-size: 0.9rem;
-    color: #777;
-    margin: 5px 0;
-  }
-  
-  .item-subcategories {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 5px;
-    font-size: 0.8rem;
-    color: #555;
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 10px;
-  }
-  
-  .item-subcategory {
-    margin: 3px 0;
-  }
-  
-  .item-price {
-    font-size: 1.1rem;
-    color: #000;
-    margin: 10px 0;
-  }
-  
-  .wishlist-button button {
-    background: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    color: var(--PrimaryColorDark);
-  }
-  
-  .wishlist-button button:hover {
-    background-color: #eee;
-  }
-  
-  .wishlist-button button svg {
-    margin-right: 5px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 250px;
+  transition: transform 0.2s ease-in-out;
+  min-height: fit-content;
+  position: relative;
+
+}
+
+.item-card:hover {
+  transform: scale(1.05);
+}
+
+.item-image img {
+  width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.item-details {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 10px 0;
+  position: relative;
+}
+
+.item-name {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.2;
+  max-height: 2.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.item-category {
+  font-size: 1rem;
+  color: #777;
+  margin: 5px 0;
+}
+
+.district_ratingValue {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemCardDistrict{
+  display: flex;
+  align-items: center;
+}
+
+.itemCardDistrict p{
+  font-size: 0.9rem;
+  color: var(--TextColor);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.itemCardDistrict p span{
+  margin-bottom: -4px;
+}
+
+.itemCardRatingSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemCardRatingStars {
+  display: flex;
+}
+
+.itemCardRatingStar.green {
+  color: var(--SecondaryColor);
+}
+
+.itemCardRatingStar {
+  font-size: 1.5rem;
+  color: var(--PlaceholderColor);
+}
+
+.itemCardRatingScore {
+  font-size: 1.5rem;
+  color: var(--SecondaryColor);
+}
+
+.itemCardDistrict {
+  display: grid;
+  width: 50%;
+  font-size: 0.8rem;
+  color: #555;
+  padding-left: 0;
+}
+
+.item-subcategory {
+  margin: 3px 0;
+}
+
+.item-price {
+  font-size: 1.1rem;
+  color: #000;
+  margin: 10px 0;
+}
+
+.wishlist-button button {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  color: var(--PrimaryColorDark);
+}
+
+.wishlist-button button:hover {
+  background-color: #eee;
+}
+
+.wishlist-button button svg {
+  margin-right: 5px;
+}

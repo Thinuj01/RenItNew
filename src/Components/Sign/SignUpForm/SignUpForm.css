@@ -67,19 +67,23 @@
 
 #uGender {
     width: 50%;
+    border-radius: 0 4px 4px 0;
 }
 
-.district_postal {
+#district_postal {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 40px;
     align-items: center;
 }
 
-#uDistrict {
+#userDistrict {
+    width: 50%;
     border-radius: 4px 0 0 4px;
 }
 
-#uPostal {
+#userPostal {
+    width: 50%;
     border-radius: 0 4px 4px 0;
 }
 

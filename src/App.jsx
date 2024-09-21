@@ -110,7 +110,7 @@ function App() {
           <ItemCard item={item} />
           <ItemCard item={item} />
         </VerticalScroller>
-        <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" />
+
 
       </div>
 
