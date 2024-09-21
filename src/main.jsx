@@ -6,7 +6,6 @@ import './index.css'
 
 import SignInPage from './Components/Sign/SignInPage/SignInPage.jsx'
 import SignUpPage from './Components/Sign/SignUpPage/SignUpPage.jsx'
-import BuyerPage from './Components/Buyer/BuyerPage/BuyerPage.jsx'
 import ForgotPswdPage from './Components/Sign/ForgotPswdPage/ForgotPswdPage.jsx'
 import AddItemPage from './Components/AddItemPage/AddItemPage.jsx'
 import ItemPreviewPage from './Components/ItemPreviewPage/ItemPreviewPage.jsx'
@@ -15,6 +14,8 @@ import ItemImageSlider from './Components/ItemImageSlider/ItemImageSlider.jsx'
 import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingBox.jsx'
 import SellerPage from './Components/Seller/SellerPage/SellerPage.jsx'
 import PurchasePage from './Components/PurchasePage/PurchasePage.jsx'
+import BuyerPage from './Components/User/BuyerPage/BuyerPage.jsx'
+import SellerPage from './Components/User/SellerPage/SellerPage.jsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App />, },
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
   { path: "/ItemImageSlider", element: <ItemImageSlider />, },
   { path: "/FeedBackShowingBox", element: <FeedBackShowingBox />, },
   { path: "/PurchasePage", element: <PurchasePage />, },
-  { path: "/buyer", element: <BuyerPage/>},
-  { path: "/SellerPage", element: <SellerPage/>, },
+  { path: "/BuyerPage", element: <BuyerPage />, },
+  { path: "/SellerPage", element: <SellerPage />, },
 ]);
 
 

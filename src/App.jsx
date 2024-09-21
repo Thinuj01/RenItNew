@@ -1,5 +1,3 @@
-
-import BuyerPage from "./Components/Buyer/BuyerPage/BuyerPage"
 import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 
@@ -53,57 +51,21 @@ function App() {
       <SearchBar onSearch={handleSearch} />
 
       <div className="containerHomePage">
-        <HorizontalScroller title="Promotion Items" description="Also you can promote your items this section">
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-        </HorizontalScroller>
+        <HorizontalScroller
+          title="Promotion Items"
+          description="Also you can promote your items this section"
+        />
 
         <CategoryBar />
 
-        <HorizontalScroller title="Promotion Packages" description="Also you can promote your items package in this section">
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-        </HorizontalScroller>
+        <HorizontalScroller
+          title="Promotion Packages"
+          description="Also you can promote your items package in this section"
+        />
 
         <CategoryBar />
 
-        <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" >
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-          <ItemCard item={item} />
-        </VerticalScroller>
+        <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" />
 
       </div>
 

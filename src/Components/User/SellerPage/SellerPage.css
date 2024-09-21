@@ -1,0 +1,71 @@
+.sellerPageContainer {
+    width: 100%;
+    padding: 20px 10%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.sellerPageContainerTop,
+.sellerPageContainerBottom {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sellerPageContainerTopLeft,
+.sellerPageContainerTopRight {
+    width: 50%;
+    height: 400px;
+}
+
+.tabsContainer {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    position: relative; 
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    gap: 10px;
+    position: sticky;
+    /* Makes it sticky */
+    top: 20px;
+    /* Adjust based on where you want it to stick */
+    align-self: flex-start;
+}
+
+.tabButton {
+    padding: 10px;
+    text-align: right;
+    background-color: transparent;
+    color: var(--PrimaryColorDark);
+    cursor: pointer;
+    font-size: 22px;
+    transition: all 0.3s ease;
+}
+
+.tabButton:hover {
+    background-color: transparent;
+    color: var(--SecondaryColor);
+}
+
+.activeTab {
+    color: var(--PrimaryColor);
+    font-weight: 900;
+}
+
+.tabContent {
+    padding: 10px;
+    width: 85%;
+}
+
+.verticalDivider {
+    border-right: 2px solid var(--PlaceHolderColor);
+}
