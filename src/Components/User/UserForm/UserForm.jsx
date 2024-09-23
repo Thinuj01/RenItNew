@@ -1,7 +1,37 @@
 import React from 'react';
 import './UserForm.css';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 function UserForm({ isBuyer, handleToggle }) {
+
+    const [data, setData] = useState([]);
+    const [sessiondata, setSessionData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            setSessionData(data);
+          });
+      }, []);
+
+      useEffect(() => {
+        let isMounted = true;
+        if (sessiondata['NIC']) {
+          axios.post('http://localhost:80/RentIT/Controllers/userDetailsController.php', { nic: sessiondata['NIC'] })
+            .then((res) => {
+              if (isMounted) {
+                console.log(res.data);
+                setData(res.data);
+              }
+            });
+        }
+        return () => { isMounted = false; }; // Cleanup
+      }, [sessiondata]);
+
     return (
         <>
             <div className="userFormContainer">
@@ -36,35 +66,35 @@ function UserForm({ isBuyer, handleToggle }) {
                     <form className="userForm">
                         <div className="formGroup">
                             <label>Name</label>
-                            <input type="text" value="Ravindu Dilshan" disabled />
+                            <input type="text" value={data[0]?.first_name || ''} disabled />
                         </div>
 
                         <div className="dob_and_gender flexRow">
                             <div className="formGroup w-50">
                                 <label>Date of Birth</label>
-                                <input type="text" value="2000 - Aug -" disabled />
+                                <input type="text" value={data[0]?.DOB || ''} disabled />
                             </div>
                             <div className="formGroup w-50">
                                 <label>Gender</label>
-                                <input type="text" value="Male" disabled />
+                                <input type="text" value={data[0]?.gender || ''} disabled />
                             </div>
                         </div>
 
                         <div className="district_and_postal flexRow">
                             <div className="formGroup w-50">
                                 <label>District</label>
-                                <input type="text" value="Galle" disabled />
+                                <input type="text" value={data[0]?.district || ''} disabled />
                             </div>
 
                             <div className="formGroup w-50">
                                 <label>Postal Code</label>
-                                <input type="text" value="80320" disabled />
+                                <input type="text" value={data[0]?.postal_code || ''} disabled />
                             </div>
                         </div>
 
                         <div className="formGroup">
                             <label>Permanent Address</label>
-                            <textarea value="83/A, Lewduva, Meetiyagoda, Ambalangoda." disabled />
+                            <textarea value={data[0]?.permanent_address || ''} disabled />
                         </div>
                     </form>
                 </div>

@@ -124,7 +124,7 @@ function CategoryViewPage() {
     
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory,status:"1" }
                 });
                 setPaths(response.data);
@@ -323,7 +323,7 @@ function CategoryViewPage() {
                                       <div key={index} className="itemBox" onClick={()=>{
                                         navigate("/ItemPreviewPage",{state:{ id: image.item_id }});
                                       }}>
-                                          <img src={'http://localhost:4433/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
+                                          <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
                                       </div>
                                   ))
                               )

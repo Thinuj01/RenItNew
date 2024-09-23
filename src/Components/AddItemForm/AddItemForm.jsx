@@ -137,7 +137,7 @@ function AddItemForm({ item, setItem }) {
         console.log(step);
         console.log('Form Data:', formDataToSubmit);
         try {
-            const response = await axios.post('http://localhost:4433/RentIT/Controllers/addItemController.php', formDataToSubmit,
+            const response = await axios.post('http://localhost:80/RentIT/Controllers/addItemController.php', formDataToSubmit,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
