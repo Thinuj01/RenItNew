@@ -71,7 +71,7 @@ function CategoryViewPage() {
       };
 
     const deliveryMethods = ['Delivery', 'Pickup'];
-    const conditions = ['New', 'LikedNew', 'Used'];
+    const conditions = ['New', 'like-new', 'Used'];
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
