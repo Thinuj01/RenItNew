@@ -1,17 +1,54 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar'; // Import the calendar component
-import 'react-calendar/dist/Calendar.css'; // Import default calendar styling
+import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import './ItemPreviewPageDateSelectCalendar.css';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function ItemPreviewPageDateSelectCalendar() {
+function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details = [], userDetails = [] }) {
     const [selectedDates, setSelectedDates] = useState([]);
+    const [nonAvailableDates, setNonAvailableDates] = useState([]); // State to store non-available dates from API
+    const navigate = useNavigate();
+    const item = fetch.length > 0 ? fetch[0] : {};
+    const newCateData = cateData.length > 0 ? cateData[0] : {};
 
-    // Example of non-available dates (these could be fetched from the database)
-    const nonAvailableDates = [
-        new Date(2024, 8, 12),
-        new Date(2024, 8, 14),
-        new Date(2024, 8, 15)
-    ];
+    // Function to generate a list of dates between two dates
+    const getDatesInRange = (startDate, endDate) => {
+        const date = new Date(startDate);
+        const dates = [];
+
+        while (date <= new Date(endDate)) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+
+        return dates;
+    };
+
+    useEffect(() => {
+        console.log("Item", item);
+
+        // Fetch the non-available dates from the API
+        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
+            params: {
+                status: "1",
+                item_id: item.item_id
+            }
+        })
+        .then(response => {
+            console.log("CalendarDates", response.data);
+
+            // Flatten the ranges of unavailable dates into individual dates
+            const fetchedNonAvailableDates = response.data.flatMap(range => 
+                getDatesInRange(new Date(range.pickup_date), new Date(range.return_date))
+            );
+
+            setNonAvailableDates(fetchedNonAvailableDates); // Set the non-available dates
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, [item]);
 
     // Handle date selection, ensuring only consecutive dates are selected or unselected
     const handleDateChange = (date) => {
@@ -95,12 +132,16 @@ function ItemPreviewPageDateSelectCalendar() {
                         'None'
                     )}
                 </div>
-
-
             </div>
 
             {/* Action buttons */}
-            <button className="purchaseButton">Purchase Now</button>
+            <button className="purchaseButton" onClick={() => {
+                if (selectedDates.length) {
+                    navigate("/PurchasePage", { state: { fetch: item, selectedDates: selectedDates, cateData: newCateData, details: details, userDetails: userDetails } });
+                } else {
+                    alert("Select Preferred Dates");
+                }
+            }}>Purchase Now</button>
             <button className="wishlistButton">Add to wishlist</button>
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ToggleableSection.css';
 
 function ToggleableSection( props ) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleSection = () => {
     setIsOpen(!isOpen);

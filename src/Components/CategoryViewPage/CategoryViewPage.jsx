@@ -2,15 +2,27 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
-import { useLocation } from 'react-router-dom'
+
+import VerticalScroller from '../VerticalScroller/VerticalScroller';
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import ItemCard from '../ItemCard/ItemCard';
 
 function CategoryViewPage() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
-    
+
+    const navigate = useNavigate();
+
+    const item = {
+        imageUrl: 'https://via.placeholder.com/250',
+        name: 'Sample Item name in 2 lines visible',
+        category: 'Electronics',
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        price: 99.99
+      };
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
         'Kurunegala', 'Anuradhapura', 'Polonnaruwa', 'Gampaha',
@@ -164,15 +176,15 @@ function CategoryViewPage() {
             }
         }
     }, [cate, category, district, text]); // Add dependencies to trigger when these values change
-    
+
 
     useEffect(() => {
         if (!selectedCategory) return;  // Don't fetch if no category is selected
-    
+
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
-                    params: { param: selectedCategory } , withCredentials:true
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                    params: { param: selectedCategory, status: "1" }
                 });
                 setPaths(response.data);
                 setSelectedDistrict(response.data[0].user_district);
@@ -182,9 +194,10 @@ function CategoryViewPage() {
                 console.error('There was an error fetching the data!', error);
             }
         };
-    
+
         fetchData(); // Call the async function
     }, [selectedCategory]); // Only fetch when selectedCategory changes
+
     
     const userCoordinates = districtCoordinates[selectedDistrict];
     
@@ -260,24 +273,24 @@ function CategoryViewPage() {
                         {/* Delivery Method Checkboxes */}
                         {selectedCategory !== 'Real Estate' && selectedCategory !== 'Vehicles' ? (
                             <div className="deliveryMethodViewContainer">
-                            <h3>Rent by Delivery-Method</h3>
-                            {deliveryMethods.map((method) => (
-                                <div key={method} className='checkBoxDiv'>
-                                    <input
-                                        type="checkbox"
-                                        id={method}
-                                        value={method}
-                                        checked={selectedDeliveryMethods.includes(method)}
-                                        onChange={handleDeliveryMethodChange}
-                                    />
-                                    <label htmlFor={method}>{method}</label>
+                                <h3>Rent by Delivery-Method</h3>
+                                {deliveryMethods.map((method) => (
+                                    <div key={method} className='checkBoxDiv'>
+                                        <input
+                                            type="checkbox"
+                                            id={method}
+                                            value={method}
+                                            checked={selectedDeliveryMethods.includes(method)}
+                                            onChange={handleDeliveryMethodChange}
+                                        />
+                                        <label htmlFor={method}>{method}</label>
                                     </div>
                                 ))}
                             </div>
-                        ):(
+                        ) : (
                             null
                         )}
-                        
+
 
                         {/* Conditions Checkboxes */}
                         <div className="conditionsViewContainer">
@@ -298,10 +311,13 @@ function CategoryViewPage() {
                     </div>
 
                     <div className="CategoryViewPageRightDiv">
-                        
+
                         {(selectedSubcategories.length > 0 || selectedDeliveryMethods.length > 0 || selectedConditions.length > 0) && (
                             <div className="selectedItemsViewContainer">
                                 <div className="selected-items">
+                                    <div>
+                                        <h1>Category: {selectedCategory}</h1>
+                                    </div>
                                     {selectedSubcategories.map((subcategory) => (
                                         <div key={subcategory} className="selected-item">
                                             {subcategory}
@@ -324,12 +340,8 @@ function CategoryViewPage() {
                             </div>
                         )}
 
-                        <div>
-                            <h1>Category: {selectedCategory}</h1>
-                        </div>
-
                         <div className="itemViewContainer">
-                            <NoneScroller className='nonScrollerWrapper'>
+                            <NoneScroller className='nonScrollerWrapperFiveColumn'>
                                 
                             {Array.isArray(paths) && paths.length > 0 ? (
                                 // First filter the paths according to the conditions
@@ -361,14 +373,11 @@ function CategoryViewPage() {
                                 })
                                 // Map the sorted items to the UI
                                 .map((image, index) => (
-                                    <div key={index} className="itemBox">
-                                    <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
-                                    </div>
+                                    <ItemCard item={item} paths={image}/>
                                 ))
                                 ) : (
                                 <div>No items found</div>
                                 )}
-
                             </NoneScroller>
                         </div>
                     </div>

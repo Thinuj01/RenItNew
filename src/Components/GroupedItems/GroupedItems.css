@@ -1,0 +1,7 @@
+.groupByButtonContainer{
+    width: 100%;
+}
+
+.groupByButtonContainer select{
+    width: 10%;
+}

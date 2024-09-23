@@ -15,6 +15,7 @@ function HeaderContent() {
     })
       .then(response => {
         const data = response.data;
+        console.log(response.data);
         setDetails(data);
       });
   }, []);

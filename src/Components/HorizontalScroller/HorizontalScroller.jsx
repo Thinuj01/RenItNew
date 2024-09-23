@@ -13,16 +13,6 @@ function HorizontalScroller(props) {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
 
-
-    const item = {
-        imageUrl: 'https://via.placeholder.com/250',
-        name: 'Sample Item name in 2 lines visible' ,
-        category: 'Electronics',
-        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
-        price: 99.99
-      };
-      
-
     const startDragging = (e) => {
         setIsDragging(true);
         setStartX(e.pageX - scrollerRef.current.offsetLeft);
@@ -87,18 +77,8 @@ function HorizontalScroller(props) {
                         onMouseUp={stopDragging}
                         onMouseLeave={stopDragging}
                     >
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        <ItemCard item={item} />
-                        
+                        {props.children}
+
 
                     </div>
                     {showRightArrow && (

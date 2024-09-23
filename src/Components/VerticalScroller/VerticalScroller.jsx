@@ -66,6 +66,7 @@ function VerticalScroller(props) {
                         <RiArrowUpSLine />
                     </button>
                 )}
+                
                 <div
                     className="scrollerContainerVertical"
                     ref={scrollerRef}
@@ -75,67 +76,9 @@ function VerticalScroller(props) {
                     onMouseUp={stopDragging}
                     onMouseLeave={stopDragging}
                 >
-                    <div className="itemBox">
-                        Sample Card
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
-                    <div className="itemBox">
-                        <p>Sample Card</p>
-                    </div>
+                    {props.children}
                 </div>
+
                 {showBottomArrow && (
                     <button className="arrow bottomArrow" onClick={scrollBottomArrow}>
                         <RiArrowDownSLine />

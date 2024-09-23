@@ -9,6 +9,7 @@ import HorizontalScroller from "./Components/HorizontalScroller/HorizontalScroll
 import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";
 import './index.css'
+import ItemCard from "./Components/ItemCard/ItemCard";
 
 function App() {
   const navigate = useNavigate();
@@ -34,31 +35,84 @@ function App() {
     navigate("/");
     location.reload();
   }
+
+  const item = {
+    imageUrl: 'https://via.placeholder.com/250',
+    name: 'Sample Item name in 2 lines visible',
+    category: 'Electronics',
+    subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+    price: 99.99
+  };
   return (
     <>
       <HeaderContent />
       <SubHeader />
       <ImageSlider />
       <SearchBar onSearch={handleSearch} />
-      
-    <div className="containerHomePage">
-    <HorizontalScroller
-        title="Promotion Items"
-        description="Also you can promote your items this section"
-      />
 
-      <CategoryBar />
+      <div className="containerHomePage">
+        <HorizontalScroller title="Promotion Items" description="Also you can promote your items this section">
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+        </HorizontalScroller>
+        <HorizontalScroller
+          title="Promotion Items"
+          description="Also you can promote your items this section"
+        />
 
-      <HorizontalScroller
-        title="Promotion Packages"
-        description="Also you can promote your items package in this section"
-      />
+        <CategoryBar />
 
-      <CategoryBar />
+        <HorizontalScroller title="Promotion Packages" description="Also you can promote your items package in this section">
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+        </HorizontalScroller>
+        <HorizontalScroller
+          title="Promotion Packages"
+          description="Also you can promote your items package in this section"
+        />
 
-      <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" />
+        <CategoryBar />
 
-    </div>
+        <VerticalScroller title="Vertical Scroller" description="This is an Vertical Scroller for future works" >
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+          <ItemCard item={item} />
+        </VerticalScroller>
+
+
+      </div>
 
 
       <button onClick={logout}>logout</button>
