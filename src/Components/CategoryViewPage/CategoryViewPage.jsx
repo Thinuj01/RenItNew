@@ -142,9 +142,13 @@ function CategoryViewPage() {
     };
 
     function haversineDistance(coords1, coords2) {
+        //   if (!coords1 || !coords2 || !coords1.lat || !coords2.lat || !coords1.lng || !coords2.lng) {
+        //         console.error("Location data is incomplete:", coords1, coords2);
+        //         return 0;
+        //     }
         const toRad = (value) => value * Math.PI / 180;
         
-        const R = 6371; // Radius of Earth in kilometers
+        const R = 6371; 
         const dLat = toRad(coords2.lat - coords1.lat);
         const dLon = toRad(coords2.lon - coords1.lon);
         
@@ -155,7 +159,7 @@ function CategoryViewPage() {
           
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         
-        return R * c; // Distance in kilometers
+        return R * c;
     }
 
     useEffect(() => {
@@ -184,7 +188,8 @@ function CategoryViewPage() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
-                    params: { param: selectedCategory, status: "1" }
+                    params: { param: selectedCategory, status: "1" },
+                    withCredentials:true
                 });
                 setPaths(response.data);
                 setSelectedDistrict(response.data[0].user_district);
