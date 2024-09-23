@@ -9,7 +9,7 @@ function UserForm({ isBuyer, handleToggle }) {
     const [sessiondata, setSessionData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -21,7 +21,11 @@ function UserForm({ isBuyer, handleToggle }) {
       useEffect(() => {
         let isMounted = true;
         if (sessiondata['NIC']) {
-          axios.post('http://localhost:80/RentIT/Controllers/userDetailsController.php', { nic: sessiondata['NIC'] })
+          axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+            params:{
+                status:"1",
+                nic: sessiondata['NIC'] 
+            }})
             .then((res) => {
               if (isMounted) {
                 console.log(res.data);

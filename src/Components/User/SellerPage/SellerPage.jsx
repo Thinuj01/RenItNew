@@ -21,7 +21,7 @@ function SellerPage() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php', {
             withCredentials: true,
         })
             .then((response) => {
@@ -37,7 +37,7 @@ function SellerPage() {
         let isMounted = true;
 
         if (sessiondata.NIC) {
-            axios.post('http://localhost:80/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC })
+            axios.post('http://localhost:4433/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC })
                 .then((res) => {
                     if (isMounted) {
                         console.log('Listed Items:', res.data);
