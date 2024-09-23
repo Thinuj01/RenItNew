@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
-import { useLocation,useNavigate } from 'react-router-dom'
+import VerticalScroller from '../VerticalScroller/VerticalScroller';
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import ItemCard from '../ItemCard/ItemCard';
 
 function CategoryViewPage() {
     const location = useLocation();
@@ -12,7 +14,15 @@ function CategoryViewPage() {
     const { category, district, text } = location.state || {};
 
     const navigate = useNavigate();
-    
+
+    const item = {
+        imageUrl: 'https://via.placeholder.com/250',
+        name: 'Sample Item name in 2 lines visible',
+        category: 'Electronics',
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        price: 99.99
+      };
+
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
         'Kurunegala', 'Anuradhapura', 'Polonnaruwa', 'Gampaha',
@@ -117,15 +127,15 @@ function CategoryViewPage() {
             }
         }
     }, [cate, category, district, text]); // Add dependencies to trigger when these values change
-    
+
 
     useEffect(() => {
         if (!selectedCategory) return;  // Don't fetch if no category is selected
-    
+
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
-                    params: { param: selectedCategory,status:"1" }
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                    params: { param: selectedCategory, status: "1" }
                 });
                 setPaths(response.data);
                 console.log(response.data);
@@ -134,15 +144,15 @@ function CategoryViewPage() {
                 console.error('There was an error fetching the data!', error);
             }
         };
-    
+
         fetchData(); // Call the async function
     }, [selectedCategory]); // Only fetch when selectedCategory changes
-    
-    
 
-    
 
-    
+
+
+
+
     return (
         <>
             <HeaderContent />
@@ -215,24 +225,24 @@ function CategoryViewPage() {
                         {/* Delivery Method Checkboxes */}
                         {selectedCategory !== 'Real Estate' ? (
                             <div className="deliveryMethodViewContainer">
-                            <h3>Rent by Delivery-Method</h3>
-                            {deliveryMethods.map((method) => (
-                                <div key={method} className='checkBoxDiv'>
-                                    <input
-                                        type="checkbox"
-                                        id={method}
-                                        value={method}
-                                        checked={selectedDeliveryMethods.includes(method)}
-                                        onChange={handleDeliveryMethodChange}
-                                    />
-                                    <label htmlFor={method}>{method}</label>
+                                <h3>Rent by Delivery-Method</h3>
+                                {deliveryMethods.map((method) => (
+                                    <div key={method} className='checkBoxDiv'>
+                                        <input
+                                            type="checkbox"
+                                            id={method}
+                                            value={method}
+                                            checked={selectedDeliveryMethods.includes(method)}
+                                            onChange={handleDeliveryMethodChange}
+                                        />
+                                        <label htmlFor={method}>{method}</label>
                                     </div>
                                 ))}
                             </div>
-                        ):(
+                        ) : (
                             null
                         )}
-                        
+
 
                         {/* Conditions Checkboxes */}
                         <div className="conditionsViewContainer">
@@ -253,10 +263,13 @@ function CategoryViewPage() {
                     </div>
 
                     <div className="CategoryViewPageRightDiv">
-                        
+
                         {(selectedSubcategories.length > 0 || selectedDeliveryMethods.length > 0 || selectedConditions.length > 0) && (
                             <div className="selectedItemsViewContainer">
                                 <div className="selected-items">
+                                    <div>
+                                        <h1>Category: {selectedCategory}</h1>
+                                    </div>
                                     {selectedSubcategories.map((subcategory) => (
                                         <div key={subcategory} className="selected-item">
                                             {subcategory}
@@ -279,58 +292,51 @@ function CategoryViewPage() {
                             </div>
                         )}
 
-                        <div>
-                            <h1>Category: {selectedCategory}</h1>
-                        </div>
-
                         <div className="itemViewContainer">
-                            <NoneScroller className='nonScrollerWrapper'>
-                                
-                            {Array.isArray(paths) && paths.length > 0 ? (
-                              paths.filter((image) => {
-                                  // Check if search term matches (empty search term should show all items)
-                                  const matchesSearch = searchText === '' || 
-                                      image.title.toLowerCase().includes(searchText) || 
-                                      image.description.toLowerCase().includes(searchText);
+                            <NoneScroller className='nonScrollerWrapperFiveColumn'>
 
-                                  // Check if subcategories match (show all if none are selected)
-                                  const matchesSubcategory = selectedSubcategories.length === 0 || 
-                                      image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                {Array.isArray(paths) && paths.length > 0 ? (
+                                    paths.filter((image) => {
+                                        // Check if search term matches (empty search term should show all items)
+                                        const matchesSearch = searchText === '' ||
+                                            image.title.toLowerCase().includes(searchText) ||
+                                            image.description.toLowerCase().includes(searchText);
 
-                                  // Check if conditions match (show all if none are selected)
-                                  const matchesCondition = selectedConditions.length === 0 ||
-                                      selectedConditions.includes(image.item_condition);
+                                        // Check if subcategories match (show all if none are selected)
+                                        const matchesSubcategory = selectedSubcategories.length === 0 ||
+                                            image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
-                                  // Return items that match all filters (search, subcategory, and condition)
-                                  return matchesSearch && matchesSubcategory && matchesCondition;
-                              }).length === 0 ? (
-                                  <div>No items found</div> // Display message if no items match the filter
-                              ) : (
-                                  paths.filter((image, index) => {
-                                      // Apply the same filtering logic again
-                                      const matchesSearch = searchText === '' || 
-                                          image.title.toLowerCase().includes(searchText) || 
-                                          image.description.toLowerCase().includes(searchText);
+                                        // Check if conditions match (show all if none are selected)
+                                        const matchesCondition = selectedConditions.length === 0 ||
+                                            selectedConditions.includes(image.item_condition);
 
-                                      const matchesSubcategory = selectedSubcategories.length === 0 || 
-                                          image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                        // Return items that match all filters (search, subcategory, and condition)
+                                        return matchesSearch && matchesSubcategory && matchesCondition;
+                                    }).length === 0 ? (
+                                        <div>No items found</div> // Display message if no items match the filter
+                                    ) : (
+                                        paths.filter((image, index) => {
+                                            // Apply the same filtering logic again
+                                            const matchesSearch = searchText === '' ||
+                                                image.title.toLowerCase().includes(searchText) ||
+                                                image.description.toLowerCase().includes(searchText);
 
-                                      const matchesCondition = selectedConditions.length === 0 ||
-                                          selectedConditions.includes(image.item_condition);
+                                            const matchesSubcategory = selectedSubcategories.length === 0 ||
+                                                image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
-                                      return matchesSearch && matchesSubcategory && matchesCondition;
-                                  }).map((image, index) => (
-                                      <div key={index} className="itemBox" onClick={()=>{
-                                        navigate("/ItemPreviewPage",{state:{ id: image.item_id }});
-                                      }}>
-                                          <img src={'http://localhost:80/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
-                                      </div>
-                                  ))
-                              )
-                          ) : (
-                              <div>No items found</div> // Display this message if paths is not an array or is empty
-                          )}
+                                            const matchesCondition = selectedConditions.length === 0 ||
+                                                selectedConditions.includes(image.item_condition);
 
+                                            return matchesSearch && matchesSubcategory && matchesCondition;
+                                        }).map((image, index) => (
+                                           
+                                                <ItemCard item={item} paths={image}/>
+                                            
+                                        ))
+                                    )
+                                ) : (
+                                    <div>No items found</div> // Display this message if paths is not an array or is empty
+                                )}
                             </NoneScroller>
                         </div>
                     </div>
