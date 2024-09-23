@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
+import VerticalScroller from '../VerticalScroller/VerticalScroller';
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import ItemCard from '../ItemCard/ItemCard';
@@ -292,7 +293,7 @@ function CategoryViewPage() {
                         )}
 
                         <div className="itemViewContainer">
-                            <NoneScroller className='nonScrollerWrapper'>
+                            <NoneScroller className='nonScrollerWrapperFiveColumn'>
 
                                 {Array.isArray(paths) && paths.length > 0 ? (
                                     paths.filter((image) => {
@@ -328,9 +329,9 @@ function CategoryViewPage() {
 
                                             return matchesSearch && matchesSubcategory && matchesCondition;
                                         }).map((image, index) => (
-                                            <NoneScroller title="" description="">
+                                           
                                                 <ItemCard item={item} paths={image}/>
-                                            </NoneScroller>
+                                            
                                         ))
                                     )
                                 ) : (
