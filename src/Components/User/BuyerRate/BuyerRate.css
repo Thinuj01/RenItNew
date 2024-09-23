@@ -140,3 +140,34 @@
 .exceedLink:hover {
     text-decoration: underline;
 }
+
+.star {
+    display: inline-block;
+    position: relative;
+    /* font-size: 24px; */
+    color: lightgray;
+  }
+  
+  .star.full {
+    color: var(--SecondaryColor);
+  }
+  
+  .star.fractional {
+    position: relative;
+    display: inline-block;
+    font-size: 80px;
+  }
+  
+  .star.fractional .starFull {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--SecondaryColor);
+    overflow: hidden;
+    font-size: 80px;
+  }
+  
+  .star.fractional .starEmpty {
+    color: lightgray;
+    font-size: 80px;
+  }

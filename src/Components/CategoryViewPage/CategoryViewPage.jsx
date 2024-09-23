@@ -337,7 +337,6 @@ function CategoryViewPage() {
                                 ) : (
                                     <div>No items found</div> // Display this message if paths is not an array or is empty
                                 )}
-
                             </NoneScroller>
                         </div>
                     </div>

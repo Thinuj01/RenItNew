@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import './GroupedItems.css'
 
 const groupBy = (items, key) => {
+    console.log('Items to group : ',items);
     return items.reduce((result, item) => {
         if (key === 'All') {
             return { All: items };
         }
 
         const groupValue = key === 'Date'
-            ? new Date(item.date).toLocaleString('default', { month: 'long', year: 'numeric' })
-            : item.category;
+            ? new Date(item.r_pickup_date).toLocaleString('default', { month: 'long', year: 'numeric' })
+            : item.name;
 
         if (!result[groupValue]) {
             result[groupValue] = [];
@@ -44,7 +45,7 @@ const GroupedItems = ({ items }) => {
                     <h3>{group}</h3>
                     <ul>
                         {groupedItems[group].map(item => (
-                            <li key={item.id}>{item.name} - {new Date(item.date).toLocaleDateString()}</li>
+                            <li key={item.id}>{item.title} - {new Date(item.r_pickup_date).toLocaleDateString()}</li>
                         ))}
                     </ul>
                 </div>
