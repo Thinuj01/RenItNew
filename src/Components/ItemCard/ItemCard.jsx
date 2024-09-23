@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CiHeart } from "react-icons/ci";
 import './ItemCard.css';
 import { CiLocationOn } from "react-icons/ci";
+import { useLocation, useNavigate } from 'react-router-dom'
 
-function ItemCard({ item }) {
+function ItemCard({ item , paths}) {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    console.log(paths);
+  },[paths]);
   return (
     <>
-      <div className="item-card">
+      <div className="item-card" onClick={()=>{
+        navigate("/ItemPreviewPage",{state:{id:paths.item_id}});
+      }}> 
 
         <div className="item-image">
-          <img src={item.imageUrl} alt={item.name} />
+          <img src={paths?'http://localhost:4433/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
         </div>
 
         <div className="item-details">
-          <h3 className="item-name">{item.name}</h3>
+          <h3 className="item-name">{paths?paths.title:item.name}</h3>
       
           <p className="item-category">{item.category}</p>
 

@@ -4,6 +4,7 @@ import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import ItemCard from '../ItemCard/ItemCard';
 
 function CategoryViewPage() {
     const location = useLocation();
@@ -12,6 +13,14 @@ function CategoryViewPage() {
     const { category, district, text } = location.state || {};
 
     const navigate = useNavigate();
+
+    const item = {
+        imageUrl: 'https://via.placeholder.com/250',
+        name: 'Sample Item name in 2 lines visible',
+        category: 'Electronics',
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        price: 99.99
+      };
 
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
@@ -319,11 +328,9 @@ function CategoryViewPage() {
 
                                             return matchesSearch && matchesSubcategory && matchesCondition;
                                         }).map((image, index) => (
-                                            <div key={index} className="itemBox" onClick={() => {
-                                                navigate("/ItemPreviewPage", { state: { id: image.item_id } });
-                                            }}>
-                                                <img src={'http://localhost:4433/RentIT' + image.item_Picture_01} width='100px' alt={`Item ${index}`} />
-                                            </div>
+                                            <NoneScroller title="" description="">
+                                                <ItemCard item={item} paths={image}/>
+                                            </NoneScroller>
                                         ))
                                     )
                                 ) : (
