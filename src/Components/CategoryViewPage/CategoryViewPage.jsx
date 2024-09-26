@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
+
 import VerticalScroller from '../VerticalScroller/VerticalScroller';
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
@@ -22,7 +23,6 @@ function CategoryViewPage() {
         subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
         price: 99.99
       };
-
     const districts = [
         'Colombo', 'Galle', 'Kandy', 'Matara', 'Jaffna', 'Hambantota',
         'Kurunegala', 'Anuradhapura', 'Polonnaruwa', 'Gampaha',
@@ -42,8 +42,36 @@ function CategoryViewPage() {
         'Vehicles': ['Car', 'Van', 'Motor Bike', 'Truck', 'Bus'],
     };
 
-    const deliveryMethods = ['Shipping', 'Pickup'];
-    const conditions = ['New', 'LikedNew', 'Used'];
+    const districtCoordinates = {
+        "Ampara": { lat: 7.2839, lon: 81.6745 },
+        "Anuradhapura": { lat: 8.3114, lon: 80.4037 },
+        "Badulla": { lat: 6.9891, lon: 81.0551 },
+        "Batticaloa": { lat: 7.7315, lon: 81.6745 },
+        "Colombo": { lat: 6.9271, lon: 79.8612 },
+        "Galle": { lat: 6.0535, lon: 80.2210 },
+        "Gampaha": { lat: 7.0912, lon: 79.9985 },
+        "Hambantota": { lat: 6.1246, lon: 81.1185 },
+        "Jaffna": { lat: 9.6615, lon: 80.0255 },
+        "Kalutara": { lat: 6.5854, lon: 79.9607 },
+        "Kandy": { lat: 7.2906, lon: 80.6337 },
+        "Kegalle": { lat: 7.2513, lon: 80.3465 },
+        "Kilinochchi": { lat: 9.3803, lon: 80.3911 },
+        "Kurunegala": { lat: 7.4863, lon: 80.3647 },
+        "Mannar": { lat: 8.9813, lon: 79.9042 },
+        "Matale": { lat: 7.4671, lon: 80.6234 },
+        "Matara": { lat: 5.9485, lon: 80.5353 },
+        "Monaragala": { lat: 6.8723, lon: 81.3443 },
+        "Mullaitivu": { lat: 9.2673, lon: 80.8145 },
+        "Nuwara Eliya": { lat: 6.9497, lon: 80.7891 },
+        "Polonnaruwa": { lat: 7.9403, lon: 81.0188 },
+        "Puttalam": { lat: 8.0362, lon: 79.8395 },
+        "Ratnapura": { lat: 6.6828, lon: 80.3994 },
+        "Trincomalee": { lat: 8.5874, lon: 81.2152 },
+        "Vavuniya": { lat: 8.7514, lon: 80.4976 }
+      };
+
+    const deliveryMethods = ['Delivery', 'Pickup'];
+    const conditions = ['New', 'like-new', 'Used'];
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
@@ -60,6 +88,10 @@ function CategoryViewPage() {
     const handleDistrictChange = (e) => {
         setSelectedDistrict(e.target.value);
     };
+
+    const handleItemDistrictChange = (e) => {
+        setItemDistrict(e.target.value);
+    }
 
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
@@ -109,6 +141,27 @@ function CategoryViewPage() {
         }
     };
 
+    function haversineDistance(coords1, coords2) {
+        //   if (!coords1 || !coords2 || !coords1.lat || !coords2.lat || !coords1.lng || !coords2.lng) {
+        //         console.error("Location data is incomplete:", coords1, coords2);
+        //         return 0;
+        //     }
+        const toRad = (value) => value * Math.PI / 180;
+        
+        const R = 6371; 
+        const dLat = toRad(coords2.lat - coords1.lat);
+        const dLon = toRad(coords2.lon - coords1.lon);
+        
+        const a = 
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRad(coords1.lat)) * Math.cos(toRad(coords2.lat)) * 
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        
+        return R * c;
+    }
+
     useEffect(() => {
         // Only set selectedCategory if it's not already set or if "cate" is valid
         if (cate && selectedCategory !== cate) {
@@ -134,10 +187,12 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
-                    params: { param: selectedCategory, status: "1" }
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                    params: { param: selectedCategory, status: "1" },
+                    withCredentials:true
                 });
                 setPaths(response.data);
+                setSelectedDistrict(response.data[0].user_district);
                 console.log(response.data);
                 console.log("Current state:", selectedCategory, category, district, text, cate);
             } catch (error) {
@@ -148,11 +203,9 @@ function CategoryViewPage() {
         fetchData(); // Call the async function
     }, [selectedCategory]); // Only fetch when selectedCategory changes
 
-
-
-
-
-
+    
+    const userCoordinates = districtCoordinates[selectedDistrict];
+    
     return (
         <>
             <HeaderContent />
@@ -223,7 +276,7 @@ function CategoryViewPage() {
                         )}
 
                         {/* Delivery Method Checkboxes */}
-                        {selectedCategory !== 'Real Estate' ? (
+                        {selectedCategory !== 'Real Estate' && selectedCategory !== 'Vehicles' ? (
                             <div className="deliveryMethodViewContainer">
                                 <h3>Rent by Delivery-Method</h3>
                                 {deliveryMethods.map((method) => (
@@ -294,48 +347,41 @@ function CategoryViewPage() {
 
                         <div className="itemViewContainer">
                             <NoneScroller className='nonScrollerWrapperFiveColumn'>
+                                
+                            {Array.isArray(paths) && paths.length > 0 ? (
+                                // First filter the paths according to the conditions
+                                paths.filter((image) => {
+                                    const matchesSearch = searchText === '' ||
+                                    image.title.toLowerCase().includes(searchText) ||
+                                    image.description.toLowerCase().includes(searchText);
 
-                                {Array.isArray(paths) && paths.length > 0 ? (
-                                    paths.filter((image) => {
-                                        // Check if search term matches (empty search term should show all items)
-                                        const matchesSearch = searchText === '' ||
-                                            image.title.toLowerCase().includes(searchText) ||
-                                            image.description.toLowerCase().includes(searchText);
+                                    const matchesSubcategory = selectedSubcategories.length === 0 ||
+                                    image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
-                                        // Check if subcategories match (show all if none are selected)
-                                        const matchesSubcategory = selectedSubcategories.length === 0 ||
-                                            image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                    const matchesCondition = selectedConditions.length === 0 ||
+                                    selectedConditions.includes(image.item_condition);
 
-                                        // Check if conditions match (show all if none are selected)
-                                        const matchesCondition = selectedConditions.length === 0 ||
-                                            selectedConditions.includes(image.item_condition);
+                                    const matchesRentingmethod = selectedDeliveryMethods.length === 0 ||
+                                    selectedDeliveryMethods.includes(image.renting_method);
 
-                                        // Return items that match all filters (search, subcategory, and condition)
-                                        return matchesSearch && matchesSubcategory && matchesCondition;
-                                    }).length === 0 ? (
-                                        <div>No items found</div> // Display message if no items match the filter
-                                    ) : (
-                                        paths.filter((image, index) => {
-                                            // Apply the same filtering logic again
-                                            const matchesSearch = searchText === '' ||
-                                                image.title.toLowerCase().includes(searchText) ||
-                                                image.description.toLowerCase().includes(searchText);
+                                    return matchesSearch && matchesSubcategory && matchesCondition && matchesRentingmethod;
+                                })
+                                // Then sort the filtered items by distance
+                                .sort((a, b) => {
+                                    const itemCoordinatesA = districtCoordinates[a.user_district];
+                                    const itemCoordinatesB = districtCoordinates[b.user_district];
 
-                                            const matchesSubcategory = selectedSubcategories.length === 0 ||
-                                                image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                    const distanceA = haversineDistance(userCoordinates, itemCoordinatesA);
+                                    const distanceB = haversineDistance(userCoordinates, itemCoordinatesB);
 
-                                            const matchesCondition = selectedConditions.length === 0 ||
-                                                selectedConditions.includes(image.item_condition);
-
-                                            return matchesSearch && matchesSubcategory && matchesCondition;
-                                        }).map((image, index) => (
-                                           
-                                                <ItemCard item={item} paths={image}/>
-                                            
-                                        ))
-                                    )
+                                    return distanceA - distanceB;
+                                })
+                                // Map the sorted items to the UI
+                                .map((image, index) => (
+                                    <ItemCard item={item} paths={image}/>
+                                ))
                                 ) : (
-                                    <div>No items found</div> // Display this message if paths is not an array or is empty
+                                <div>No items found</div>
                                 )}
                             </NoneScroller>
                         </div>

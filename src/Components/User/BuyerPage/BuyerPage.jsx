@@ -21,7 +21,7 @@ function BuyerPage() {
     const handleToggle = () => setIsBuyer(!isBuyer);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
         })
             .then(response => setSessionData(response.data))
@@ -31,8 +31,8 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.post('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { nic: sessiondata.NIC });
-            const fetchRentedItems = axios.post('http://localhost:80/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
+            const fetchWishlist = axios.post('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { nic: sessiondata.NIC });
+            const fetchRentedItems = axios.post('http://localhost:4433/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])
                 .then(([wishlistResponse, rentedResponse]) => {
