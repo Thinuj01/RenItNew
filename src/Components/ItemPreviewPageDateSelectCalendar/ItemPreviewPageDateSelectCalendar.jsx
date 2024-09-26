@@ -29,7 +29,7 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
         console.log("Item", item);
 
         // Fetch the non-available dates from the API
-        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php', {
             params: {
                 status: "1",
                 item_id: item.item_id

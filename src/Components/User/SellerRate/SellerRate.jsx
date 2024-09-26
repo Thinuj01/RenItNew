@@ -1,7 +1,7 @@
 import React from 'react';
 import './SellerRate.css';
 
-const SellerRate = ({ rating, totalUsers, itemCount }) => {
+const SellerRate = ({ rating, totalUsers, itemCount, pendingCount }) => {
     const maxStars = 5;
 
     const renderStars = () => {
@@ -64,7 +64,7 @@ const SellerRate = ({ rating, totalUsers, itemCount }) => {
 
                     <div className="sellerSummaryItem">
                         <h3 className="summaryLabel">Pending Orders</h3>
-                        <div className="summaryValue">45</div>
+                        <div className="summaryValue">{pendingCount}</div>
                     </div>
                 </div>
             </div>

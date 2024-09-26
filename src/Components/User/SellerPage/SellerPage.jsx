@@ -5,12 +5,14 @@ import './SellerPage.css';
 import SellerRate from '../SellerRate/SellerRate';
 import BuyerPage from '../BuyerPage/BuyerPage'; // Import BuyerPage
 import axios from 'axios';
+import GroupedItems from '../../GroupedItems/GroupedItems';
 
 function SellerPage() {
     const [activeTab, setActiveTab] = useState(0);
     const [isBuyer, setIsBuyer] = useState(false); // Toggle state for Buyer/Seller
     const [sessiondata, setSessionData] = useState({});
     const [data, setData] = useState([]);
+    const [pendingItems, setPendingItemsData] = useState([]);
 
     const handleTabClick = (index) => {
         setActiveTab(index);
@@ -35,24 +37,30 @@ function SellerPage() {
 
     useEffect(() => {
         let isMounted = true;
-
+    
         if (sessiondata.NIC) {
-            axios.post('http://localhost:4433/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC })
-                .then((res) => {
+            const fetchlistedItems = axios.post('http://localhost:80/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
+            const fetchPendingOrders = axios.post('http://localhost:80/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
+    
+            Promise.all([fetchlistedItems, fetchPendingOrders])
+                .then(([listedResponse, pendingResponse]) => {
                     if (isMounted) {
-                        console.log('Listed Items:', res.data);
-                        setData(res.data);
+                        setData(listedResponse.data);
+                        setPendingItemsData(pendingResponse.data);
+                        console.log('Listed items: ', listedResponse.data);
+                        console.log('Pending orders: ', pendingResponse.data);
                     }
                 })
                 .catch((error) => {
                     console.error('Error fetching listed items:', error);
                 });
         }
-
+    
         return () => {
             isMounted = false;
         };
     }, [sessiondata]);
+    
 
     if (isBuyer) {
         return <BuyerPage />; // Show BuyerPage if toggled to Buyer
@@ -68,7 +76,7 @@ function SellerPage() {
                         <UserForm isBuyer={isBuyer} handleToggle={handleToggle} />
                     </div>
                     <div className="sellerPageContainerTopRight">
-                        <SellerRate rating={4.3} totalUsers={5} itemCount={data[1]} />
+                        <SellerRate rating={4.3} totalUsers={5} itemCount={data.length} pendingCount={pendingItems.length} />
                     </div>
                 </div>
 
@@ -97,15 +105,15 @@ function SellerPage() {
                         <div className="verticalDivider"></div>
                         <div className="tabContent">
                             {activeTab === 0 && data.length > 0 ? (
-                                data[0].map((item, index) => (
-                                    <div className="itemRow" key={index}>
-                                        <span className="itemName">{item.title}</span>
-                                    </div>
-                                ))
+
+                                <GroupedItems items={data} />
+
                             ) : activeTab === 1 ? (
                                 <div>Sales History Content</div>
-                            ) : activeTab === 2 ? (
-                                <div>Pending Orders Content</div>
+                            ) : activeTab === 2 && pendingItems.length > 0 ? (
+                                
+                                <GroupedItems items={pendingItems} />
+
                             ) : (
                                 <div>No items found.</div>
                             )}
