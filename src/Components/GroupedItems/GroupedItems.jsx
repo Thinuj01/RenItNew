@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './GroupedItems.css'
+import NoneScroller from '../NoneScroller/NoneScroller';
+import ItemCard from '../ItemCard/ItemCard';
 
 const groupBy = (items, key) => {
-    console.log('Items to group : ',items);
     return items.reduce((result, item) => {
         if (key === 'All') {
             return { All: items };
@@ -21,21 +22,32 @@ const groupBy = (items, key) => {
     }, {});
 };
 
+const hasPickupDate = (items) => {
+    return items.some(item => item.r_pickup_date);
+};
+
 const GroupedItems = ({ items }) => {
     const [groupByKey, setGroupByKey] = useState('All');
-
+    
     const handleGroupByChange = (e) => {
         setGroupByKey(e.target.value);
     };
 
-    const groupedItems = groupBy(items, groupByKey);
+    const modifiedItems = items.map(item => ({
+        ...item,
+        imageUrl: `http://localhost:80/RentIT${item.imageUrl.slice(2)}`
+    }));
+
+    const groupedItems = groupBy(modifiedItems, groupByKey);
+    const showDateOption = hasPickupDate(items);
+    console.log(modifiedItems);
 
     return (
         <div>
             <div className='groupByButtonContainer'>
                 <select value={groupByKey} onChange={handleGroupByChange}>
                     <option value="All">All</option>
-                    <option value="Date">Date</option>
+                    {showDateOption && <option value="Date">Date</option>}
                     <option value="Category">Category</option>
                 </select>
             </div>
@@ -43,11 +55,16 @@ const GroupedItems = ({ items }) => {
             {Object.keys(groupedItems).map(group => (
                 <div key={group}>
                     <h3>{group}</h3>
-                    <ul>
-                        {groupedItems[group].map(item => (
-                            <li key={item.id}>{item.title} - {new Date(item.r_pickup_date).toLocaleDateString()}</li>
-                        ))}
-                    </ul>
+                    <NoneScroller className='nonScrollerWrapperFiveColumn'>
+                    {groupedItems[group].map(item => (
+                        
+                        <div key={item.id}>
+                            <ItemCard item={item}/>
+                            {item.r_pickup_date && ` - ${new Date(item.r_pickup_date).toLocaleDateString()}`}
+                        </div>
+                        
+                    ))}
+                    </NoneScroller>
                 </div>
             ))}
         </div>

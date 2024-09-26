@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 function ItemCard({ item , paths}) {
   const navigate = useNavigate();
   useEffect(()=>{
-    console.log(paths);
+    console.log(item);
   },[paths]);
   return (
     <>
@@ -16,7 +16,7 @@ function ItemCard({ item , paths}) {
       }}> 
 
         <div className="item-image">
-          <img src={paths?'http://localhost:4433/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
+          <img src={paths?'http://localhost:80/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
         </div>
 
         <div className="item-details">

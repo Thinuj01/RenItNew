@@ -13,16 +13,13 @@ function BuyerPage() {
     const [data, setData] = useState([]);
     const [rented, setRented] = useState([]);
     const [sessiondata, setSessionData] = useState([]);
-    const [loading, setLoading] = useState(true);  // Loading state
-    const [error, setError] = useState(null);      // Error state
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Handle tab click
     const handleTabClick = (index) => setActiveTab(index);
 
-    // Toggle Buyer/Seller
     const handleToggle = () => setIsBuyer(!isBuyer);
 
-    // Fetch session data
     useEffect(() => {
         axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
@@ -32,7 +29,6 @@ function BuyerPage() {
             .finally(() => setLoading(false));
     }, []);
 
-    // Fetch wishlist and rented items concurrently
     useEffect(() => {
         if (sessiondata.NIC) {
             const fetchWishlist = axios.post('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { nic: sessiondata.NIC });
@@ -48,7 +44,6 @@ function BuyerPage() {
         }
     }, [sessiondata]);
 
-    // Conditional render SellerPage if isBuyer is false
     if (!isBuyer) return <SellerPage />;
 
     return (
