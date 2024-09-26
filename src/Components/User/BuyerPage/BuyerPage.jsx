@@ -31,7 +31,7 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.post('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { nic: sessiondata.NIC });
+            const fetchWishlist = axios.post('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
             const fetchRentedItems = axios.post('http://localhost:4433/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])

@@ -368,8 +368,8 @@ function CategoryViewPage() {
                                 })
                                 // Then sort the filtered items by distance
                                 .sort((a, b) => {
-                                    const itemCoordinatesA = districtCoordinates[a.user_district];
-                                    const itemCoordinatesB = districtCoordinates[b.user_district];
+                                    const itemCoordinatesA = districtCoordinates[a.district];
+                                    const itemCoordinatesB = districtCoordinates[b.district];
 
                                     const distanceA = haversineDistance(userCoordinates, itemCoordinatesA);
                                     const distanceB = haversineDistance(userCoordinates, itemCoordinatesB);
