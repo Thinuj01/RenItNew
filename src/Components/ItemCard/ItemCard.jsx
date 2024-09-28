@@ -10,7 +10,7 @@ function ItemCard({ item , paths}) {
 
   const category = ['Books & Educational Material','Electronics','Event Supplies','Fashion & Accessories','Real Estate','Sports & Outdoors','Tools & Equipment','Vehicles'];
   useEffect(()=>{
-    console.log(item);
+    // console.log(item);
   },[paths]);
 
   function addToWishlist(){

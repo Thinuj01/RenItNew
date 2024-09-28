@@ -15,6 +15,7 @@ import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingB
 import PurchasePage from './Components/PurchasePage/PurchasePage.jsx'
 import BuyerPage from './Components/User/BuyerPage/BuyerPage.jsx'
 import SellerPage from './Components/User/SellerPage/SellerPage.jsx'
+import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
 
 const router = createBrowserRouter([
   { path: "/", element: <App />, },
@@ -33,7 +34,10 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <DailyCallBack>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>,
+  </DailyCallBack>
+  
 )

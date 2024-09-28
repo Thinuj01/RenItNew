@@ -173,7 +173,7 @@ const PurchasePage = () => {
         return () => {
             document.body.removeChild(script);
         };
-    }, [itemUserDetails]);
+    }, [itemUserDetails ]);
 
     const handlePayment = () => {
         // Fetch hash from backend using axios
