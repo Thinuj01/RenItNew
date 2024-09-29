@@ -5,6 +5,7 @@ import arrowMore from '/AdminPanelHomeImages/arrow-next-small-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 
 function AdminHomePageCardContainer({ title, count, data, SvgIcon, headers }) {
+    
     return (
         <div className="adminHomePageCardContainer">
             <div className="adminHomeCardTop">

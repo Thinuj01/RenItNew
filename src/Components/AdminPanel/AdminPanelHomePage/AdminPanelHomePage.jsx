@@ -5,6 +5,7 @@ import userSolidSVG from '/AdminPanelHomeImages/user-solid.svg';
 import itemSolidSVG from '/AdminPanelHomeImages/item.svg';
 import AdminHomePageCardContainer from '../AdminHomePageCardContainer/AdminHomePageCardContainer'; // Import the new component
 
+
 function AdminPanelHomePage() {
     const [data, setData] = useState([]);
 
@@ -80,6 +81,7 @@ function AdminPanelHomePage() {
                                 />
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
