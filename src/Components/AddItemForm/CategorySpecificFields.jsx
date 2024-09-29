@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CategorySpecificFields.css';
 
-function CategorySpecificFields({ category, handleInputChange,formData,setFormData }) {
+function CategorySpecificFields({ category, handleInputChange, formData, setFormData }) {
     const [selectedOptions, setSelectedOptions] = useState({
         amenities: [],
         furnishingStatus: [],
@@ -53,7 +53,7 @@ function CategorySpecificFields({ category, handleInputChange,formData,setFormDa
                 ...(formData.color ? formData.color.filter(color => predefinedColors.includes(color)) : []), // Predefined selected colors
                 ...updatedColors, // Additional colors
             ];
-    
+
             setFormData((prevData) => ({
                 ...prevData,
                 color: allColors, // Update formData with combined colors
@@ -67,7 +67,7 @@ function CategorySpecificFields({ category, handleInputChange,formData,setFormDa
                 ...(formData.subjectTopic ? formData.subjectTopic.filter(subjectTopic => predefinedsubjectTopics.includes(subjectTopic)) : []), // Predefined selected colors
                 ...updatedSubjects, // Additional colors
             ];
-    
+
             setFormData((prevData) => ({
                 ...prevData,
                 subjectTopic: allSubjects, // Update formData with combined colors
@@ -93,19 +93,19 @@ function CategorySpecificFields({ category, handleInputChange,formData,setFormDa
         const updatedOptions = selectedOptions[field].includes(option)
             ? selectedOptions[field].filter(item => item !== option)
             : [...selectedOptions[field], option];
-    
+
         setSelectedOptions(prevState => ({
             ...prevState,
             [field]: updatedOptions
         }));
-    
+
         // Set the form data
         setFormData({
             ...formData,
             [field]: updatedOptions.length > 0 ? updatedOptions : [option],
         });
     };
-    
+
 
     const renderOptions = (options, field) => (
         options.map((option, index) => (
@@ -364,10 +364,10 @@ function CategorySpecificFields({ category, handleInputChange,formData,setFormDa
                             <div className="subcategoryContainer">
                                 {renderOptions(['Red', 'Green'], 'color')}
                                 {renderAdditionalFields('color', additionalColors)}
-                                <input 
-                                    type="button" 
-                                    value="Add More Colors" 
-                                    onClick={() => handleAddField('color')} 
+                                <input
+                                    type="button"
+                                    value="Add More Colors"
+                                    onClick={() => handleAddField('color')}
                                     className="add-more-button" // Optional: Add classes for styling
                                 />
 
@@ -555,10 +555,10 @@ function CategorySpecificFields({ category, handleInputChange,formData,setFormDa
                                 {renderOptions(['Science', 'Literature'], 'subjectTopic')}
                                 {renderAdditionalFields('subjectTopic', additionalSubjects)}
                                 {/* <button onClick={() => handleAddField('subjectTopic')}>Add More Subjects</button> */}
-                                <input 
-                                    type="button" 
-                                    value="Add More Subjects" 
-                                    onClick={() => handleAddField('subjectTopic')} 
+                                <input
+                                    type="button"
+                                    value="Add More Subjects"
+                                    onClick={() => handleAddField('subjectTopic')}
                                     className="add-more-button" // Optional: Add classes for styling
                                 />
                             </div>

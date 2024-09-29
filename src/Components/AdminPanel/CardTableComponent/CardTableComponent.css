@@ -1,0 +1,72 @@
+.tableContainer {
+    max-height: 202px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.tableContainer::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+.districtTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.districtTable th,
+.districtTable td {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.districtTable th {
+    color: #888;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 14px;
+    position: sticky;
+    top: -1px;
+    z-index: 200;
+}
+
+.districtTable tbody tr {
+    border-bottom: 1px solid #eee;
+    z-index: 100;
+}
+
+.districtTable tbody tr:last-child {
+    border-bottom: none;
+}
+
+.districtTable td {
+    font-size: 16px;
+    vertical-align: middle; /* Vertically center the content in the cell */
+}
+
+.tableMoreView {
+    width: 30px; /* Set a width for the icon container */
+    height: 30px; /* Set a height for the icon container */
+    display: flex; /* Use flexbox to center the icon */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 0 auto; /* Center the container in the table cell */
+    cursor: pointer; /* Add pointer cursor for interactivity */
+}
+
+.tableMoreView:hover {
+    background-color: var(--PlaceholderColor);
+    border-radius: 50%;
+}
+
+.tableMoreView img {
+    width: 100%;
+    height: 100%;
+    padding: 5px; /* Adjust padding if needed */
+    filter: brightness(0) saturate(100%) invert(16%) sepia(37%) saturate(677%) hue-rotate(85deg) brightness(91%) contrast(89%);
+}
+
+.districtTable tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}

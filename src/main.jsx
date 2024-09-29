@@ -15,6 +15,9 @@ import FeedBackShowingBox from './Components/FeedBackShowingBox/FeedBackShowingB
 import PurchasePage from './Components/PurchasePage/PurchasePage.jsx'
 import BuyerPage from './Components/User/BuyerPage/BuyerPage.jsx'
 import SellerPage from './Components/User/SellerPage/SellerPage.jsx'
+import BuyerTrackingPage from './Components/Tracking/BuyerTrackingPage/BuyerTrackingPage.jsx';
+import SellerTrackingPage from './Components/Tracking/SellerTrackingPage/SellerTrackingPage.jsx';
+import AdminPanelHomePage from './Components/AdminPanel/AdminPanelHomePage/AdminPanelHomePage.jsx';
 
 const router = createBrowserRouter([
   { path: "/", element: <App />, },
@@ -29,6 +32,9 @@ const router = createBrowserRouter([
   { path: "/PurchasePage", element: <PurchasePage />, },
   { path: "/BuyerPage", element: <BuyerPage />, },
   { path: "/SellerPage", element: <SellerPage />, },
+  { path: "/BuyerTrackingPage", element: <BuyerTrackingPage />, },
+  { path: "/SellerTrackingPage", element: <SellerTrackingPage />, },
+  { path: "/AdminPanelHomePage", element: <AdminPanelHomePage />, },
 ]);
 
 
