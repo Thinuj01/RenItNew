@@ -96,7 +96,7 @@ h3 {
     flex-direction: column;
     gap: 20px;
     width: 80%;
-    padding: 12px;
+    padding: 24px;
 }
 
 .selectedItemsViewContainer{

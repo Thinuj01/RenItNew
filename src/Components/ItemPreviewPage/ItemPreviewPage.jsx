@@ -94,7 +94,7 @@ function ItemPreviewPage() {
                                 pics={pics} />
                         </div>
                         <div className="FeedbackShowingBox">
-                            <FeedBackShowingBox />
+                            <FeedBackShowingBox fetch={fetch}/>
                         </div>
                         <div className="promotionSimilarItemsDiv">
                             <NoneScroller

@@ -132,7 +132,7 @@ function AddItemForm({ item, setItem }) {
             pricingModifiers,
             category,
             selectedSubcategories,
-
+            selectedDistrict,
         };
         console.log(step);
         console.log('Form Data:', formDataToSubmit);

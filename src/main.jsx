@@ -19,6 +19,9 @@ import BuyerTrackingPage from './Components/Tracking/BuyerTrackingPage/BuyerTrac
 import SellerTrackingPage from './Components/Tracking/SellerTrackingPage/SellerTrackingPage.jsx';
 import AdminPanelHomePage from './Components/AdminPanel/AdminPanelHomePage/AdminPanelHomePage.jsx';
 
+import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
+
+
 const router = createBrowserRouter([
   { path: "/", element: <App />, },
   { path: "/signin", element: <SignInPage />, },
@@ -39,7 +42,10 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <DailyCallBack>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>,
+  </DailyCallBack>
+  
 )
