@@ -1,0 +1,101 @@
+.countdown-container {
+    width: 100%;
+    box-shadow: var(--BoxShadowLight);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.countdown-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--PrimaryColorDark);
+}
+
+.countdown-header p {
+    color: var(--PlaceholderColor);
+    margin-bottom: 20px;
+}
+
+.countdownTimerDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--SecondaryColor);
+}
+
+.time-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.time-value {
+    font-size: 4rem;
+}
+
+.time-label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.button-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.navigate-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigate-button:hover {
+    background-color: #45a049;
+}
+
+.time-expired-message p {
+    font-size: 1.9rem;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Define the alert-like animation */
+@keyframes alert-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Add the animation to the expired message */
+.animate-alert {
+    animation: alert-animation 1s ease-in-out infinite; /* Infinite pulsing */
+}
+
+

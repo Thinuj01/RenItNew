@@ -1,0 +1,137 @@
+.tracking-process {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+}
+
+.progress-line-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+    margin-left: -15px;
+}
+
+.solid-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: lightgray;
+    z-index: 0;
+}
+
+.step-container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+}
+
+.step-container:before {
+    content: '';
+    width: 5px;
+    height: 210%;
+    background-color: lightgray;
+    z-index: 0;
+    position: absolute;
+    left: 15px;
+}
+
+.step-container.completed:before {
+    background-color: green;
+    /* Line connecting completed steps */
+}
+
+/* No line for the last step */
+.step-container:last-child:before,
+.step-container:first-child:before {
+    top: 0;
+}
+
+.step-container:last-child:before{
+    height: 100%;
+}
+
+.circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid lightgray;
+    z-index: 1;
+    margin-left: 5px;
+    position: relative;
+}
+
+.circle.completed {
+    background-color: green;
+    border-color: green;
+}
+
+.step-text {
+    width: 90%;
+    margin-left: 20px;
+    color: gray;
+    /* Default color for incomplete steps */
+}
+
+.step-text.completed .step-title,
+.step-text.completed .step-description {
+    color: green;
+    /* Change text color for completed steps */
+}
+
+.step-title {
+    font-weight: bold;
+}
+
+.step-description {
+    font-size: 0.9em;
+}
+
+/* Styles for OTP form, input, and button */
+.otp-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.otp-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    width: 250px;
+    font-size: 0.9em;
+    background-color: #f9f9f9;
+}
+
+.otp-input:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.otp-submit-button {
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    font-size: 0.9em;
+}
+
+.otp-submit-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.otp-submit-button:hover:not(:disabled) {
+    background-color: darkgreen;
+}
