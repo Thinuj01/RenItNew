@@ -4,15 +4,15 @@ import CardTableComponent from '../CardTableComponent/CardTableComponent';
 import arrowMore from '/AdminPanelHomeImages/arrow-next-small-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 
-function AdminHomePageCardContainer({ title, count, data, SvgIcon, headers }) {
-    
+function AdminHomePageCardContainer({ title, count, data, SvgIcon, headers, cardMenuLink }) {
+
     return (
         <div className="adminHomePageCardContainer">
             <div className="adminHomeCardTop">
                 <div className="adminHomeCardTopLeft">
                     <div className="cardSVG_cardTexts">
                         <div className="cardSVG">
-                            <Link to=''><img src={SvgIcon} alt="" className='cardIcon' /></Link>
+                            <img src={SvgIcon} alt="" className='cardIcon' />
                         </div>
                         <div className="cardTexts">
                             <p>{title}</p>
@@ -22,13 +22,13 @@ function AdminHomePageCardContainer({ title, count, data, SvgIcon, headers }) {
                 </div>
                 <div className="adminHomeCardTopRight">
                     <div className="cardMoreView">
-                        <img src={arrowMore} alt="" className='cardMoreViewIcon' />
+                        <Link to={cardMenuLink}><img src={arrowMore} alt="" className='cardMoreViewIcon' /></Link>
                     </div>
                 </div>
             </div>
 
             <div className="adminHomeCardBottom">
-                <CardTableComponent data={data} headers={headers}/>
+                <CardTableComponent data={data} headers={headers} />
             </div>
         </div>
     );

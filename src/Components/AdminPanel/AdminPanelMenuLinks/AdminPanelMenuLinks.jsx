@@ -1,13 +1,20 @@
-import React from 'react'
-import './AdminPanelMenuLinks.css'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import './AdminPanelMenuLinks.css';
+import { NavLink } from 'react-router-dom';
 
 function AdminPanelMenuLinks(props) {
   return (
     <>
-        <Link className='adminPanelMenuLink' to={props.adminPanelURL}>{props.adminPanelLinkName}</Link>
+        <NavLink 
+          className={({ isActive }) => 
+            isActive ? 'adminPanelMenuLink active' : 'adminPanelMenuLink'
+          } 
+          to={props.adminPanelURL}
+        >
+          {props.adminPanelLinkName}
+        </NavLink>
     </>
-  )
+  );
 }
 
-export default AdminPanelMenuLinks
+export default AdminPanelMenuLinks;

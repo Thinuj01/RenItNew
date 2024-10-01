@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FaFilter } from "react-icons/fa";
-import "./AdminPanelBodyTableComponent.css"; // Import the CSS file
+import "./UserApprovalTableComponent.css"; // Import the CSS file
 import arrowMore from '/AdminPanelHomeImages/arrow-next-small-svgrepo-com.svg';
+import UserApprovalPopupWindow from "../UserApprovalPopupWindow/UserApprovalPopupWindow";
 
-function AdminPanelBodyTableComponent({ data, columnHeaders }) {
+function UserApprovalTableComponent({ data, columnHeaders }) {
   const [filters, setFilters] = useState({
     column2: "",
     column3: "",
@@ -13,6 +14,9 @@ function AdminPanelBodyTableComponent({ data, columnHeaders }) {
     column2: false,
     column3: false,
   });
+
+  const [selectedRowData, setSelectedRowData] = useState(null); // To hold the selected row data
+  const [isPopupVisible, setIsPopupVisible] = useState(false); // To manage popup visibility
 
   // Handle closing the dropdown when clicking outside of it
   useEffect(() => {
@@ -45,6 +49,28 @@ function AdminPanelBodyTableComponent({ data, columnHeaders }) {
 
   const toggleDropdown = (column) => {
     setDropdownVisible((prev) => ({ ...prev, [column]: !prev[column] }));
+  };
+
+  const openPopup = (rowData) => {
+    setSelectedRowData(rowData); // Set the selected row data
+    setIsPopupVisible(true); // Show the popup
+  };
+
+  const closePopup = () => {
+    setIsPopupVisible(false); // Hide the popup
+    setSelectedRowData(null); // Clear the selected row data
+  };
+
+  const handleSubmit = () => {
+    // Handle submission logic here
+    alert("User approved!");
+    closePopup(); // Close the popup after submission
+  };
+
+  const handleReject = () => {
+    // Handle rejection logic here
+    alert("User rejected!");
+    closePopup(); // Close the popup after rejection
   };
 
   return (
@@ -111,7 +137,7 @@ function AdminPanelBodyTableComponent({ data, columnHeaders }) {
               <td>{row.column2}</td>
               <td>{row.column3}</td>
               <td>
-                <div className="tableMoreView" onClick={() => alert(`Button clicked for: ${row.column1}`)}>
+                <div className="tableMoreView" onClick={() => openPopup(row)}>
                   <img src={arrowMore} alt="" className='tableMoreViewIcon' />
                 </div>
               </td>
@@ -119,8 +145,17 @@ function AdminPanelBodyTableComponent({ data, columnHeaders }) {
           ))}
         </tbody>
       </table>
+
+      {isPopupVisible && (
+        <UserApprovalPopupWindow
+          selectedRowData={selectedRowData}
+          onClose={closePopup}
+          onSubmit={handleSubmit}
+          onReject={handleReject}
+        />
+      )}
     </div>
   );
 }
 
-export default AdminPanelBodyTableComponent;
+export default UserApprovalTableComponent;

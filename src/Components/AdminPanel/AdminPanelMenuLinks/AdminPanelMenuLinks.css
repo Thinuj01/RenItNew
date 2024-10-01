@@ -20,6 +20,7 @@
   transition: height 0.3s ease;
 }
 
+/* Hover and focus state */
 .adminPanelMenuLink:hover::before, 
 .adminPanelMenuLink:focus::before {
   height: 200%; /* The line grows vertically to match the height of the text */
@@ -28,4 +29,13 @@
 .adminPanelMenuLink:hover, 
 .adminPanelMenuLink:focus {
   font-weight: bold; /* Text becomes bold on hover */
+}
+
+/* Active state when the link is active */
+.adminPanelMenuLink.active::before {
+  height: 200%; /* Line grows when the link is active */
+}
+
+.adminPanelMenuLink.active {
+  font-weight: bold; /* Text is bold when the link is active */
 }

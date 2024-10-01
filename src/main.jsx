@@ -19,6 +19,10 @@ import BuyerTrackingPage from './Components/Tracking/BuyerTrackingPage/BuyerTrac
 import SellerTrackingPage from './Components/Tracking/SellerTrackingPage/SellerTrackingPage.jsx';
 import AdminPanelHomePage from './Components/AdminPanel/AdminPanelHomePage/AdminPanelHomePage.jsx';
 import AdminPanelUserApprovalPage from './Components/AdminPanel/AdminPanelUserApprovalPage/AdminPanelUserApprovalPage.jsx';
+import AdminPanelItemApprovalPage from './Components/AdminPanel/AdminPanelItemApprovalPage/AdminPanelItemApprovalPage.jsx'
+import AdminPanelUserCasePage from './Components/AdminPanel/AdminPanelUserCasePage/AdminPanelUserCasePage.jsx'
+import AdminPanelItemCasePage from './Components/AdminPanel/AdminPanelItemCasePage/AdminPanelItemCasePage.jsx'
+
 
 import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
 
@@ -40,6 +44,9 @@ const router = createBrowserRouter([
   { path: "/SellerTrackingPage", element: <SellerTrackingPage />, },
   { path: "/AdminPanelHomePage", element: <AdminPanelHomePage />, },
   { path: "/AdminPanelUserApprovalPage", element: <AdminPanelUserApprovalPage />, },
+  { path: "/AdminPanelItemApprovalPage", element: <AdminPanelItemApprovalPage />, },
+  { path: "/AdminPanelUserCasePage", element: <AdminPanelUserCasePage />, },
+  { path: "/AdminPanelItemCasePage", element: <AdminPanelItemCasePage />, },
 ]);
 
 

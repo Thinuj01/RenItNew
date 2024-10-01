@@ -1,9 +1,8 @@
 import React from 'react'
-import './AdminPanelUserApprovalPage.css'
-import UserApprovalTableComponent from '../UserApprovalTableComponent/UserApprovalTableComponent';
+import ItemApprovalTableComponent from '../ItemApprovalTableComponent/ItemApprovalTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
-function AdminPanelUserApprovalPage() {
+function AdminPanelItemApprovalPage() {
 
     const tableData = [
         { column1: 'Unique 1', column2: 'Category A', column3: 'Status 1' },
@@ -34,8 +33,8 @@ function AdminPanelUserApprovalPage() {
 
                     <div className="adminPanelBodyContainer">
                         <div>
-                            <h1>Admin Panel</h1>
-                            <UserApprovalTableComponent data={tableData} columnHeaders={columnHeaders} />
+                            <h1>Admin Panel - Item Approval</h1>
+                            <ItemApprovalTableComponent data={tableData} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>
@@ -44,4 +43,4 @@ function AdminPanelUserApprovalPage() {
     )
 }
 
-export default AdminPanelUserApprovalPage
+export default AdminPanelItemApprovalPage
