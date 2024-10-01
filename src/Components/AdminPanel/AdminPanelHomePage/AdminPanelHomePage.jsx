@@ -5,6 +5,7 @@ import userSolidSVG from '/AdminPanelHomeImages/user-solid.svg';
 import itemSolidSVG from '/AdminPanelHomeImages/item.svg';
 import AdminHomePageCardContainer from '../AdminHomePageCardContainer/AdminHomePageCardContainer'; // Import the new component
 
+
 function AdminPanelHomePage() {
     const [data, setData] = useState([]);
 
@@ -47,16 +48,18 @@ function AdminPanelHomePage() {
                                     data={data}
                                     headers={headers}
                                     SvgIcon={userSolidSVG} // Pass the SVG as a prop
+                                    cardMenuLink = "/AdminPanelUserApprovalPage"
                                 />
                             </div>
 
                             <div className="adminPanelBodyContainerTopRight">
                                 <AdminHomePageCardContainer
                                     title="Item Approval Request"
-                                    count="110"
+                                    count="211"
                                     data={data}
                                     headers={headers}
                                     SvgIcon={itemSolidSVG} // Pass the SVG as a prop
+                                    cardMenuLink = "/AdminPanelItemApprovalPage"
                                 />
                             </div>
                         </div>
@@ -64,22 +67,25 @@ function AdminPanelHomePage() {
                             <div className="adminPanelBodyContainerBottomLeft">
                                 <AdminHomePageCardContainer
                                     title="User Case Management"
-                                    count="110"
+                                    count="1350"
                                     data={data}
                                     headers={headers}
                                     SvgIcon={userSolidSVG} // Pass the SVG as a prop
+                                    cardMenuLink = "/AdminPanelUserCasePage"
                                 />
                             </div>
                             <div className="adminPanelBodyContainerBottomRight">
                                 <AdminHomePageCardContainer
                                     title="Item Case Management"
-                                    count="110"
+                                    count="120"
                                     data={data}
                                     headers={headers}
                                     SvgIcon={itemSolidSVG} // Pass the SVG as a prop
+                                    cardMenuLink = "/AdminPanelItemCasePage"
                                 />
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

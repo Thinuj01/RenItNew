@@ -12,15 +12,15 @@ function AdminPanelNavBar() {
             </div>
 
             <div id="adminPanelMenuLinks">
-                <AdminPanelMenuLinks adminPanelLinkName="Home" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="User Approval Request" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Item Approval Request" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="User Case Management" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Item Case Management" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Admin Management" adminPanelURL=""/>
+                <AdminPanelMenuLinks adminPanelLinkName="Home" adminPanelURL="/AdminPanelHomePage"/>
+                <AdminPanelMenuLinks adminPanelLinkName="User Approval Request" adminPanelURL="/AdminPanelUserApprovalPage"/>
+                <AdminPanelMenuLinks adminPanelLinkName="Item Approval Request" adminPanelURL="/AdminPanelItemApprovalPage"/>
+                <AdminPanelMenuLinks adminPanelLinkName="User Case Management" adminPanelURL="/AdminPanelUserCasePage"/>
+                <AdminPanelMenuLinks adminPanelLinkName="Item Case Management" adminPanelURL="/AdminPanelItemCasePage"/>
+                {/* <AdminPanelMenuLinks adminPanelLinkName="Admin Management" adminPanelURL=""/>
                 <AdminPanelMenuLinks adminPanelLinkName="Payment Management" adminPanelURL=""/>
                 <AdminPanelMenuLinks adminPanelLinkName="User Request" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Logout" adminPanelURL=""/>
+                <AdminPanelMenuLinks adminPanelLinkName="Logout" adminPanelURL=""/> */}
             </div>
         </div>
     </>
