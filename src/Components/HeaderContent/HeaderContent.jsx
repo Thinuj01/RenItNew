@@ -32,7 +32,7 @@ function HeaderContent() {
 
         {details && details['fname'] ? (
           <>
-            Hi, <MenuLinks linkName={details['fname']} url="#" />
+            Hi, <MenuLinks linkName={details['fname']} url="/BuyerPage" />
           </>
         ) : (
           <>

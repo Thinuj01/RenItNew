@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './SellerTrackingProcess.css';
+import axios from 'axios';
 
-const SellerTrackingProcess = ({ completedStep }) => {
+const SellerTrackingProcess = ({ completedStep ,reserve_id}) => {
     
     const [otp, setOtp] = useState(""); // State for OTP input
 
@@ -17,12 +18,40 @@ const SellerTrackingProcess = ({ completedStep }) => {
         { label: "Rate the Customer", description: "You can rate the customer now." }
     ];
 
+    const sellerHandOver =()=>{
+        axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
+            params:{
+                status:"2",
+                reserve_id:reserve_id
+            }
+        }).then(response=>{
+            console.log(response.data);
+        }).catch(err=>{
+            console.error(err);
+        })
+    }
+
     const handleOtpSubmit = (e) => {
         e.preventDefault();
-        console.log("OTP Submitted:", otp);  // Handle OTP submission logic here
+        axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
+            params:{
+                status:"3",
+                reserve_id:reserve_id,
+                buyerOTP:otp
+            }
+        }).then(response=>{
+            if(response.data == "unsuccess"){
+                alert("OTP validation unsuccessful")
+            }
+            console.log(response.data);
+        }).catch(err=>{
+            console.error(err);
+        })
+        
     };
 
     const isOtpStep = steps.length - 7; // Target OTP input to appear for the 7th step (step index: steps.length - 3)
+    const isHandOverStep =steps.length - 8;
 
     return (
         <div className="tracking-process">
@@ -44,15 +73,27 @@ const SellerTrackingProcess = ({ completedStep }) => {
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                         placeholder="Enter OTP"
-                                        disabled={index > completedStep} // Disable if this step is not yet completed
+                                        disabled={2 > completedStep || 2<completedStep} // Disable if this step is not yet completed
                                     />
                                     <button 
                                         type="submit" 
                                         className="otp-submit-button" 
-                                        disabled={index > completedStep} // Disable submit button too
+                                        disabled={2 > completedStep || 2<completedStep} // Disable submit button too
                                     >
                                         Submit OTP
                                     </button>
+                                </form>
+                            )}
+                            {index === isHandOverStep &&(
+                                <form>
+                                    <input 
+                                        type='checkbox'
+                                        name='handedOver'
+                                        disabled={completedStep > 0}
+                                        onChange={()=>{
+                                            sellerHandOver();
+                                        }}
+                                    />
                                 </form>
                             )}
                         </div>

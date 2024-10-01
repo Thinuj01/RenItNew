@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FeedbackSection.css';  // Import the CSS file
 
-const FeedbackSection = ({ title, action }) => { // Add action prop here
+const FeedbackSection = ({ title, action ,completedStep}) => { // Add action prop here
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [feedback, setFeedback] = useState('');
@@ -19,28 +19,7 @@ const FeedbackSection = ({ title, action }) => { // Add action prop here
             const feedbackData = new FormData();
             feedbackData.append('rating', rating);
             feedbackData.append('feedback', feedback);
-
-            try {
-                // Use the action prop for the URL in fetch()
-                const response = await fetch(action, { // Use action here
-                    method: 'POST',
-                    body: feedbackData
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    alert('Feedback submitted successfully!');
-                    console.log(result);
-                    // Reset form after successful submission
-                    setRating(0);
-                    setFeedback('');
-                } else {
-                    alert('Failed to submit feedback');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while submitting feedback');
-            }
+                
         } else {
             alert('Please provide a rating and feedback');
         }
@@ -84,7 +63,7 @@ const FeedbackSection = ({ title, action }) => { // Add action prop here
 
             {/* Submit Button */}
             <div className="submit-button-div">
-                <button onClick={handleSubmit} className="submit-button">
+                <button onClick={handleSubmit} className="submit-button" disabled={title === "Rate Item" || title ==="Rate Seller"?completedStep<9:completedStep<8}>
                     Submit
                 </button>
             </div>
