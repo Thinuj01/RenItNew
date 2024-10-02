@@ -187,12 +187,12 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory, status: "1" },
                     withCredentials:true
                 });
                 setPaths(response.data);
-                setSelectedDistrict(response.data[0].user_district);
+                setSelectedDistrict(response.data.user_district);
                 console.log(response.data);
                 console.log("Current state:", selectedCategory, category, district, text, cate);
             } catch (error) {
@@ -352,22 +352,26 @@ function CategoryViewPage() {
                                 // First filter the paths according to the conditions
                                 paths.filter((image) => {
                                     const matchesSearch = searchText === '' ||
-                                    image.title.toLowerCase().includes(searchText) ||
-                                    image.description.toLowerCase().includes(searchText);
+                                        image.title.toLowerCase().includes(searchText) ||
+                                        image.description.toLowerCase().includes(searchText);
 
                                     const matchesSubcategory = selectedSubcategories.length === 0 ||
-                                    image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
+                                        image.subcategories.some(subcategory => selectedSubcategories.includes(subcategory));
 
                                     const matchesCondition = selectedConditions.length === 0 ||
-                                    selectedConditions.includes(image.item_condition);
+                                        selectedConditions.includes(image.item_condition);
 
                                     const matchesRentingmethod = selectedDeliveryMethods.length === 0 ||
-                                    selectedDeliveryMethods.includes(image.renting_method);
+                                        selectedDeliveryMethods.includes(image.renting_method);
 
                                     return matchesSearch && matchesSubcategory && matchesCondition && matchesRentingmethod;
                                 })
-                                // Then sort the filtered items by distance
+                                // Sort only if userCoordinates are not empty
                                 .sort((a, b) => {
+                                    if (!userCoordinates || Object.keys(userCoordinates).length === 0) {
+                                        return 0; // Do not sort, return 0 to keep original order
+                                    }
+
                                     const itemCoordinatesA = districtCoordinates[a.district];
                                     const itemCoordinatesB = districtCoordinates[b.district];
 
@@ -378,11 +382,12 @@ function CategoryViewPage() {
                                 })
                                 // Map the sorted items to the UI
                                 .map((image, index) => (
-                                    <ItemCard item={item} paths={image}/>
+                                    <ItemCard key={index} item={item} paths={image} />
                                 ))
-                                ) : (
+                            ) : (
                                 <div>No items found</div>
-                                )}
+                            )}
+
                             </NoneScroller>
                         </div>
                     </div>
