@@ -1,0 +1,22 @@
+#adminPanelNavContent{
+    background-color: var(--PrimaryColorDark);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 20px 50px;
+    position: sticky;
+    top: 0;
+}
+
+#adminPanelNavContent .logo img{
+    height: 40px;
+    object-fit: cover;
+    margin-bottom: 50px;
+}
+
+#adminPanelNavContent #adminPanelMenuLinks{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}

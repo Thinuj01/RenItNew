@@ -1,0 +1,41 @@
+.adminPanelMenuLink {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  position: relative;
+  font-weight: normal; /* Initial weight */
+  transition: font-weight 0.3s ease, color 0.3s ease; /* Add transition for smooth bold effect */
+}
+
+.adminPanelMenuLink::before {
+  content: "";
+  position: absolute;
+  left: -10px; /* Adjust this distance to control the space between the text and the line */
+  top: -10px;
+  height: 0; /* Initially, the height is 0 */
+  width: 2px; /* Width of the vertical line */
+  background: #fff;
+  transition: height 0.3s ease;
+}
+
+/* Hover and focus state */
+.adminPanelMenuLink:hover::before, 
+.adminPanelMenuLink:focus::before {
+  height: 200%; /* The line grows vertically to match the height of the text */
+}
+
+.adminPanelMenuLink:hover, 
+.adminPanelMenuLink:focus {
+  font-weight: bold; /* Text becomes bold on hover */
+}
+
+/* Active state when the link is active */
+.adminPanelMenuLink.active::before {
+  height: 200%; /* Line grows when the link is active */
+}
+
+.adminPanelMenuLink.active {
+  font-weight: bold; /* Text is bold when the link is active */
+}

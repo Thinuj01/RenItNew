@@ -50,6 +50,9 @@ function App() {
       <ImageSlider />
       <SearchBar onSearch={handleSearch} />
 
+      
+
+
       <div className="containerHomePage">
         <HorizontalScroller title="Promotion Items" description="Also you can promote your items this section">
           <ItemCard item={item} />

@@ -28,7 +28,7 @@ function CommonFields({ formData, selectedDistrict, pcode, paddress, setFormData
                 <div className="district_postal">
                     <select
                         name="selectedDistrict"
-                        id="iDistrict"
+                        id="district"
                         value={formData.selectedDistrict||''}
                         onChange={setFormData}
                     >

@@ -31,11 +31,13 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.post('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
-            const fetchRentedItems = axios.post('http://localhost:80/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
+            const fetchWishlist = axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
+            const fetchRentedItems = axios.post('http://localhost:4433/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])
                 .then(([wishlistResponse, rentedResponse]) => {
+                    console.log(wishlistResponse.data);
+                    console.log(rentedResponse.data);
                     setData(wishlistResponse.data);
                     setRented(rentedResponse.data);
                 })

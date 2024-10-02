@@ -29,7 +29,7 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
         console.log("Item", item);
 
         // Fetch the non-available dates from the API
-        axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
             params: {
                 status: "1",
                 item_id: item.item_id
@@ -93,6 +93,30 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
         return '';
     };
 
+    function addToWishlist(){
+        // try{
+          axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+            withCredentials: true
+          })
+            .then(response => {
+              console.log(response.data);
+              axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php',{
+                params:{status:"2",item_id:item.item_id,nic:response.data.NIC}
+              })
+              .then(res=>{
+                if(res.data == "Allready in Wishlist"){
+                  alert("Allready in WishList");
+                  return;
+                }
+                console.log(res.data);
+              })
+            });
+        // }catch{
+        //   alert("You need to SignIn first");
+        // }
+    
+      }
+
     return (
         <div className="itemPreviewPageDateSelectCalendar">
             <div className="titleAndDesc">
@@ -142,7 +166,7 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
                     alert("Select Preferred Dates");
                 }
             }}>Purchase Now</button>
-            <button className="wishlistButton">Add to wishlist</button>
+            <button className="wishlistButton" onClick={()=>{addToWishlist()}}>Add to wishlist</button>
         </div>
     );
 }

@@ -39,8 +39,8 @@ function SellerPage() {
         let isMounted = true;
     
         if (sessiondata.NIC) {
-            const fetchlistedItems = axios.post('http://localhost:80/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
-            const fetchPendingOrders = axios.post('http://localhost:80/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
+            const fetchlistedItems = axios.post('http://localhost:4433/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
+            const fetchPendingOrders = axios.post('http://localhost:4433/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
     
             Promise.all([fetchlistedItems, fetchPendingOrders])
                 .then(([listedResponse, pendingResponse]) => {

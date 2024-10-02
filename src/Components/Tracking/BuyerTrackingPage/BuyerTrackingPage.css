@@ -1,0 +1,18 @@
+.buyerTrackingPageContainer{
+    width: 100%;
+    height: fit-content;
+    padding: 50px 10%;
+    display: flex;
+    gap: 20px;
+}
+
+.buyerTrackingPageContainerLeft,
+.buyerTrackingPageContainerRight{
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

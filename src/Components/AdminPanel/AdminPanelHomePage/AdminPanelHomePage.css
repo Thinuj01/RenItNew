@@ -1,0 +1,36 @@
+.adminPanelHomePageContainer {
+    width: 100%;
+    position: relative;
+    height: fit-content;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.adminPanelHomePageNavContainer {
+    width: 20%;
+    position: relative;
+}
+
+.adminPanelHomePageBodyContainer {
+    width: 80%;
+    position: relative;
+}
+
+.adminPanelBodyContainerTop,
+.adminPanelBodyContainerBottom {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.adminPanelBodyContainerTopLeft,
+.adminPanelBodyContainerTopRight,
+.adminPanelBodyContainerBottomLeft,
+.adminPanelBodyContainerBottomRight {
+    width: 50%;
+    position: relative;
+}
