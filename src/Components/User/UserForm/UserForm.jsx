@@ -96,8 +96,8 @@ function UserForm({ isBuyer, handleToggle }) {
                         src={userDetails.profile_picture
                             ? 'http://localhost:80/RentIT/' + userDetails.profile_picture.slice(2)
                             : (userDetails.gender === "Male" 
-                                ? "http://localhost:80/RentIT/images/male.png" 
-                                : "http://localhost:80/RentIT/images/female.png")}
+                                ? "http://localhost:80/RentIT/images/ProfileImages/male.jpg" 
+                                : "http://localhost:80/RentIT/images/ProfileImages/female.jpg")}
                         alt="User Profile"
                         id="profileImage"
                         className="profileImage"
