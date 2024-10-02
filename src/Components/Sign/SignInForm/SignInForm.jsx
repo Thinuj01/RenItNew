@@ -12,7 +12,7 @@ function SignInForm() {
     e.preventDefault();
     const status = '1';
     console.log(status);
-    axios.post('http://localhost:4433/RentIT/Controllers/userLoginController.php', {
+    axios.post('http://localhost:80/RentIT/Controllers/userLoginController.php', {
       userName: userName,
       userPswd: userPswd,
       status: status,
