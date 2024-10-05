@@ -7,7 +7,7 @@ import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import axios from 'axios'
 
 function BuyerTrackingPage() {
-    const reserve_id = 'R66faebc12e4';
+    const reserve_id = 'R66f45b8e970';
     const [trackingStep,setTrackingStep] = useState(0);
     const [onGoing,setOnGoing] = useState(0);
     const [endDate,setEndDate] = useState();
@@ -44,8 +44,8 @@ function BuyerTrackingPage() {
                         startTime={startDate} // Current time
                         endTime={onGoing==1?endDate:new Date().getTime()}
                         buttonText="Book for your Next Day"
-                        buttonLink="/bookingPage"
-                        expiredMessage="You must returned your Item in 24 hours."  // Custom expiration message
+                        expiredMessage={onGoing === 2 ? "Rental Process Ended" : onGoing === 0 ? "Order has not started yet":""}  // Custom expiration message
+                        onGoing={onGoing}   // Custom expiration message
                     />
 
 
@@ -53,13 +53,15 @@ function BuyerTrackingPage() {
                     <FeedbackSection
                         title="Rate Item"
                         action="/submitItemFeedback.php"
-                        completedStep={trackingStep}  // Pass the dynamic URL here
+                        completedStep={trackingStep}
+                        reserve_id={reserve_id}
                     />
 
                     <FeedbackSection
                         title="Rate Seller"
                         action="/submitSellerFeedback.php"
-                        completedStep={trackingStep}  // Pass the dynamic URL here
+                        completedStep={trackingStep}
+                        reserve_id={reserve_id}
                     />
                 </div>
             </div>

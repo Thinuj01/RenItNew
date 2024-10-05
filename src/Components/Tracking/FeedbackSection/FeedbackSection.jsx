@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './FeedbackSection.css';  // Import the CSS file
+import './FeedbackSection.css';
+import axios from 'axios';
 
-const FeedbackSection = ({ title, action ,completedStep}) => { // Add action prop here
+const FeedbackSection = ({ title, action ,completedStep, reserve_id}) => { // Add action prop here
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [feedback, setFeedback] = useState('');
@@ -16,9 +17,25 @@ const FeedbackSection = ({ title, action ,completedStep}) => { // Add action pro
 
     const handleSubmit = async () => {
         if (rating > 0 && feedback !== '') {
-            const feedbackData = new FormData();
-            feedbackData.append('rating', rating);
-            feedbackData.append('feedback', feedback);
+                axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php',{
+                    params:{
+                        status:"3",
+                        title:title,
+                        reserve_id:reserve_id,
+                        feedback:feedback,
+                        rating:rating
+                    }
+                })
+                .then(response=>{
+                    console.log("Rate",response.data);
+                    setRating(0);
+                    setFeedback("");
+                })
+                .catch(err=>{
+                    console.error(err);
+                })
+
+
                 
         } else {
             alert('Please provide a rating and feedback');

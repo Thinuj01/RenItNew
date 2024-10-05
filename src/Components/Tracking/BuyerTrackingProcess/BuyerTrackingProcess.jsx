@@ -73,12 +73,12 @@ const BuyerTrackingProcess = ({ completedStep,reserve_id }) => {
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                         placeholder="Enter OTP"
-                                        disabled={2> completedStep||2<completedStep} // Disable if this step is not yet completed
+                                        disabled={8> completedStep||8<completedStep} // Disable if this step is not yet completed
                                     />
                                     <button 
                                         type="submit" 
                                         className="otp-submit-button" 
-                                        disabled={2> completedStep||2<completedStep} // Disable submit button too
+                                        disabled={8> completedStep||8<completedStep} // Disable submit button too
                                     >
                                         Submit OTP
                                     </button>

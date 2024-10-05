@@ -1,0 +1,86 @@
+.buyerorder-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+  }
+  
+  .buyerorder-table th,
+  .buyerorder-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    columns: var(--TextColor);
+  }
+  
+  
+  .buyertable-product-image {
+    width: 100px;
+    height: 100px;
+    background-color: var(--PlaceholderColor);
+    border-radius: var(--BorderRadiusNormal);
+    margin: 5px auto;
+    display: block;
+  }
+  
+  .status-column {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;    
+  }
+  
+  .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--BorderRadiusRound);
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .green-dot {
+    background-color: var(--TextColorActive);
+  }
+  
+  .grey-dot {
+    background-color: var(--PlaceholderColor);
+  }
+  
+  .track-btn {
+    padding: 5px;
+    border-radius: var(--BorderRadiusNormal);
+    transition: background-color var(--TransitionNormal), box-shadow var(--TransitionNormal); 
+  }
+  
+  .track-btn.green {
+    background-color: var(--TextColorActive);
+    color: var(--White);
+  }
+  
+  .track-btn.green:hover {
+    background-color: var(--PrimaryColorDark); 
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); 
+  }
+  
+  .track-btn.grey {
+    background-color: var(--PlaceholderColor);
+    color: var(--White);
+  }
+  
+  .track-btn.grey:hover {
+    background-color: var(--TextColor); 
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); 
+  }
+  
+  .cancel-btn {
+    background-color: red;
+    color: var(--White);
+    padding: 5px;
+    border-radius: var(--BorderRadiusNormal);
+    transition: background-color var(--TransitionNormal), box-shadow var(--TransitionNormal); 
+  }
+  
+  .cancel-btn:hover {
+    background-color: #b30000; 
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4); 
+  }
+  
