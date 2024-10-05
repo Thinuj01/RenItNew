@@ -25,6 +25,7 @@ import AdminPanelItemCasePage from './Components/AdminPanel/AdminPanelItemCasePa
 import OrderPage from './Components/OrdersBuyer/OrderPage/OrderPage.jsx'
 
 import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
+import { OrderReturnTimeCheck } from './Components/OrderReturnTimeCheck/OrderReturnTimeCheck.jsx';
 
 
 const router = createBrowserRouter([
@@ -52,10 +53,12 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <DailyCallBack>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>,
-  </DailyCallBack>
+  <OrderReturnTimeCheck>
+    <DailyCallBack>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>,
+    </DailyCallBack>
+  </OrderReturnTimeCheck>
   
 )
