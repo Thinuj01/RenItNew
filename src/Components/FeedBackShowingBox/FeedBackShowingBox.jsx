@@ -14,7 +14,7 @@ function FeedBackShowingBox({ fetch = [] }) {
         console.log("item", item);
 
         // Fetch feedbacks based on item_id
-        axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
             params: {
                 status: "1",
                 item_id: item.item_id
@@ -50,7 +50,7 @@ function FeedBackShowingBox({ fetch = [] }) {
             const fetchUsernames = async () => {
                 const usernameMap = {};
                 await Promise.all(NICs.map(NIC => {
-                    return axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+                    return axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
                         params: {
                             status: "1",
                             nic: NIC
