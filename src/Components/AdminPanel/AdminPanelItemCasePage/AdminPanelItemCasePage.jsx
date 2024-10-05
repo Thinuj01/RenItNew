@@ -1,5 +1,6 @@
 import React from 'react'
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
+import ItemCaseTableComponent from '../ItemCaseTableComponent/ItemCaseTableComponent';
 
 function AdminPanelItemCasePage() {
 
@@ -32,8 +33,8 @@ function AdminPanelItemCasePage() {
 
                     <div className="adminPanelBodyContainer">
                         <div>
-                            <h1>Admin Panel</h1>
-                    
+                            <h1>Admin Panel - Item case</h1>
+                            <ItemCaseTableComponent data={tableData} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>
