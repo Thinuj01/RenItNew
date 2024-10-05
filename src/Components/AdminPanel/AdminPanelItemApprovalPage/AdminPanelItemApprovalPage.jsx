@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ItemApprovalTableComponent from '../ItemApprovalTableComponent/ItemApprovalTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 function AdminPanelItemApprovalPage() {
 
-    const tableData = [
-        { column1: 'Unique 1', column2: 'Category A', column3: 'Status 1' },
-        { column1: 'Unique 2', column2: 'Category B', column3: 'Status 2' },
-        { column1: 'Unique 3', column2: 'Category A', column3: 'Status 2' },
-        { column1: 'Unique 4', column2: 'Category C', column3: 'Status 3' },
-        { column1: 'Unique 5', column2: 'Category B', column3: 'Status 2' },
-    ];
-
     const columnHeaders = {
-        column1: 'ID',
-        column2: 'Category',
-        column3: 'Status',
+        item_id: 'ID',
+        title: 'Title',
+        name: 'Category',
+        district: 'District',
         column4: 'Action'
     };
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+            params: { status: "4" }
+        })
+            .then((response) => {
+                console.log(response.data);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
     return (
         <>
@@ -34,7 +43,7 @@ function AdminPanelItemApprovalPage() {
                     <div className="adminPanelBodyContainer">
                         <div>
                             <h1>Admin Panel - Item Approval</h1>
-                            <ItemApprovalTableComponent data={tableData} columnHeaders={columnHeaders} />
+                            <ItemApprovalTableComponent data={data} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>
