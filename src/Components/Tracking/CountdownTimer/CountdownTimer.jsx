@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './CountdownTimer.css'; // Create a CSS file for styling
 
-const CountdownTimer = ({ startTime, endTime, buttonText, buttonLink, expiredMessage }) => {
+const CountdownTimer = ({ startTime, endTime, buttonText, buttonLink, expiredMessage, onGoing }) => {
     const [remainingTime, setRemainingTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [hasEnded, setHasEnded] = useState(false); // Track if countdown has ended
+    const [rentalEnded, setRentalEnded] = useState(false); // Track if rental period has ended
 
     // Helper function to calculate the remaining time
     const calculateRemainingTime = () => {
@@ -25,14 +26,19 @@ const CountdownTimer = ({ startTime, endTime, buttonText, buttonLink, expiredMes
     };
 
     useEffect(() => {
-        // Update countdown every second
+        if (onGoing === 2) {
+            setRentalEnded(true); // Set rentalEnded flag if onGoing is 2
+            return;
+        }
+
+        // Update countdown every second if the rental hasn't ended
         const timer = setInterval(() => {
             setRemainingTime(calculateRemainingTime());
         }, 1000);
 
         // Clear the timer when the component is unmounted
         return () => clearInterval(timer);
-    }, [endTime]);
+    }, [endTime, onGoing]);
 
     return (
         <div className="countdown-container">
@@ -41,12 +47,16 @@ const CountdownTimer = ({ startTime, endTime, buttonText, buttonLink, expiredMes
                 <p>Your item period has started, and you are remaining:</p>
             </div>
 
-            {/* Countdown Timer or Expiration Message */}
+            {/* Countdown Timer or Expiration/Rental Ended Message */}
             <div className="countdownTimerDiv">
-                {hasEnded ? (
+                {rentalEnded ? (
+                    <div className="time-expired-message animate-alert">
+                        <p>Rental period has ended.</p>
+                    </div>
+                ) : hasEnded ? (
                     <div className="time-expired-message animate-alert">
                         <p>Time has expired!</p>
-                        <p>{expiredMessage}</p>  {/* Configurable message passed as prop */}
+                        <p>{expiredMessage}</p> {/* Configurable message passed as prop */}
                     </div>
                 ) : (
                     <div className="countdown-timer">
@@ -75,7 +85,7 @@ const CountdownTimer = ({ startTime, endTime, buttonText, buttonLink, expiredMes
 
             {/* Show button or hide it based on whether countdown has ended */}
             <div className="button-container">
-                {!hasEnded && (
+                {!hasEnded && !rentalEnded && (
                     <a href={buttonLink} className="navigate-button">{buttonText}</a>
                 )}
             </div>
