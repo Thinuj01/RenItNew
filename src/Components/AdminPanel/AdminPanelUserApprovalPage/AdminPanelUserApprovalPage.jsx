@@ -1,24 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AdminPanelUserApprovalPage.css'
 import UserApprovalTableComponent from '../UserApprovalTableComponent/UserApprovalTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 function AdminPanelUserApprovalPage() {
 
-    const tableData = [
-        { column1: 'Unique 1', column2: 'Category A', column3: 'Status 1' },
-        { column1: 'Unique 2', column2: 'Category B', column3: 'Status 2' },
-        { column1: 'Unique 3', column2: 'Category A', column3: 'Status 2' },
-        { column1: 'Unique 4', column2: 'Category C', column3: 'Status 3' },
-        { column1: 'Unique 5', column2: 'Category B', column3: 'Status 2' },
-    ];
-
     const columnHeaders = {
-        column1: 'ID',
-        column2: 'Category',
-        column3: 'Status',
+        NIC: 'ID',
+        firstname: 'First Name',
+        district: 'District',
         column4: 'Action'
     };
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+            params: { status: "2" }
+        })
+            .then((response) => {
+                console.log(response.data);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
     return (
         <>
@@ -34,8 +42,8 @@ function AdminPanelUserApprovalPage() {
 
                     <div className="adminPanelBodyContainer">
                         <div>
-                            <h1>Admin Panel</h1>
-                            <UserApprovalTableComponent data={tableData} columnHeaders={columnHeaders} />
+                            <h1>Admin Panel - User Approval</h1>
+                            <UserApprovalTableComponent data={data} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>

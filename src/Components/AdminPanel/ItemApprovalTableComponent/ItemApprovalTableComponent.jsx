@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FaFilter } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./ItemApprovalTableComponent.css"; // Import the CSS file
 import arrowMore from '/AdminPanelHomeImages/arrow-next-small-svgrepo-com.svg';
 import ItemApprovalPopupWindow from "../ItemApprovalPopupWindow/ItemApprovalPopupWindow";
 
 function ItemApprovalTableComponent({ data, columnHeaders }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
-    column2: "",
-    column3: "",
+    name: "",
+    district: "",
   });
 
   const [dropdownVisible, setDropdownVisible] = useState({
-    column2: false,
-    column3: false,
+    name: false,
+    district: false,
   });
 
   const [selectedRowData, setSelectedRowData] = useState(null); // To hold the selected row data
@@ -22,7 +25,7 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".filter-icon-wrapper")) {
-        setDropdownVisible({ column2: false, column3: false });
+        setDropdownVisible({ name: false, district: false });
       }
     };
 
@@ -32,10 +35,19 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
     };
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const district = params.get("district");
+    if (district) {
+        setFilters((prev) => ({ ...prev, district }));
+        navigate(window.location.pathname, { replace: true });
+    }
+  }, [location.search]);
+
   const filteredData = data.filter(
     (row) =>
-      (filters.column2 === "" || row.column2 === filters.column2) &&
-      (filters.column3 === "" || row.column3 === filters.column3)
+      (filters.name === "" || row.name === filters.name) &&
+      (filters.district === "" || row.district === filters.district)
   );
 
   const handleFilterChange = (column, value) => {
@@ -59,18 +71,7 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
   const closePopup = () => {
     setIsPopupVisible(false); // Hide the popup
     setSelectedRowData(null); // Clear the selected row data
-  };
-
-  const handleSubmit = () => {
-    // Handle submission logic here
-    alert("User approved!");
-    closePopup(); // Close the popup after submission
-  };
-
-  const handleReject = () => {
-    // Handle rejection logic here
-    alert("User rejected!");
-    closePopup(); // Close the popup after rejection
+    window.location.reload();
   };
 
   return (
@@ -78,23 +79,24 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
       <table className="table">
         <thead>
           <tr>
-            <th className="table-header-center">{columnHeaders.column1}</th>
+            <th className="table-header-center">{columnHeaders.item_id}</th>
+            <th className="table-header-filter">{columnHeaders.title}</th>
             <th className="table-header-filter">
-              {columnHeaders.column2}
+              {columnHeaders.name}
               <div
                 className="filter-icon-wrapper"
-                onClick={() => toggleDropdown("column2")}
+                onClick={() => toggleDropdown("name")}
               >
                 <FaFilter className="filter-icon" title="Filter" />
-                {dropdownVisible.column2 && (
+                {dropdownVisible.name && (
                   <div className="filter-dropdown-list">
-                    <div onClick={() => handleFilterChange("column2", "")}>
+                    <div onClick={() => handleFilterChange("name", "")}>
                       All
                     </div>
-                    {uniqueColumnValues("column2").map((val, index) => (
+                    {uniqueColumnValues("name").map((val, index) => (
                       <div
                         key={index}
-                        onClick={() => handleFilterChange("column2", val)}
+                        onClick={() => handleFilterChange("name", val)}
                       >
                         {val}
                       </div>
@@ -104,21 +106,21 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
               </div>
             </th>
             <th className="table-header-filter">
-              {columnHeaders.column3}
+              {columnHeaders.district}
               <div
                 className="filter-icon-wrapper"
-                onClick={() => toggleDropdown("column3")}
+                onClick={() => toggleDropdown("district")}
               >
                 <FaFilter className="filter-icon" title="Filter" />
-                {dropdownVisible.column3 && (
+                {dropdownVisible.district && (
                   <div className="filter-dropdown-list">
-                    <div onClick={() => handleFilterChange("column3", "")}>
+                    <div onClick={() => handleFilterChange("district", "")}>
                       All
                     </div>
-                    {uniqueColumnValues("column3").map((val, index) => (
+                    {uniqueColumnValues("district").map((val, index) => (
                       <div
                         key={index}
-                        onClick={() => handleFilterChange("column3", val)}
+                        onClick={() => handleFilterChange("district", val)}
                       >
                         {val}
                       </div>
@@ -133,9 +135,10 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
         <tbody>
           {filteredData.map((row, index) => (
             <tr key={index}>
-              <td>{row.column1}</td>
-              <td>{row.column2}</td>
-              <td>{row.column3}</td>
+              <td>{row.item_id}</td>
+              <td>{row.title}</td>
+              <td>{row.name}</td>
+              <td>{row.district}</td>
               <td>
                 <div className="tableMoreView" onClick={() => openPopup(row)}>
                   <img src={arrowMore} alt="" className='tableMoreViewIcon' />
@@ -150,8 +153,6 @@ function ItemApprovalTableComponent({ data, columnHeaders }) {
         <ItemApprovalPopupWindow
           selectedRowData={selectedRowData}
           onClose={closePopup}
-          onSubmit={handleSubmit}
-          onReject={handleReject}
         />
       )}
     </div>

@@ -28,7 +28,7 @@ function AdminHomePageCardContainer({ title, count, data, SvgIcon, headers, card
             </div>
 
             <div className="adminHomeCardBottom">
-                <CardTableComponent data={data} headers={headers} />
+                <CardTableComponent data={data} headers={headers} page={cardMenuLink} />
             </div>
         </div>
     );
