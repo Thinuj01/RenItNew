@@ -16,7 +16,7 @@ function AdminPanelItemApprovalPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {
