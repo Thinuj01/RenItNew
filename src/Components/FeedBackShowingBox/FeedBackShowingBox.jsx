@@ -29,7 +29,7 @@ function FeedBackShowingBox({ fetch = [] }) {
     }, [item]);
 
     useEffect(()=>{
-        axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php',{
+        axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php',{
             params:{
                 status:"2",
                 seller_nic:item.NIC_number,
@@ -76,7 +76,7 @@ function FeedBackShowingBox({ fetch = [] }) {
             const fetchUsernames = async () => {
                 const usernameMap = {};
                 await Promise.all(NICs.map(NIC => {
-                    return axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+                    return axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
                         params: {
                             status: "1",
                             nic: NIC
