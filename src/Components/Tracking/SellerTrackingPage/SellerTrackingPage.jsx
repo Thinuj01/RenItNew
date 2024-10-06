@@ -7,7 +7,7 @@ import SellerTrackingProcess from '../SellerTrackingProcess/SellerTrackingProces
 import axios from 'axios'
 
 function SellerTrackingPage() {
-    const reserve_id = 'R66faebc12e4';
+    const reserve_id = 'R66f45b8e970';
     const [trackingStep,setTrackingStep] = useState(0);
     const [onGoing,setOGoing] = useState(0);
     const [endDate,setEndDate] = useState();
@@ -45,14 +45,15 @@ function SellerTrackingPage() {
                         startTime={startDate} // Current time
                         endTime={onGoing==1?endDate:new Date().getTime()}
                         buttonText="Book for your Next Day"
-                        buttonLink="/bookingPage"
-                        expiredMessage="Inform to buyer return your Item in 24 hours."  // Custom expiration message
+                        expiredMessage={onGoing === 2 ? "Rental Process Ended" : onGoing === 0 ? "Order has not started yet":""}  // Custom expiration message
+                        onGoing={onGoing}   // Custom expiration message
                     />
 
                     <FeedbackSection
                         title="Rate Buyer"
                         action="/submitBuyerFeedback.php"
-                        completedStep={trackingStep}  // Pass the dynamic URL here
+                        completedStep={trackingStep}
+                        reserve_id={reserve_id}
                     />
                 </div>
             </div>

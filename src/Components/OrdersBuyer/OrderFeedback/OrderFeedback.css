@@ -1,0 +1,32 @@
+.orderfeedbackbox{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ddd; */
+    margin: 5px;
+    border-radius: var(--BorderRadiusNormal);
+    border: 1px solid var(--PlaceholderColor);
+
+  }
+  
+  .orderstars {
+    font-size: var(--FontSizeXLarge);
+  }
+  
+  .star {
+    margin-right: 5px;
+  }
+  
+  .ordergreen-star {
+    color: var(--SecondaryColor);
+  }
+  
+  .ordergrey-star {
+    color: var(--PlaceholderColor);
+  }
+
+  .orderfeedbackbox p{
+    color: var(--SecondaryColor) ;
+    font-size: var(--FontSizeNormal);
+    padding: 8px;
+  }
+  

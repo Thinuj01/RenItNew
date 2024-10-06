@@ -1,0 +1,24 @@
+.upper{
+    display: flex;
+    gap:80px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+    justify-content: space-between;
+}
+
+.orderpage-leftdiv{
+    align-items: left;
+    width: 40%;
+}
+
+.orderpage-rightdiv{
+    align-items: right;
+    width: 40%;
+    text-align: right;
+}
+
+.bottom{
+    padding-left: 150px;
+    padding-right: 150px;
+}
