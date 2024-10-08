@@ -8,7 +8,6 @@ import AdminHomePageCardContainer from '../AdminHomePageCardContainer/AdminHomeP
 
 
 function AdminPanelHomePage() {
-    const [data, setData] = useState([]);
     const [itemApp, setItemApp] = useState([]);
     const [userApp, setUserApp] = useState([]);
     const [itemCase, setItemCase] = useState([]);
@@ -17,23 +16,7 @@ function AdminPanelHomePage() {
     const headers = ['District', 'Requests', 'View more'];
 
     useEffect(() => {
-        // Simulating fetch data, replace with actual fetch call
-        const fetchData = async () => {
-            const result = [
-                { district: 'Galle', requests: '09' },
-                { district: 'Mathara', requests: '45' },
-                { district: 'Hambanthota', requests: '25' },
-                { district: 'Colombo', requests: '31' },
-                // Add more rows here for testing scrolling
-            ];
-            setData(result);
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {
@@ -46,12 +29,38 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {
                 const groupedData = Object.values(groupByDistrict(response.data));
                 setItemApp(groupedData); // Set the grouped data
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "1" }
+        })
+            .then((response) => {
+                const groupedData = Object.values(groupByDistrict(response.data));
+                setUserCase(groupedData); // Set the grouped data
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "2" }
+        })
+            .then((response) => {
+                const groupedData = Object.values(groupByDistrict(response.data));
+                setItemCase(groupedData); // Set the grouped data
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
@@ -111,8 +120,8 @@ function AdminPanelHomePage() {
                             <div className="adminPanelBodyContainerBottomLeft">
                                 <AdminHomePageCardContainer
                                     title="User Case Management"
-                                    count="1350"
-                                    data={data}
+                                    count={userCase.reduce((sum, uCase) => sum + uCase.requests, 0)}
+                                    data={userCase}
                                     headers={headers}
                                     SvgIcon={userSolidSVG} // Pass the SVG as a prop
                                     cardMenuLink = "/AdminPanelUserCasePage"
@@ -121,8 +130,8 @@ function AdminPanelHomePage() {
                             <div className="adminPanelBodyContainerBottomRight">
                                 <AdminHomePageCardContainer
                                     title="Item Case Management"
-                                    count="120"
-                                    data={data}
+                                    count={itemCase.reduce((sum, iCase) => sum + iCase.requests, 0)}
+                                    data={itemCase}
                                     headers={headers}
                                     SvgIcon={itemSolidSVG} // Pass the SVG as a prop
                                     cardMenuLink = "/AdminPanelItemCasePage"

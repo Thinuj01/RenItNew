@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './ItemCasePopupWindow.css'; // Link the CSS file
 
 const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
     const images = [
-        selectedRowData?.image1 || 'https://img.freepik.com/free-photo/side-view-smiley-couple-indoors_23-2149903726.jpg?t=st=1727811362~exp=1727814962~hmac=f214e56be739405d6a0b5a48eec5bd5b9c34ed125702be6e7f695b3653e0a23f&w=1380',
-        selectedRowData?.image2 || 'https://img.freepik.com/free-photo/man-woman-posing-together-medium-shot_23-2149903736.jpg?t=st=1727811670~exp=1727815270~hmac=34a5742a8c16a62f029cfe15f98b7b7f67b1508b82800925f34ea0eb7525fd2e&w=740',
-        selectedRowData?.image3 || 'https://img.freepik.com/free-photo/side-view-man-kissing-woman-cheek_23-2149903746.jpg?t=st=1727811687~exp=1727815287~hmac=6458ebc6e77d3d1fe211b48e35354e9549b378f4e9a149055b1ba5b09703529d&w=740',
-        selectedRowData?.image4 || 'https://img.freepik.com/free-photo/side-view-plus-size-couple-kissing_23-2149903759.jpg?t=st=1727811695~exp=1727815295~hmac=ea33ed9ce41963d562366abffac24db9e1bf5169cf8a31ce2170439147b6396a&w=740',
-        selectedRowData?.image5 || 'https://img.freepik.com/free-photo/side-view-man-kissing-woman-cheek_23-2149903746.jpg?t=st=1727811687~exp=1727815287~hmac=6458ebc6e77d3d1fe211b48e35354e9549b378f4e9a149055b1ba5b09703529d&w=740',
-
+        selectedRowData.case_picture_01? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
+        selectedRowData.case_picture_02? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
+        selectedRowData.case_picture_03? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_03.slice(3):'',
+        selectedRowData.case_picture_04? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
+        selectedRowData.case_picture_05? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_05.slice(3):''
     ];
+
+    const [details, setDetails] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
 
     const openImagePreview = (index) => {
         setSelectedImageIndex(index);
@@ -39,17 +52,17 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
 
                         <div className="formField">
                             <label>Case Category</label>
-                            <input type="text" readOnly value="Some Case Category" />
+                            <input type="text" readOnly value="" />
                         </div>
 
                         <div className="formField">
                             <label>Case Description</label>
-                            <textarea name="" id="" readOnly value="Description of the case goes here"></textarea>
+                            <textarea name="" id="" readOnly value={selectedRowData.case_discription}></textarea>
                         </div>
 
                         <div className="formField">
                             <label>Request Description</label>
-                            <textarea name="" id="" readOnly value="Request description from the user"></textarea>
+                            <textarea name="" id="" readOnly value={selectedRowData.request_discription}></textarea>
                         </div>
 
                         <div className="relatedImages">
@@ -57,7 +70,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                             <div className="imageGrid">
                                 {images.map((image, index) => (
                                     <div key={index} className="thumbnail" onClick={() => openImagePreview(index)}>
-                                        <img src={image} alt={`Related ${index + 1}`} />
+                                        <img src={image? image:null} />
                                     </div>
                                 ))}
                             </div>
@@ -94,17 +107,20 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
 
                 {/* Right Section */}
                 <div className="popupContentRight">
+                    <div className="closeDiv">
+                        <button className="btn close-btn" onClick={onClose}>Close</button>
+                    </div>
                     <div className="caseOpener">
                         <h4>Case Opener</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src='https://img.freepik.com/free-photo/side-view-smiley-couple-indoors_23-2149903726.jpg?t=st=1727811362~exp=1727814962~hmac=f214e56be739405d6a0b5a48eec5bd5b9c34ed125702be6e7f695b3653e0a23f&w=1380' alt="" />
+                                <img src={selectedRowData.openerPP?'http://localhost:80/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
-                                <h2>Ravindu Dilshan</h2>
+                                <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
                                 <div>
-                                <p>Existing case: 04</p>
-                                <p>Current Case Level: 01</p>
+                                <p>Existing case: {selectedRowData.openerCaselvl}</p>
+                                <p>Current Case Level: </p>
                                 </div>
                             </div>
                         </div>
@@ -115,13 +131,13 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src='https://img.freepik.com/free-photo/side-view-smiley-couple-indoors_23-2149903726.jpg?t=st=1727811362~exp=1727814962~hmac=f214e56be739405d6a0b5a48eec5bd5b9c34ed125702be6e7f695b3653e0a23f&w=1380' alt="" />
+                                <img src={selectedRowData.affectorPP?'http://localhost:80/RentIT/'+selectedRowData.affectorPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affectorGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
-                                <h2>Ravindu Dilshan</h2>
+                                <h2>{selectedRowData.affectorFname +' '+ selectedRowData.affectorLname}</h2>
                                 <div>
-                                <p>Existing case: 04</p>
-                                <p>Current Case Level: 01</p>
+                                <p>Existing case: {selectedRowData.affectorCaselvl}</p>
+                                <p>Current Case Level: </p>
                                 </div>
                             </div>
                         </div>
@@ -131,12 +147,12 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <h4>Item</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src='https://img.freepik.com/free-photo/side-view-smiley-couple-indoors_23-2149903726.jpg?t=st=1727811362~exp=1727814962~hmac=f214e56be739405d6a0b5a48eec5bd5b9c34ed125702be6e7f695b3653e0a23f&w=1380' alt="" />
+                                <img src={'http://localhost:80/RentIT/'+selectedRowData.item_Picture_01.slice(3)} alt="" />
                             </div>
                             <div className="caseDetails">
-                                <h2>Item Name</h2>
+                                <h2>{selectedRowData.title}</h2>
                                 <div>
-                                <p>Existing case: 04</p>
+                                <p>Existing case: {selectedRowData.case_level}</p>
                                 <p>Current Case Level: 01</p>
                                 </div>
                             </div>
@@ -162,7 +178,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                     <button className="closePreviewBtn" onClick={closeImagePreview}>Close</button>
                     <div className="imagePreviewContent">
                         <button className="previousImageBtn" onClick={showPreviousImage}>Previous</button>
-                        <img src={images[selectedImageIndex]} alt="Preview" className="previewImage" />
+                        <img src={selectedImageIndex? images[selectedImageIndex]:null} className="previewImage" />
                         <button className="nextImageBtn" onClick={showNextImage}>Next</button>
                     </div>
                 </div>

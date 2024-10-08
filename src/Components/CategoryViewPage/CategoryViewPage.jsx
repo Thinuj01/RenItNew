@@ -187,7 +187,7 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory, status: "1" },
                     withCredentials:true
                 });

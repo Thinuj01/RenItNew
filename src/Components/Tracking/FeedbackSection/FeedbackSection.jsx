@@ -17,7 +17,7 @@ const FeedbackSection = ({ title, action ,completedStep, reserve_id}) => { // Ad
 
     const handleSubmit = async () => {
         if (rating > 0 && feedback !== '') {
-                axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php',{
+                axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php',{
                     params:{
                         status:"3",
                         title:title,
