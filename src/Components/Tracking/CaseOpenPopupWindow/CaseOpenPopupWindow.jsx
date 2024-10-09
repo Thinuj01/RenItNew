@@ -1,9 +1,32 @@
 // PopupComponent.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './CaseOpenPopupWindow.css';
+import ImageUpload from '../../AddItemForm/ImageUpload';
 
 const CaseOpenPopupWindow = ({ isOpen, onClose, title, categoryOptions, label1, label2 }) => {
     if (!isOpen) return null; // If not open, don't render anything.
+
+    const [images, setImages] = useState([]);
+
+    
+
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        setImages((prevImages) => {
+            const newImages = [...prevImages, ...files].slice(0, 5); // Limiting to 5 images
+            if (newImages.length > 0 && item.imageUrl === 'https://via.placeholder.com/250') {
+                // Update the item imageUrl with the first image's URL
+                setItem({
+                    ...item,
+                    imageUrl: URL.createObjectURL(newImages[0]),
+                });
+            }
+            return newImages;
+        });
+    };
+    const handleRemoveImage = (index) => {
+        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    };
 
     return (
         <div className="popup-overlay">
@@ -33,6 +56,15 @@ const CaseOpenPopupWindow = ({ isOpen, onClose, title, categoryOptions, label1, 
                     <div className="form-group">
                         <label htmlFor="textbox2">{label2}:</label>
                         <textarea id="textbox2" className="text-input" />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="textbox2">Add Images Related to Case:</label>
+                        <ImageUpload
+                            images={images}
+                            handleImageChange={handleImageChange}
+                            handleRemoveImage={handleRemoveImage}
+                        />
                     </div>
 
                     {/* Buttons */}
