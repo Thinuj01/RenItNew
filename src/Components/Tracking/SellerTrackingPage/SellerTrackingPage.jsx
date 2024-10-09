@@ -13,6 +13,11 @@ function SellerTrackingPage() {
     const [endDate,setEndDate] = useState();
     const [startDate,setStartDate] = useState();
 
+    const titleCase = 'Case open to Buyer'
+    const categoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const label1 = 'Case Description';
+    const label2 = 'User Request';
+
     useEffect(()=>{
         const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
                 params:{
@@ -54,6 +59,10 @@ function SellerTrackingPage() {
                         action="/submitBuyerFeedback.php"
                         completedStep={trackingStep}
                         reserve_id={reserve_id}
+                        titleCase={titleCase}
+                        categoryOptions={categoryOptions}
+                        label1={label1}
+                        label2={label2}
                     />
                 </div>
             </div>

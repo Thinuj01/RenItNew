@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './FeedbackSection.css';
 import axios from 'axios';
+import CaseOpenPopupWindow from '../CaseOpenPopupWindow/CaseOpenPopupWindow';
 
-const FeedbackSection = ({ title, action ,completedStep, reserve_id}) => { // Add action prop here
+const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, categoryOptions, label1, label2 }) => { // Add action prop here
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [feedback, setFeedback] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const handleRating = (rate) => {
         setRating(rate);
@@ -17,29 +19,33 @@ const FeedbackSection = ({ title, action ,completedStep, reserve_id}) => { // Ad
 
     const handleSubmit = async () => {
         if (rating > 0 && feedback !== '') {
-                axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php',{
-                    params:{
-                        status:"3",
-                        title:title,
-                        reserve_id:reserve_id,
-                        feedback:feedback,
-                        rating:rating
-                    }
-                })
-                .then(response=>{
-                    console.log("Rate",response.data);
+            axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+                params: {
+                    status: "3",
+                    title: title,
+                    reserve_id: reserve_id,
+                    feedback: feedback,
+                    rating: rating
+                }
+            })
+                .then(response => {
+                    console.log("Rate", response.data);
                     setRating(0);
                     setFeedback("");
                 })
-                .catch(err=>{
+                .catch(err => {
                     console.error(err);
                 })
 
 
-                
+
         } else {
             alert('Please provide a rating and feedback');
         }
+    };
+
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen);
     };
 
     return (
@@ -80,10 +86,23 @@ const FeedbackSection = ({ title, action ,completedStep, reserve_id}) => { // Ad
 
             {/* Submit Button */}
             <div className="submit-button-div">
-                <button onClick={handleSubmit} className="submit-button" disabled={title === "Rate Item" || title ==="Rate Seller"?completedStep<9:completedStep<8}>
+                <button className="case-button" onClick={togglePopup}>
+                    Open Case
+                </button>
+
+                <button onClick={handleSubmit} className="submit-button" disabled={title === "Rate Item" || title === "Rate Seller" ? completedStep < 9 : completedStep < 8}>
                     Submit
                 </button>
             </div>
+
+            <CaseOpenPopupWindow
+                isOpen={isPopupOpen}
+                onClose={togglePopup}
+                title={titleCase}
+                categoryOptions={categoryOptions}
+                label1={label1}
+                label2={label2}
+            />
         </div>
     );
 };
