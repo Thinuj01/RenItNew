@@ -29,7 +29,7 @@ function AdminPanelUserCasePage() {
     }, []);
 
     const columnHeaders = {
-        caseAffector: 'Case Affector',
+        caseaffecter: 'Case affecter',
         caseCategory: 'Category',
         caseOpener: 'Case Opener',
         column4: 'Action'

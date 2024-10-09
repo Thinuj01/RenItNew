@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ItemCasePopupWindow.css'; // Link the CSS file
 
-const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) => {
+const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+    const [selectedCaseAction, setSelectedCaseAction] = useState('');
+    const handleCaseActionChange = (e) => {
+        setSelectedCaseAction(e.target.value);
+    };
 
     const images = [
         selectedRowData.case_picture_01? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
@@ -25,6 +29,25 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
             setDetails(data);
           });
       }, []);
+
+      const handleAction = () => {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "4", itemid: selectedRowData.item_id, caseAction: selectedCaseAction, caseid: selectedRowData.item_case_id }
+        })
+            .then((response) => {
+                console.log('Response:', response.data);
+                if (response.data.success) {
+                    alert(`Case closed successfully!`);
+                    onClose();
+                } else {
+                    alert('Error: ' + response.data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error submitting data:', error);
+                alert('An error occurred. Please try again.');
+            });
+    };
 
     const openImagePreview = (index) => {
         setSelectedImageIndex(index);
@@ -81,26 +104,55 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                             <h4>Case Status</h4>
                             <ul>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level One Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="itemCaseAction" 
+                                        value="1" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level One Case Open
+                                    <label htmlFor="itemCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level Two Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="itemCaseAction" 
+                                        value="2" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level Two Case Open
+                                    <label htmlFor="itemCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level Three Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="itemCaseAction" 
+                                        value="3" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level Three Case Open
+                                    <label htmlFor="itemCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Remove Account Permanently
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="itemCaseAction" 
+                                        value="4" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Remove Item Permanently
+                                    <label htmlFor="itemCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Don’t do anything
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="itemCaseAction" 
+                                        value="0" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Don’t do anything
+                                    <label htmlFor="itemCaseAction">Description</label>
                                 </li>
                             </ul>
+                            <div className="actions">
+                        {/* <button className="btn rejectBtn" onClick={onReject}>Reject</button> */}
+                        <button className="btn submitBtn" onClick={handleAction} disabled={selectedCaseAction? false: true}>Submit</button>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -120,7 +172,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                                 <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
                                 <div>
                                 <p>Existing case: {selectedRowData.openerCaselvl}</p>
-                                <p>Current Case Level: </p>
+                                {/* <p>Current Case Level: </p> */}
                                 </div>
                             </div>
                         </div>
@@ -131,13 +183,13 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={selectedRowData.affectorPP?'http://localhost:80/RentIT/'+selectedRowData.affectorPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affectorGender.toLowerCase()+'.jpg'} />
+                                <img src={selectedRowData.affecterPP?'http://localhost:80/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
-                                <h2>{selectedRowData.affectorFname +' '+ selectedRowData.affectorLname}</h2>
+                                <h2>{selectedRowData.affecterFname +' '+ selectedRowData.affecterLname}</h2>
                                 <div>
-                                <p>Existing case: {selectedRowData.affectorCaselvl}</p>
-                                <p>Current Case Level: </p>
+                                <p>Existing case: {selectedRowData.affecterCaselvl}</p>
+                                {/* <p>Current Case Level: </p> */}
                                 </div>
                             </div>
                         </div>
@@ -153,7 +205,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                                 <h2>{selectedRowData.title}</h2>
                                 <div>
                                 <p>Existing case: {selectedRowData.case_level}</p>
-                                <p>Current Case Level: 01</p>
+                                <p>Current Case Level: {selectedCaseAction}</p>
                                 </div>
                             </div>
                         </div>
@@ -165,10 +217,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <textarea placeholder="Enter the message for notify User"></textarea>
                     </div>
 
-                    <div className="actions">
-                        <button className="btn rejectBtn" onClick={onReject}>Reject</button>
-                        <button className="btn submitBtn" onClick={onSubmit}>Submit</button>
-                    </div>
+                    
                 </div>
             </div>
 

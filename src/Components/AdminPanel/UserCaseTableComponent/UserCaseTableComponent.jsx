@@ -58,24 +58,12 @@ function UserCaseTableComponent({ data, columnHeaders }) {
     setSelectedRowData(null); // Clear the selected row data
   };
 
-  const handleSubmit = () => {
-    // Handle submission logic here
-    alert("User approved!");
-    closePopup(); // Close the popup after submission
-  };
-
-  const handleReject = () => {
-    // Handle rejection logic here
-    alert("User rejected!");
-    closePopup(); // Close the popup after rejection
-  };
-
   return (
     <div>
       <table className="table">
         <thead>
           <tr>
-            <th className="table-header-center">{columnHeaders.caseAffector}</th>
+            <th className="table-header-center">{columnHeaders.caseaffecter}</th>
             <th className="table-header-filter">
               {columnHeaders.caseCategory}
               <div
@@ -107,7 +95,7 @@ function UserCaseTableComponent({ data, columnHeaders }) {
         <tbody>
           {filteredData.map((row, index) => (
             <tr key={index}>
-              <td>{row.affectorFname +' '+ row.affectorLname}</td>
+              <td>{row.affecterFname +' '+ row.affecterLname}</td>
               <td>{row.caseCategory}</td>
               <td>{row.openerFname +' '+ row.openerLname}</td>
               <td>
@@ -124,8 +112,6 @@ function UserCaseTableComponent({ data, columnHeaders }) {
         <UserCasePopupWindow
           selectedRowData={selectedRowData}
           onClose={closePopup}
-          onSubmit={handleSubmit}
-          onReject={handleReject}
         />
       )}
     </div>

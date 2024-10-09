@@ -1,29 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './userCasePopupWindow.css'; // Link the CSS file
 
-const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) => {
-    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
+    // const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+    const [selectedCaseAction, setSelectedCaseAction] = useState('');
 
-    const images = [
-        '',
-        '',
-    ];
-
-    const openImagePreview = (index) => {
-        setSelectedImageIndex(index);
+    const handleCaseActionChange = (e) => {
+        setSelectedCaseAction(e.target.value);
     };
 
-    const closeImagePreview = () => {
-        setSelectedImageIndex(null);
+    const handleAction = () => {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "3", affecterNIC: selectedRowData.affecterNIC, caseAction: selectedCaseAction, caseid: selectedRowData.user_case_id }
+        })
+            .then((response) => {
+                console.log('Response:', response.data);
+                if (response.data.success) {
+                    alert(`Case closed successfully!`);
+                    onClose();
+                } else {
+                    alert('Error: ' + response.data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error submitting data:', error);
+                alert('An error occurred. Please try again.');
+            });
     };
+    
+    // const images = [
+    //     '',
+    //     '',
+    // ];
 
-    const showNextImage = () => {
-        setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
+    // const openImagePreview = (index) => {
+    //     setSelectedImageIndex(index);
+    // };
 
-    const showPreviousImage = () => {
-        setSelectedImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
+    // const closeImagePreview = () => {
+    //     setSelectedImageIndex(null);
+    // };
+
+    // const showNextImage = () => {
+    //     setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    // };
+
+    // const showPreviousImage = () => {
+    //     setSelectedImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    // };
 
     return (
         <div className="popupOverlay">
@@ -64,24 +89,49 @@ const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                             <h4>Case Status</h4>
                             <ul>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level One Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="userCaseAction" 
+                                        value="1" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level One Case Open
+                                    <label htmlFor="userCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level Two Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="userCaseAction" 
+                                        value="2" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level Two Case Open
+                                    <label htmlFor="userCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Level Three Case Open
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="userCaseAction" 
+                                        value="3" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Level Three Case Open
+                                    <label htmlFor="userCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Remove Account Permanently
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="userCaseAction" 
+                                        value="4" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Remove Account Permanently
+                                    <label htmlFor="userCaseAction">Description</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name='itemCaseAction' /> Don’t do anything
-                                    <label htmlFor="itemCaseAction">Descriotion</label>
+                                    <input 
+                                        type="radio" 
+                                        name="userCaseAction" 
+                                        value="0" 
+                                        onChange={handleCaseActionChange} 
+                                    /> Don’t do anything
+                                    <label htmlFor="userCaseAction">Description</label>
                                 </li>
                             </ul>
                         </div>
@@ -103,7 +153,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                                 <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
                                 <div>
                                 <p>Existing case: {selectedRowData.openerCaselvl}</p>
-                                <p>Current Case Level: </p>
+                                {/* <p>Current Case Level: </p> */}
                                 </div>
                             </div>
                         </div>
@@ -114,13 +164,13 @@ const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                            <img src={selectedRowData.affectorPP?'http://localhost:80/RentIT/'+selectedRowData.affectorPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affectorGender.toLowerCase()+'.jpg'} />
+                            <img src={selectedRowData.affecterPP?'http://localhost:80/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
-                                <h2>{selectedRowData.affectorFname +' '+ selectedRowData.affectorLname}</h2>
+                                <h2>{selectedRowData.affecterFname +' '+ selectedRowData.affecterLname}</h2>
                                 <div>
-                                <p>Existing case: {selectedRowData.affectorCaselvl}</p>
-                                <p>Current Case Level: </p>
+                                <p>Existing case: {selectedRowData.affecterCaselvl}</p>
+                                <p>Current Case Level: {selectedCaseAction}</p>
                                 </div>
                             </div>
                         </div>
@@ -134,14 +184,14 @@ const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                     </div>
 
                     <div className="actions">
-                        <button className="btn rejectBtn" onClick={onReject}>Reject</button>
-                        <button className="btn submitBtn" onClick={onSubmit}>Submit</button>
+                        {/* <button className="btn rejectBtn" onClick={onReject}>Reject</button> */}
+                        <button className="btn submitBtn" onClick={handleAction} disabled={selectedCaseAction? false: true}>Submit</button>
                     </div>
                 </div>
             </div>
 
             {/* Image Preview Modal */}
-            {selectedImageIndex !== null && (
+            {/* {selectedImageIndex !== null && (
                 <div className="imagePreviewModal">
                     <button className="closePreviewBtn" onClick={closeImagePreview}>Close</button>
                     <div className="imagePreviewContent">
@@ -150,7 +200,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose, onSubmit, onReject }) =
                         <button className="nextImageBtn" onClick={showNextImage}>Next</button>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
