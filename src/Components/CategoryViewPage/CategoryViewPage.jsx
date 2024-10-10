@@ -32,7 +32,7 @@ function CategoryViewPage() {
     ];
 
     const categories = {
-        'Real Estate': ['House', 'Land', 'Apartment'],
+        'Real Estate': ['Houses', 'Land', 'Apartment'],
         'Electronics': ['Phone', 'Laptop', 'Tablet'],
         'Tools & Equipment': ['Hammer', 'Drill', 'Saw'],
         'Fashion & Accessories': ['Clothes', 'Shoes', 'Accessories'],

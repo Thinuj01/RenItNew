@@ -1,8 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CardTableComponent.css';
 import arrowMore from '/AdminPanelHomeImages/arrow-next-small-svgrepo-com.svg';
 
-function CardTableComponent({ data, headers }) {
+function CardTableComponent({ data, headers, page }) {
+    console.log(data);
+    let popup = '';
+    if(page === '/AdminPanelUserApprovalPage'){
+        popup = '/AdminPanelUserApprovalPage?district=';
+    } else if (page === '/AdminPanelItemApprovalPage'){
+        popup = '/AdminPanelItemApprovalPage?district=';
+    } else {
+        popup = '';
+    }
     return (
         <div className="tableContainer">
             <table className="districtTable">
@@ -20,7 +30,7 @@ function CardTableComponent({ data, headers }) {
                             <td>{item.requests}</td>
                             <td>
                                 <div className="tableMoreView">
-                                    <img src={arrowMore} alt="" className='tableMoreViewIcon' />
+                                <Link to={popup? popup+item.district: page}><img src={arrowMore} alt="" className='tableMoreViewIcon' /></Link>
                                 </div>
                             </td>
                         </tr>

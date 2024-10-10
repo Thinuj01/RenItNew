@@ -6,13 +6,11 @@ import ItemCasePopupWindow from "../ItemCasePopupWindow/ItemCasePopupWindow";
 
 function ItemCaseTableComponent({ data, columnHeaders }) {
   const [filters, setFilters] = useState({
-    column2: "",
-    column3: "",
+    caseCategory: "",
   });
 
   const [dropdownVisible, setDropdownVisible] = useState({
-    column2: false,
-    column3: false,
+    caseCategory: false,
   });
 
   const [selectedRowData, setSelectedRowData] = useState(null); // To hold the selected row data
@@ -22,7 +20,7 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".filter-icon-wrapper")) {
-        setDropdownVisible({ column2: false, column3: false });
+        setDropdownVisible({ caseCategory: false });
       }
     };
 
@@ -34,8 +32,7 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
 
   const filteredData = data.filter(
     (row) =>
-      (filters.column2 === "" || row.column2 === filters.column2) &&
-      (filters.column3 === "" || row.column3 === filters.column3)
+      (filters.caseCategory === "" || row.caseCategory === filters.caseCategory)
   );
 
   const handleFilterChange = (column, value) => {
@@ -80,21 +77,21 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
           <tr>
             <th className="table-header-center">{columnHeaders.column1}</th>
             <th className="table-header-filter">
-              {columnHeaders.column2}
+              {columnHeaders.caseCategory}
               <div
                 className="filter-icon-wrapper"
-                onClick={() => toggleDropdown("column2")}
+                onClick={() => toggleDropdown("caseCategory")}
               >
                 <FaFilter className="filter-icon" title="Filter" />
-                {dropdownVisible.column2 && (
+                {dropdownVisible.caseCategory && (
                   <div className="filter-dropdown-list">
-                    <div onClick={() => handleFilterChange("column2", "")}>
+                    <div onClick={() => handleFilterChange("caseCategory", "")}>
                       All
                     </div>
-                    {uniqueColumnValues("column2").map((val, index) => (
+                    {uniqueColumnValues("caseCategory").map((val, index) => (
                       <div
                         key={index}
-                        onClick={() => handleFilterChange("column2", val)}
+                        onClick={() => handleFilterChange("caseCategory", val)}
                       >
                         {val}
                       </div>
@@ -103,39 +100,16 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
                 )}
               </div>
             </th>
-            <th className="table-header-filter">
-              {columnHeaders.column3}
-              <div
-                className="filter-icon-wrapper"
-                onClick={() => toggleDropdown("column3")}
-              >
-                <FaFilter className="filter-icon" title="Filter" />
-                {dropdownVisible.column3 && (
-                  <div className="filter-dropdown-list">
-                    <div onClick={() => handleFilterChange("column3", "")}>
-                      All
-                    </div>
-                    {uniqueColumnValues("column3").map((val, index) => (
-                      <div
-                        key={index}
-                        onClick={() => handleFilterChange("column3", val)}
-                      >
-                        {val}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </th>
+            <th className="table-header-filter">{columnHeaders.column3}</th>
             <th className="table-header-center">{columnHeaders.column4}</th>
           </tr>
         </thead>
         <tbody>
           {filteredData.map((row, index) => (
             <tr key={index}>
-              <td>{row.column1}</td>
-              <td>{row.column2}</td>
-              <td>{row.column3}</td>
+              <td>{row.item_id}</td>
+              <td>{row.caseCategory}</td>
+              <td>{row.openerFname+' '+row.openerLname}</td>
               <td>
                 <div className="tableMoreView" onClick={() => openPopup(row)}>
                   <img src={arrowMore} alt="" className='tableMoreViewIcon' />
