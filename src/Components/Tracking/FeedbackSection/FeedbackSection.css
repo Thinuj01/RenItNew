@@ -50,20 +50,36 @@
 .submit-button-div{
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.case-button{
+    width: 25%;
+    padding: 10px;
+    border: 2px solid var(--SecondaryColor);
+    background-color: transparent;
+    color: var(--SecondaryColor);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.case-button:hover {
+    background-color: var(--PrimaryColor);
+    border: 2px solid var(--PrimaryColor);
+    color: var(--White);
 }
 
 .submit-button {
     width: 25%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: var(--SecondaryColor);
+    border: 2px solid var(--SecondaryColor);
     color: white;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
-
 }
 
 .submit-button:hover {
-    background-color: #45a049;
+    background-color: var(--PrimaryColor);
+    border: 2px solid var(--PrimaryColor);
 }
