@@ -15,8 +15,18 @@ function BuyerTrackingPage() {
     const location = useLocation();
     const { reserve_id } = location.state || {};
 
+    const sellertitleCase = 'Case open to Seller'
+    const sellercategoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const sellerlabel1 = 'Case Description';
+    const sellerlabel2 = 'User Request';
+
+    const itemtitleCase = 'Case open to Item'
+    const itemcategoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const itemlabel1 = 'Case Description';
+    const itemlabel2 = 'User Request';
+
     useEffect(()=>{
-        const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
+        const intervalId = setInterval(() =>{axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
                 params:{
                     status:"1",
                     reserve_id:reserve_id
@@ -57,6 +67,10 @@ function BuyerTrackingPage() {
                         action="/submitItemFeedback.php"
                         completedStep={trackingStep}
                         reserve_id={reserve_id}
+                        titleCase={itemtitleCase}
+                        categoryOptions={itemcategoryOptions}
+                        label1={itemlabel1}
+                        label2={itemlabel2}
                     />
 
                     <FeedbackSection
@@ -64,6 +78,10 @@ function BuyerTrackingPage() {
                         action="/submitSellerFeedback.php"
                         completedStep={trackingStep}
                         reserve_id={reserve_id}
+                        titleCase={sellertitleCase}
+                        categoryOptions={sellercategoryOptions}
+                        label1={sellerlabel1}
+                        label2={sellerlabel2}
                     />
                 </div>
             </div>

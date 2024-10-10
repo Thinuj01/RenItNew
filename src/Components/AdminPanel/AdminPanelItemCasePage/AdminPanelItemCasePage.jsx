@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 import ItemCaseTableComponent from '../ItemCaseTableComponent/ItemCaseTableComponent';
 
 function AdminPanelItemCasePage() {
 
-    const tableData = [
-        { column1: 'Unique 1', column2: 'Category A', column3: 'Status 1' },
-        { column1: 'Unique 2', column2: 'Category B', column3: 'Status 2' },
-        { column1: 'Unique 3', column2: 'Category A', column3: 'Status 2' },
-        { column1: 'Unique 4', column2: 'Category C', column3: 'Status 3' },
-        { column1: 'Unique 5', column2: 'Category B', column3: 'Status 2' },
-    ];
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "2" }
+        })
+            .then((response) => {
+                console.log(response.data);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
     const columnHeaders = {
-        column1: 'ID',
-        column2: 'Category',
-        column3: 'Status',
+        column1: 'Item ID',
+        caseCategory: 'Category',
+        column3: 'Case Opener',
         column4: 'Action'
     };
 
@@ -34,7 +42,7 @@ function AdminPanelItemCasePage() {
                     <div className="adminPanelBodyContainer">
                         <div>
                             <h1>Admin Panel - Item case</h1>
-                            <ItemCaseTableComponent data={tableData} columnHeaders={columnHeaders} />
+                            <ItemCaseTableComponent data={data} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>
