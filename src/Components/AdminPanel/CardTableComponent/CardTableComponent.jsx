@@ -11,7 +11,7 @@ function CardTableComponent({ data, headers, page }) {
     } else if (page === '/AdminPanelItemApprovalPage'){
         popup = '/AdminPanelItemApprovalPage?district=';
     } else {
-        popup = page;
+        popup = '';
     }
     return (
         <div className="tableContainer">
@@ -30,7 +30,7 @@ function CardTableComponent({ data, headers, page }) {
                             <td>{item.requests}</td>
                             <td>
                                 <div className="tableMoreView">
-                                <Link to={popup+item.district}><img src={arrowMore} alt="" className='tableMoreViewIcon' /></Link>
+                                <Link to={popup? popup+item.district: page}><img src={arrowMore} alt="" className='tableMoreViewIcon' /></Link>
                                 </div>
                             </td>
                         </tr>
