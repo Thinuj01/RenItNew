@@ -14,6 +14,18 @@ const PurchasePage = () => {
     const {fetch,selectedDates,cateData,details,userDetails} = location.state || [];
     const [itemUserDetails,setItemUserDetails] = useState([]);
     const [itemAddress, setItemAddress] = useState({});
+    const [orderingID,setOrderingID] = useState("");
+    const generateUniqueId = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let uniqueId = 'R'; // Start with 'R'
+    
+        for (let i = 1; i < 10; i++) { // Generate the next 9 characters
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            uniqueId += characters[randomIndex];
+        }
+    
+        return uniqueId;
+    };
 
     useEffect(()=>{
         console.log("fetch",fetch);
@@ -21,6 +33,8 @@ const PurchasePage = () => {
         console.log("CateData",cateData);
         console.log("details",details);
         console.log("userDetails",userDetails[0]);
+
+        setOrderingID(generateUniqueId());
         
     },[fetch,selectedDates]);
 
@@ -39,6 +53,7 @@ const PurchasePage = () => {
 
       
       useEffect(()=>{
+        console.log(orderingID);
         console.log("Item User Details",itemUserDetails);
         setItemAddress({
             shopName: fetch.title,
@@ -119,6 +134,7 @@ const PurchasePage = () => {
                 console.log("Payment completed. OrderID:" + orderId);
                 axios.get('http://localhost:4433/RentIT/Controllers/paymentStatusController.php?',{
                     params:{
+                        order_id:orderId,
                         item_id:fetch.item_id,
                         title:fetch.title,
                         user_nic:details.NIC,
@@ -178,7 +194,7 @@ const PurchasePage = () => {
     const handlePayment = () => {
         // Fetch hash from backend using axios
         axios.get('http://localhost:4433/RentIT/Controllers/paymentController.php',{params:{
-            order_id:fetch.item_id,
+            order_id:orderingID,
             amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length)
             
         },withCredentials:true})
@@ -190,7 +206,7 @@ const PurchasePage = () => {
                     return_url: 'http://localhost:4433/RentIT/Controllers/paymentReturnController.php', // URL to redirect users when success
                     cancel_url: 'http://yourdomain.com/cancel.php', // URL to redirect users when canceled
                     notify_url: 'http://localhost:4433/RentIT/Controllers/paymentNotifyController.php', // URL to callback the status of the payment
-                    order_id: fetch.item_id,
+                    order_id: orderingID,
                     items: fetch.title,
                     amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length),
                     currency: 'LKR',

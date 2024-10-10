@@ -5,7 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
-function ItemCard({ item , paths}) {
+function ItemCard({ item , paths, navi}) {
   const navigate = useNavigate();
 
   const category = ['Books & Educational Material','Electronics','Event Supplies','Fashion & Accessories','Real Estate','Sports & Outdoors','Tools & Equipment','Vehicles'];
@@ -41,7 +41,7 @@ function ItemCard({ item , paths}) {
       <div className="item-card"> 
 
         <div className="item-image" onClick={()=>{
-        navigate("/ItemPreviewPage",{state:{id:paths.item_id}});
+        navi=="preview"?navigate("/ItemPreviewPage",{state:{id:paths.item_id}}):navi="orderP"?navigate("/orderpage",{state:{item:item}}):{};
       }}>
           <img src={paths?'http://localhost:4433/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
         </div>
@@ -68,12 +68,14 @@ function ItemCard({ item , paths}) {
       
           <p className="item-price">Rs.{paths?paths.rental_price+".00":item.price}</p>
         </div>
-      
-        <div className="wishlist-button">
-          <button onClick={()=>{addToWishlist()}}>
-            <CiHeart /> Add to Wishlist
-          </button>
-        </div>
+      {navi == "preview"?(
+                <div className="wishlist-button">
+                <button onClick={()=>{addToWishlist()}}>
+                  <CiHeart /> Add to Wishlist
+                </button>
+              </div>
+      ):(<></>)}
+
       </div>
     </>
   );
