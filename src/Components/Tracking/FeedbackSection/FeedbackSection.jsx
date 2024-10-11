@@ -3,7 +3,7 @@ import './FeedbackSection.css';
 import axios from 'axios';
 import CaseOpenPopupWindow from '../CaseOpenPopupWindow/CaseOpenPopupWindow';
 
-const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, categoryOptions, label1, label2 }) => { // Add action prop here
+const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, categoryOptions, label1, label2, data }) => { // Add action prop here
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [feedback, setFeedback] = useState('');
@@ -19,7 +19,7 @@ const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, 
 
     const handleSubmit = async () => {
         if (rating > 0 && feedback !== '') {
-            axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+            axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
                 params: {
                     status: "3",
                     title: title,
@@ -86,7 +86,7 @@ const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, 
 
             {/* Submit Button */}
             <div className="submit-button-div">
-                <button className="case-button" onClick={togglePopup}>
+                <button className="case-button" onClick={togglePopup} >
                     Open Case
                 </button>
 
@@ -102,6 +102,7 @@ const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, 
                 categoryOptions={categoryOptions}
                 label1={label1}
                 label2={label2}
+                caseData={data}
             />
         </div>
     );

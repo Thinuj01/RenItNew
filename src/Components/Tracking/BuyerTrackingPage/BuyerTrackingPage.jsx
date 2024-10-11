@@ -12,14 +12,24 @@ function BuyerTrackingPage() {
     const [onGoing,setOnGoing] = useState(0);
     const [endDate,setEndDate] = useState();
     const [startDate,setStartDate] = useState();
+    const [caseData,setCaseData] = useState([]);
 
     const sellertitleCase = 'Case open to Seller'
-    const sellercategoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const sellercategoryOptions = ['Non-Delivery of Goods',
+                                'Shipping Issues', 
+                                'Breach of Platform Policies', 
+                                'Unjustified Price Changes', 
+                                'Other'];
+                                
     const sellerlabel1 = 'Case Description';
     const sellerlabel2 = 'User Request';
 
     const itemtitleCase = 'Case open to Item'
-    const itemcategoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const itemcategoryOptions = ['Item Not as Described', 
+                                'Counterfeit or Fake Products', 
+                                'Damaged or Defective Goods', 
+                                'Other'];
+                                
     const itemlabel1 = 'Case Description';
     const itemlabel2 = 'User Request';
 
@@ -35,6 +45,7 @@ function BuyerTrackingPage() {
             setTrackingStep(response.data.buyer_tracking_step);
             setOnGoing(response.data.onGoing);
             setEndDate(new Date(response.data.return_date).toISOString());
+            setCaseData(response.data);
         })
         .catch(err=>{
             console.error(err);
@@ -69,6 +80,7 @@ function BuyerTrackingPage() {
                         categoryOptions={itemcategoryOptions}
                         label1={itemlabel1}
                         label2={itemlabel2}
+                        data={caseData}
                     />
 
                     <FeedbackSection
@@ -80,6 +92,7 @@ function BuyerTrackingPage() {
                         categoryOptions={sellercategoryOptions}
                         label1={sellerlabel1}
                         label2={sellerlabel2}
+                        data={caseData}
                     />
                 </div>
             </div>

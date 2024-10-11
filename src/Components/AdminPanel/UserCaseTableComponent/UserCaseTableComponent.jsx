@@ -16,6 +16,28 @@ function UserCaseTableComponent({ data, columnHeaders }) {
   const [selectedRowData, setSelectedRowData] = useState(null); // To hold the selected row data
   const [isPopupVisible, setIsPopupVisible] = useState(false); // To manage popup visibility
 
+  const getCaseCategory = (caseId) => {
+    const prefix = caseId.substring(0, 3); // Get the first 3 letters of the caseId
+    switch (prefix) {
+      case "Non":
+        return "Non-Delivery of Goods";
+      case "Shi":
+        return "Shipping Issues";
+      case "Bre":
+        return "Breach of Platform Policies";
+      case "Unj":
+        return "Unjustified Price Changes";
+      case "Una":
+        return "Unauthorized Payments";
+      case "Pay":
+        return "Payment Delay";
+      case "Fra":
+        return "Fraudulent Returns";
+      default:
+        return "Other";
+    }
+  };
+
   // Handle closing the dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,7 +54,7 @@ function UserCaseTableComponent({ data, columnHeaders }) {
 
   const filteredData = data.filter(
     (row) =>
-      (filters.caseCategory === "" || row.caseCategory === filters.caseCategory)
+      (filters.caseCategory === "" || getCaseCategory(row.case_id) === filters.caseCategory)
   );
 
   const handleFilterChange = (column, value) => {
@@ -40,8 +62,8 @@ function UserCaseTableComponent({ data, columnHeaders }) {
     setDropdownVisible((prev) => ({ ...prev, [column]: false })); // Close dropdown after selection
   };
 
-  const uniqueColumnValues = (column) => {
-    return [...new Set(data.map((item) => item[column]))];
+  const uniqueCaseCategories = () => {
+    return [...new Set(data.map((item) => getCaseCategory(item.case_id)))];
   };
 
   const toggleDropdown = (column) => {
@@ -76,7 +98,7 @@ function UserCaseTableComponent({ data, columnHeaders }) {
                     <div onClick={() => handleFilterChange("caseCategory", "")}>
                       All
                     </div>
-                    {uniqueColumnValues("caseCategory").map((val, index) => (
+                    {uniqueCaseCategories().map((val, index) => (
                       <div
                         key={index}
                         onClick={() => handleFilterChange("caseCategory", val)}
@@ -96,7 +118,7 @@ function UserCaseTableComponent({ data, columnHeaders }) {
           {filteredData.map((row, index) => (
             <tr key={index}>
               <td>{row.affecterFname +' '+ row.affecterLname}</td>
-              <td>{row.caseCategory}</td>
+              <td>{getCaseCategory(row.case_id)}</td>
               <td>{row.openerFname +' '+ row.openerLname}</td>
               <td>
                 <div className="tableMoreView" onClick={() => openPopup(row)}>
