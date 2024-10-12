@@ -4,15 +4,17 @@ import HeaderContent from '../../HeaderContent/HeaderContent'
 import FeedbackSection from '../FeedbackSection/FeedbackSection'
 import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import SellerTrackingProcess from '../SellerTrackingProcess/SellerTrackingProcess'
+import { useLocation } from 'react-router-dom';
 import axios from 'axios'
 
 function SellerTrackingPage() {
-    const reserve_id = 'R66f45b8e970';
     const [trackingStep,setTrackingStep] = useState(0);
     const [onGoing,setOGoing] = useState(0);
     const [endDate,setEndDate] = useState();
     const [startDate,setStartDate] = useState();
     const [caseData,setCaseData] = useState([]);
+    const location = useLocation();
+    const { reserve_id } = location.state || {};
 
     const titleCase = 'Case open to Buyer'
     const categoryOptions = ['Unauthorized Payments', 
@@ -25,7 +27,8 @@ function SellerTrackingPage() {
     const label2 = 'User Request';
 
     useEffect(()=>{
-        const intervalId = setInterval(() =>{axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
+        console.log(reserve_id);    
+        const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
                 params:{
                     status:"1",
                     reserve_id:reserve_id

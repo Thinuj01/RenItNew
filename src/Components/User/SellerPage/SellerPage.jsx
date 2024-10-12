@@ -95,12 +95,12 @@ function SellerPage() {
                             >
                                 Sales History
                             </button>
-                            <button
+                            {/* <button
                                 className={`tabButton ${activeTab === 2 ? 'activeTab' : ''}`}
                                 onClick={() => handleTabClick(2)}
                             >
                                 Pending Orders
-                            </button>
+                            </button> */}
                         </div>
                         <div className="verticalDivider"></div>
                         <div className="tabContent">

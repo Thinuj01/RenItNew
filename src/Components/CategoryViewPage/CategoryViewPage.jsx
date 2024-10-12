@@ -382,7 +382,7 @@ function CategoryViewPage() {
                                 })
                                 // Map the sorted items to the UI
                                 .map((image, index) => (
-                                    <ItemCard key={index} item={item} paths={image} />
+                                    <ItemCard key={index} item={item} paths={image} navi="preview"/>
                                 ))
                             ) : (
                                 <div>No items found</div>

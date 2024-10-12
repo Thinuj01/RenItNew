@@ -6,6 +6,7 @@ import BuyerRate from '../BuyerRate/BuyerRate';
 import SellerPage from '../SellerPage/SellerPage';
 import GroupedItems from '../../GroupedItems/GroupedItems';
 import axios from "axios";
+import BuyerPendingOrders from '../BuyerPendingOrders/BuyerPendingOrders';
 
 function BuyerPage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -24,7 +25,10 @@ function BuyerPage() {
         axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
         })
-            .then(response => setSessionData(response.data))
+            .then(response => {
+                setSessionData(response.data);
+                console.log(response.data);
+            })
             .catch(err => setError('Error fetching session data'))
             .finally(() => setLoading(false));
     }, []);
@@ -76,6 +80,12 @@ function BuyerPage() {
                             >
                                 Rented Items
                             </button>
+                            <button
+                                className={`tabButton ${activeTab === 2 ? 'activeTab' : ''}`}
+                                onClick={() => handleTabClick(2)}
+                            >
+                                Pending Orders
+                            </button>
                         </div>
                         <div className="verticalDivider"></div>
                         <div className="tabContent">
@@ -103,6 +113,11 @@ function BuyerPage() {
                                             ) : (
                                                 <div>No Rented Items Found</div>
                                             )}
+                                        </div>
+                                    )}
+                                    {activeTab === 2 && (
+                                        <div>
+                                            <BuyerPendingOrders buyer_nic={sessiondata.NIC}/>
                                         </div>
                                     )}
                                 </>

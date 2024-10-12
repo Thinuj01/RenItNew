@@ -1,12 +1,12 @@
-.buyerorder-table {
+.buyerpendingorder-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 
   }
   
-  .buyerorder-table th,
-  .buyerorder-table td {
+  .buyerpendingorder-table th,
+  .buyerpendingorder-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -14,7 +14,7 @@
   }
   
   
-  .buyertable-product-image {
+  .buyerpendingorder-product-image {
     width: 100px;
     height: 100px;
     background-color: var(--PlaceholderColor);
@@ -22,7 +22,10 @@
     margin: 5px auto;
     display: block;
   }
-  
+  .buyerpendingorder-pro-image{
+    width: 100px;
+    height: 100px;
+  }
   .status-column {
     align-items: center;
     justify-content: center;

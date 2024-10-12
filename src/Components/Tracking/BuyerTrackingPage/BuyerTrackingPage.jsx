@@ -5,14 +5,17 @@ import BuyerTrackingProcess from './../BuyerTrackingProcess/BuyerTrackingProcess
 import FeedbackSection from '../FeedbackSection/FeedbackSection'
 import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom';
 
 function BuyerTrackingPage() {
-    const reserve_id = 'R66f45b8e970';
     const [trackingStep,setTrackingStep] = useState(0);
     const [onGoing,setOnGoing] = useState(0);
     const [endDate,setEndDate] = useState();
     const [startDate,setStartDate] = useState();
     const [caseData,setCaseData] = useState([]);
+    const location = useLocation();
+    const { reserve_id } = location.state || {};
+
 
     const sellertitleCase = 'Case open to Seller'
     const sellercategoryOptions = ['Non-Delivery of Goods',
