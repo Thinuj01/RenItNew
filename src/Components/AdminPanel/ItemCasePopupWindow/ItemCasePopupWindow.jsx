@@ -9,6 +9,20 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
         setSelectedCaseAction(e.target.value);
     };
 
+    const getCaseCategory = (caseId) => {
+        const prefix = caseId.substring(0, 3); // Get the first 3 letters of the caseId
+        switch (prefix) {
+          case "Ite":
+            return "Item Not as Described";
+          case "Cou":
+            return "Counterfeit or Fake Products";
+          case "Dam":
+            return "Damaged or Defective Goods";
+          default:
+            return "Other"; // Default case if no match
+        }
+      };
+
     const images = [
         selectedRowData.case_picture_01? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
         selectedRowData.case_picture_02? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
@@ -16,6 +30,9 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
         selectedRowData.case_picture_04? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
         selectedRowData.case_picture_05? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_05.slice(3):''
     ];
+
+
+    console.log(selectedRowData);
 
     const [details, setDetails] = useState([]);
 
@@ -29,6 +46,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
             setDetails(data);
           });
       }, []);
+
 
       const handleAction = () => {
         axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
@@ -75,7 +93,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
 
                         <div className="formField">
                             <label>Case Category</label>
-                            <input type="text" readOnly value="" />
+                            <input type="text" readOnly value={getCaseCategory(selectedRowData.case_id)} />
                         </div>
 
                         <div className="formField">

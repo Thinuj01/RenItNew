@@ -3,12 +3,42 @@ import axios from 'axios';
 import './userCasePopupWindow.css'; // Link the CSS file
 
 const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
-    // const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
     const [selectedCaseAction, setSelectedCaseAction] = useState('');
+
+    const getCaseCategory = (caseId) => {
+        const prefix = caseId.substring(0, 3); // Get the first 3 letters of the caseId
+        switch (prefix) {
+          case "Non":
+            return "Non-Delivery of Goods";
+          case "Shi":
+            return "Shipping Issues";
+          case "Bre":
+            return "Breach of Platform Policies";
+          case "Unj":
+            return "Unjustified Price Changes";
+          case "Una":
+            return "Unauthorized Payments";
+          case "Pay":
+            return "Payment Delay";
+          case "Fra":
+            return "Fraudulent Returns";
+          default:
+            return "Other";
+        }
+      };
 
     const handleCaseActionChange = (e) => {
         setSelectedCaseAction(e.target.value);
     };
+
+    const images = [
+        selectedRowData.case_picture_01? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
+        selectedRowData.case_picture_02? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
+        selectedRowData.case_picture_03? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_03.slice(3):'',
+        selectedRowData.case_picture_04? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
+        selectedRowData.case_picture_05? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_05.slice(3):''
+    ];
 
     const handleAction = () => {
         axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
@@ -34,21 +64,21 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
     //     '',
     // ];
 
-    // const openImagePreview = (index) => {
-    //     setSelectedImageIndex(index);
-    // };
+    const openImagePreview = (index) => {
+        setSelectedImageIndex(index);
+    };
 
-    // const closeImagePreview = () => {
-    //     setSelectedImageIndex(null);
-    // };
+    const closeImagePreview = () => {
+        setSelectedImageIndex(null);
+    };
 
-    // const showNextImage = () => {
-    //     setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    // };
+    const showNextImage = () => {
+        setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    };
 
-    // const showPreviousImage = () => {
-    //     setSelectedImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    // };
+    const showPreviousImage = () => {
+        setSelectedImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
 
     return (
         <div className="popupOverlay">
@@ -60,7 +90,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
 
                         <div className="formField">
                             <label>Case Category</label>
-                            <input type="text" readOnly value="" />
+                            <input type="text" readOnly value={getCaseCategory(selectedRowData.case_id)} />
                         </div>
 
                         <div className="formField">
@@ -73,7 +103,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                             <textarea name="" id="" readOnly value={selectedRowData.request_discription}></textarea>
                         </div>
 
-                        {/* <div className="relatedImages">
+                        <div className="relatedImages">
                             <h4>Images Related to Case</h4>
                             <div className="imageGrid">
                                 {images.map((image, index) => (
@@ -82,7 +112,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                                     </div>
                                 ))}
                             </div>
-                        </div> */}
+                        </div>
 
                         {/* Case Status Options */}
                         <div className="caseStatusOptions">
@@ -191,7 +221,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
             </div>
 
             {/* Image Preview Modal */}
-            {/* {selectedImageIndex !== null && (
+            {selectedImageIndex !== null && (
                 <div className="imagePreviewModal">
                     <button className="closePreviewBtn" onClick={closeImagePreview}>Close</button>
                     <div className="imagePreviewContent">
@@ -200,7 +230,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <button className="nextImageBtn" onClick={showNextImage}>Next</button>
                     </div>
                 </div>
-            )} */}
+            )}
         </div>
     );
 };

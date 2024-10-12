@@ -12,11 +12,17 @@ function SellerTrackingPage() {
     const [onGoing,setOGoing] = useState(0);
     const [endDate,setEndDate] = useState();
     const [startDate,setStartDate] = useState();
+    const [caseData,setCaseData] = useState([]);
     const location = useLocation();
     const { reserve_id } = location.state || {};
 
     const titleCase = 'Case open to Buyer'
-    const categoryOptions = ['Issue with Buyer', 'Payment Delay', 'Other'];
+    const categoryOptions = ['Unauthorized Payments', 
+                            'Payment Delay', 
+                            'Fraudulent Returns', 
+                            'Breach of Platform Policies', 
+                            'Other'];
+        
     const label1 = 'Case Description';
     const label2 = 'User Request';
 
@@ -29,10 +35,11 @@ function SellerTrackingPage() {
                 }
         })
         .then(response=>{
-            console.log("track",response.data);
+            //console.log("track",response.data);
             setTrackingStep(response.data.seller_tracking_step);
             setOGoing(response.data.onGoing);
             setEndDate(new Date(response.data.return_date).toISOString());
+            setCaseData(response.data);
         })
         .catch(err=>{
             console.error(err);
@@ -66,6 +73,7 @@ function SellerTrackingPage() {
                         categoryOptions={categoryOptions}
                         label1={label1}
                         label2={label2}
+                        data={caseData}
                     />
                 </div>
             </div>

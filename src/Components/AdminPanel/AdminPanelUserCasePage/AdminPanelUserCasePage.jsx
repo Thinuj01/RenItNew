@@ -5,14 +5,6 @@ import UserCaseTableComponent from '../UserCaseTableComponent/UserCaseTableCompo
 
 function AdminPanelUserCasePage() {
 
-    const tableData = [
-        { column1: 'Unique 1', column2: 'Category A', column3: 'Status 1' },
-        { column1: 'Unique 2', column2: 'Category B', column3: 'Status 2' },
-        { column1: 'Unique 3', column2: 'Category A', column3: 'Status 2' },
-        { column1: 'Unique 4', column2: 'Category C', column3: 'Status 3' },
-        { column1: 'Unique 5', column2: 'Category B', column3: 'Status 2' },
-    ];
-
     const [data, setData] = useState([]);
 
     useEffect(() => {
