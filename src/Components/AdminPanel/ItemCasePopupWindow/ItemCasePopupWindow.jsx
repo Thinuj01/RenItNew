@@ -24,17 +24,32 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
       };
 
     const images = [
-        selectedRowData.case_picture_01? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
-        selectedRowData.case_picture_02? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
-        selectedRowData.case_picture_03? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_03.slice(3):'',
-        selectedRowData.case_picture_04? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
-        selectedRowData.case_picture_05? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_05.slice(3):''
+        selectedRowData.case_picture_01? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
+        selectedRowData.case_picture_02? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
+        selectedRowData.case_picture_03? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_03.slice(3):'',
+        selectedRowData.case_picture_04? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
+        selectedRowData.case_picture_05? 'http://localhost:4433/RentIT/' + selectedRowData.case_picture_05.slice(3):''
     ];
+
 
     console.log(selectedRowData);
 
+    const [details, setDetails] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
+
+
       const handleAction = () => {
-        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
             params: { status: "4", itemid: selectedRowData.item_id, caseAction: selectedCaseAction, caseid: selectedRowData.item_case_id }
         })
             .then((response) => {
@@ -169,7 +184,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Opener</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={selectedRowData.openerPP?'http://localhost:80/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
+                                <img src={selectedRowData.openerPP?'http://localhost:4433/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
@@ -186,7 +201,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={selectedRowData.affecterPP?'http://localhost:80/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
+                                <img src={selectedRowData.affecterPP?'http://localhost:4433/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.affecterFname +' '+ selectedRowData.affecterLname}</h2>
@@ -202,7 +217,7 @@ const ItemCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Item</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={'http://localhost:80/RentIT/'+selectedRowData.item_Picture_01.slice(3)} alt="" />
+                                <img src={'http://localhost:4433/RentIT/'+selectedRowData.item_Picture_01.slice(3)} alt="" />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.title}</h2>

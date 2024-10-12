@@ -8,7 +8,7 @@ function AdminPanelUserCasePage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
             params: { status: "1" }
         })
             .then((response) => {
