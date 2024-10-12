@@ -29,32 +29,28 @@ const OrderTable = ({ item }) => {
     return new Date(a.pickup_date) - new Date(b.pickup_date);
   });
 
-//   const handleRefund = () => {
-//     axios.post('http://localhost:4433/RentIT/Controllers/refundPaymentController.php', {
-//         order_id: "eve66f94b7b9",
-//         refund_amount: 6000.00,
-//     })
-//     .then(response => {
-//         console.log('Refund successful:', response.data);
-//         alert('Refund processed successfully!');
-//     })
-//     .catch(error => {
-//         console.error('Error processing refund:', error);
-//         alert('Refund failed. Please try again.');
-//     });
-// };
-
 const handleRefund = async (order_id) => {
   try {
-      // Step 1: Send refund request to your PHP backend
       const refundResponse = await axios.post('http://localhost:4433/RentIT/Controllers/refundPaymentController.php', {
-          order_id: order_id,  // Replace with actual order ID or payment ID 
+          order_id: order_id, 
           description: "Item is out of stock"
       });
 
       console.log('Refund response from backend:', refundResponse.data);
-      if (refundResponse.data.status === 'success') {
+      if (refundResponse.data.status == 1) {
           alert('Refund processed successfully!');
+          axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php',{
+            params:{
+              status:"4",
+              reserve_id:order_id
+            }
+          })
+          .then(response=>{
+            console.log(response.data);
+          })
+          .catch(err=>{
+            console.error(err);
+          })
       } else {
           alert('Refund failed: ' + refundResponse.data.message);
       }
@@ -96,7 +92,7 @@ const handleRefund = async (order_id) => {
                 Track
               </button>
             </td>
-            <td><button className={`cancel-btn ${order.cancel}`} onClick={()=>{handleRefund(order.reserve_id)}}>Cancel</button></td>
+            <td><button className={`cancel-btn ${order.cancel}`} onClick={()=>{handleRefund(order.reserve_id)}} disabled={order.onGoing == 1}>Cancel</button></td>
           </tr>
         ))}
       </tbody>

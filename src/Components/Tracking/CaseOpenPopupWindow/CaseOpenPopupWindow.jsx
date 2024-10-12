@@ -14,13 +14,6 @@ const CaseOpenPopupWindow = ({ isOpen, onClose, title, categoryOptions, label1, 
         const files = Array.from(e.target.files);
         setImages((prevImages) => {
             const newImages = [...prevImages, ...files].slice(0, 5); // Limiting to 5 images
-            if (newImages.length > 0 && item.imageUrl === 'https://via.placeholder.com/250') {
-                // Update the item imageUrl with the first image's URL
-                setItem({
-                    ...item,
-                    imageUrl: URL.createObjectURL(newImages[0]),
-                });
-            }
             return newImages;
         });
     };

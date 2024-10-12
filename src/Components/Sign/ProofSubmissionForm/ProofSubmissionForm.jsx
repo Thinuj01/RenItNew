@@ -31,7 +31,7 @@ function ProofSubmissionForm() {
 
 
     try {
-      const response = await axios.post('http://localhost:80/RentIT/Controllers/userRegistrationController.php', formData, {
+      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
