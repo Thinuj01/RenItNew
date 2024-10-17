@@ -1,20 +1,18 @@
 .product-info {
+    width: 100%;
     display: flex;
-    align-items: center;
-    gap: 15px;
-    /* background-color: #ddd; */
-    padding: 15px;
-    margin: 5px;
-    font-size: var(--FontSizeNormal);
-    border-radius: var(--BorderRadiusNormal);    
-    border: 1px solid var(--PlaceholderColor);
-
+    gap: 20px;
+    background-color: var(--InputBackgroundColor);
+    padding: 20px;
+    border-radius: var(--BorderRadiusLarge);
+    border: 1px solid var(--BorderColor);
+    position: relative;
 
   }
   
   .image-box {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background-color: var(--PlaceholderColor);
     border-radius: var(--BorderRadiusNormal);
     margin: 1px;
@@ -28,7 +26,8 @@
   }
   
   .info-text p {
-    margin: 5px 0;
+    margin: 20px 0;
     color: var(--TextColor);
+    font-size: 22px;
   }
   

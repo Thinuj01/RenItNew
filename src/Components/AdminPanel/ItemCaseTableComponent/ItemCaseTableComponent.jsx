@@ -16,6 +16,20 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
   const [selectedRowData, setSelectedRowData] = useState(null); // To hold the selected row data
   const [isPopupVisible, setIsPopupVisible] = useState(false); // To manage popup visibility
 
+  const getCaseCategory = (caseId) => {
+    const prefix = caseId.substring(0, 3); // Get the first 3 letters of the caseId
+    switch (prefix) {
+      case "Ite":
+        return "Item Not as Described";
+      case "Cou":
+        return "Counterfeit or Fake Products";
+      case "Dam":
+        return "Damaged or Defective Goods";
+      default:
+        return "Other"; // Default case if no match
+    }
+  };
+  
   // Handle closing the dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,7 +46,7 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
 
   const filteredData = data.filter(
     (row) =>
-      (filters.caseCategory === "" || row.caseCategory === filters.caseCategory)
+      (filters.caseCategory === "" || getCaseCategory(row.case_id) === filters.caseCategory)
   );
 
   const handleFilterChange = (column, value) => {
@@ -40,8 +54,8 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
     setDropdownVisible((prev) => ({ ...prev, [column]: false })); // Close dropdown after selection
   };
 
-  const uniqueColumnValues = (column) => {
-    return [...new Set(data.map((item) => item[column]))];
+  const uniqueCaseCategories = () => {
+    return [...new Set(data.map((item) => getCaseCategory(item.case_id)))];
   };
 
   const toggleDropdown = (column) => {
@@ -60,13 +74,13 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
 
   const handleSubmit = () => {
     // Handle submission logic here
-    alert("User approved!");
+    alert("Item approved!");
     closePopup(); // Close the popup after submission
   };
 
   const handleReject = () => {
     // Handle rejection logic here
-    alert("User rejected!");
+    alert("Item rejected!");
     closePopup(); // Close the popup after rejection
   };
 
@@ -88,7 +102,7 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
                     <div onClick={() => handleFilterChange("caseCategory", "")}>
                       All
                     </div>
-                    {uniqueColumnValues("caseCategory").map((val, index) => (
+                    {uniqueCaseCategories().map((val, index) => (
                       <div
                         key={index}
                         onClick={() => handleFilterChange("caseCategory", val)}
@@ -108,7 +122,7 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
           {filteredData.map((row, index) => (
             <tr key={index}>
               <td>{row.item_id}</td>
-              <td>{row.caseCategory}</td>
+              <td>{getCaseCategory(row.case_id)}</td>
               <td>{row.openerFname+' '+row.openerLname}</td>
               <td>
                 <div className="tableMoreView" onClick={() => openPopup(row)}>

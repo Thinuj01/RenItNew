@@ -16,7 +16,7 @@ function AdminPanelUserApprovalPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {

@@ -16,7 +16,7 @@ function AdminPanelHomePage() {
     const headers = ['District', 'Requests', 'View more'];
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {
@@ -29,7 +29,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {
@@ -42,7 +42,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
             params: { status: "1" }
         })
             .then((response) => {
@@ -55,7 +55,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
             params: { status: "2" }
         })
             .then((response) => {

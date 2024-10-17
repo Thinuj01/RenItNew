@@ -1,10 +1,19 @@
 .orderfeedbackbox{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    /* background-color: #ddd; */
     margin: 5px;
     border-radius: var(--BorderRadiusNormal);
-    border: 1px solid var(--PlaceholderColor);
+    border: 1px solid var(--PlaceholderColor); */
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--InputBackgroundColor);
+    padding: 20px;
+    border-radius: var(--BorderRadiusLarge);
+    border: 1px solid var(--BorderColor);
+    position: relative;
 
   }
   

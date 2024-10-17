@@ -187,7 +187,7 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory, status: "1" },
                     withCredentials:true
                 });
@@ -382,7 +382,7 @@ function CategoryViewPage() {
                                 })
                                 // Map the sorted items to the UI
                                 .map((image, index) => (
-                                    <ItemCard key={index} item={item} paths={image} />
+                                    <ItemCard key={index} item={item} paths={image} navi="preview"/>
                                 ))
                             ) : (
                                 <div>No items found</div>
