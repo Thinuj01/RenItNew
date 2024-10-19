@@ -4,8 +4,8 @@ import './AdminPanelHomePage.css';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 import userSolidSVG from '/AdminPanelHomeImages/user-solid.svg';
 import itemSolidSVG from '/AdminPanelHomeImages/item.svg';
-import AdminHomePageCardContainer from '../AdminHomePageCardContainer/AdminHomePageCardContainer'; // Import the new component
-
+import AdminHomePageCardContainer from '../AdminHomePageCardContainer/AdminHomePageCardContainer';
+import { useNavigate} from 'react-router-dom'
 
 function AdminPanelHomePage() {
     const [itemApp, setItemApp] = useState([]);
@@ -14,9 +14,27 @@ function AdminPanelHomePage() {
     const [userCase, setUserCase] = useState([]);
 
     const headers = ['District', 'Requests', 'View more'];
+    const [details, setDetails] = useState([]);
+
+    const navigate = useNavigate();
+
+    const isAdmin = details && details['is_Admin'];
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
+
+    isAdmin ? null : navigate('/');
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {
@@ -29,7 +47,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {
@@ -42,7 +60,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
             params: { status: "1" }
         })
             .then((response) => {
@@ -55,7 +73,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
             params: { status: "2" }
         })
             .then((response) => {

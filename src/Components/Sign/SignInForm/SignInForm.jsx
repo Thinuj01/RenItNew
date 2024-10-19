@@ -12,7 +12,7 @@ function SignInForm() {
     e.preventDefault();
     const status = '1';
     console.log(status);
-    axios.post('http://localhost:4433/RentIT/Controllers/userLoginController.php', {
+    axios.post('http://localhost:80/RentIT/Controllers/userLoginController.php', {
       userName: userName,
       userPswd: userPswd,
       status: status,
@@ -22,9 +22,11 @@ function SignInForm() {
       .then(response => {
         console.log(response.data);
         if(response.data == "Account Validated"){
-            alert("Login Successfull");
             navigate('/');
-        }else{
+        }else if(response.data == "Your account is banned."){
+            alert("Your account is banned.");
+        }
+        else{
             alert("Invalid Username or Password");
         }
 

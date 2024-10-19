@@ -4,17 +4,18 @@ import './ItemApprovalPopupWindow.css';
 
 const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
     const imageArray = [
-        selectedRowData.item_Picture_01? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_01.slice(3):'',
-        selectedRowData.item_Picture_02? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_02.slice(3):'',
-        selectedRowData.item_Picture_03? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_03.slice(3):'',
-        selectedRowData.item_Picture_04? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_04.slice(3):'',
-        selectedRowData.item_Picture_05? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_05.slice(3):''
+        selectedRowData.item_Picture_01? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_01.slice(3):'',
+        selectedRowData.item_Picture_02? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_02.slice(3):'',
+        selectedRowData.item_Picture_03? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_03.slice(3):'',
+        selectedRowData.item_Picture_04? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_04.slice(3):'',
+        selectedRowData.item_Picture_05? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_05.slice(3):''
     ]
     const [selectedImage, setSelectedImage] = useState(imageArray[0]);
+    const [submitting, setSubmitting] = useState(false);
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -25,13 +26,12 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
       }, []);
 
     const handleAction = (action) => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: action, id: selectedRowData.item_id, message: document.querySelector('.userMessageBox textarea').value, admin_NIC: details.NIC }
         })
             .then((response) => {
                 console.log('Response:', response.data);
                 if (response.data.success) {
-                    alert(`Item ${action}d successfully!`);  // Dynamic success message
                     onClose();  // Close the popup after successful action
                 } else {
                     alert('Error: ' + response.data.message);
@@ -46,7 +46,7 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { item_id: selectedRowData.item_id, category_id: selectedRowData.category_id , status: "5" }
         })
             .then((response) => {
@@ -56,15 +56,18 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
+            setSubmitting(false);
     }, []);
 
     
 
     const handleSubmit = () => {
+        setSubmitting(true);
         handleAction('approve');
     };
 
     const handleReject = () => {
+        setSubmitting(true);
         handleAction('reject');
     };
 
@@ -639,8 +642,8 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
                     </div>
 
                     <div className="actions">
-                        <button className="btn reject-btn" onClick={handleReject}>Reject</button>
-                        <button className="btn submit-btn" onClick={handleSubmit}>Submit</button>
+                        <button className="btn reject-btn" onClick={handleReject} disabled={submitting}>Reject</button>
+                        <button className="btn submit-btn" onClick={handleSubmit} disabled={submitting}>Submit</button>
                     </div>
 
                     <div className="userMessageBox">

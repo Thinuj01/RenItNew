@@ -9,6 +9,7 @@ function ConditionField({ setFormData,formData }) {
                     <option value="">Select Condition</option>
                     <option value="used">Used</option>
                     <option value="like-new">Like New</option>
+                    <option value="new">New</option>
                 </select>
             </div>
         </>

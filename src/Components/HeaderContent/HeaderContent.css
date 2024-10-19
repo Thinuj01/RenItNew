@@ -24,3 +24,62 @@
     color: white;
     text-decoration: none;    
 }
+
+.nav-username-container {
+    position: relative; /* Ensures the dropdown is positioned relative to the username */
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  /* Username style */
+  .nav-username {
+    padding: 10px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  /* Dropdown menu style */
+  .nav-dropdown {
+    position: absolute;
+    top: 100%; /* Position right below the username */
+    left: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+    min-width: 150px;
+    border-radius: 4px;
+  }
+  
+  /* Dropdown links and buttons */
+  .nav-dropdown a, .nav-dropdown button {
+    display: block;
+    padding: 8px 12px;
+    margin: 4px 0;
+    background-color: #fff;
+    border: none;
+    text-align: left;
+    width: 100%;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .nav-dropdown a:hover, .nav-dropdown button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Admin panel link */
+  .nav-admin-link {
+    font-weight: bold;
+  }
+  
+  /* Logout button */
+  .nav-logout-button {
+    background-color: #f44336;
+    color: white;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+  }
+  

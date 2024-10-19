@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import HeaderContent from '../HeaderContent/HeaderContent';
 import './CategoryViewPage.css';
 import NoneScroller from '../NoneScroller/NoneScroller';
-
-import VerticalScroller from '../VerticalScroller/VerticalScroller';
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import ItemCard from '../ItemCard/ItemCard';
@@ -13,8 +11,6 @@ function CategoryViewPage() {
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
-
-    const navigate = useNavigate();
 
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
@@ -32,14 +28,14 @@ function CategoryViewPage() {
     ];
 
     const categories = {
-        'Real Estate': ['Houses', 'Land', 'Apartment'],
-        'Electronics': ['Phone', 'Laptop', 'Tablet'],
+        'Real Estate': ['Apartment', 'House', 'Land', 'Commercial'],
+        'Electronics': ['Phone', 'Laptop', 'Computer', 'Cameras', 'TVs'],
         'Tools & Equipment': ['Hammer', 'Drill', 'Saw'],
         'Fashion & Accessories': ['Clothes', 'Shoes', 'Accessories'],
         'Sports & Outdoors': ['Bicycle', 'Tennis Racket', 'Backpack'],
         'Event Supplies': ['Chairs', 'Tents', 'Tables'],
-        'Books & Educational Material': ['Book', 'Notebook', 'Stationery'],
-        'Vehicles': ['Car', 'Van', 'Motor Bike', 'Truck', 'Bus'],
+        'Books & Educational Material': ['Textbooks', 'Notebook', 'Novels', 'Educational Toys', 'Stationery'],
+        'Vehicles': ['Car', 'Motor Bike', 'Truck', 'Van', 'Bus'],
     };
 
     const districtCoordinates = {
@@ -88,10 +84,6 @@ function CategoryViewPage() {
     const handleDistrictChange = (e) => {
         setSelectedDistrict(e.target.value);
     };
-
-    const handleItemDistrictChange = (e) => {
-        setItemDistrict(e.target.value);
-    }
 
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
@@ -187,7 +179,7 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory, status: "1" },
                     withCredentials:true
                 });
