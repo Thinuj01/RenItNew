@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.ItemPreview{
+    width: 50%;
+    padding: 20px;
+    margin: 5px;
+}
+
+.productTable{
+    width: 100%;
+    padding: 20px;
+}
