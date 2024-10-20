@@ -20,3 +20,7 @@
     flex-direction: column;
     gap: 40px;
 }
+
+.nav-logout-button:hover{
+    border: 1px solid red;
+}

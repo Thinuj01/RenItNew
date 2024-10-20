@@ -32,10 +32,8 @@ function AdminPanelNavBar() {
                 <AdminPanelMenuLinks adminPanelLinkName="Item Approval Request" adminPanelURL="/AdminPanelItemApprovalPage"/>
                 <AdminPanelMenuLinks adminPanelLinkName="User Case Management" adminPanelURL="/AdminPanelUserCasePage"/>
                 <AdminPanelMenuLinks adminPanelLinkName="Item Case Management" adminPanelURL="/AdminPanelItemCasePage"/>
-                {/* <AdminPanelMenuLinks adminPanelLinkName="Admin Management" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Payment Management" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="User Request" adminPanelURL=""/>
-                <AdminPanelMenuLinks adminPanelLinkName="Logout" adminPanelURL=""/> */}
+                <AdminPanelMenuLinks adminPanelLinkName="Admin Management" adminPanelURL="/AdminManagementPage"/>
+                <AdminPanelMenuLinks adminPanelLinkName="Payment Preview" adminPanelURL="/PaymentPreviewPage"/>
                 <button onClick={() => {logout()}} className="nav-logout-button">Logout</button>
             </div>
         </div>
