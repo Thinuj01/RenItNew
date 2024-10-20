@@ -17,7 +17,7 @@ function App() {
     text: ''
   });
 
-  const categoryBarRef = useRef(null); // Create a ref for the CategoryBar
+  const categoryBarRef = useRef(null); 
 
   const handleSearch = (category, district, text) => {
     setSearchParams({ category, district, text });
@@ -33,6 +33,7 @@ function App() {
 
   const [paths, setPaths] = useState([]);
 
+  
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -50,14 +51,14 @@ function App() {
     fetchData();
   }, []);
 
-
+  
   useEffect(() => {
     const fetchRatings = async () => {
       const updatedPaths = await Promise.all(
         paths.map(async (path) => {
           try {
-            const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
-              params: { itemId: path.item_id, status: "3" },
+            const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+              params: { itemId: path.item_id, status: "4" },
               withCredentials: true
             });
             return { ...path, rating: response.data };
@@ -73,7 +74,8 @@ function App() {
     if (paths.length > 0) {
       fetchRatings();
     }
-  }, [paths]);
+  }, [paths.length]);
+  
   
   const getRandomItems = (items, count) => {
     const shuffledItems = items.sort(() => 0.5 - Math.random());
@@ -81,7 +83,6 @@ function App() {
   };
 
   const randomItems = getRandomItems(paths, 6);
-
 
   return (
     <>
@@ -91,7 +92,7 @@ function App() {
       <SearchBar onSearch={handleSearch} />
 
       <div className="containerHomePage">
-        <HorizontalScroller title="Things may you like..." description="" >
+        <HorizontalScroller title="Things may you like..." description="">
           {Array.isArray(randomItems) && randomItems.length > 0 ? (
             randomItems.map((image, index) => (
               <ItemCard key={index} item={item} paths={image} navi="preview"/>

@@ -206,8 +206,8 @@ function CategoryViewPage() {
           const updatedPaths = await Promise.all(
             paths.map(async (path) => {
               try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
-                  params: { itemId: path.item_id, status: "3" },
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "4" },
                   withCredentials: true
                 });
                 return { ...path, rating: response.data };

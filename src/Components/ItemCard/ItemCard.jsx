@@ -61,7 +61,7 @@ function ItemCard({ item , paths, navi}) {
               <div className="itemCardRatingStars">
                 <span className="itemCardRatingStar green">&#9733;</span>
               </div>
-              <span className="itemCardRatingScore">{paths?paths.rating:0}</span><br />
+              <span className="itemCardRatingScore">{paths?paths.rating?paths.rating.toFixed(1):0:0}</span><br />
             </div>
       
           </div>
