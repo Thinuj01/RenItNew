@@ -22,6 +22,8 @@ import AdminPanelUserApprovalPage from './Components/AdminPanel/AdminPanelUserAp
 import AdminPanelItemApprovalPage from './Components/AdminPanel/AdminPanelItemApprovalPage/AdminPanelItemApprovalPage.jsx'
 import AdminPanelUserCasePage from './Components/AdminPanel/AdminPanelUserCasePage/AdminPanelUserCasePage.jsx'
 import AdminPanelItemCasePage from './Components/AdminPanel/AdminPanelItemCasePage/AdminPanelItemCasePage.jsx'
+import AdminManagementPage from './Components/AdminPanel/AdminManagementPage/AdminManagementPage.jsx';
+import PaymentPreviewPage from './Components/AdminPanel/PaymentPreviewPage/PaymentPreviewPage.jsx';
 import OrderPage from './Components/OrdersBuyer/OrderPage/OrderPage.jsx'
 import Footer from './Components/Footer/Footer.jsx';
 
@@ -49,6 +51,8 @@ const router = createBrowserRouter([
   { path: "/AdminPanelItemApprovalPage", element: <AdminPanelItemApprovalPage />, },
   { path: "/AdminPanelUserCasePage", element: <AdminPanelUserCasePage />, },
   { path: "/AdminPanelItemCasePage", element: <AdminPanelItemCasePage />, },
+  { path: "/AdminManagementPage", element: <AdminManagementPage />, },
+  { path: "/PaymentPreviewPage", element: <PaymentPreviewPage />, },
   { path: "/Orderpage", element: <OrderPage/>},
   { path: "/Footer", element: <Footer/>},
 ]);
