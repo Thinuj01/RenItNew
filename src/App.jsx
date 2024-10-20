@@ -10,6 +10,7 @@ import VerticalScroller from "./Components/VerticalScroller/VerticalScroller";
 import CategoryBar from "./Components/CategoryBar/CategoryBar";
 import './index.css'
 import ItemCard from "./Components/ItemCard/ItemCard";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ function App() {
 
 
       <button onClick={logout}>logout</button>
+      <Footer/>
     </>
   );
 }
