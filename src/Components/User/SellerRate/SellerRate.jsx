@@ -39,7 +39,7 @@ const SellerRate = ({ rating, totalUsers, itemCount, pendingCount }) => {
                         {renderStars()}
                     </div>
                     <div className="ratingSection">
-                        <span className="ratingScore">{rating.toFixed(1)}</span><br />
+                        <span className="ratingScore">{rating}</span><br />
                         <span className="ratingText">{totalUsers} Users were rated</span><br />
                         <a href="#" className="feedbackLink">View more feedback &gt;</a>
                     </div>

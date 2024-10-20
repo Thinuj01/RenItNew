@@ -12,7 +12,7 @@ function AdminPanelItemApprovalPage() {
     const isAdmin = details && details['is_Admin'];
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -35,7 +35,7 @@ function AdminPanelItemApprovalPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {

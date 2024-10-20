@@ -5,6 +5,7 @@ import OrderFeedback from '../OrderFeedback/OrderFeedback'
 import OrderTable from '../OrderTable/OrderTable'
 import HeaderContent from '../../HeaderContent/HeaderContent'
 import { useLocation } from 'react-router-dom';
+import Footer from '../../Footer/Footer'
 
 function OrderPage() {
     const location = useLocation();
@@ -26,6 +27,7 @@ function OrderPage() {
                 <OrderTable item={item} />
             </div>
         </div>
+        <Footer/>
     </>
   )
 }
