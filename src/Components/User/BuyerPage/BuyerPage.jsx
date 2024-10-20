@@ -59,7 +59,7 @@ function BuyerPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
                     params: { buyerNIC: sessiondata.NIC, status: "5" },
                     withCredentials:true
                 });
@@ -78,7 +78,7 @@ function BuyerPage() {
           const updatedPaths = await Promise.all(
             data.map(async (path) => {
               try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
                   params: { itemId: path.item_id, status: "3" },
                   withCredentials: true
                 });
@@ -104,7 +104,7 @@ function BuyerPage() {
           const updatedPaths = await Promise.all(
             rented.map(async (path) => {
               try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
                   params: { itemId: path.item_id, status: "3" },
                   withCredentials: true
                 });
