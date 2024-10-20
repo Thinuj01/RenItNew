@@ -17,10 +17,10 @@ import Footer from '../Footer/Footer'
 function ItemPreviewPage() {
     const location = useLocation();
     const { id } = location.state || {};
-    const [fetch,setFetch]= useState([]);
-    const [cateData,setCateData]= useState([]);
-    const [details,setDetails] = useState([]);
-    const [userDetails,setUserDetails] = useState([]);
+    const [fetch, setFetch] = useState([]);
+    const [cateData, setCateData] = useState([]);
+    const [details, setDetails] = useState([]);
+    const [userDetails, setUserDetails] = useState([]);
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
@@ -57,8 +57,8 @@ function ItemPreviewPage() {
           }).then(response => {
             console.log("Cate Data",response.data);
             setCateData(response.data);
-          })
-      }, [fetch]);
+        })
+    }, [fetch]);
 
     const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
 
@@ -95,7 +95,7 @@ function ItemPreviewPage() {
                                 pics={pics} />
                         </div>
                         <div className="FeedbackShowingBox">
-                            <FeedBackShowingBox fetch={fetch}/>
+                            <FeedBackShowingBox fetch={fetch} />
                         </div>
                         <div className="promotionSimilarItemsDiv">
                             <NoneScroller
@@ -126,9 +126,31 @@ function ItemPreviewPage() {
                             <IitemPreviewPageItemDetails fetch={fetch} />
                         </div>
 
-                        <div className="itemPreviewPageDateSelectCalendarDiv">
-                            <ItemPreviewPageDateSelectCalendar fetch={fetch} cateData={cateData} details={details} userDetails={userDetails}/>
+                        <div className="itemPriceList_itemPreviewPageDateSelectCalendarDiv">
+                            <div className="itemPriceList">
+                                <div className="price-preview">
+                                    <h3>Price Preview:</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Rental Duration (Days)</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div className="itemPreviewPageDateSelectCalendarDiv">
+                                <ItemPreviewPageDateSelectCalendar fetch={fetch} cateData={cateData} details={details} userDetails={userDetails} />
+                            </div>
                         </div>
+
 
                         <div className="moreDetailsOfItem">
                             <div className="shippingMethod">

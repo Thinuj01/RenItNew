@@ -141,7 +141,7 @@ function BuyerPage() {
 
                 <div className="buyerPageContainerBottom">
                     <div className="tabsContainer">
-                        <div className="tabs">
+                        <div className="buyerTabs">
                             <button
                                 className={`tabButton ${activeTab === 0 ? 'activeTab' : ''}`}
                                 onClick={() => handleTabClick(0)}
@@ -191,7 +191,7 @@ function BuyerPage() {
                                     )}
                                     {activeTab === 2 && (
                                         <div>
-                                            <BuyerPendingOrders buyer_nic={sessiondata.NIC}/>
+                                            <BuyerPendingOrders buyer_nic={sessiondata.NIC} />
                                         </div>
                                     )}
                                 </>

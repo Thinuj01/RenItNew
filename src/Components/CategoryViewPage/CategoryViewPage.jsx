@@ -22,7 +22,7 @@ function CategoryViewPage() {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
         category: 'Electronics',
-        subcategories: ['Smartphones', 'Accessories', 'Gadgets'], // Add subcategories here
+        subcategories: ['Smartphones', 'Accessories', 'Gadgets'],
         price: 99.99
       };
     const districts = [
@@ -140,10 +140,6 @@ function CategoryViewPage() {
     };
 
     function haversineDistance(coords1, coords2) {
-        //   if (!coords1 || !coords2 || !coords1.lat || !coords2.lat || !coords1.lng || !coords2.lng) {
-        //         console.error("Location data is incomplete:", coords1, coords2);
-        //         return 0;
-        //     }
         const toRad = (value) => value * Math.PI / 180;
         
         const R = 6371; 

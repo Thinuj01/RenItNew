@@ -8,6 +8,7 @@ import axios from 'axios';
 function HeaderContent({ categoryBarRef }) {
   const [details, setDetails] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [hamburgerMenuVisible, setHamburgerMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -60,7 +61,13 @@ function HeaderContent({ categoryBarRef }) {
     <div id="navContent">
       <Link to='/'><img src={Logo} alt="Rentit Home" /></Link>
 
-      <div id='menuLinks'>
+      {/* Hamburger icon (visible only on smaller screens) */}
+      <div className="hamburger-icon" onClick={() => setHamburgerMenuVisible(!hamburgerMenuVisible)}>
+        &#9776; {/* Unicode character for hamburger menu */}
+      </div>
+
+      {/* Menu links (hidden on smaller screens, toggled by the hamburger icon) */}
+      <div id='menuLinks' className={hamburgerMenuVisible ? 'menu-visible' : ''}>
         <MenuLinks linkName="Home" url="/" />
         <MenuLinks linkName="Category" url="#" onClick={handleCategoryClick} style={{ cursor: 'pointer' }} /> {/* Pass handleCategoryClick to onClick */}
         <MenuLinks linkName="About" url="/about" />

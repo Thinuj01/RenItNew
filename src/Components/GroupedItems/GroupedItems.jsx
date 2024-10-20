@@ -54,8 +54,8 @@ const GroupedItems = ({ items }) => {
 
             {Object.keys(groupedItems).map(group => (
                 <div key={group}>
-                    <h3>{group}</h3>
-                    <NoneScroller className='nonScrollerWrapperFiveColumn'>
+                    
+                    <NoneScroller className='nonScrollerWrapperFourColumn' title={group}>
                     {groupedItems[group].map(item => (
                         
                         <div key={item.id}>

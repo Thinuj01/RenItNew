@@ -28,16 +28,16 @@ function UserForm({ isBuyer, handleToggle }) {
             axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
                 params: { status: "1", nic: sessionData['NIC'] }
             })
-            .then((res) => {
-                setData(res.data);
-                setLoading(false);
-                console.log(res.data);
-            })
-            .catch(err => {
-                setError('Error fetching user details');
-                setLoading(false);
-                console.error(err);
-            });
+                .then((res) => {
+                    setData(res.data);
+                    setLoading(false);
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    setError('Error fetching user details');
+                    setLoading(false);
+                    console.error(err);
+                });
         }
     }, [sessionData]);
 
@@ -63,14 +63,14 @@ function UserForm({ isBuyer, handleToggle }) {
             },
             withCredentials: true
         })
-        .then(response => {
-            console.log('Image uploaded successfully:', response.data);
-            setUploadSuccess(true);
-            setImage(null);
-        })
-        .catch(err => {
-            console.error('Error uploading image:', err);
-        });
+            .then(response => {
+                console.log('Image uploaded successfully:', response.data);
+                setUploadSuccess(true);
+                setImage(null);
+            })
+            .catch(err => {
+                console.error('Error uploading image:', err);
+            });
     };
 
     if (loading) return <div>Loading...</div>;
@@ -106,11 +106,11 @@ function UserForm({ isBuyer, handleToggle }) {
             </div>
 
                 <div className="userProfilePicAddButton">
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleImageChange} 
-                        style={{ display: 'none' }} 
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
                         id="fileInput"
                     />
                     <label htmlFor="fileInput" className="addImageButton">Add Image</label>
