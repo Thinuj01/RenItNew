@@ -1,28 +1,43 @@
 #menuLink {
-    color: #fff;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 0.15em;
-    
-    display: inline-block;
-    padding: 15px 20px;
-    position: relative;
-  }
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+  transition: font-weight 0.3s ease, color 0.3s ease;
+  font-weight: normal; /* Initial weight */
+}
 
-  #menuLink:after {    
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: #fff;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-  }
+/* Underline bar */
+#menuLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #fff; /* The underline color */
+  transition: width 0.3s ease, left 0.3s ease;
+}
 
-  #menuLink:hover:after, #menuLink:focus::after { 
-    width: 100%; 
-    left: 0; 
-  }
+/* Hover or focus state */
+#menuLink:hover::after, 
+#menuLink:focus::after {
+  width: 100%; /* Full underline */
+  left: 0;
+}
+
+/* Active state */
+#menuLink.active::after {
+  width: 100%; /* Keep the underline fixed when the link is active */
+  left: 0;
+}
+
+/* Active state text and underline fixed */
+#menuLink.active {
+  font-weight: bold; /* Bold text for active link */
+  color: #fff; /* Ensure the text stays white when active */
+  position: relative; /* Keep positioning for the underline */
+}
