@@ -5,6 +5,18 @@ import './userCasePopupWindow.css'; // Link the CSS file
 const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
     const [selectedCaseAction, setSelectedCaseAction] = useState('');
+    const [details, setDetails] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
 
     const getCaseCategory = (caseId) => {
         const prefix = caseId.substring(0, 3); // Get the first 3 letters of the caseId
@@ -41,13 +53,12 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
     ];
 
     const handleAction = () => {
-        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
-            params: { status: "3", affecterNIC: selectedRowData.affecterNIC, caseAction: selectedCaseAction, caseid: selectedRowData.user_case_id }
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+            params: { status: "3", affecterNIC: selectedRowData.affecterNIC, caseAction: selectedCaseAction, caseid: selectedRowData.user_case_id, reviewedby: details.NIC }
         })
             .then((response) => {
                 console.log('Response:', response.data);
                 if (response.data.success) {
-                    alert(`Case closed successfully!`);
                     onClose();
                 } else {
                     alert('Error: ' + response.data.message);
@@ -108,7 +119,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                             <div className="imageGrid">
                                 {images.map((image, index) => (
                                     <div key={index} className="thumbnail" onClick={() => openImagePreview(index)}>
-                                        <img src={image} alt={`Related ${index + 1}`} />
+                                        {image?<img src={image} alt={`Related ${index + 1}`} />:null}
                                     </div>
                                 ))}
                             </div>
@@ -145,7 +156,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                                     /> Level Three Case Open
                                     <label htmlFor="userCaseAction">Description</label>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <input 
                                         type="radio" 
                                         name="userCaseAction" 
@@ -153,7 +164,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                                         onChange={handleCaseActionChange} 
                                     /> Remove Account Permanently
                                     <label htmlFor="userCaseAction">Description</label>
-                                </li>
+                                </li> */}
                                 <li>
                                     <input 
                                         type="radio" 
@@ -165,6 +176,15 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                                 </li>
                             </ul>
                         </div>
+                        {/* Message and Action buttons */}
+                    <div className="userMessageBox">
+                        <textarea placeholder="Enter the message for notify User"></textarea>
+                    </div>
+
+                    <div className="actions">
+                        {/* <button className="btn rejectBtn" onClick={onReject}>Reject</button> */}
+                        <button className="btn submitBtn" onClick={handleAction} disabled={selectedCaseAction? false: true}>Submit</button>
+                    </div>
                     </div>
                 </div>
 
@@ -177,7 +197,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Opener</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={selectedRowData.openerPP?'http://localhost:4433/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
+                                <img src={selectedRowData.openerPP?'http://localhost:80/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
@@ -194,7 +214,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                            <img src={selectedRowData.affecterPP?'http://localhost:4433/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
+                            <img src={selectedRowData.affecterPP?'http://localhost:80/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.affecterFname +' '+ selectedRowData.affecterLname}</h2>
@@ -207,16 +227,6 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                     </div>
 
 
-
-                    {/* Message and Action buttons */}
-                    <div className="userMessageBox">
-                        <textarea placeholder="Enter the message for notify User"></textarea>
-                    </div>
-
-                    <div className="actions">
-                        {/* <button className="btn rejectBtn" onClick={onReject}>Reject</button> */}
-                        <button className="btn submitBtn" onClick={handleAction} disabled={selectedCaseAction? false: true}>Submit</button>
-                    </div>
                 </div>
             </div>
 

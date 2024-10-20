@@ -1,14 +1,29 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import './AdminPanelNavBar.css'
 import Logo from '../../../assets/logo.png'
 import AdminPanelMenuLinks from '../AdminPanelMenuLinks/AdminPanelMenuLinks'
 
 function AdminPanelNavBar() {
+  const navigate = useNavigate();
+
+  const setCookie = (name, value, days) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`;
+  };
+
+  function logout() {
+    setCookie("PHPSESSID", 0, -1);
+    navigate("/");
+    location.reload();
+  }
+
   return (
     <>
         <div id="adminPanelNavContent">
             <div className="logo">
-                <img src={Logo} alt="Rentit Home" />
+            <Link to='/'><img src={Logo} alt="Rentit Home" /></Link>
             </div>
 
             <div id="adminPanelMenuLinks">
@@ -21,6 +36,7 @@ function AdminPanelNavBar() {
                 <AdminPanelMenuLinks adminPanelLinkName="Payment Management" adminPanelURL=""/>
                 <AdminPanelMenuLinks adminPanelLinkName="User Request" adminPanelURL=""/>
                 <AdminPanelMenuLinks adminPanelLinkName="Logout" adminPanelURL=""/> */}
+                <button onClick={() => {logout()}} className="nav-logout-button">Logout</button>
             </div>
         </div>
     </>

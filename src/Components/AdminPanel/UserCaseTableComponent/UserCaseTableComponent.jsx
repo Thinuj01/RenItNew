@@ -78,6 +78,7 @@ function UserCaseTableComponent({ data, columnHeaders }) {
   const closePopup = () => {
     setIsPopupVisible(false); // Hide the popup
     setSelectedRowData(null); // Clear the selected row data
+    window.location.reload();
   };
 
   return (

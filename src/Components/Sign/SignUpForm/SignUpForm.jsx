@@ -175,7 +175,7 @@ function SignUpForm({ isRegistered, setIsRegistered }) {
     console.log(newStatus);
     setIsSendingEmail(true);
     try {
-      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { email, newStatus }, { withCredentials: true });
+      const response = await axios.post('http://localhost:80/RentIT/Controllers/userRegistrationController.php', { email, newStatus }, { withCredentials: true });
       console.log('Email sent successfully:', response.data);
       setIsSubmitting(true);
     } catch (error) {
@@ -197,7 +197,7 @@ function SignUpForm({ isRegistered, setIsRegistered }) {
     setstatus(newStatus);
     console.log(newStatus);
     try {
-      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', { otp, newStatus }, { withCredentials: true });
+      const response = await axios.post('http://localhost:80/RentIT/Controllers/userRegistrationController.php', { otp, newStatus }, { withCredentials: true });
       console.log('Email Verification:', response.data);
       if (response.data == "Matched") {
         setIsOtpVerified(true);
@@ -298,10 +298,9 @@ function SignUpForm({ isRegistered, setIsRegistered }) {
     };
 
     try {
-      const response = await axios.post('http://localhost:4433/RentIT/Controllers/userRegistrationController.php', formData, { withCredentials: true });
+      const response = await axios.post('http://localhost:80/RentIT/Controllers/userRegistrationController.php', formData, { withCredentials: true });
       console.log('Registration successful:', response.data);
       if (response.data == "Registration Successfull") {
-        alert('Registration successful!');
         setIsRegistered(true);
       } else {
         alert('Registration unsuccessful!');

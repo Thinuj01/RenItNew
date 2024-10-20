@@ -37,8 +37,6 @@ const FeedbackSection = ({ title, action, completedStep, reserve_id, titleCase, 
                     console.error(err);
                 })
 
-
-
         } else {
             alert('Please provide a rating and feedback');
         }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import './AdminPanelUserApprovalPage.css'
 import UserApprovalTableComponent from '../UserApprovalTableComponent/UserApprovalTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
+import { useNavigate} from 'react-router-dom'
 
 function AdminPanelUserApprovalPage() {
 
@@ -14,9 +15,26 @@ function AdminPanelUserApprovalPage() {
     };
 
     const [data, setData] = useState([]);
+    const [details, setDetails] = useState([]);
+    const navigate = useNavigate();
+
+    const isAdmin = details && details['is_Admin'];
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
+
+    isAdmin ? null : navigate('/');
+
+    useEffect(() => {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {

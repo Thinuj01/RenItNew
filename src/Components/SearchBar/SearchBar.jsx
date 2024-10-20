@@ -46,6 +46,7 @@ function SearchBar({ onSearch }) {
                         value={selectedCategory}
                         onChange={handleSelectChange(setSelectedCategory)}
                         style={getSelectStyle(selectedCategory)}
+                        required
                     >
                         <option value="">Category</option>
                         <option value="Real Estate">Real Estate</option>

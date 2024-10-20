@@ -28,14 +28,14 @@ function SellerTrackingPage() {
 
     useEffect(()=>{
         console.log(reserve_id);    
-        const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
+        const intervalId = setInterval(() =>{axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
                 params:{
                     status:"1",
                     reserve_id:reserve_id
                 }
         })
         .then(response=>{
-            //console.log("track",response.data);
+            console.log("track",response.data);
             setTrackingStep(response.data.seller_tracking_step);
             setOGoing(response.data.onGoing);
             setEndDate(new Date(response.data.return_date).toISOString());

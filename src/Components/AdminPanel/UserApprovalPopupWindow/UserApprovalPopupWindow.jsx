@@ -3,10 +3,11 @@ import axios from 'axios';
 import './UserApprovalPopupWindow.css'; // Link the CSS file
 
 const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
+    const [submitting, setSubmitting] = useState(false);
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -16,13 +17,12 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
           });
       }, []);
     const handleAction = (action) => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: action, nic: selectedRowData.NIC_number, admin_NIC: details.NIC }
         })
             .then((response) => {
                 console.log('Response:', response.data);
                 if (response.data.success) {
-                    alert(`User ${action}d successfully!`);  // Dynamic success message
                     onClose();  // Close the popup after successful action
                 } else {
                     alert('Error: ' + response.data.message);
@@ -32,13 +32,16 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
                 console.error('Error submitting data:', error);
                 alert('An error occurred. Please try again.');
             });
+            setSubmitting(false);
     };
     
     const handleSubmit = () => {
+        setSubmitting(true);
         handleAction('approve');
     };
 
     const handleReject = () => {
+        setSubmitting(true);
         handleAction('reject');
     };
     
@@ -89,6 +92,10 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
                             <label>Mobile Number</label>
                             <input type="tel" value={selectedRowData?.phone_number || ''} readOnly />
                         </div>
+                        <div className="actions">
+                            <button className="btn reject-btn" onClick={handleReject} disabled={submitting}>Reject</button>
+                            <button className="btn submit-btn" onClick={handleSubmit} disabled={submitting}>Submit</button>
+                        </div>
                     </div>
                 </div>
 
@@ -99,17 +106,14 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
                 
                     <h4>User NIC</h4>
                     <div className="image-preview">
-                        <img src={'http://localhost:4433/RentIT/' + selectedRowData.NIC_photo.slice(3)} alt="User NIC" />
+                        <img src={'http://localhost:80/RentIT/' + selectedRowData.NIC_photo.slice(3)} alt="User NIC" />
                     </div>
 
                     <h4>User Residential Proof</h4>
                     <div className="image-preview">
-                        <img src={'http://localhost:4433/RentIT/' + selectedRowData.residential_proof.slice(3)} alt="User Residential Proof" />
+                        <img src={'http://localhost:80/RentIT/' + selectedRowData.residential_proof.slice(3)} alt="User Residential Proof" />
                     </div>
-                    <div className="actions">
-                        <button className="btn reject-btn" onClick={handleReject}>Reject</button>
-                        <button className="btn submit-btn" onClick={handleSubmit}>Submit</button>
-                    </div>
+                    
                     <div className="userMessageBox">
                         <textarea name="" id="" placeholder='Enter the message for notify User'></textarea>
                     </div>
