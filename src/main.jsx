@@ -23,6 +23,7 @@ import AdminPanelItemApprovalPage from './Components/AdminPanel/AdminPanelItemAp
 import AdminPanelUserCasePage from './Components/AdminPanel/AdminPanelUserCasePage/AdminPanelUserCasePage.jsx'
 import AdminPanelItemCasePage from './Components/AdminPanel/AdminPanelItemCasePage/AdminPanelItemCasePage.jsx'
 import OrderPage from './Components/OrdersBuyer/OrderPage/OrderPage.jsx'
+import Footer from './Components/Footer/Footer.jsx';
 
 import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
 import { OrderReturnTimeCheck } from './Components/OrderReturnTimeCheck/OrderReturnTimeCheck.jsx';
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
   { path: "/AdminPanelItemApprovalPage", element: <AdminPanelItemApprovalPage />, },
   { path: "/AdminPanelUserCasePage", element: <AdminPanelUserCasePage />, },
   { path: "/AdminPanelItemCasePage", element: <AdminPanelItemCasePage />, },
-  { path: "/orderpage", element: <OrderPage/>},
+  { path: "/Orderpage", element: <OrderPage/>},
+  { path: "/Footer", element: <Footer/>},
 ]);
 
 

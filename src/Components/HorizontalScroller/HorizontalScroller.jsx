@@ -77,7 +77,11 @@ function HorizontalScroller(props) {
                         onMouseUp={stopDragging}
                         onMouseLeave={stopDragging}
                     >
-                        {props.children}
+
+                    
+                    {props.children}
+                    
+                        
 
 
                     </div>

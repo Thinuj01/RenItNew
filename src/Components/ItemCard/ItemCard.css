@@ -8,11 +8,13 @@
   transition: transform 0.2s ease-in-out;
   min-height: fit-content;
   position: relative;
-
+  opacity: 0.8;
+  user-select: none;
 }
 
 .item-card:hover {
   transform: scale(1.05);
+  opacity: 1;
 }
 
 .item-image img {
@@ -21,6 +23,7 @@
   min-height: 250px;
   border-radius: 8px;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .item-details {
