@@ -12,6 +12,7 @@ import NoneScroller from '../NoneScroller/NoneScroller'
 import ItemCard from '../ItemCard/ItemCard'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../Footer/Footer'
 
 function ItemPreviewPage() {
     const location = useLocation();
@@ -30,7 +31,7 @@ function ItemPreviewPage() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`, {
+            axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`, {
                 params: { status: "2", id: id }
             })
                 .then(response => {
@@ -51,7 +52,7 @@ function ItemPreviewPage() {
     useEffect(() => {
         const item = fetch.length > 0 ? fetch[0] : {};
         const cate = item.category_id;
-        axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`,{
+        axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
             params: {status:"3",cate_id:cate}
           }).then(response => {
             console.log("Cate Data",response.data);
@@ -62,7 +63,7 @@ function ItemPreviewPage() {
     const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
+        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
         .then(response=>{
             setDetails(response.data);
         }).catch(error=>{
@@ -71,8 +72,8 @@ function ItemPreviewPage() {
       },[id]);
 
     useEffect(()=>{
-        console.log(details);
-        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php?',{
+        details?
+(        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
             params:{status:"1",nic:details['NIC']}
         })
         .then(response=>{
@@ -80,7 +81,7 @@ function ItemPreviewPage() {
         })
         .catch(error=>{
             console.error(error);
-        })
+        })):null;
       },[details]);
     return (
         <>
@@ -244,6 +245,7 @@ function ItemPreviewPage() {
                 </div>
 
             </div>
+            <Footer/>
         </>
     )
 }

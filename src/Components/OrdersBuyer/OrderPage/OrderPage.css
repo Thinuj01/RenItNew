@@ -1,3 +1,6 @@
+.orderpageContainer{
+    min-height: 67vh;
+}
 .upper{
     display: flex;
     gap:80px;

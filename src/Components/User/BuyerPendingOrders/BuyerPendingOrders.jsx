@@ -7,7 +7,7 @@ export default function BuyerPendingOrders({buyer_nic}) {
     const [order, setOrder] = useState([]);
     const navigate = useNavigate();
     useEffect(()=>{
-        axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php',{
+        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php',{
             params:{
                 status:"3",
                 buyer_nic:buyer_nic
@@ -31,7 +31,7 @@ export default function BuyerPendingOrders({buyer_nic}) {
 
   const handleRefund = async (order_id) => {
     try {
-        const refundResponse = await axios.post('http://localhost:80/RentIT/Controllers/refundPaymentController.php', {
+        const refundResponse = await axios.post('http://localhost:4433/RentIT/Controllers/refundPaymentController.php', {
             order_id: order_id, 
             description: "Item is out of stock"
         });
@@ -39,7 +39,7 @@ export default function BuyerPendingOrders({buyer_nic}) {
         console.log('Refund response from backend:', refundResponse.data);
         if (refundResponse.data.status == 1) {
             alert('Refund processed successfully!');
-            axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php',{
+            axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php',{
               params:{
                 status:"4",
                 reserve_id:order_id
@@ -76,7 +76,7 @@ export default function BuyerPendingOrders({buyer_nic}) {
       {sortedOrders.map((order, index) => (
         <tr key={index}>
           <td><div className='buyerpendingorder-product-image'>
-                <img src={'http://localhost:80/RentIT'+order.iPic} className='buyerpendingorder-pro-image'/>
+                <img src={'http://localhost:4433/RentIT'+order.iPic} className='buyerpendingorder-pro-image'/>
             </div></td>
           <td>{order.title}</td>
           <td>{new Date(order.pickup_date).toLocaleDateString()}</td>

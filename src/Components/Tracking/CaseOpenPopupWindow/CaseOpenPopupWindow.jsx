@@ -51,7 +51,7 @@ const CaseOpenPopupWindow = ({ isOpen, onClose, title, categoryOptions, label1, 
         formData.append('req', request);
         formData.append('item_id', caseData.item_id);
         try {
-            const response = await axios.post('http://localhost:80/RentIT/Controllers/caseController.php', formData,
+            const response = await axios.post('http://localhost:4433/RentIT/Controllers/caseController.php', formData,
                 {
                     withCredentials: true
                 });

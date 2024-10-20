@@ -7,14 +7,14 @@ function FeedBackShowingBox({ fetch = [] }) {
 
     const [feedbacks, setFeedbacks] = useState([]);
     const [sellerFeedbacks, setSellerFeedbacks] = useState([]);
-    const [usernames, setUsernames] = useState({}); // To store the usernames by NIC
-    const [sellerusernames, setSellerUsernames] = useState({}); // To store the usernames by NIC
+    const [usernames, setUsernames] = useState({}); // Store both usernames and profile pictures by NIC
+    const [sellerusernames, setSellerUsernames] = useState({}); // Store both usernames and profile pictures by NIC
 
     useEffect(() => {
         console.log("item", item);
 
         // Fetch feedbacks based on item_id
-        axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
             params: {
                 status: "1",
                 item_id: item.item_id
@@ -28,68 +28,71 @@ function FeedBackShowingBox({ fetch = [] }) {
         });
     }, [item]);
 
-    useEffect(()=>{
-        axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php',{
-            params:{
-                status:"2",
-                seller_nic:item.NIC_number,
+    useEffect(() => {
+        axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+            params: {
+                status: "2",
+                seller_nic: item.NIC_number,
             }
         })
-        .then(response=>{
-            console.log("seller_feedback",response.data);
+        .then(response => {
+            console.log("seller_feedback", response.data);
             setSellerFeedbacks(response.data);
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err);
-        })
+        });
     }, [item]);
 
     useEffect(() => {
-        // Fetch usernames for all NICs once feedback is loaded
+        // Fetch usernames and profile pictures for feedbacks
         if (feedbacks.length > 0) {
             const NICs = feedbacks.map(feedback => feedback.NIC_number);
             const fetchUsernames = async () => {
-                const usernameMap = {};
+                const userMap = {};
                 await Promise.all(NICs.map(NIC => {
-                    return axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+                    return axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
                         params: {
                             status: "1",
                             nic: NIC
                         }
                     }).then(response => {
                         const FullName = response.data[0].first_name + " " + response.data[0].last_name;
-                        usernameMap[NIC] = FullName;
+                        const proPic = response.data[0].profile_picture;
+                        userMap[NIC] = { FullName, proPic };
                     }).catch(err => {
                         console.error(err);
-                        usernameMap[NIC] = 'Anonymous';
+                        userMap[NIC] = { FullName: 'Anonymous', proPic: '' }; // Use default values
                     });
                 }));
-                setUsernames(usernameMap);
+                setUsernames(userMap);
             };
             fetchUsernames();
         }
     }, [feedbacks]);
 
     useEffect(() => {
-        // Fetch usernames for all NICs once feedback is loaded
+        // Fetch usernames and profile pictures for seller feedbacks
         if (sellerFeedbacks.length > 0) {
             const NICs = sellerFeedbacks.map(feedback => feedback.buyer_NIC_number);
             const fetchUsernames = async () => {
-                const usernameMap = {};
+                const userMap = {};
                 await Promise.all(NICs.map(NIC => {
-                    return axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+                    return axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
                         params: {
                             status: "1",
                             nic: NIC
                         }
                     }).then(response => {
                         const FullName = response.data[0].first_name + " " + response.data[0].last_name;
-                        usernameMap[NIC] = FullName;
+                        const proPic = response.data[0].profile_picture;
+                        console.log(response.data[0].profile_picture);
+                        userMap[NIC] = { FullName, proPic };
                     }).catch(err => {
                         console.error(err);
-                        usernameMap[NIC] = 'Anonymous';
+                        userMap[NIC] = { FullName: 'Anonymous', proPic: '' };
                     });
                 }));
-                setSellerUsernames(usernameMap);
+                setSellerUsernames(userMap);
             };
             fetchUsernames();
         }
@@ -97,21 +100,25 @@ function FeedBackShowingBox({ fetch = [] }) {
 
     const itemFeedback = feedbacks.length > 0 ? (
         feedbacks.map((feedback) => ({
-            name: usernames[feedback.NIC_number] || 'Anonymous',
+            name: usernames[feedback.NIC_number]?.FullName || 'Anonymous',
             comment: feedback.feedback || 'No comment provided',
-            profilePic: '', // Assuming you will add a profile picture later
+            profilePic: usernames[feedback.NIC_number]?.proPic || '', // Add profile picture
             rating: feedback.rating || 0
         }))
     ) : [];
 
-    const sellerFeedback = sellerFeedbacks.length > 0? (
-        sellerFeedbacks.map((sellerFeedback)=>({
-            name: sellerusernames[sellerFeedback.buyer_NIC_number] || 'Anonymous',
+    const sellerFeedback = sellerFeedbacks.length > 0 ? (
+        sellerFeedbacks.map((sellerFeedback) => ({
+            name: sellerusernames[sellerFeedback.buyer_NIC_number]?.FullName || 'Anonymous',
             comment: sellerFeedback.feedback || 'No comment provided',
-            profilePic: '', // Assuming you will add a profile picture later
+            profilePic: sellerusernames[sellerFeedback.buyer_NIC_number]?.proPic || '', // Add profile picture
             rating: sellerFeedback.rating || 0
         }))
-    ):[];
+    ) : [];
+
+    useEffect(()=>{
+        console.log(sellerFeedback);
+    },[sellerFeedback])
 
     const [activeTab, setActiveTab] = useState('itemFeedback');
     const [currentPage, setCurrentPage] = useState(1);
@@ -170,7 +177,7 @@ function FeedBackShowingBox({ fetch = [] }) {
                     <div key={index} className="feedback-comment">
                         <div className="profile-pic">
                             {feedback.profilePic ? (
-                                <img src={feedback.profilePic} alt="Profile" />
+                                <img src={'http://localhost:4433/RentIT/' + feedback.profilePic.slice(2)} />
                             ) : (
                                 <div className="placeholder-pic">P</div>
                             )}

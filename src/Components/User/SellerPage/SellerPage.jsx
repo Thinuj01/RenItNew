@@ -6,6 +6,7 @@ import SellerRate from '../SellerRate/SellerRate';
 import BuyerPage from '../BuyerPage/BuyerPage'; // Import BuyerPage
 import axios from 'axios';
 import GroupedItems from '../../GroupedItems/GroupedItems';
+import Footer from '../../Footer/Footer';
 
 function SellerPage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -23,7 +24,7 @@ function SellerPage() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php', {
             withCredentials: true,
         })
             .then((response) => {
@@ -39,8 +40,8 @@ function SellerPage() {
         let isMounted = true;
     
         if (sessiondata.NIC) {
-            const fetchlistedItems = axios.post('http://localhost:80/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
-            const fetchPendingOrders = axios.post('http://localhost:80/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
+            const fetchlistedItems = axios.post('http://localhost:4433/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
+            const fetchPendingOrders = axios.post('http://localhost:4433/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
     
             Promise.all([fetchlistedItems, fetchPendingOrders])
                 .then(([listedResponse, pendingResponse]) => {
@@ -121,6 +122,7 @@ function SellerPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }
