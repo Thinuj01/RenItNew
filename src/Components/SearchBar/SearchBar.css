@@ -6,7 +6,10 @@
     height: fit-content;
 }
 
-.textSearch, .categorySearch, .locationSearch, .searchButton {
+.textSearch,
+.categorySearch,
+.locationSearch,
+.searchButton {
     width: 25%;
 }
 
@@ -38,7 +41,6 @@
 
 .searchButton {
     border-radius: 0 16px 16px 0;
-
 }
 
 input[type="text"],
@@ -90,4 +92,44 @@ select:focus {
 
 .searchButton button:active {
     background-color: var(--PrimaryColor);
+}
+
+
+@media only screen and (max-width: 1201px) {
+    .searchBarContainer {
+        padding: 25px 5%;
+    }
+}
+
+/* Media Query for Tablets and Smaller Devices (768px and Below) */
+@media only screen and (max-width: 768px) {
+    .searchBarContainer {
+        padding: 25px 2%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .textSearch,
+    .categorySearch,
+    .locationSearch,
+    .searchButton {
+        width: 100%;
+    }
+
+    #searchText {
+        border-radius: 16px;
+    }
+
+
+    .categorySearch select {
+        border-radius: 16px;
+    }
+
+    .locationSearch select {
+        border-radius: 16px;
+    }
+
+    #homePageSearchBar button{
+        border-radius: 16px;
+    }
 }

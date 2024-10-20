@@ -28,16 +28,16 @@ function UserForm({ isBuyer, handleToggle }) {
             axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
                 params: { status: "1", nic: sessionData['NIC'] }
             })
-            .then((res) => {
-                setData(res.data);
-                setLoading(false);
-                console.log(res.data);
-            })
-            .catch(err => {
-                setError('Error fetching user details');
-                setLoading(false);
-                console.error(err);
-            });
+                .then((res) => {
+                    setData(res.data);
+                    setLoading(false);
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    setError('Error fetching user details');
+                    setLoading(false);
+                    console.error(err);
+                });
         }
     }, [sessionData]);
 
@@ -63,14 +63,14 @@ function UserForm({ isBuyer, handleToggle }) {
             },
             withCredentials: true
         })
-        .then(response => {
-            console.log('Image uploaded successfully:', response.data);
-            setUploadSuccess(true);
-            setImage(null);
-        })
-        .catch(err => {
-            console.error('Error uploading image:', err);
-        });
+            .then(response => {
+                console.log('Image uploaded successfully:', response.data);
+                setUploadSuccess(true);
+                setImage(null);
+            })
+            .catch(err => {
+                console.error('Error uploading image:', err);
+            });
     };
 
     if (loading) return <div>Loading...</div>;
@@ -81,36 +81,36 @@ function UserForm({ isBuyer, handleToggle }) {
     return (
         <div className="userFormContainer">
             <div className="userFormContainerLeft">
-            <div className="userProfilePic">
-                {imagePreview ? (
-                    // Show the preview of the newly selected image
-                    <img
-                        src={imagePreview}
-                        alt="Preview of User Profile"
-                        id="profileImage"
-                        className="profileImage"
-                    />
-                ) : (
-                    // Show the existing profile picture or a default image
-                    <img
-                        src={userDetails.profile_picture
-                            ? 'http://localhost:80/RentIT/' + userDetails.profile_picture.slice(2)
-                            : (userDetails.gender === "Male" 
-                                ? "http://localhost:80/RentIT/images/ProfileImages/male.jpg" 
-                                : "http://localhost:80/RentIT/images/ProfileImages/female.jpg")}
-                        alt="User Profile"
-                        id="profileImage"
-                        className="profileImage"
-                    />
-                )}
-            </div>
+                <div className="userProfilePic">
+                    {imagePreview ? (
+                        // Show the preview of the newly selected image
+                        <img
+                            src={imagePreview}
+                            alt="Preview of User Profile"
+                            id="profileImage"
+                            className="profileImage"
+                        />
+                    ) : (
+                        // Show the existing profile picture or a default image
+                        <img
+                            src={userDetails.profile_picture
+                                ? 'http://localhost:80/RentIT/' + userDetails.profile_picture.slice(2)
+                                : (userDetails.gender === "Male"
+                                    ? "http://localhost:80/RentIT/images/ProfileImages/male.jpg"
+                                    : "http://localhost:80/RentIT/images/ProfileImages/female.jpg")}
+                            alt="User Profile"
+                            id="profileImage"
+                            className="profileImage"
+                        />
+                    )}
+                </div>
 
                 <div className="userProfilePicAddButton">
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleImageChange} 
-                        style={{ display: 'none' }} 
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
                         id="fileInput"
                     />
                     <label htmlFor="fileInput" className="addImageButton">Add Image</label>

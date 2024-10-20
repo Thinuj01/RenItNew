@@ -14,7 +14,7 @@ function IitemPreviewPageItemDetails({fetch=[]}) {
                     <strong>{item.rental_price ? item.rental_price : "Price"}.00 LKR</strong>
                 </div>
 
-                <div className="availabilityAndCondition">
+                <div className="availabilityAndCondition_shippingOrPickup">
                     <div className="availabilitiDiv labelItemDetails">
                         <strong>{item.availability=="available"?"Available":"Not-Available"}</strong>
                     </div>
@@ -22,17 +22,17 @@ function IitemPreviewPageItemDetails({fetch=[]}) {
                     <div className="conditionDiv labelItemDetails">
                         <strong>{item.item_condition}</strong>
                     </div>
-                </div>
 
-                <div className="shippingOrPickup">
                     <div className="shippingiDiv labelItemDetails">
-                        <strong>Free Shipping</strong>
+                        <strong>Shipping</strong>
                     </div>
 
                     <div className="pickupDiv labelItemDetails">
-                        <strong>Pickup Have</strong>
+                        <strong>Pickup</strong>
                     </div>
                 </div>
+
+                
             </div>
 
         </>

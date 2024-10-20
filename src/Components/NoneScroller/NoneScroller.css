@@ -9,6 +9,7 @@
 .nonScrollerWrapperContainer {
     position: relative;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     position: relative;
@@ -21,91 +22,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.nonScrollerWrapperThreeColumn {
-    justify-content: center;
-    justify-items: center;
-    margin-top: 20px;
-    height: fit-content;
-    width: 100%;
-    display: grid;
-    gap: 40px;
-    position: relative;
-
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 items per row */
-
-    @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 items per row */
-    }
-
-    @media (max-width: 400px) {
-        grid-template-columns: repeat(1, 1fr);
-        /* 1 item per row */
-    }
-}
-
-.nonScrollerWrapperFourColumn {
-    justify-content: center;
-    justify-items: center;
-    margin-top: 20px;
-    height: fit-content;
-    width: 100%;
-    display: grid;
-    gap: 40px;
-
-    /* Force 5 items per row at wider screens */
-    grid-template-columns: repeat(4, 1fr);
-
-    @media (max-width: 900px) {
-        grid-template-columns: repeat(3, 1fr);
-        /* 3 items per row */
-    }
-
-    @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 items per row */
-    }
-
-    @media (max-width: 400px) {
-        grid-template-columns: repeat(1, 1fr);
-        /* 1 item per row */
-    }
-}
-
-
-.nonScrollerWrapperFiveColumn {
-    justify-content: center;
-    justify-items: center;
-    margin-top: 20px;
-    height: fit-content;
-    width: 100%;
-    display: grid;
-    gap: 40px;
-
-    /* Force 5 items per row at wider screens */
-    grid-template-columns: repeat(5, 1fr);
-
-    @media (max-width: 1200px) {
-        grid-template-columns: repeat(4, 1fr);
-        /* 4 items per row */
-    }
-
-    @media (max-width: 900px) {
-        grid-template-columns: repeat(3, 1fr);
-        /* 3 items per row */
-    }
-
-    @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 items per row */
-    }
-
-    @media (max-width: 400px) {
-        grid-template-columns: repeat(1, 1fr);
-        /* 1 item per row */
-    }
+    justify-content: space-between;
+    gap: 100px;
 }

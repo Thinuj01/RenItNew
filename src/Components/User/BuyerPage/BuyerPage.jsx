@@ -35,7 +35,7 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
+            const fetchWishlist = axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { params: { nic: sessiondata.NIC, status: "1" } });
             const fetchRentedItems = axios.post('http://localhost:80/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])
@@ -67,7 +67,7 @@ function BuyerPage() {
 
                 <div className="buyerPageContainerBottom">
                     <div className="tabsContainer">
-                        <div className="tabs">
+                        <div className="buyerTabs">
                             <button
                                 className={`tabButton ${activeTab === 0 ? 'activeTab' : ''}`}
                                 onClick={() => handleTabClick(0)}
@@ -117,7 +117,7 @@ function BuyerPage() {
                                     )}
                                     {activeTab === 2 && (
                                         <div>
-                                            <BuyerPendingOrders buyer_nic={sessiondata.NIC}/>
+                                            <BuyerPendingOrders buyer_nic={sessiondata.NIC} />
                                         </div>
                                     )}
                                 </>

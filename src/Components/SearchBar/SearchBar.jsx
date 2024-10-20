@@ -100,8 +100,8 @@ function SearchBar({ onSearch }) {
                     </select>
                 </div>
 
-                <div className="searchButton">
-                <button type="button" onClick={handleSearchClick}>Search</button>
+                <div className="searchButton" id='homePageSearchBar'>
+                    <button type="button" onClick={handleSearchClick}>Search</button>
                 </div>
             </div>
         </>

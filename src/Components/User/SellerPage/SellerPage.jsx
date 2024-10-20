@@ -82,7 +82,7 @@ function SellerPage() {
 
                 <div className="sellerPageContainerBottom">
                     <div className="tabsContainer">
-                        <div className="tabs">
+                        <div className="sellerTabs">
                             <button
                                 className={`tabButton ${activeTab === 0 ? 'activeTab' : ''}`}
                                 onClick={() => handleTabClick(0)}

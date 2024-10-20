@@ -1,85 +1,145 @@
-#navContent{
-    background-color: var(--PrimaryColorDark);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10%;
+/* Base navigation styles */
+#navContent {
+  background-color: var(--PrimaryColorDark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10%;
+  position: relative;
+  z-index: 10; /* Keep the navbar on top */
 }
 
-#navContent a img{
-    height: 40px;
-    object-fit: cover;
+#navContent a img {
+  height: 40px;
+  object-fit: cover;
 }
 
-#menuLinks{
-    display: flex;
-    align-items: center;
-    gap: 30px;
+#menuLinks {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
-#signInButton{
-    outline: 1px solid var(--White);
-    padding: 10px 20px;
-    border-radius: 50px;
-    color: white;
-    text-decoration: none;    
+#signInButton {
+  outline: 1px solid var(--White);
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
 }
 
+/* Hamburger icon (only visible on smaller screens) */
+.hamburger-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Mobile menu visibility */
+#menuLinks {
+  display: flex;
+}
+
+@media only screen and (max-width: 1201px ) {
+  #navContent {
+    padding: 10px 5%;
+  }
+}
+
+/* Media Query for Tablets and Smaller Devices (768px and Below) */
+@media only screen and (max-width: 768px){
+  #navContent {
+    padding: 10px 2%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  /* Hide menu links by default */
+  #menuLinks {
+      display: none;
+      position: absolute;
+      top: 100%; /* Position it just below the nav bar */
+      left: 0;
+      background-color: var(--PrimaryColorDark); /* Match with nav bar color */
+      width: 100%;
+      flex-direction: column;
+      padding: 20px 0;
+      z-index: 9;
+  }
+
+  /* Show menu links when the menu-visible class is added */
+  #menuLinks.menu-visible {
+      display: flex;
+  }
+
+  /* Hamburger icon visible only on smaller screens */
+  .hamburger-icon {
+      display: block;
+  }
+
+  /* Links inside the dropdown should look good */
+  #menuLinks a {
+      padding: 10px 20px;
+      text-align: center;
+      width: 100%;
+      color: white;
+      text-decoration: none;
+  }
+
+}
+
+/* Username dropdown styles */
 .nav-username-container {
-    position: relative; /* Ensures the dropdown is positioned relative to the username */
-    display: inline-block;
-    cursor: pointer;
-  }
-  
-  /* Username style */
-  .nav-username {
-    padding: 10px;
-    font-weight: bold;
-    color: #ffffff;
-  }
-  
-  /* Dropdown menu style */
-  .nav-dropdown {
-    position: absolute;
-    top: 100%; /* Position right below the username */
-    left: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    z-index: 1;
-    min-width: 150px;
-    border-radius: 4px;
-  }
-  
-  /* Dropdown links and buttons */
-  .nav-dropdown a, .nav-dropdown button {
-    display: block;
-    padding: 8px 12px;
-    margin: 4px 0;
-    background-color: #fff;
-    border: none;
-    text-align: left;
-    width: 100%;
-    text-decoration: none;
-    color: #333;
-    cursor: pointer;
-  }
-  
-  .nav-dropdown a:hover, .nav-dropdown button:hover {
-    background-color: #ddd;
-  }
-  
-  /* Admin panel link */
-  .nav-admin-link {
-    font-weight: bold;
-  }
-  
-  /* Logout button */
-  .nav-logout-button {
-    background-color: #f44336;
-    color: white;
-    border-radius: 4px;
-    padding: 8px;
-    cursor: pointer;
-  }
-  
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.nav-username {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1;
+  min-width: 150px;
+  border-radius: 4px;
+}
+
+.nav-dropdown a,
+.nav-dropdown button {
+  display: block;
+  padding: 8px 12px;
+  margin: 4px 0;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.nav-dropdown a:hover,
+.nav-dropdown button:hover {
+  background-color: #ddd;
+}
+
+.nav-admin-link {
+  font-weight: bold;
+}
+
+.nav-logout-button {
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+}

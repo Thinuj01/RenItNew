@@ -10,7 +10,7 @@ function NoneScroller(props) {
             </div>
 
             <div className="nonScrollerWrapperContainer">
-                <div className={`nonScrollerWrapper ${props.className}`}>
+                <div className='nonScrollerWrapper'>
                     {props.children}
                 </div>
             </div>

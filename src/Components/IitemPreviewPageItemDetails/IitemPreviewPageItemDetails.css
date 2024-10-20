@@ -22,7 +22,7 @@
     color: var(--PrimaryColorDark);
 }
 
-.availabilityAndCondition {
+.availabilityAndCondition_shippingOrPickup {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -32,20 +32,14 @@
 
 .labelItemDetails {
     position: relative;
-    width: 50%;
+    width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    font-size: 1.6rem;
-    transition: font-size 0.3s ease-in, line-height 0.3s ease-in;
-    height: 60px;
+    padding: 20px;
 }
 
-.labelItemDetails:hover {
-    font-size: 1.7rem;
-    line-height: 50px;
-}
 
 .availabilitiDiv {
     background-color: var(--PrimaryColor);

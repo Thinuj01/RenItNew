@@ -17,6 +17,8 @@
     gap: 20px;
     align-items: center;
     padding-right: 20px;
+    max-height: 100px;
+    position: relative;
 }
 
 .userProfilePic {
@@ -154,4 +156,17 @@ input:checked+.sliderUser:before {
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+@media only screen and (max-width: 1601px) {
+    .userFormContainerLeft {
+        width: 20%;
+    }
+}
+
+    
+@media only screen and (max-width: 1201px) {
+    .userFormContainerLeft {
+        width: 30%;
+    }
 }

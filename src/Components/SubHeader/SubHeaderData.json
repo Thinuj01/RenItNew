@@ -5,11 +5,6 @@
         "description": "We offer competitive prices on thousand of items"
     },
     {
-        "icon": "/SubHeaderImage/Image02.svg",
-        "title": "Fast delivery",
-        "description": "Fast delivery on selected items thanks to our improved logistics"
-    },
-    {
         "icon": "/SubHeaderImage/Image03.svg",
         "title": "Pickup",
         "description": "You can pickup item go to the shop after payment"
