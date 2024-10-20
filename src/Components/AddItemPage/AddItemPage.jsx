@@ -8,10 +8,10 @@ import ItemCard from '../ItemCard/ItemCard'
 function AddItemPage() {
     const [item, setItem] = useState({
         imageUrl: 'https://via.placeholder.com/250',
-        name: 'Sample Item name in 2 lines visible',
-        category: 'Electronics',
-        subcategories: ['Smartphones', 'Accessories', 'Gadgets'],
-        price: "99.99",
+        name: '',
+        category: '',
+        subcategories: [],
+        price: "0.00",
     });
 
     return (

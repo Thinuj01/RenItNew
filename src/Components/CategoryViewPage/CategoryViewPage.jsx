@@ -8,9 +8,14 @@ import ItemCard from '../ItemCard/ItemCard';
 
 function CategoryViewPage() {
     const location = useLocation();
+    const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
     const cate = decodeURIComponent(queryParams.get('category') || '');
     const { category, district, text } = location.state || {};
+
+    useEffect(() => {
+        navigate(location.pathname, { replace: true });
+      }, [location.pathname, navigate]);
 
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
@@ -194,6 +199,30 @@ function CategoryViewPage() {
 
         fetchData(); // Call the async function
     }, [selectedCategory]); // Only fetch when selectedCategory changes
+
+    useEffect(() => {
+        const fetchRatings = async () => {
+          const updatedPaths = await Promise.all(
+            paths.map(async (path) => {
+              try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "3" },
+                  withCredentials: true
+                });
+                return { ...path, rating: response.data };
+              } catch (error) {
+                console.error('There was an error fetching rating', error);
+                return path;
+              }
+            })
+          );
+          setPaths(updatedPaths);
+        };
+      
+        if (paths.length > 0) {
+          fetchRatings();
+        }
+      }, [paths]);
 
     
     const userCoordinates = districtCoordinates[selectedDistrict];

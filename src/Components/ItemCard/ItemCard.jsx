@@ -54,14 +54,14 @@ function ItemCard({ item , paths, navi}) {
           <div className="district_ratingValue">
       
             <div className="itemCardDistrict">
-              <p><span><CiLocationOn /></span>{paths?paths.district:'Matara'}</p>
+              <p><span><CiLocationOn /></span>{paths?paths.district:null}</p>
             </div>
       
             <div className="itemCardRatingSection">
               <div className="itemCardRatingStars">
                 <span className="itemCardRatingStar green">&#9733;</span>
               </div>
-              <span className="itemCardRatingScore">4.5</span><br />
+              <span className="itemCardRatingScore">{paths?paths.rating:0}</span><br />
             </div>
       
           </div>
