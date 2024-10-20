@@ -7,6 +7,8 @@ import SellerPage from '../SellerPage/SellerPage';
 import GroupedItems from '../../GroupedItems/GroupedItems';
 import axios from "axios";
 import BuyerPendingOrders from '../BuyerPendingOrders/BuyerPendingOrders';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../../Footer/Footer';
 
 function BuyerPage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -16,13 +18,15 @@ function BuyerPage() {
     const [sessiondata, setSessionData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleTabClick = (index) => setActiveTab(index);
 
     const handleToggle = () => setIsBuyer(!isBuyer);
 
+
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
         })
             .then(response => {
@@ -35,8 +39,8 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { params: { nic: sessiondata.NIC, status: "1" } });
-            const fetchRentedItems = axios.post('http://localhost:80/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
+            const fetchWishlist = axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
+            const fetchRentedItems = axios.post('http://localhost:4433/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])
                 .then(([wishlistResponse, rentedResponse]) => {
@@ -50,7 +54,77 @@ function BuyerPage() {
         }
     }, [sessiondata]);
 
-    if (!isBuyer) return <SellerPage />;
+    const [rating, setRating] = useState();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                    params: { buyerNIC: sessiondata.NIC, status: "5" },
+                    withCredentials:true
+                });
+                setRating(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('There was an error fetching the data!', error);
+            }
+        };
+    
+        fetchData();
+      }, [sessiondata]);
+
+      useEffect(() => {
+        const fetchRatings = async () => {
+          const updatedPaths = await Promise.all(
+            data.map(async (path) => {
+              try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "3" },
+                  withCredentials: true
+                });
+                return { ...path, rating: response.data };
+              } catch (error) {
+                console.error('There was an error fetching rating', error);
+                return path;
+              }
+            })
+          );
+          setData(updatedPaths);
+          console.log(updatedPaths);
+        };
+      
+        if (data.length > 0) {
+            console.log(2);
+          fetchRatings();
+        }
+      }, [rating]);
+
+      useEffect(() => {
+        const fetchRatings = async () => {
+          const updatedPaths = await Promise.all(
+            rented.map(async (path) => {
+              try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "3" },
+                  withCredentials: true
+                });
+                return { ...path, rating: response.data };
+              } catch (error) {
+                console.error('There was an error fetching rating', error);
+                return path;
+              }
+            })
+          );
+          setRented(updatedPaths);
+        };
+      
+        if (rented.length > 0) {
+            console.log(1);
+          fetchRatings();
+        }
+      }, [rented]);
+
+    if (!isBuyer)  {navigate("/SellerPage")};
 
     return (
         <>
@@ -61,7 +135,7 @@ function BuyerPage() {
                         <UserForm isBuyer={isBuyer} handleToggle={handleToggle} />
                     </div>
                     <div className="buyerPageContainerTopRight">
-                        <BuyerRate rating={4.5} totalUsers={10} />
+                        {rating?<BuyerRate rating={rating[0]} totalUsers={rating[1]} />:null}
                     </div>
                 </div>
 
@@ -126,6 +200,7 @@ function BuyerPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

@@ -29,7 +29,7 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
         console.log("Item", item);
 
         // Fetch the non-available dates from the API
-        axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
             params: {
                 status: "1",
                 item_id: item.item_id
@@ -95,12 +95,12 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
 
     function addToWishlist(){
         // try{
-          axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
           })
             .then(response => {
               console.log(response.data);
-              axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php',{
+              axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php',{
                 params:{status:"2",item_id:item.item_id,nic:response.data.NIC}
               })
               .then(res=>{
@@ -161,12 +161,22 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
             {/* Action buttons */}
             <button className="purchaseButton" onClick={() => {
                 if (selectedDates.length) {
-                    navigate("/PurchasePage", { state: { fetch: item, selectedDates: selectedDates, cateData: newCateData, details: details, userDetails: userDetails } });
+                    if(userDetails.length){
+                        navigate("/PurchasePage", { state: { fetch: item, selectedDates: selectedDates, cateData: newCateData, details: details, userDetails: userDetails } });
+                    }else{
+                        navigate("/signin");
+                    }
                 } else {
                     alert("Select Preferred Dates");
                 }
             }}>Purchase Now</button>
-            <button className="wishlistButton" onClick={()=>{addToWishlist()}}>Add to wishlist</button>
+            <button className="wishlistButton" onClick={()=>{
+                if(userDetails.length){
+                    addToWishlist()
+                }else{
+                    navigate("/signin");
+                }
+            }}>Add to wishlist</button>
         </div>
     );
 }

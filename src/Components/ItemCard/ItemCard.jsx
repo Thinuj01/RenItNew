@@ -15,12 +15,12 @@ function ItemCard({ item , paths, navi}) {
 
   function addToWishlist(){
     // try{
-      axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+      axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
         withCredentials: true
       })
         .then(response => {
           console.log(response.data);
-          axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php',{
+          axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php',{
             params:{status:"2",item_id:paths.item_id,nic:response.data.NIC}
           })
           .then(res=>{
@@ -43,7 +43,7 @@ function ItemCard({ item , paths, navi}) {
         <div className="item-image" onClick={()=>{
         navi=="preview"?navigate("/ItemPreviewPage",{state:{id:paths.item_id}}):navi="orderP"?navigate("/orderpage",{state:{item:item}}):{};
       }}>
-          <img src={paths?'http://localhost:80/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
+          <img src={paths?'http://localhost:4433/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
         </div>
 
         <div className="item-details">
@@ -54,14 +54,14 @@ function ItemCard({ item , paths, navi}) {
           <div className="district_ratingValue">
       
             <div className="itemCardDistrict">
-              <p><span><CiLocationOn /></span>{paths?paths.district:'Matara'}</p>
+              <p><span><CiLocationOn /></span>{paths?paths.district:null}</p>
             </div>
       
             <div className="itemCardRatingSection">
               <div className="itemCardRatingStars">
                 <span className="itemCardRatingStar green">&#9733;</span>
               </div>
-              <span className="itemCardRatingScore">4.5</span><br />
+              <span className="itemCardRatingScore">{paths?paths.rating?paths.rating.toFixed(1):0:0}</span><br />
             </div>
       
           </div>

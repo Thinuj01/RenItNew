@@ -7,7 +7,7 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -17,7 +17,7 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
           });
       }, []);
     const handleAction = (action) => {
-        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: action, nic: selectedRowData.NIC_number, admin_NIC: details.NIC }
         })
             .then((response) => {
@@ -106,12 +106,12 @@ const UserApprovalPopupWindow = ({ selectedRowData, onClose }) => {
                 
                     <h4>User NIC</h4>
                     <div className="image-preview">
-                        <img src={'http://localhost:80/RentIT/' + selectedRowData.NIC_photo.slice(3)} alt="User NIC" />
+                        <img src={'http://localhost:4433/RentIT/' + selectedRowData.NIC_photo.slice(3)} alt="User NIC" />
                     </div>
 
                     <h4>User Residential Proof</h4>
                     <div className="image-preview">
-                        <img src={'http://localhost:80/RentIT/' + selectedRowData.residential_proof.slice(3)} alt="User Residential Proof" />
+                        <img src={'http://localhost:4433/RentIT/' + selectedRowData.residential_proof.slice(3)} alt="User Residential Proof" />
                     </div>
                     
                     <div className="userMessageBox">
