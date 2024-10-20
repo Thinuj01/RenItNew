@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import './ItemPreviewPage.css'
-import ToggleableSection from '../ToggleableSection/ToggleableSection'
-import ItemImageSlider from '../ItemImageSlider/ItemImageSlider'
-import FeedBackShowingBox from '../FeedBackShowingBox/FeedBackShowingBox'
-import HorizontalScroller from '../HorizontalScroller/HorizontalScroller'
-import VerticalScroller from '../VerticalScroller/VerticalScroller'
-import HeaderContent from '../HeaderContent/HeaderContent'
-import IitemPreviewPageItemDetails from '../IitemPreviewPageItemDetails/IitemPreviewPageItemDetails'
-import ItemPreviewPageDateSelectCalendar from '../ItemPreviewPageDateSelectCalendar/ItemPreviewPageDateSelectCalendar'
-import NoneScroller from '../NoneScroller/NoneScroller'
-import ItemCard from '../ItemCard/ItemCard'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import './ItemPreviewPage.css';
+import ToggleableSection from '../ToggleableSection/ToggleableSection';
+import ItemImageSlider from '../ItemImageSlider/ItemImageSlider';
+import FeedBackShowingBox from '../FeedBackShowingBox/FeedBackShowingBox';
+import HorizontalScroller from '../HorizontalScroller/HorizontalScroller';
+import VerticalScroller from '../VerticalScroller/VerticalScroller';
+import HeaderContent from '../HeaderContent/HeaderContent';
+import IitemPreviewPageItemDetails from '../IitemPreviewPageItemDetails/IitemPreviewPageItemDetails';
+import ItemPreviewPageDateSelectCalendar from '../ItemPreviewPageDateSelectCalendar/ItemPreviewPageDateSelectCalendar';
+import NoneScroller from '../NoneScroller/NoneScroller';
+import ItemCard from '../ItemCard/ItemCard';
+import { json, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer';
 
 function ItemPreviewPage() {
     const location = useLocation();
@@ -21,6 +21,8 @@ function ItemPreviewPage() {
     const [cateData, setCateData] = useState([]);
     const [details, setDetails] = useState([]);
     const [userDetails, setUserDetails] = useState([]);
+    const [pricingModifiers, setPricingModifiers] = useState([]);
+
     const item = {
         imageUrl: 'https://via.placeholder.com/250',
         name: 'Sample Item name in 2 lines visible',
@@ -28,7 +30,6 @@ function ItemPreviewPage() {
         subcategories: ['Smartphones', 'Accessories', 'Gadgets'],
         price: 99.99
     };
-
     useEffect(() => {
         if (id) {
             axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`, {
@@ -37,7 +38,13 @@ function ItemPreviewPage() {
                 .then(response => {
                     console.log('Response data:', response.data);
                     setFetch(response.data);
-                    console.log(fetch);
+                    
+                    // Parse pricing_modifiers from the fetched data
+                    const item = response.data[0];
+                    if (item.pricing_modifiers) {
+                        const parsedModifiers = JSON.parse(item.pricing_modifiers);
+                        setPricingModifiers(parsedModifiers);
+                    }
 
                 })
                 .catch(error => {
@@ -47,20 +54,20 @@ function ItemPreviewPage() {
         }
     }, [id]);
 
-
-
     useEffect(() => {
         const item = fetch.length > 0 ? fetch[0] : {};
         const cate = item.category_id;
         axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
             params: {status:"3",cate_id:cate}
-          }).then(response => {
+        }).then(response => {
             console.log("Cate Data",response.data);
-            setCateData(response.data);
+            response.data.forEach(res=>{
+                if(res.item_id == id){
+                    setCateData(res);
+                }
+            })
         })
     }, [fetch]);
-
-    const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
 
     useEffect(() => {
         axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
@@ -73,7 +80,7 @@ function ItemPreviewPage() {
 
     useEffect(()=>{
         details?
-(        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
+        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
             params:{status:"1",nic:details['NIC']}
         })
         .then(response=>{
@@ -81,18 +88,35 @@ function ItemPreviewPage() {
         })
         .catch(error=>{
             console.error(error);
-        })):null;
+        }):null;
       },[details]);
+
     return (
         <>
             <HeaderContent />
             <div className="ItemPreviewPageContainer">
-
                 <div className="itemPreviewPageContainerTop">
                     <div className="ItemPreviewPageContainerleftDiv">
                         <div className="itemImageSlider">
                             <ItemImageSlider
-                                pics={pics} />
+                                pics={fetch.length > 0 && fetch[0].pics ? fetch[0].pics : []}
+                            />
+                        </div>
+                        <div className="itemDescription">
+                            <p>{fetch.length > 0 && fetch[0].description?fetch[0].description:""}</p>
+                            {/* {cateData && cateData.length > 0 ? (
+                                cateData.map((item, index) => (
+                                    <div key={index}>
+                                        {Object.keys(item).map((key, i) => (
+                                            <p key={i}>
+                                                <strong>{key}: </strong>{item[key]}
+                                            </p>
+                                        ))}
+                                    </div>
+                                ))
+                            ) : 'No category data available'} */}
+
+
                         </div>
                         <div className="FeedbackShowingBox">
                             <FeedBackShowingBox fetch={fetch} />
@@ -117,8 +141,6 @@ function ItemPreviewPage() {
                                 <ItemCard item={item} />
                             </NoneScroller>
                         </div>
-
-
                     </div>
 
                     <div className="ItemPreviewPageContainerrightDiv">
@@ -138,10 +160,18 @@ function ItemPreviewPage() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            {pricingModifiers.length > 0 ? (
+                                                pricingModifiers.map((modifier, index) => (
+                                                    <tr key={index}>
+                                                        <td>{modifier.days || 'N/A'}</td>
+                                                        <td>{modifier?"Rs."+fetch[0].rental_price*modifier.days*modifier.multiplier+".00":null|| 'N/A'}</td>
+                                                    </tr>
+                                                ))
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan="2">No pricing modifiers available</td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
@@ -150,7 +180,6 @@ function ItemPreviewPage() {
                                 <ItemPreviewPageDateSelectCalendar fetch={fetch} cateData={cateData} details={details} userDetails={userDetails} />
                             </div>
                         </div>
-
 
                         <div className="moreDetailsOfItem">
                             <div className="shippingMethod">
@@ -203,9 +232,8 @@ function ItemPreviewPage() {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="itemPreviewPageContainerBottom">
+                    </div>
+                    <div className="itemPreviewPageContainerBottom">
                     <HorizontalScroller title='Promotion Similar Items' description='Also you can promote your items this section'>
                         <ItemCard item={item} />
                         <ItemCard item={item} />
@@ -263,13 +291,11 @@ function ItemPreviewPage() {
                         <ItemCard item={item} />
                         <ItemCard item={item} />
                     </HorizontalScroller>
-
                 </div>
-
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
-export default ItemPreviewPage
+export default ItemPreviewPage;
