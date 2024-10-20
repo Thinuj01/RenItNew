@@ -12,7 +12,7 @@ function UserForm({ isBuyer, handleToggle }) {
     const [uploadSuccess, setUploadSuccess] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, { withCredentials: true })
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, { withCredentials: true })
             .then(response => {
                 setSessionData(response.data);
             })
@@ -25,7 +25,7 @@ function UserForm({ isBuyer, handleToggle }) {
     useEffect(() => {
         if (sessionData['NIC']) {
             setLoading(true);
-            axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
+            axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
                 params: { status: "1", nic: sessionData['NIC'] }
             })
             .then((res) => {
@@ -57,7 +57,7 @@ function UserForm({ isBuyer, handleToggle }) {
         formData.append('image', image);
         formData.append('nic', sessionData['NIC']); // Assuming you want to associate the image with the user
 
-        axios.post('http://localhost:80/RentIT/Controllers/uploadProfilePicController.php', formData, {
+        axios.post('http://localhost:4433/RentIT/Controllers/uploadProfilePicController.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -94,10 +94,10 @@ function UserForm({ isBuyer, handleToggle }) {
                     // Show the existing profile picture or a default image
                     <img
                         src={userDetails.profile_picture
-                            ? 'http://localhost:80/RentIT/' + userDetails.profile_picture.slice(2)
+                            ? 'http://localhost:4433/RentIT/' + userDetails.profile_picture.slice(2)
                             : (userDetails.gender === "Male" 
-                                ? "http://localhost:80/RentIT/images/ProfileImages/male.jpg" 
-                                : "http://localhost:80/RentIT/images/ProfileImages/female.jpg")}
+                                ? "http://localhost:4433/RentIT/images/ProfileImages/male.jpg" 
+                                : "http://localhost:4433/RentIT/images/ProfileImages/female.jpg")}
                         alt="User Profile"
                         id="profileImage"
                         className="profileImage"

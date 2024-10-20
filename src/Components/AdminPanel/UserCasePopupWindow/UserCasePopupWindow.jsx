@@ -8,7 +8,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -45,15 +45,15 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
     };
 
     const images = [
-        selectedRowData.case_picture_01? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_01.slice(3):'',
-        selectedRowData.case_picture_02? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_02.slice(3):'',
-        selectedRowData.case_picture_03? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_03.slice(3):'',
-        selectedRowData.case_picture_04? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_04.slice(3):'',
-        selectedRowData.case_picture_05? 'http://localhost:80/RentIT/' + selectedRowData.case_picture_05.slice(3):''
+        selectedRowData.case_Picture_01? 'http://localhost:4433/RentIT/' + selectedRowData.case_Picture_01.slice(3):'',
+        selectedRowData.case_Picture_02? 'http://localhost:4433/RentIT/' + selectedRowData.case_Picture_02.slice(3):'',
+        selectedRowData.case_Picture_03? 'http://localhost:4433/RentIT/' + selectedRowData.case_Picture_03.slice(3):'',
+        selectedRowData.case_Picture_04? 'http://localhost:4433/RentIT/' + selectedRowData.case_Picture_04.slice(3):'',
+        selectedRowData.case_Picture_05? 'http://localhost:4433/RentIT/' + selectedRowData.case_Picture_05.slice(3):''
     ];
 
     const handleAction = () => {
-        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
             params: { status: "3", affecterNIC: selectedRowData.affecterNIC, caseAction: selectedCaseAction, caseid: selectedRowData.user_case_id, reviewedby: details.NIC }
         })
             .then((response) => {
@@ -197,7 +197,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Opener</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                                <img src={selectedRowData.openerPP?'http://localhost:80/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
+                                <img src={selectedRowData.openerPP?'http://localhost:4433/RentIT/'+selectedRowData.openerPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.openerGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.openerFname +' '+ selectedRowData.openerLname}</h2>
@@ -214,7 +214,7 @@ const UserCasePopupWindow = ({ selectedRowData, onClose }) => {
                         <h4>Case Affecter</h4>
                         <div className="caseDetailsCard">
                             <div className="caseUserImage">
-                            <img src={selectedRowData.affecterPP?'http://localhost:80/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:80/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
+                            <img src={selectedRowData.affecterPP?'http://localhost:4433/RentIT/'+selectedRowData.affecterPP.slice(3):'http://localhost:4433/RentIT/images/ProfileImages/'+selectedRowData.affecterGender.toLowerCase()+'.jpg'} />
                             </div>
                             <div className="caseDetails">
                                 <h2>{selectedRowData.affecterFname +' '+ selectedRowData.affecterLname}</h2>

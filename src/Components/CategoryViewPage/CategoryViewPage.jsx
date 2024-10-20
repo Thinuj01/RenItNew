@@ -5,6 +5,7 @@ import NoneScroller from '../NoneScroller/NoneScroller';
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import ItemCard from '../ItemCard/ItemCard';
+import Footer from '../Footer/Footer';
 
 function CategoryViewPage() {
     const location = useLocation();
@@ -184,7 +185,7 @@ function CategoryViewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
                     params: { param: selectedCategory, status: "1" },
                     withCredentials:true
                 });
@@ -414,6 +415,7 @@ function CategoryViewPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

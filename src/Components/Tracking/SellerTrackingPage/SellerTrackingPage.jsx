@@ -6,6 +6,7 @@ import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import SellerTrackingProcess from '../SellerTrackingProcess/SellerTrackingProcess'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios'
+import Footer from '../../Footer/Footer'
 
 function SellerTrackingPage() {
     const [trackingStep,setTrackingStep] = useState(0);
@@ -28,7 +29,7 @@ function SellerTrackingPage() {
 
     useEffect(()=>{
         console.log(reserve_id);    
-        const intervalId = setInterval(() =>{axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
+        const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
                 params:{
                     status:"1",
                     reserve_id:reserve_id
@@ -77,6 +78,7 @@ function SellerTrackingPage() {
                     />
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

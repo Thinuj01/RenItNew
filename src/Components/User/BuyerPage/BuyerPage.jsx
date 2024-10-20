@@ -8,6 +8,7 @@ import GroupedItems from '../../GroupedItems/GroupedItems';
 import axios from "axios";
 import BuyerPendingOrders from '../BuyerPendingOrders/BuyerPendingOrders';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../Footer/Footer';
 
 function BuyerPage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -25,7 +26,7 @@ function BuyerPage() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
         })
             .then(response => {
@@ -38,8 +39,8 @@ function BuyerPage() {
 
     useEffect(() => {
         if (sessiondata.NIC) {
-            const fetchWishlist = axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
-            const fetchRentedItems = axios.post('http://localhost:80/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
+            const fetchWishlist = axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php', { params:{nic: sessiondata.NIC,status:"1"} });
+            const fetchRentedItems = axios.post('http://localhost:4433/RentIT/Controllers/rentedItemsController.php', { nic: sessiondata.NIC });
 
             Promise.all([fetchWishlist, fetchRentedItems])
                 .then(([wishlistResponse, rentedResponse]) => {
@@ -199,6 +200,7 @@ function BuyerPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }
