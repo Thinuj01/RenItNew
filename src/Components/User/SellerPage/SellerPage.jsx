@@ -6,7 +6,9 @@ import SellerRate from '../SellerRate/SellerRate';
 import BuyerPage from '../BuyerPage/BuyerPage'; // Import BuyerPage
 import axios from 'axios';
 import GroupedItems from '../../GroupedItems/GroupedItems';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../Footer/Footer';
+
 
 function SellerPage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -14,6 +16,7 @@ function SellerPage() {
     const [sessiondata, setSessionData] = useState({});
     const [data, setData] = useState([]);
     const [pendingItems, setPendingItemsData] = useState([]);
+    const navigate = useNavigate();
 
     const handleTabClick = (index) => {
         setActiveTab(index);
@@ -61,11 +64,78 @@ function SellerPage() {
             isMounted = false;
         };
     }, [sessiondata]);
-    
 
-    if (isBuyer) {
-        return <BuyerPage />; // Show BuyerPage if toggled to Buyer
-    }
+    const [rating, setRating] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                    params: { sellerNIC: sessiondata.NIC, status: "4" },
+                    withCredentials:true
+                });
+                setRating(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('There was an error fetching the data!', error);
+            }
+        };
+    
+        fetchData();
+      },[sessiondata]);
+
+      useEffect(() => {
+        const fetchRatings = async () => {
+          const updatedPaths = await Promise.all(
+            data.map(async (path) => {
+              try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "3" },
+                  withCredentials: true
+                });
+                return { ...path, rating: response.data };
+              } catch (error) {
+                console.error('There was an error fetching rating', error);
+                return path;
+              }
+            })
+          );
+          setData(updatedPaths);
+          console.log(updatedPaths);
+        };
+      
+        if (data.length > 0) {
+            console.log(1);
+          fetchRatings();
+        }
+      }, [rating]);
+
+      useEffect(() => {
+        const fetchRatings = async () => {
+          const updatedPaths = await Promise.all(
+            pendingItems.map(async (path) => {
+              try {
+                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                  params: { itemId: path.item_id, status: "3" },
+                  withCredentials: true
+                });
+                return { ...path, rating: response.data };
+              } catch (error) {
+                console.error('There was an error fetching rating', error);
+                return path;
+              }
+            })
+          );
+          setPendingItemsData(updatedPaths);
+        };
+      
+        if (pendingItems.length > 0) {
+            console.log(2);
+          fetchRatings();
+        }
+      }, [rating]);
+
+      if (isBuyer)  {navigate("/BuyerPage")};
 
     return (
         <>
@@ -77,8 +147,8 @@ function SellerPage() {
                         <UserForm isBuyer={isBuyer} handleToggle={handleToggle} />
                     </div>
                     <div className="sellerPageContainerTopRight">
-                        <SellerRate rating={4.3} totalUsers={5} itemCount={data.length} pendingCount={pendingItems.length} />
-                    </div>
+                      {rating?<SellerRate rating={rating[0]} totalUsers={5} itemCount={data.length} pendingCount={pendingItems.length} />:null}
+                  </div>
                 </div>
 
                 <div className="sellerPageContainerBottom">

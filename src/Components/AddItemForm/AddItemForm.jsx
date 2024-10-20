@@ -6,6 +6,7 @@ import RentalPriceForm from './RentalPriceForm';
 import ConditionField from './ConditionField';
 import CategoryFields from './CategoryFields';
 import CategorySpecificFields from './CategorySpecificFields';
+import { useNavigate } from 'react-router-dom';
 import './AddItemForm.css';
 
 function AddItemForm({ item, setItem }) {
@@ -20,6 +21,8 @@ function AddItemForm({ item, setItem }) {
     const [pcode, setPcode] = useState('');
     const [paddress, setPaddress] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(selectedSubcategories != null){
@@ -145,7 +148,9 @@ function AddItemForm({ item, setItem }) {
                     withCredentials: true
                 });
             console.log('Item adding successful:', response.data);
-
+            window.alert('Your item submitted successfully');
+            navigate('/');
+            
         } catch (error) {
             console.error('Error during registration:', error);
         }
