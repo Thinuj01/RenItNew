@@ -1,0 +1,73 @@
+.footer {
+    background-color: var(--PrimaryColorDark); 
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .footer-border{
+    border: 1px solid var(--PlaceholderColor);
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .footerpayment-info {
+    flex: 1;
+  }
+
+  .footer-contacts{
+    flex: 1;
+  }
+  
+  .footer-folow {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+  }
+  
+
+  .contact-button button:hover{
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); 
+  }
+
+
+  
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+  
+  .footer-links a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  }
+  
+  .footer-badge {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .footer-badge img {
+    width: 100px; 
+  }
