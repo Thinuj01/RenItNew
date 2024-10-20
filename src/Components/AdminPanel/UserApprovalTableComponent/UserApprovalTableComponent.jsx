@@ -72,14 +72,10 @@ function UserApprovalTableComponent({ data, columnHeaders }) {
   };
 
   const handleSubmit = () => {
-    // Handle submission logic here
-    alert("User approved!");
     closePopup(); // Close the popup after submission
   };
 
   const handleReject = () => {
-    // Handle rejection logic here
-    alert("User rejected!");
     closePopup(); // Close the popup after rejection
   };
 

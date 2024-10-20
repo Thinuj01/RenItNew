@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './CategoryFields.css';
 
 const categorySubcategories = {
-    'real-estate': ['Apartments', 'Houses', 'Land', 'Commercial'],
-    'vehicles': ['Cars', 'Motorcycles', 'Trucks', 'Bicycles'],
-    'electronics': ['Phones', 'Computers', 'Cameras', 'TVs'],
+    'real-estate': ['Apartment', 'House', 'Land', 'Commercial'],
+    'vehicles': ['Car', 'Motor Bike', 'Truck', 'Van', 'Bus'],
+    'electronics': ['Phone', 'Laptop', 'Computer', 'Cameras', 'TVs'],
     'tools-equipment': ['Hand Tools', 'Power Tools', 'Gardening Tools'],
     'fashion-accessories': ['Clothing', 'Jewelry', 'Shoes', 'Bags'],
     'sports-outdoors': ['Sports Equipment', 'Camping Gear', 'Outdoor Clothing'],
     'event-supplies': ['Decorations', 'Lighting', 'Audio Equipment'],
-    'books-educational': ['Textbooks', 'Novels', 'Educational Toys', 'Stationery'],
+    'books-educational': ['Textbooks', 'Notebook', 'Novels', 'Educational Toys', 'Stationery'],
 };
 
 function CategoryFields({ category, handleCategoryChange ,selectedSubcategories,setSelectedSubcategories}) {

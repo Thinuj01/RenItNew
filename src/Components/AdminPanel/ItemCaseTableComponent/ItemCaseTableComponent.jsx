@@ -70,17 +70,14 @@ function ItemCaseTableComponent({ data, columnHeaders }) {
   const closePopup = () => {
     setIsPopupVisible(false); // Hide the popup
     setSelectedRowData(null); // Clear the selected row data
+    window.location.reload();
   };
 
   const handleSubmit = () => {
-    // Handle submission logic here
-    alert("Item approved!");
     closePopup(); // Close the popup after submission
   };
 
   const handleReject = () => {
-    // Handle rejection logic here
-    alert("Item rejected!");
     closePopup(); // Close the popup after rejection
   };
 

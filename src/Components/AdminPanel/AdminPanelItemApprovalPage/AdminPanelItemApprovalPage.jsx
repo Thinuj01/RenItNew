@@ -2,8 +2,27 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemApprovalTableComponent from '../ItemApprovalTableComponent/ItemApprovalTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
+import { useNavigate} from 'react-router-dom'
 
 function AdminPanelItemApprovalPage() {
+    const [details, setDetails] = useState([]);
+
+    const navigate = useNavigate();
+
+    const isAdmin = details && details['is_Admin'];
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          withCredentials: true
+        })
+          .then(response => {
+            const data = response.data;
+            console.log(response.data);
+            setDetails(data);
+          });
+      }, []);
+
+    isAdmin ? null : navigate('/');
 
     const columnHeaders = {
         item_id: 'ID',
@@ -16,7 +35,7 @@ function AdminPanelItemApprovalPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {

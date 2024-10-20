@@ -3,9 +3,9 @@ import CategoryBarData from './CategoryBar.json';
 import NoneScroller from '../NoneScroller/NoneScroller';
 import CatOrPackCard from '../CatOrPackCard/CatOrPackCard';
 
-function CategoryBar() {
+const CategoryBar = React.forwardRef((props, ref) => {
     return (
-        <div>
+        <div ref={ref} className="category-bar">
             <NoneScroller
                 title="Category"
                 description="Choose your category and rent what you need from our site!"
@@ -27,6 +27,6 @@ function CategoryBar() {
             </NoneScroller>
         </div>
     );
-}
+})
 
 export default CategoryBar;

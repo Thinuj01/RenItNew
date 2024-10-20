@@ -50,21 +50,14 @@ const SellerRate = ({ rating, totalUsers, itemCount, pendingCount }) => {
                 <div className="sellerSummarySection">
                     <div className="sellerSummaryItem">
                         <h3 className="summaryLabel">Total listed items</h3>
-                        <div className="summaryValue">{itemCount}</div>
-                    </div>
-
-                    <div className="verticalLine"></div>
-
-                    <div className="sellerSummaryItem">
-                        <h3 className="summaryLabel">Total Earnings</h3>
-                        <div className="summaryValue">50$</div>
+                        <div className="summaryValue">{itemCount?itemCount:0}</div>
                     </div>
 
                     <div className="verticalLine"></div>
 
                     <div className="sellerSummaryItem">
                         <h3 className="summaryLabel">Pending Orders</h3>
-                        <div className="summaryValue">{pendingCount}</div>
+                        <div className="summaryValue">{pendingCount?pendingCount:0}</div>
                     </div>
                 </div>
             </div>
