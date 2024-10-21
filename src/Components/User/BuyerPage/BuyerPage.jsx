@@ -79,7 +79,7 @@ function BuyerPage() {
             data.map(async (path) => {
               try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
-                  params: { itemId: path.item_id, status: "3" },
+                  params: { itemId: path.item_id, status: "4" },
                   withCredentials: true
                 });
                 return { ...path, rating: response.data };
@@ -97,7 +97,7 @@ function BuyerPage() {
             console.log(2);
           fetchRatings();
         }
-      }, [rating]);
+      }, [data]);
 
       useEffect(() => {
         const fetchRatings = async () => {
@@ -105,10 +105,10 @@ function BuyerPage() {
             rented.map(async (path) => {
               try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
-                  params: { itemId: path.item_id, status: "3" },
+                  params: { itemId: path.item_id, status: "4" },
                   withCredentials: true
-                });
-                return { ...path, rating: response.data };
+                })
+                return { ...path, rating: response.data};
               } catch (error) {
                 console.error('There was an error fetching rating', error);
                 return path;

@@ -147,7 +147,7 @@ function SellerPage() {
                         <UserForm isBuyer={isBuyer} handleToggle={handleToggle} />
                     </div>
                     <div className="sellerPageContainerTopRight">
-                      {rating?<SellerRate rating={rating[0]} totalUsers={5} itemCount={data.length} pendingCount={pendingItems.length} />:null}
+                      {rating?<SellerRate rating={rating[0]} totalUsers={rating[1]} itemCount={data.length} pendingCount={pendingItems.length} />:null}
                   </div>
                 </div>
 
