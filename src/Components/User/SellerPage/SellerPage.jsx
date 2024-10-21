@@ -108,7 +108,7 @@ function SellerPage() {
             console.log(1);
           fetchRatings();
         }
-      }, [data]);
+      }, [rating]);
 
       useEffect(() => {
         const fetchRatings = async () => {
@@ -133,7 +133,7 @@ function SellerPage() {
             console.log(2);
           fetchRatings();
         }
-      }, [pendingItems]);
+      }, [data]);
 
       if (isBuyer)  {navigate("/BuyerPage")};
 
@@ -166,12 +166,14 @@ function SellerPage() {
                             >
                                 Sales History
                             </button>
-                            {/* <button
+                            <button
                                 className={`tabButton ${activeTab === 2 ? 'activeTab' : ''}`}
-                                onClick={() => handleTabClick(2)}
+                                onClick={()=>
+
+                                    navigate("/additempage")}
                             >
-                                Pending Orders
-                            </button> */}
+                                Add Item
+                            </button>
                         </div>
                         <div className="verticalDivider"></div>
                         <div className="tabContent">

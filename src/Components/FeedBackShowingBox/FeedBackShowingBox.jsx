@@ -7,13 +7,12 @@ function FeedBackShowingBox({ fetch = [] }) {
 
     const [feedbacks, setFeedbacks] = useState([]);
     const [sellerFeedbacks, setSellerFeedbacks] = useState([]);
-    const [usernames, setUsernames] = useState({}); // Store both usernames and profile pictures by NIC
-    const [sellerusernames, setSellerUsernames] = useState({}); // Store both usernames and profile pictures by NIC
+    const [usernames, setUsernames] = useState({}); 
+    const [sellerusernames, setSellerUsernames] = useState({}); 
 
     useEffect(() => {
         console.log("item", item);
 
-        // Fetch feedbacks based on item_id
         axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
             params: {
                 status: "1",
@@ -44,7 +43,6 @@ function FeedBackShowingBox({ fetch = [] }) {
     }, [item]);
 
     useEffect(() => {
-        // Fetch usernames and profile pictures for feedbacks
         if (feedbacks.length > 0) {
             const NICs = feedbacks.map(feedback => feedback.NIC_number);
             const fetchUsernames = async () => {
@@ -61,7 +59,7 @@ function FeedBackShowingBox({ fetch = [] }) {
                         userMap[NIC] = { FullName, proPic };
                     }).catch(err => {
                         console.error(err);
-                        userMap[NIC] = { FullName: 'Anonymous', proPic: '' }; // Use default values
+                        userMap[NIC] = { FullName: 'Anonymous', proPic: '' }; 
                     });
                 }));
                 setUsernames(userMap);
@@ -71,7 +69,6 @@ function FeedBackShowingBox({ fetch = [] }) {
     }, [feedbacks]);
 
     useEffect(() => {
-        // Fetch usernames and profile pictures for seller feedbacks
         if (sellerFeedbacks.length > 0) {
             const NICs = sellerFeedbacks.map(feedback => feedback.buyer_NIC_number);
             const fetchUsernames = async () => {
@@ -85,7 +82,6 @@ function FeedBackShowingBox({ fetch = [] }) {
                     }).then(response => {
                         const FullName = response.data[0].first_name + " " + response.data[0].last_name;
                         const proPic = response.data[0].profile_picture;
-                        console.log(response.data[0].profile_picture);
                         userMap[NIC] = { FullName, proPic };
                     }).catch(err => {
                         console.error(err);
@@ -102,7 +98,7 @@ function FeedBackShowingBox({ fetch = [] }) {
         feedbacks.map((feedback) => ({
             name: usernames[feedback.NIC_number]?.FullName || 'Anonymous',
             comment: feedback.feedback || 'No comment provided',
-            profilePic: usernames[feedback.NIC_number]?.proPic || '', // Add profile picture
+            profilePic: usernames[feedback.NIC_number]?.proPic || '', 
             rating: feedback.rating || 0
         }))
     ) : [];
@@ -111,14 +107,10 @@ function FeedBackShowingBox({ fetch = [] }) {
         sellerFeedbacks.map((sellerFeedback) => ({
             name: sellerusernames[sellerFeedback.buyer_NIC_number]?.FullName || 'Anonymous',
             comment: sellerFeedback.feedback || 'No comment provided',
-            profilePic: sellerusernames[sellerFeedback.buyer_NIC_number]?.proPic || '', // Add profile picture
+            profilePic: sellerusernames[sellerFeedback.buyer_NIC_number]?.proPic || '', 
             rating: sellerFeedback.rating || 0
         }))
     ) : [];
-
-    useEffect(()=>{
-        console.log(sellerFeedback);
-    },[sellerFeedback])
 
     const [activeTab, setActiveTab] = useState('itemFeedback');
     const [currentPage, setCurrentPage] = useState(1);
@@ -138,6 +130,9 @@ function FeedBackShowingBox({ fetch = [] }) {
     };
 
     const calculateAverageRating = (feedbackArray) => {
+        if (feedbackArray.length === 0) {
+            return 0; 
+        }
         const totalRating = feedbackArray.reduce((sum, feedback) => sum + feedback.rating, 0);
         return (totalRating / feedbackArray.length).toFixed(1);
     };
@@ -164,11 +159,10 @@ function FeedBackShowingBox({ fetch = [] }) {
 
             <div className="rating-section">
                 <div className="rating-section-left">
-                    <div className="stars">★★★★☆</div>
-                    <div className="total-users">{totalUsersRated} Users were rated</div>
+                    <div className="total-users">{totalUsersRated || 0} Users were rated</div>
                 </div>
                 <div className="rating-section-right">
-                    <div className="rating-number">{averageRating}</div>
+                    <div className="rating-number">{averageRating || 0}</div>
                 </div>
             </div>
 

@@ -42,7 +42,7 @@ function Footer() {
         &copy; 2024 RentIt. All Rights Reserved.
       </div>
     </footer>
-  );
+  )
 }
 
 export default Footer

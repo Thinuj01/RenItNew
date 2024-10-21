@@ -47,7 +47,7 @@
     position: sticky;
 } */
 
-.itemDescription{
+.itemPreviewDescription{
     height: 10vh;
     border-radius: 1vw;
     box-shadow: var(--BoxShadow);

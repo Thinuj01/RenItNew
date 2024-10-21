@@ -97,7 +97,7 @@ function BuyerPage() {
             console.log(2);
           fetchRatings();
         }
-      }, [data]);
+      }, [sessiondata]);
 
       useEffect(() => {
         const fetchRatings = async () => {
@@ -122,7 +122,7 @@ function BuyerPage() {
             console.log(1);
           fetchRatings();
         }
-      }, [rented]);
+      }, [sessiondata]);
 
     if (!isBuyer)  {navigate("/SellerPage")};
 

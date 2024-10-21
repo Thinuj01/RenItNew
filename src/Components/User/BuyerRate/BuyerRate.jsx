@@ -52,35 +52,9 @@ const BuyerRate = ({ rating, totalUsers }) => {
       <div className="itemsSection">
         <div className="totalItems">
           <h3>Total purchased items</h3>
-          <div className="itemCount">25</div>
+          <div className="itemCount">0</div>
         </div>
 
-        <div className="verticalLine"></div>
-
-        <div className="upcomingItems">
-          <h3>Upcoming time period end items</h3>
-          <div className="subTopics">
-            <h4>Name</h4>
-            <h4>Remaining time</h4>
-            <h4>Get More time</h4>
-          </div>
-
-          <div className="itemRowScroller">
-            {/* Sample items, consider mapping through a list */}
-            {[
-              { name: "Item 01", remainingTime: "24 h : 25 m : 30 s" },
-              { name: "Item 02", remainingTime: "23 h : 15 m : 20 s" },
-              { name: "Item 03", remainingTime: "22 h : 05 m : 10 s" },
-              { name: "Item 04", remainingTime: "20 h : 45 m : 40 s" },
-            ].map((item, index) => (
-              <div className="itemRow" key={index}>
-                <span className="itemName">{item.name}</span>
-                <span className="remainingTime">{item.remainingTime}</span>
-                <a href="#" className="exceedLink">Exceed period &gt;</a>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

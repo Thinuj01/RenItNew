@@ -47,7 +47,7 @@ function AdminPanelNavBar() {
                 <AdminPanelMenuLinks adminPanelLinkName="User Case Management" adminPanelURL="/AdminPanelUserCasePage"/>
                 <AdminPanelMenuLinks adminPanelLinkName="Item Case Management" adminPanelURL="/AdminPanelItemCasePage"/>
                 {details['is_SuperAdmin'] === 1? (<AdminPanelMenuLinks adminPanelLinkName="Admin Management" adminPanelURL="/AdminManagementPage"/>):null}
-                <AdminPanelMenuLinks adminPanelLinkName="Payment Preview" adminPanelURL="/PaymentPreviewPage"/>
+                {/* <AdminPanelMenuLinks adminPanelLinkName="Payment Preview" adminPanelURL="/PaymentPreviewPage"/> */}
                 <button onClick={() => {logout()}} className="nav-logout-button">Logout</button>
             </div>
         </div>

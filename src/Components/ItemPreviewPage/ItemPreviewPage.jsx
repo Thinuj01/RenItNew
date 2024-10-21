@@ -106,7 +106,7 @@ function ItemPreviewPage() {
                                 pics={fetch.length > 0 && fetch[0].pics ? fetch[0].pics : []}
                             />
                         </div>
-                        <div className="itemDescription">
+                        <div className="itemPreviewDescription">
                             <p>{fetch.length > 0 && fetch[0].description?fetch[0].description:""}</p>
                             {/* {cateData && cateData.length > 0 ? (
                                 cateData.map((item, index) => (
@@ -125,7 +125,7 @@ function ItemPreviewPage() {
                         <div className="FeedbackShowingBox">
                             <FeedBackShowingBox fetch={fetch} />
                         </div>
-                        <div className="promotionSimilarItemsDiv">
+                        {/* <div className="promotionSimilarItemsDiv">
                             <NoneScroller
                                 title='Promotion Similar Items'
                                 description='Also you can promote your items this section'
@@ -144,7 +144,7 @@ function ItemPreviewPage() {
                                 <ItemCard item={item} />
                                 <ItemCard item={item} />
                             </NoneScroller>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="ItemPreviewPageContainerrightDiv">
@@ -227,18 +227,11 @@ function ItemPreviewPage() {
                                 </ToggleableSection>
                             </div>
 
-                            <div className="paymentOptions">
-                                <ToggleableSection title="Payment Option:">
-                                    <p><strong>:</strong> </p>
-                                    <p><strong>:</strong> </p>
-                                    <p><strong>:</strong> </p>
-                                </ToggleableSection>
-                            </div>
                         </div>
                     </div>
                     </div>
                     <div className="itemPreviewPageContainerBottom">
-                    <HorizontalScroller title='Promotion Similar Items' description='Also you can promote your items this section'>
+                    {/* <HorizontalScroller title='Promotion Similar Items' description='Also you can promote your items this section'>
                         <ItemCard item={item} />
                         <ItemCard item={item} />
                         <ItemCard item={item} />
@@ -294,8 +287,8 @@ function ItemPreviewPage() {
                         <ItemCard item={item} />
                         <ItemCard item={item} />
                         <ItemCard item={item} />
-                    </HorizontalScroller>
-                </div>
+                    </HorizontalScroller> */}
+                </div> 
             </div>
             <Footer />
         </>

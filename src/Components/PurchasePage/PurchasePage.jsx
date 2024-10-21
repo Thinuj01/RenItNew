@@ -238,7 +238,7 @@ const PurchasePage = () => {
             <div className="purchase-page">
                 <div className="purchasePageContainerLeft">
                     {/* Delivery Method Section */}
-                    <div className="delivery-method">
+                    {/* <div className="delivery-method">
                         <span>Choose your delivery method</span>
                         <div className="delivery-method-buttons">
                             {cateData.renting_method?(
@@ -264,7 +264,7 @@ const PurchasePage = () => {
                             'In the Galle District free shipping, but others can be added with an additional fee.' :
                             'In this option, you must get your item after reaching the address below.'}
                         </p>
-                    </div>
+                    </div> */}
 
                     {/* Conditional Rendering of Address Sections */}
                     {deliveryMethod === 'shipping' ? (
@@ -298,7 +298,7 @@ const PurchasePage = () => {
                     )}
 
                     {/* Card Section */}
-                    <div className="card-section">
+                    {/* <div className="card-section">
                         <span>Card Details {selectedCard.cardHolderName ? '(Selected)' : ''}</span>
                         {cards.map((card, index) => (
                             <div
@@ -312,7 +312,7 @@ const PurchasePage = () => {
                             </div>
                         ))}
                         <button className="add-new-button" onClick={() => setShowNewCardModal(true)}>Add New Card</button>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="purchasePageContainerRight">
