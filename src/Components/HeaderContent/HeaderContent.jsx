@@ -25,7 +25,7 @@ function HeaderContent({ categoryBarRef }) {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+    axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
       withCredentials: true
     })
       .then(response => {
@@ -52,6 +52,7 @@ function HeaderContent({ categoryBarRef }) {
 
   const handleCategoryClick = (event) => {
     event.preventDefault(); // Prevent the default link behavior
+    navigate('/');
     if (categoryBarRef.current) {
       categoryBarRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scroll to CategoryBar
     }

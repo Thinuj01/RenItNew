@@ -11,7 +11,7 @@ function AdminPanelNavBar() {
   const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {

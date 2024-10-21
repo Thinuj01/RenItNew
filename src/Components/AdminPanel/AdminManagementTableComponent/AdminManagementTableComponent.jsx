@@ -8,7 +8,7 @@ function AdminManagementTableComponent({ data, columnHeaders }) {
   const handlePromote = async (nic) => {
     console.log(nic);
     try {
-      const response = await axios.get("http://localhost:4433/RentIT/Controllers/getUserDetailsController.php", {
+      const response = await axios.get("http://localhost:80/RentIT/Controllers/getUserDetailsController.php", {
         params: { nic: nic, status: "3" }
       });
       if (response.data.success) {

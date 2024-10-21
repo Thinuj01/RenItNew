@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import HeaderContent from "./Components/HeaderContent/HeaderContent";
 import ImageSlider from "./Components/ImageSlider/ImageSlider";
 import SubHeader from "./Components/SubHeader/SubHeader";
@@ -17,7 +18,8 @@ function App() {
     text: ''
   });
 
-  const categoryBarRef = useRef(null); 
+  const categoryBarRef = useRef(null);
+  const location = useLocation();
 
   const handleSearch = (category, district, text) => {
     setSearchParams({ category, district, text });
@@ -37,7 +39,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+            const response = await axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
                 params: { param: 'all', status: "1" },
                 withCredentials:true
             });
@@ -51,13 +53,21 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (location.pathname === '/') {
+      if (categoryBarRef.current) {
+        categoryBarRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   
   useEffect(() => {
     const fetchRatings = async () => {
       const updatedPaths = await Promise.all(
         paths.map(async (path) => {
           try {
-            const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+            const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
               params: { itemId: path.item_id, status: "4" },
               withCredentials: true
             });

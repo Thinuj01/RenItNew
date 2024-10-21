@@ -21,7 +21,7 @@ function AdminPanelHomePage() {
     const isAdmin = details && details['is_Admin'];
 
     useEffect(() => {
-        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -34,7 +34,7 @@ function AdminPanelHomePage() {
     isAdmin ? null : navigate('/');
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
             params: { status: "2" }
         })
             .then((response) => {
@@ -47,7 +47,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: "4" }
         })
             .then((response) => {
@@ -60,7 +60,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
             params: { status: "1" }
         })
             .then((response) => {
@@ -73,7 +73,7 @@ function AdminPanelHomePage() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/caseController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/caseController.php', {
             params: { status: "2" }
         })
             .then((response) => {

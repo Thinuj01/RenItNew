@@ -35,7 +35,7 @@ const GroupedItems = ({ items }) => {
 
     const modifiedItems = items.map(item => ({
         ...item,
-        imageUrl: `http://localhost:4433/RentIT${item.imageUrl.slice(2)}`
+        imageUrl: `http://localhost:80/RentIT${item.imageUrl.slice(2)}`
     }));
 
     const groupedItems = groupBy(modifiedItems, groupByKey);
