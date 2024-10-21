@@ -15,12 +15,12 @@ function ItemCard({ item , paths, navi}) {
 
   function addToWishlist(){
     // try{
-      axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+      axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
         withCredentials: true
       })
         .then(response => {
           console.log(response.data);
-          axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php',{
+          axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php',{
             params:{status:"2",item_id:paths.item_id,nic:response.data.NIC}
           })
           .then(res=>{
@@ -43,7 +43,7 @@ function ItemCard({ item , paths, navi}) {
         <div className="item-image" onClick={()=>{
         navi=="preview"?navigate("/ItemPreviewPage",{state:{id:paths.item_id}}):navi="orderP"?navigate("/orderpage",{state:{item:item}}):{};
       }}>
-          <img src={paths?'http://localhost:80/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
+          <img src={paths?'http://localhost:4433/RentIT'+paths.item_Picture_01:item.imageUrl} alt={paths?paths.title:item.name} />
         </div>
 
         <div className="item-details">

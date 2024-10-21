@@ -27,7 +27,7 @@ function SellerPage() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php', {
             withCredentials: true,
         })
             .then((response) => {
@@ -43,8 +43,8 @@ function SellerPage() {
         let isMounted = true;
     
         if (sessiondata.NIC) {
-            const fetchlistedItems = axios.post('http://localhost:80/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
-            const fetchPendingOrders = axios.post('http://localhost:80/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
+            const fetchlistedItems = axios.post('http://localhost:4433/RentIT/Controllers/getListedItemsController.php', { nic: sessiondata.NIC });
+            const fetchPendingOrders = axios.post('http://localhost:4433/RentIT/Controllers/getPendingOrdersController.php', { nic: sessiondata.NIC });
     
             Promise.all([fetchlistedItems, fetchPendingOrders])
                 .then(([listedResponse, pendingResponse]) => {
@@ -70,8 +70,8 @@ function SellerPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
-                    params: { sellerNIC: sessiondata.NIC, status: "4" },
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
+                    params: { sellerNIC: sessiondata.NIC, status: "5" },
                     withCredentials:true
                 });
                 setRating(response.data);
@@ -89,7 +89,7 @@ function SellerPage() {
           const updatedPaths = await Promise.all(
             data.map(async (path) => {
               try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
                   params: { itemId: path.item_id, status: "3" },
                   withCredentials: true
                 });
@@ -115,7 +115,7 @@ function SellerPage() {
           const updatedPaths = await Promise.all(
             pendingItems.map(async (path) => {
               try {
-                const response = await axios.get('http://localhost:80/RentIT/Controllers/feedbackController.php', {
+                const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
                   params: { itemId: path.item_id, status: "3" },
                   withCredentials: true
                 });

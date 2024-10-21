@@ -19,7 +19,7 @@ const SellerTrackingProcess = ({ completedStep ,reserve_id}) => {
     ];
 
     const sellerHandOver =()=>{
-        axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
+        axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
             params:{
                 status:"2",
                 reserve_id:reserve_id
@@ -33,7 +33,7 @@ const SellerTrackingProcess = ({ completedStep ,reserve_id}) => {
 
     const handleOtpSubmit = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
+        axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
             params:{
                 status:"3",
                 reserve_id:reserve_id,

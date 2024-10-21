@@ -29,7 +29,7 @@ function SellerTrackingPage() {
 
     useEffect(()=>{
         console.log(reserve_id);    
-        const intervalId = setInterval(() =>{axios.get('http://localhost:80/RentIT/Controllers/trackingController.php',{   
+        const intervalId = setInterval(() =>{axios.get('http://localhost:4433/RentIT/Controllers/trackingController.php',{   
                 params:{
                     status:"1",
                     reserve_id:reserve_id

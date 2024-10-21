@@ -32,7 +32,7 @@ function ItemPreviewPage() {
     };
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`, {
+            axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`, {
                 params: { status: "2", id: id }
             })
                 .then(response => {
@@ -40,9 +40,9 @@ function ItemPreviewPage() {
                     setFetch(response.data);
                     
                     // Parse pricing_modifiers from the fetched data
-                    const item = response.data[0];
+                    const items = response.data[0];
                     if (item.pricing_modifiers) {
-                        const parsedModifiers = JSON.parse(item.pricing_modifiers);
+                        const parsedModifiers = JSON.parse(items.pricing_modifiers);
                         setPricingModifiers(parsedModifiers);
                     }
 
@@ -52,25 +52,29 @@ function ItemPreviewPage() {
                     setFetch([]);
                 });
         }
-    }, [id]);
+    }, []);
 
     useEffect(() => {
-        const item = fetch.length > 0 ? fetch[0] : {};
-        const cate = item.category_id;
-        axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`,{
-            params: {status:"3",cate_id:cate}
-        }).then(response => {
-            console.log("Cate Data",response.data);
-            response.data.forEach(res=>{
-                if(res.item_id == id){
-                    setCateData(res);
-                }
+        if(fetch.length>0){
+            const item = fetch.length > 0 ? fetch[0] : {};
+            const cate = item.category_id;
+            axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
+                params: {status:"3",cate_id:cate}
+            }).then(response => {
+                console.log("Cate Data",response.data);
+                response.data.forEach(res=>{
+                    if(res.item_id == id){
+                        setCateData(res);
+                        console.log("res",res);
+                    }
+                })
             })
-        })
+        }
+
     }, [fetch]);
 
     useEffect(() => {
-        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
+        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
         .then(response=>{
             setDetails(response.data);
         }).catch(error=>{

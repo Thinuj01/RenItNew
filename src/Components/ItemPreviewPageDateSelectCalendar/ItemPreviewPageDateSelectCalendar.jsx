@@ -5,12 +5,12 @@ import './ItemPreviewPageDateSelectCalendar.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details = [], userDetails = [] }) {
+function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = {}, details = [], userDetails = [] }) {
     const [selectedDates, setSelectedDates] = useState([]);
     const [nonAvailableDates, setNonAvailableDates] = useState([]); // State to store non-available dates from API
     const navigate = useNavigate();
     const item = fetch.length > 0 ? fetch[0] : {};
-    const newCateData = cateData.length > 0 ? cateData[0] : {};
+    const newCateData = cateData.length > 0 ? cateData : {};
 
     // Function to generate a list of dates between two dates
     const getDatesInRange = (startDate, endDate) => {
@@ -26,10 +26,9 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
     };
 
     useEffect(() => {
-        console.log("Item", item);
-
+        console.log("res 1", newCateData);
         // Fetch the non-available dates from the API
-        axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php', {
+        axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
             params: {
                 status: "1",
                 item_id: item.item_id
@@ -95,12 +94,12 @@ function ItemPreviewPageDateSelectCalendar({ fetch = [], cateData = [], details 
 
     function addToWishlist(){
         // try{
-          axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
+          axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
             withCredentials: true
           })
             .then(response => {
               console.log(response.data);
-              axios.get('http://localhost:80/RentIT/Controllers/wishlistDetailsController.php',{
+              axios.get('http://localhost:4433/RentIT/Controllers/wishlistDetailsController.php',{
                 params:{status:"2",item_id:item.item_id,nic:response.data.NIC}
               })
               .then(res=>{

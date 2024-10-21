@@ -11,7 +11,7 @@ const groupBy = (items, key) => {
 
         const groupValue = key === 'Date'
             ? new Date(item.r_pickup_date).toLocaleString('default', { month: 'long', year: 'numeric' })
-            : item.name;
+            : item.category;
 
         if (!result[groupValue]) {
             result[groupValue] = [];
@@ -35,7 +35,7 @@ const GroupedItems = ({ items }) => {
 
     const modifiedItems = items.map(item => ({
         ...item,
-        imageUrl: `http://localhost:80/RentIT${item.imageUrl.slice(2)}`
+        imageUrl: `http://localhost:4433/RentIT${item.imageUrl.slice(2)}`
     }));
 
     const groupedItems = groupBy(modifiedItems, groupByKey);
