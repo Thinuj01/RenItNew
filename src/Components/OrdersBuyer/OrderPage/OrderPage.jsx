@@ -19,7 +19,7 @@ function OrderPage() {
                     <ProductInfo item={item}/>
                 </div>
                 <div className="orderpage-rightdiv">
-                    <OrderFeedback />
+                    <OrderFeedback item={item} />
                 </div>      
                 
             </div>

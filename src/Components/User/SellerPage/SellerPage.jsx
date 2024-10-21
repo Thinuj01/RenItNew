@@ -90,7 +90,7 @@ function SellerPage() {
             data.map(async (path) => {
               try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
-                  params: { itemId: path.item_id, status: "3" },
+                  params: { itemId: path.item_id, status: "4" },
                   withCredentials: true
                 });
                 return { ...path, rating: response.data };
@@ -108,7 +108,7 @@ function SellerPage() {
             console.log(1);
           fetchRatings();
         }
-      }, [rating]);
+      }, [data]);
 
       useEffect(() => {
         const fetchRatings = async () => {
@@ -116,7 +116,7 @@ function SellerPage() {
             pendingItems.map(async (path) => {
               try {
                 const response = await axios.get('http://localhost:4433/RentIT/Controllers/feedbackController.php', {
-                  params: { itemId: path.item_id, status: "3" },
+                  params: { itemId: path.item_id, status: "4" },
                   withCredentials: true
                 });
                 return { ...path, rating: response.data };
@@ -133,7 +133,7 @@ function SellerPage() {
             console.log(2);
           fetchRatings();
         }
-      }, [rating]);
+      }, [pendingItems]);
 
       if (isBuyer)  {navigate("/BuyerPage")};
 
