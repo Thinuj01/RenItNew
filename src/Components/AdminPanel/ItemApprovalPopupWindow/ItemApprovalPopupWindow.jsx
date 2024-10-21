@@ -4,18 +4,18 @@ import './ItemApprovalPopupWindow.css';
 
 const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
     const imageArray = [
-        selectedRowData.item_Picture_01? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_01.slice(3):'',
-        selectedRowData.item_Picture_02? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_02.slice(3):'',
-        selectedRowData.item_Picture_03? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_03.slice(3):'',
-        selectedRowData.item_Picture_04? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_04.slice(3):'',
-        selectedRowData.item_Picture_05? 'http://localhost:4433/RentIT/' + selectedRowData.item_Picture_05.slice(3):''
+        selectedRowData.item_Picture_01? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_01.slice(3):'',
+        selectedRowData.item_Picture_02? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_02.slice(3):'',
+        selectedRowData.item_Picture_03? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_03.slice(3):'',
+        selectedRowData.item_Picture_04? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_04.slice(3):'',
+        selectedRowData.item_Picture_05? 'http://localhost:80/RentIT/' + selectedRowData.item_Picture_05.slice(3):''
     ]
     const [selectedImage, setSelectedImage] = useState(imageArray[0]);
     const [submitting, setSubmitting] = useState(false);
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:4433/RentIT/Controllers/getSessionValueController.php`, {
+        axios.get(`http://localhost:80/RentIT/Controllers/getSessionValueController.php`, {
           withCredentials: true
         })
           .then(response => {
@@ -26,7 +26,7 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
       }, []);
 
     const handleAction = (action) => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { status: action, id: selectedRowData.item_id, message: document.querySelector('.userMessageBox textarea').value, admin_NIC: details.NIC }
         })
             .then((response) => {
@@ -46,7 +46,7 @@ const ItemApprovalPopupWindow = ({ selectedRowData, onClose }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/showItemsController.php', {
+        axios.get('http://localhost:80/RentIT/Controllers/showItemsController.php', {
             params: { item_id: selectedRowData.item_id, category_id: selectedRowData.category_id , status: "5" }
         })
             .then((response) => {

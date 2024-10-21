@@ -31,7 +31,7 @@ function ItemPreviewPage() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`, {
+            axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`, {
                 params: { status: "2", id: id }
             })
                 .then(response => {
@@ -52,7 +52,7 @@ function ItemPreviewPage() {
     useEffect(() => {
         const item = fetch.length > 0 ? fetch[0] : {};
         const cate = item.category_id;
-        axios.get(`http://localhost:4433/RentIT/Controllers/showItemsController.php?`,{
+        axios.get(`http://localhost:80/RentIT/Controllers/showItemsController.php?`,{
             params: {status:"3",cate_id:cate}
           }).then(response => {
             console.log("Cate Data",response.data);
@@ -63,7 +63,7 @@ function ItemPreviewPage() {
     const pics = fetch.length > 0 && fetch[0].pics ? fetch[0].pics : [];
 
     useEffect(() => {
-        axios.get('http://localhost:4433/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
+        axios.get('http://localhost:80/RentIT/Controllers/getSessionValueController.php',{withCredentials:true})
         .then(response=>{
             setDetails(response.data);
         }).catch(error=>{
@@ -73,7 +73,7 @@ function ItemPreviewPage() {
 
     useEffect(()=>{
         details?
-(        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
+(        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php?',{
             params:{status:"1",nic:details['NIC']}
         })
         .then(response=>{

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminManagementPage.css'
-import UserApprovalTableComponent from '../UserApprovalTableComponent/UserApprovalTableComponent';
+import AdminManagementTableComponent from '../AdminManagementTableComponent/AdminManagementTableComponent';
 import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 import { useNavigate} from 'react-router-dom'
 
@@ -10,7 +10,7 @@ function AdminManagementPage() {
     const columnHeaders = {
         NIC: 'ID',
         firstname: 'First Name',
-        district: 'District',
+        lastname: 'Last Name',
         column4: 'Action'
     };
 
@@ -35,7 +35,7 @@ function AdminManagementPage() {
 
     useEffect(() => {
         axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php', {
-            params: { status: "2" }
+            params: { nic: 'all', status: "1" }
         })
             .then((response) => {
                 console.log(response.data);
@@ -61,7 +61,7 @@ function AdminManagementPage() {
                     <div className="adminPanelBodyContainer">
                         <div>
                             <h1>Admin Panel - User Approval</h1>
-                            <UserApprovalTableComponent data={data} columnHeaders={columnHeaders} />
+                            <AdminManagementTableComponent data={data} columnHeaders={columnHeaders} />
                         </div>
                     </div>
                 </div>
