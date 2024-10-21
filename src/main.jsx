@@ -26,6 +26,7 @@ import AdminManagementPage from './Components/AdminPanel/AdminManagementPage/Adm
 import PaymentPreviewPage from './Components/AdminPanel/PaymentPreviewPage/PaymentPreviewPage.jsx';
 import OrderPage from './Components/OrdersBuyer/OrderPage/OrderPage.jsx'
 import Footer from './Components/Footer/Footer.jsx';
+import AboutUsPage from './Components/AboutUsPage/AboutUsPage.jsx';
 
 import { DailyCallBack } from './Components/DailyCallBack/DailyCallBack.jsx';
 import { OrderReturnTimeCheck } from './Components/OrderReturnTimeCheck/OrderReturnTimeCheck.jsx';
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
   { path: "/PaymentPreviewPage", element: <PaymentPreviewPage />, },
   { path: "/Orderpage", element: <OrderPage/>},
   { path: "/Footer", element: <Footer/>},
+  { path: "/AboutUsPage", element: <AboutUsPage/>},
 ]);
 
 
