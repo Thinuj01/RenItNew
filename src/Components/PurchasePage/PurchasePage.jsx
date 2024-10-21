@@ -41,7 +41,7 @@ const PurchasePage = () => {
 
     useEffect(()=>{
         console.log(details);
-        axios.get('http://localhost:4433/RentIT/Controllers/getUserDetailsController.php?',{
+        axios.get('http://localhost:80/RentIT/Controllers/getUserDetailsController.php?',{
             params:{status:"1",nic:fetch.NIC_number}
         })
         .then(response=>{
@@ -133,7 +133,7 @@ const PurchasePage = () => {
         script.onload = () => {
             window.payhere.onCompleted = function (orderId) {
                 console.log("Payment completed. OrderID:" + orderId);
-                axios.get('http://localhost:4433/RentIT/Controllers/paymentStatusController.php?',{
+                axios.get('http://localhost:80/RentIT/Controllers/paymentStatusController.php?',{
                     params:{
                         order_id:orderId,
                         item_id:fetch.item_id,
@@ -158,7 +158,7 @@ const PurchasePage = () => {
 
             window.payhere.onDismissed = function () {
                 console.log("Payment dismissed");
-                axios.get('http://localhost:4433/RentIT/Controllers/paymentStatusController.php?',{
+                axios.get('http://localhost:80/RentIT/Controllers/paymentStatusController.php?',{
                     params:{
                         item_id:fetch.item_id,
                         title:fetch.title,
@@ -194,7 +194,7 @@ const PurchasePage = () => {
 
     const handlePayment = () => {
         // Fetch hash from backend using axios
-        axios.get('http://localhost:4433/RentIT/Controllers/paymentController.php',{params:{
+        axios.get('http://localhost:80/RentIT/Controllers/paymentController.php',{params:{
             order_id:orderingID,
             amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length)
             
@@ -204,9 +204,9 @@ const PurchasePage = () => {
                 const payment = {
                     sandbox: true,
                     merchant_id: '1227928',    // Replace with your Merchant ID
-                    return_url: 'http://localhost:4433/RentIT/Controllers/paymentReturnController.php', // URL to redirect users when success
+                    return_url: 'http://localhost:80/RentIT/Controllers/paymentReturnController.php', // URL to redirect users when success
                     cancel_url: 'http://yourdomain.com/cancel.php', // URL to redirect users when canceled
-                    notify_url: 'http://localhost:4433/RentIT/Controllers/paymentNotifyController.php', // URL to callback the status of the payment
+                    notify_url: 'http://localhost:80/RentIT/Controllers/paymentNotifyController.php', // URL to callback the status of the payment
                     order_id: orderingID,
                     items: fetch.title,
                     amount: deliveryMethod === 'shipping' ?(fetch.rental_price*selectedDates.length)+300:(fetch.rental_price*selectedDates.length),

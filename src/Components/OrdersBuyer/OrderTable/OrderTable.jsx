@@ -8,7 +8,7 @@ const OrderTable = ({ item }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php', {
+    axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php', {
       params: {
         status: "2",
         item_id: item.item_id
@@ -31,7 +31,7 @@ const OrderTable = ({ item }) => {
 
 const handleRefund = async (order_id) => {
   try {
-      const refundResponse = await axios.post('http://localhost:4433/RentIT/Controllers/refundPaymentController.php', {
+      const refundResponse = await axios.post('http://localhost:80/RentIT/Controllers/refundPaymentController.php', {
           order_id: order_id, 
           description: "Item is out of stock"
       });
@@ -39,7 +39,7 @@ const handleRefund = async (order_id) => {
       console.log('Refund response from backend:', refundResponse.data);
       if (refundResponse.data.status == 1) {
           alert('Refund processed successfully!');
-          axios.get('http://localhost:4433/RentIT/Controllers/getItemReserveDetails.php',{
+          axios.get('http://localhost:80/RentIT/Controllers/getItemReserveDetails.php',{
             params:{
               status:"4",
               reserve_id:order_id
