@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './HeaderContent.css';
 import MenuLinks from '../MenuLinks/MenuLinks';
@@ -70,7 +70,7 @@ function HeaderContent({ categoryBarRef }) {
       <div id='menuLinks' className={hamburgerMenuVisible ? 'menu-visible' : ''}>
         <MenuLinks linkName="Home" url="/" />
         <MenuLinks linkName="Category" url="#" onClick={handleCategoryClick} style={{ cursor: 'pointer' }} /> {/* Pass handleCategoryClick to onClick */}
-        <MenuLinks linkName="About" url="/about" />
+        <MenuLinks linkName="About Us" url="/AboutUsPage" />
 
         {details && details['fname'] ? (
           <div className="nav-username-container" ref={dropdownRef} onMouseEnter={() => setDropdownVisible(true)} onMouseLeave={() => setDropdownVisible(false)}>

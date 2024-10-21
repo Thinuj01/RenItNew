@@ -2,10 +2,17 @@ import React from 'react';
 import './MenuLinks.css';
 import { Link } from 'react-router-dom';
 
-function MenuLinks({ url, linkName, onClick }) { // Destructure props to access url, linkName, and onClick
+function MenuLinks({ url, linkName, onClick }) { 
   return (
     <div>
-      <Link id='menuLink' to={url} onClick={onClick}>{linkName}</Link> {/* Pass the onClick function to the Link */}
+      <Link
+        className={({ isActive }) => 
+          isActive ? 'menuLink active' : 'menuLink'
+        }
+        id='menuLink' to={url} onClick={onClick}
+      >
+        {linkName}
+      </Link>
     </div>
   );
 }

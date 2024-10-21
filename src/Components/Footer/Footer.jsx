@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -8,34 +9,34 @@ function Footer() {
         <div className="footerpayment-info">
           <h2>We Accept</h2>
           <div className="payment-icons">
-            <i className="fa fa-cc-visa"></i>
-            <i className="fa fa-cc-mastercard"></i>
-            <i className="fa fa-cc-paypal"></i>
-            <i className="fa fa-cc-amex"></i>
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-paypal"></i>
+            <i class="fab fa-cc-amex"></i>
           </div>
         </div>
 
         <div className="footer-links">
           <h2>Quick links</h2>
-          <a href="/Home">Home</a>
-          <a href="/Category">Category</a>
-          <a href="/Package">Package</a>
-          <a href="/About">About Us</a>
-        </div>
-
-        <div className="footer-contacts">
-          <h2>For More Details</h2>
-          <p><i className="fa fa-phone"></i> +94 6421 28920</p>
-          <p><i className="fa fa-phone"></i> ++94 6421 28920</p>
-          <p><i className="fa fa-envelope"></i> info@rentit.com</p>
+          <div className="quick-links">
+            <p>Home</p>
+            <p>Category</p>
+            <p>About Us</p>
+          </div>
         </div>
 
         <div className="footer-folow">
           <h2>Follow Us on</h2>
+          <div className='socialIcons'>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+
+          </div>
         </div>
       </div>
 
-      <div className="footer-border"></div>     
+      <div className="footer-border"></div>
 
       <div className="footer-end">
         &copy; 2024 RentIt. All Rights Reserved.
